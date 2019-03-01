@@ -1,5 +1,5 @@
 import Foundation
-@testable import TCR
+@testable import meta
 
 class TestStorage: Storage {
     var error: Error?

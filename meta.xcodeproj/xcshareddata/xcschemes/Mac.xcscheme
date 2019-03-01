@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "20366BDA222937BE009A2FB3"
-               BuildableName = "metaMac.app"
+               BuildableName = "meta.app"
                BlueprintName = "Mac"
                ReferencedContainer = "container:meta.xcodeproj">
             </BuildableReference>
@@ -44,7 +44,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "20366BDA222937BE009A2FB3"
-            BuildableName = "metaMac.app"
+            BuildableName = "meta.app"
             BlueprintName = "Mac"
             ReferencedContainer = "container:meta.xcodeproj">
          </BuildableReference>
@@ -67,7 +67,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "20366BDA222937BE009A2FB3"
-            BuildableName = "metaMac.app"
+            BuildableName = "meta.app"
             BlueprintName = "Mac"
             ReferencedContainer = "container:meta.xcodeproj">
          </BuildableReference>
@@ -86,7 +86,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "20366BDA222937BE009A2FB3"
-            BuildableName = "metaMac.app"
+            BuildableName = "meta.app"
             BlueprintName = "Mac"
             ReferencedContainer = "container:meta.xcodeproj">
          </BuildableReference>

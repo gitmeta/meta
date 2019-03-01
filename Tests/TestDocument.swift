@@ -1,5 +1,5 @@
 import XCTest
-@testable import TCR
+@testable import meta
 
 class TestDocument: XCTestCase {
     private var folder: Folder!

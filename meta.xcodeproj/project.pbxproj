@@ -67,6 +67,7 @@
 		20366C9922293BE8009A2FB3 /* Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20366C9022293BE8009A2FB3 /* Shared.swift */; };
 		20366C9A22293BE8009A2FB3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 20366C9122293BE8009A2FB3 /* Assets.xcassets */; };
 		20366C9B22293BE8009A2FB3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 20366C9122293BE8009A2FB3 /* Assets.xcassets */; };
+		20BD161A2229456C00B8EFDF /* Mac.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 20BD16192229456C00B8EFDF /* Mac.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -159,6 +160,8 @@
 		20366C9D22293CE3009A2FB3 /* meta.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = meta.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		20366C9E22293D20009A2FB3 /* libmeta.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libmeta.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		20366C9F22293D59009A2FB3 /* libmeta.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libmeta.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		20BD16192229456C00B8EFDF /* Mac.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Mac.xcassets; sourceTree = "<group>"; };
+		20BD161B2229472200B8EFDF /* meta.sketch */ = {isa = PBXFileReference; lastKnownFileType = file; path = meta.sketch; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -215,18 +218,19 @@
 			children = (
 				20366C2A22293B8B009A2FB3 /* .gitignore */,
 				20366C2B22293B8B009A2FB3 /* LICENSE */,
+				20366C9E22293D20009A2FB3 /* libmeta.a */,
+				20366C9F22293D59009A2FB3 /* libmeta.a */,
+				20366C9C22293CBB009A2FB3 /* meta.app */,
+				20366C9D22293CE3009A2FB3 /* meta.app */,
 				20366C2922293B8B009A2FB3 /* README.md */,
+				20BD161B2229472200B8EFDF /* meta.sketch */,
 				20366C4922293BBF009A2FB3 /* Tests.xctest */,
+				2005CD5422293F9D00B6972D /* Frameworks */,
 				20366C2C22293BA4009A2FB3 /* iOS */,
 				20366C6922293BDD009A2FB3 /* Library */,
 				20366C3322293BBF009A2FB3 /* Mac */,
 				20366C8B22293BE8009A2FB3 /* Shared */,
 				20366C5C22293BCF009A2FB3 /* Tests */,
-				20366C9C22293CBB009A2FB3 /* meta.app */,
-				20366C9D22293CE3009A2FB3 /* meta.app */,
-				20366C9E22293D20009A2FB3 /* libmeta.a */,
-				20366C9F22293D59009A2FB3 /* libmeta.a */,
-				2005CD5422293F9D00B6972D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -263,6 +267,7 @@
 				20366C3E22293BBF009A2FB3 /* Skin.swift */,
 				20366C3422293BBF009A2FB3 /* Storage.swift */,
 				20366C4522293BBF009A2FB3 /* Text.swift */,
+				20BD16192229456C00B8EFDF /* Mac.xcassets */,
 			);
 			path = Mac;
 			sourceTree = "<group>";
@@ -469,6 +474,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				20366C9622293BE8009A2FB3 /* SFMono-Bold.otf in Resources */,
+				20BD161A2229456C00B8EFDF /* Mac.xcassets in Resources */,
 				20366C9222293BE8009A2FB3 /* Localizable.strings in Resources */,
 				20366C9422293BE8009A2FB3 /* SFMono-Light.otf in Resources */,
 				20366C9A22293BE8009A2FB3 /* Assets.xcassets in Resources */,
@@ -646,6 +652,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -713,6 +720,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";

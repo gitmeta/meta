@@ -1,5 +1,5 @@
 import XCTest
-@testable import TCR
+@testable import meta
 
 class TestFolder: XCTestCase {
     private var storage: TestStorage!

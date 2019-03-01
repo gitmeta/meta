@@ -15,6 +15,7 @@ class Display: NSView {
     
     func open(_ document: meta.Document) {
         clear()
+        App.shared.state = .document
         switch document {
         case let document as meta.Directory: configure(Directory(document))
         case let document as meta.Image: configure(Image(document))

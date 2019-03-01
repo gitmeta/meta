@@ -2,7 +2,14 @@ import AppKit
 import meta
 
 @NSApplicationMain class App: NSWindow, NSApplicationDelegate {
+    enum State {
+        case none
+        case folder
+        case document
+    }
+    
     static private(set) weak var shared: App!
+    var state = State.none { didSet { refresh() } }
     private(set) var user: User!
     
     func applicationShouldTerminateAfterLastWindowClosed(_: NSApplication) -> Bool { return true }
@@ -36,8 +43,32 @@ import meta
         DispatchQueue.global(qos: .background).async {
             self.user = User.load()
             DispatchQueue.main.async {
+                self.refresh()
                 List.shared.update()
             }
+        }
+    }
+    
+    func clear() {
+        state = .none
+        Display.shared.clear()
+        List.shared.clear()
+        List.shared.update()
+    }
+    
+    @objc func create() { Create() }
+    
+    private func refresh() {
+        switch state {
+        case .none:
+            Bar.shared.new.isEnabled = false
+            Bar.shared.close.isEnabled = false
+        case .folder:
+            Bar.shared.new.isEnabled = true
+            Bar.shared.close.isEnabled = false
+        case .document:
+            Bar.shared.new.isEnabled = true
+            Bar.shared.close.isEnabled = true
         }
     }
 }

@@ -38,9 +38,15 @@ class List: NSScrollView {
     
     required init?(coder: NSCoder) { return nil }
     
-    func update() {
+    func clear() {
         documentView!.subviews.filter({ $0 is Document }).forEach({ $0.removeFromSuperview() })
-        title.stringValue = App.shared.user.folder ?? String()
+        title.stringValue = String()
+    }
+    
+    func update() {
+        guard let name = App.shared.user.folder else { return }
+        App.shared.state = .folder
+        title.stringValue = name
         folder.documents(App.shared.user) {
             var top = self.topAnchor
             $0.enumerated().forEach {
@@ -64,8 +70,8 @@ class List: NSScrollView {
         Display.shared.open(item.document)
     }
     
-    @objc func toggle(_ button: Button) {
-        width.constant = button.state == .on ? open : 0
+    @objc func toggle() {
+        width.constant = Bar.shared.toggle.state == .on ? open : 0
         NSAnimationContext.runAnimationGroup({ context in
             context.duration = 0.6
             context.allowsImplicitAnimation = true
@@ -80,9 +86,8 @@ class List: NSScrollView {
         panel.message = .local("List.open")
         panel.begin {
             if $0 == .OK {
-                Display.shared.clear()
                 App.shared.user.bookmark = [panel.url!: try! panel.url!.bookmarkData(options: .withSecurityScope)]
-                self.update()
+                App.shared.clear()
             }
         }
     }

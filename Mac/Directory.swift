@@ -35,7 +35,6 @@ class Directory: NSView {
             let data = App.shared.user.bookmark.first?.value
         else { return }
         App.shared.user.bookmark = [url: data]
-        Display.shared.clear()
-        List.shared.update()
+        App.shared.clear()
     }
 }

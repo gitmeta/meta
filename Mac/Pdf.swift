@@ -1,21 +1,29 @@
 import AppKit
 import meta
 import WebKit
+import Quartz
 
 class Pdf: NSView {
     init(_ document: meta.Pdf) {
         super.init(frame: .zero)
         translatesAutoresizingMaskIntoConstraints = false
         
-        let web = WKWebView()
-        web.translatesAutoresizingMaskIntoConstraints = false
-        web.loadFileURL(document.url, allowingReadAccessTo: document.url)
-        addSubview(web)
+        let pdf = PDFView()
+        pdf.translatesAutoresizingMaskIntoConstraints = false
+        pdf.backgroundColor = .clear
+        addSubview(pdf)
         
-        web.topAnchor.constraint(equalTo: topAnchor, constant: 30).isActive = true
-        web.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -30).isActive = true
-        web.leftAnchor.constraint(equalTo: leftAnchor, constant: 30).isActive = true
-        web.rightAnchor.constraint(equalTo: rightAnchor, constant: -30).isActive = true
+        pdf.topAnchor.constraint(equalTo: topAnchor).isActive = true
+        pdf.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        pdf.leftAnchor.constraint(equalTo: leftAnchor, constant: 30).isActive = true
+        pdf.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
+        
+        DispatchQueue.global(qos: .background).async {
+            let document = PDFDocument(url: document.url)
+            DispatchQueue.main.async { [weak pdf] in
+                pdf?.document = document
+            }
+        }
     }
     
     required init?(coder: NSCoder) { return nil }

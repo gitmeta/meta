@@ -38,7 +38,7 @@ public class Folder {
     func load(_ url: [URL]) -> [Document] {
         return url.map ({
             (try? $0.resourceValues(forKeys: [.isDirectoryKey]))?.isDirectory == true ? Directory($0) : {
-                switch $0.pathExtension {
+                switch $0.pathExtension.lowercased() {
                 case "md": return Md($0)
                 case "pdf": return Pdf($0)
                 case "png", "jpg", "jpeg", "gif", "bmp": return Image($0)

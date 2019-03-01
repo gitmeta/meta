@@ -25,6 +25,10 @@ class TestDocument: XCTestCase {
         XCTAssertTrue(folder.load([URL(fileURLWithPath: "hello.md")]).first is Md)
     }
     
+    func testUppercase() {
+        XCTAssertTrue(folder.load([URL(fileURLWithPath: "hello.MD")]).first is Md)
+    }
+    
     func testImage() {
         folder.load([URL(fileURLWithPath: "hello.png"),
                      URL(fileURLWithPath: "hello.jpg"),

@@ -1,8 +1,8 @@
 import AppKit
-import TCR
+import meta
 
 class Image: NSView {
-    init(_ document: TCR.Image) {
+    init(_ document: meta.Image) {
         super.init(frame: .zero)
         translatesAutoresizingMaskIntoConstraints = false
         

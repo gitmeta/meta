@@ -1,5 +1,5 @@
 import AppKit
-import TCR
+import meta
 
 class Scroll: NSScrollView {
     static let shared = Scroll()
@@ -15,12 +15,12 @@ class Scroll: NSScrollView {
     
     required init?(coder: NSCoder) { return nil }
     
-    func open(_ document: TCR.Document) {
+    func open(_ document: meta.Document) {
         clear()
         switch document {
-        case let document as TCR.Directory: configure(Directory(document))
-        case let document as TCR.Image: configure(Image(document))
-        case let document as TCR.Pdf: configure(Pdf(document))
+        case let document as meta.Directory: configure(Directory(document))
+        case let document as meta.Image: configure(Image(document))
+        case let document as meta.Pdf: configure(Pdf(document))
         case let document as Editable: configure(document)
         default: break
         }

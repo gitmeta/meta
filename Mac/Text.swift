@@ -1,5 +1,5 @@
 import AppKit
-import TCR
+import meta
 
 class Text: NSTextView {
     weak var ruler: Ruler?

@@ -1,9 +1,9 @@
 import AppKit
-import TCR
+import meta
 import WebKit
 
 class Pdf: NSView {
-    init(_ document: TCR.Pdf) {
+    init(_ document: meta.Pdf) {
         super.init(frame: .zero)
         translatesAutoresizingMaskIntoConstraints = false
         

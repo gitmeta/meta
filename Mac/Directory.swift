@@ -1,10 +1,10 @@
 import AppKit
-import TCR
+import meta
 
 class Directory: NSView {
-    private weak var document: TCR.Directory?
+    private weak var document: meta.Directory?
     
-    init(_ document: TCR.Directory) {
+    init(_ document: meta.Directory) {
         super.init(frame: .zero)
         translatesAutoresizingMaskIntoConstraints = false
         self.document = document

@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2005CD5522293F9D00B6972D /* libmeta.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 20366C9F22293D59009A2FB3 /* libmeta.a */; };
+		2005CD5822293FAE00B6972D /* libmeta.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 20366C9F22293D59009A2FB3 /* libmeta.a */; };
+		2005CD5B22293FB900B6972D /* libmeta.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 20366C9E22293D20009A2FB3 /* libmeta.a */; };
 		20366C3022293BA4009A2FB3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 20366C2D22293BA4009A2FB3 /* LaunchScreen.storyboard */; };
 		20366C3222293BA4009A2FB3 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20366C2F22293BA4009A2FB3 /* App.swift */; };
 		20366C4822293BBF009A2FB3 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20366C3422293BBF009A2FB3 /* Storage.swift */; };
@@ -67,12 +70,26 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		20366C2322293944009A2FB3 /* PBXContainerItemProxy */ = {
+		2005CD5222293F9200B6972D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 20366BD12229341F009A2FB3 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 20366BDA222937BE009A2FB3;
-			remoteInfo = Mac;
+			remoteGlobalIDString = 20366C102229393A009A2FB3;
+			remoteInfo = "-Mac";
+		};
+		2005CD5622293FA800B6972D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 20366BD12229341F009A2FB3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 20366C102229393A009A2FB3;
+			remoteInfo = "-Mac";
+		};
+		2005CD5922293FB400B6972D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 20366BD12229341F009A2FB3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 20366C0522293876009A2FB3;
+			remoteInfo = "-iOS";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -138,10 +155,10 @@
 		20366C8F22293BE8009A2FB3 /* SFMono-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFMono-Bold.otf"; sourceTree = "<group>"; };
 		20366C9022293BE8009A2FB3 /* Shared.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shared.swift; sourceTree = "<group>"; };
 		20366C9122293BE8009A2FB3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		20366C9C22293CBB009A2FB3 /* Mac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mac.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		20366C9D22293CE3009A2FB3 /* iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		20366C9E22293D20009A2FB3 /* lib-iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "lib-iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		20366C9F22293D59009A2FB3 /* lib-Mac.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "lib-Mac.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		20366C9C22293CBB009A2FB3 /* meta.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = meta.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		20366C9D22293CE3009A2FB3 /* meta.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = meta.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		20366C9E22293D20009A2FB3 /* libmeta.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libmeta.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		20366C9F22293D59009A2FB3 /* libmeta.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libmeta.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +166,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2005CD5822293FAE00B6972D /* libmeta.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -156,6 +174,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2005CD5B22293FB900B6972D /* libmeta.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -177,12 +196,20 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2005CD5522293F9D00B6972D /* libmeta.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2005CD5422293F9D00B6972D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		20366BD02229341F009A2FB3 = {
 			isa = PBXGroup;
 			children = (
@@ -195,10 +222,11 @@
 				20366C3322293BBF009A2FB3 /* Mac */,
 				20366C8B22293BE8009A2FB3 /* Shared */,
 				20366C5C22293BCF009A2FB3 /* Tests */,
-				20366C9C22293CBB009A2FB3 /* Mac.app */,
-				20366C9D22293CE3009A2FB3 /* iOS.app */,
-				20366C9E22293D20009A2FB3 /* lib-iOS.a */,
-				20366C9F22293D59009A2FB3 /* lib-Mac.a */,
+				20366C9C22293CBB009A2FB3 /* meta.app */,
+				20366C9D22293CE3009A2FB3 /* meta.app */,
+				20366C9E22293D20009A2FB3 /* libmeta.a */,
+				20366C9F22293D59009A2FB3 /* libmeta.a */,
+				2005CD5422293F9D00B6972D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -306,10 +334,11 @@
 			buildRules = (
 			);
 			dependencies = (
+				2005CD5722293FA800B6972D /* PBXTargetDependency */,
 			);
 			name = Mac;
 			productName = Mac;
-			productReference = 20366C9C22293CBB009A2FB3 /* Mac.app */;
+			productReference = 20366C9C22293CBB009A2FB3 /* meta.app */;
 			productType = "com.apple.product-type.application";
 		};
 		20366BEF222937D6009A2FB3 /* iOS */ = {
@@ -323,10 +352,11 @@
 			buildRules = (
 			);
 			dependencies = (
+				2005CD5A22293FB400B6972D /* PBXTargetDependency */,
 			);
 			name = iOS;
 			productName = iOS;
-			productReference = 20366C9D22293CE3009A2FB3 /* iOS.app */;
+			productReference = 20366C9D22293CE3009A2FB3 /* meta.app */;
 			productType = "com.apple.product-type.application";
 		};
 		20366C0522293876009A2FB3 /* -iOS */ = {
@@ -343,7 +373,7 @@
 			);
 			name = "-iOS";
 			productName = "-iOS";
-			productReference = 20366C9E22293D20009A2FB3 /* lib-iOS.a */;
+			productReference = 20366C9E22293D20009A2FB3 /* libmeta.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 		20366C102229393A009A2FB3 /* -Mac */ = {
@@ -360,7 +390,7 @@
 			);
 			name = "-Mac";
 			productName = "-Mac";
-			productReference = 20366C9F22293D59009A2FB3 /* lib-Mac.a */;
+			productReference = 20366C9F22293D59009A2FB3 /* libmeta.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 		20366C1D22293944009A2FB3 /* Tests */ = {
@@ -374,7 +404,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				20366C2422293944009A2FB3 /* PBXTargetDependency */,
+				2005CD5322293F9200B6972D /* PBXTargetDependency */,
 			);
 			name = Tests;
 			productName = Tests;
@@ -409,7 +439,6 @@
 					};
 					20366C1D22293944009A2FB3 = {
 						CreatedOnToolsVersion = 10.1;
-						TestTargetID = 20366BDA222937BE009A2FB3;
 					};
 				};
 			};
@@ -554,10 +583,20 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		20366C2422293944009A2FB3 /* PBXTargetDependency */ = {
+		2005CD5322293F9200B6972D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 20366BDA222937BE009A2FB3 /* Mac */;
-			targetProxy = 20366C2322293944009A2FB3 /* PBXContainerItemProxy */;
+			target = 20366C102229393A009A2FB3 /* -Mac */;
+			targetProxy = 2005CD5222293F9200B6972D /* PBXContainerItemProxy */;
+		};
+		2005CD5722293FA800B6972D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 20366C102229393A009A2FB3 /* -Mac */;
+			targetProxy = 2005CD5622293FA800B6972D /* PBXContainerItemProxy */;
+		};
+		2005CD5A22293FB400B6972D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 20366C0522293876009A2FB3 /* -iOS */;
+			targetProxy = 2005CD5922293FB400B6972D /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -582,6 +621,7 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				PRODUCT_NAME = meta;
 				SWIFT_INSTALL_OBJC_HEADER = NO;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
@@ -596,6 +636,7 @@
 				ENABLE_BITCODE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				PRODUCT_NAME = meta;
 				SWIFT_INSTALL_OBJC_HEADER = NO;
 				SWIFT_VERSION = 4.2;
 			};
@@ -662,7 +703,7 @@
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = meta.Mac;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_MODULE_NAME = metaMac;
 				SDKROOT = macosx;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 			};
@@ -723,7 +764,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = meta.Mac;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_MODULE_NAME = metaMac;
 				SDKROOT = macosx;
 				SWIFT_COMPILATION_MODE = wholemodule;
 			};
@@ -788,7 +829,7 @@
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = meta.iOS;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_MODULE_NAME = metaiOS;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -848,7 +889,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = meta.iOS;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_MODULE_NAME = metaiOS;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -910,7 +951,6 @@
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
@@ -966,7 +1006,6 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -1029,7 +1068,6 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 			};
@@ -1083,7 +1121,6 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 			};
@@ -1093,7 +1130,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -1154,7 +1190,6 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Mac.app/Contents/MacOS/Mac";
 			};
 			name = Debug;
 		};
@@ -1162,7 +1197,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -1217,7 +1251,6 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				SWIFT_COMPILATION_MODE = wholemodule;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Mac.app/Contents/MacOS/Mac";
 			};
 			name = Release;
 		};

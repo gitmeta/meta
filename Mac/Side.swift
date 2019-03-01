@@ -1,5 +1,5 @@
 import AppKit
-import TCR
+import meta
 
 class Side: NSScrollView {
     static let shared = Side()

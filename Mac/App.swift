@@ -1,5 +1,5 @@
 import AppKit
-import TCR
+import meta
 
 @NSApplicationMain class App: NSWindow, NSApplicationDelegate {
     static private(set) weak var shared: App!

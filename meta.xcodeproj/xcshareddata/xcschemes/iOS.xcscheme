@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "20366BDA222937BE009A2FB3"
-               BuildableName = "metaMac.app"
-               BlueprintName = "Mac"
+               BlueprintIdentifier = "20366BEF222937D6009A2FB3"
+               BuildableName = "metaiOS.app"
+               BlueprintName = "iOS"
                ReferencedContainer = "container:meta.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -28,24 +28,13 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO"
-            testExecutionOrdering = "random">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "20366C1D22293944009A2FB3"
-               BuildableName = "Tests.xctest"
-               BlueprintName = "Tests"
-               ReferencedContainer = "container:meta.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "20366BDA222937BE009A2FB3"
-            BuildableName = "metaMac.app"
-            BlueprintName = "Mac"
+            BlueprintIdentifier = "20366BEF222937D6009A2FB3"
+            BuildableName = "metaiOS.app"
+            BlueprintName = "iOS"
             ReferencedContainer = "container:meta.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -66,9 +55,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "20366BDA222937BE009A2FB3"
-            BuildableName = "metaMac.app"
-            BlueprintName = "Mac"
+            BlueprintIdentifier = "20366BEF222937D6009A2FB3"
+            BuildableName = "metaiOS.app"
+            BlueprintName = "iOS"
             ReferencedContainer = "container:meta.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -85,9 +74,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "20366BDA222937BE009A2FB3"
-            BuildableName = "metaMac.app"
-            BlueprintName = "Mac"
+            BlueprintIdentifier = "20366BEF222937D6009A2FB3"
+            BuildableName = "metaiOS.app"
+            BlueprintName = "iOS"
             ReferencedContainer = "container:meta.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

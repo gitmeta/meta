@@ -1,11 +1,11 @@
 import AppKit
-import TCR
+import meta
 
 class Document: NSControl {
-    let document: TCR.Document
+    let document: meta.Document
     private weak var label: Label!
     
-    init(_ document: TCR.Document) {
+    init(_ document: meta.Document) {
         self.document = document
         super.init(frame: .zero)
         translatesAutoresizingMaskIntoConstraints = false

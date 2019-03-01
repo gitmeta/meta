@@ -5,7 +5,7 @@ class Menu: NSMenu {
     @IBOutlet private(set) weak var sidebar: NSMenuItem!
     @IBOutlet private weak var fileNew: NSMenuItem!
     @IBOutlet private weak var fileOpen: NSMenuItem!
-    @IBOutlet private weak var fileClose: NSMenuItem!
+    @IBOutlet private(set) weak var fileClose: NSMenuItem!
     @IBOutlet private weak var fileDelete: NSMenuItem!
     
     override func awakeFromNib() {
@@ -13,6 +13,12 @@ class Menu: NSMenu {
         Menu.shared = self
         sidebar.target = self
         sidebar.action = #selector(toggle)
+        
+        fileOpen.target = List.shared
+        fileOpen.action = #selector(List.shared.select)
+        
+        fileClose.target = App.shared
+        fileClose.action = #selector(App.shared.close)
     }
     
     @objc private func toggle() {

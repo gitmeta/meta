@@ -56,6 +56,12 @@ import meta
         List.shared.update()
     }
     
+    @objc override func close() {
+        state = .folder
+        Display.shared.clear()
+        List.shared.selected = nil
+    }
+    
     @objc func create() { Create() }
     
     private func refresh() {
@@ -63,12 +69,15 @@ import meta
         case .none:
             Bar.shared.new.isEnabled = false
             Bar.shared.close.isEnabled = false
+            Menu.shared.fileClose.isEnabled = false
         case .folder:
             Bar.shared.new.isEnabled = true
             Bar.shared.close.isEnabled = false
+            Menu.shared.fileClose.isEnabled = false
         case .document:
             Bar.shared.new.isEnabled = true
             Bar.shared.close.isEnabled = true
+            Menu.shared.fileClose.isEnabled = true
         }
     }
 }

@@ -71,6 +71,7 @@ class List: NSScrollView {
     }
     
     @objc func toggle() {
+        Menu.shared.sidebar.state = Bar.shared.toggle.state == .on ? .on : .off
         width.constant = Bar.shared.toggle.state == .on ? open : 0
         NSAnimationContext.runAnimationGroup({ context in
             context.duration = 0.6

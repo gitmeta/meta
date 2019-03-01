@@ -61,7 +61,7 @@ class List: NSScrollView {
     @objc func open(_ item: Document) {
         guard item !== selected else { return }
         selected = item
-        Scroll.shared.open(item.document)
+        Display.shared.open(item.document)
     }
     
     @objc func toggle(_ button: Button) {
@@ -80,7 +80,7 @@ class List: NSScrollView {
         panel.message = .local("List.open")
         panel.begin {
             if $0 == .OK {
-                Scroll.shared.clear()
+                Display.shared.clear()
                 App.shared.user.bookmark = [panel.url!: try! panel.url!.bookmarkData(options: .withSecurityScope)]
                 self.update()
             }

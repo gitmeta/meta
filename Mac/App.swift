@@ -16,7 +16,7 @@ import meta
         NSApp.delegate = self
         App.shared = self
         
-        contentView!.addSubview(Scroll.shared)
+        contentView!.addSubview(Display.shared)
         contentView!.addSubview(List.shared)
         contentView!.addSubview(Bar.shared)
         
@@ -28,10 +28,10 @@ import meta
         Bar.shared.bottomAnchor.constraint(equalTo: contentView!.bottomAnchor).isActive = true
         Bar.shared.leftAnchor.constraint(equalTo: List.shared.rightAnchor).isActive = true
         
-        Scroll.shared.topAnchor.constraint(equalTo: contentView!.topAnchor).isActive = true
-        Scroll.shared.bottomAnchor.constraint(equalTo: contentView!.bottomAnchor).isActive = true
-        Scroll.shared.leftAnchor.constraint(equalTo: Bar.shared.rightAnchor).isActive = true
-        Scroll.shared.rightAnchor.constraint(equalTo: contentView!.rightAnchor).isActive = true
+        Display.shared.topAnchor.constraint(equalTo: contentView!.topAnchor).isActive = true
+        Display.shared.bottomAnchor.constraint(equalTo: contentView!.bottomAnchor).isActive = true
+        Display.shared.leftAnchor.constraint(equalTo: Bar.shared.rightAnchor).isActive = true
+        Display.shared.rightAnchor.constraint(equalTo: contentView!.rightAnchor).isActive = true
         
         DispatchQueue.global(qos: .background).async {
             self.user = User.load()

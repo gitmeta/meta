@@ -1,19 +1,17 @@
 import AppKit
 import meta
 
-class Scroll: NSScrollView {
-    static let shared = Scroll()
+class Display: NSView {
+    static let shared = Display()
     
     private init() {
         super.init(frame: .zero)
         translatesAutoresizingMaskIntoConstraints = false
-        drawsBackground = false
-        hasVerticalScroller = true
-        verticalScroller!.controlSize = .mini
-        horizontalScrollElasticity = .none
     }
     
     required init?(coder: NSCoder) { return nil }
+    
+    func clear() { subviews.forEach({ $0.removeFromSuperview() }) }
     
     func open(_ document: meta.Document) {
         clear()
@@ -26,30 +24,32 @@ class Scroll: NSScrollView {
         }
     }
     
-    func clear() {
-        documentView = nil
-        verticalRulerView = nil
-        rulersVisible = false
-        verticalScrollElasticity = .none
-    }
-    
     private func configure(_ document: Editable) {
         let text = Text(document)
         let ruler = Ruler(text, layout: text.layoutManager as! Layout)
+        let scroll = NSScrollView()
+        scroll.translatesAutoresizingMaskIntoConstraints = false
+        scroll.drawsBackground = false
+        scroll.documentView = text
+        scroll.hasVerticalScroller = true
+        scroll.verticalScroller!.controlSize = .mini
+        scroll.horizontalScrollElasticity = .none
+        scroll.verticalScrollElasticity = .allowed
+        scroll.verticalRulerView = ruler
+        scroll.rulersVisible = true
         text.ruler = ruler
-        documentView = text
-        verticalRulerView = ruler
-        rulersVisible = true
-        verticalScrollElasticity = .allowed
         
+        configure(scroll)
         text.widthAnchor.constraint(equalTo: widthAnchor, constant: -ruler.ruleThickness).isActive = true
         text.heightAnchor.constraint(greaterThanOrEqualTo: heightAnchor).isActive = true
-        App.shared.makeFirstResponder(text)
     }
     
     private func configure(_ document: NSView) {
-        documentView = document
-        documentView!.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
-        documentView!.heightAnchor.constraint(equalTo: heightAnchor).isActive = true
+        addSubview(document)
+        
+        document.topAnchor.constraint(equalTo: topAnchor).isActive = true
+        document.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        document.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
+        document.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
     }
 }

@@ -14,7 +14,6 @@
 		20366C3222293BA4009A2FB3 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20366C2F22293BA4009A2FB3 /* App.swift */; };
 		20366C4822293BBF009A2FB3 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20366C3422293BBF009A2FB3 /* Storage.swift */; };
 		20366C4A22293BBF009A2FB3 /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20366C3522293BBF009A2FB3 /* Label.swift */; };
-		20366C4B22293BBF009A2FB3 /* Scroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20366C3622293BBF009A2FB3 /* Scroll.swift */; };
 		20366C4C22293BBF009A2FB3 /* Link.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20366C3822293BBF009A2FB3 /* Link.swift */; };
 		20366C4D22293BBF009A2FB3 /* Directory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20366C3922293BBF009A2FB3 /* Directory.swift */; };
 		20366C4E22293BBF009A2FB3 /* Mac.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 20366C3A22293BBF009A2FB3 /* Mac.storyboard */; };
@@ -68,6 +67,7 @@
 		20366C9A22293BE8009A2FB3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 20366C9122293BE8009A2FB3 /* Assets.xcassets */; };
 		20366C9B22293BE8009A2FB3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 20366C9122293BE8009A2FB3 /* Assets.xcassets */; };
 		20BD161A2229456C00B8EFDF /* Mac.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 20BD16192229456C00B8EFDF /* Mac.xcassets */; };
+		20BD161D22294F8E00B8EFDF /* Display.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20BD161C22294F8E00B8EFDF /* Display.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -115,7 +115,6 @@
 		20366C2F22293BA4009A2FB3 /* App.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 		20366C3422293BBF009A2FB3 /* Storage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		20366C3522293BBF009A2FB3 /* Label.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
-		20366C3622293BBF009A2FB3 /* Scroll.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Scroll.swift; sourceTree = "<group>"; };
 		20366C3722293BBF009A2FB3 /* Mac.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = Mac.entitlements; sourceTree = "<group>"; };
 		20366C3822293BBF009A2FB3 /* Link.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Link.swift; sourceTree = "<group>"; };
 		20366C3922293BBF009A2FB3 /* Directory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Directory.swift; sourceTree = "<group>"; };
@@ -162,6 +161,7 @@
 		20366C9F22293D59009A2FB3 /* libmeta.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libmeta.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		20BD16192229456C00B8EFDF /* Mac.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Mac.xcassets; sourceTree = "<group>"; };
 		20BD161B2229472200B8EFDF /* meta.sketch */ = {isa = PBXFileReference; lastKnownFileType = file; path = meta.sketch; sourceTree = "<group>"; };
+		20BD161C22294F8E00B8EFDF /* Display.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Display.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -254,6 +254,7 @@
 				20366C3B22293BBF009A2FB3 /* Bar.swift */,
 				20366C4622293BBF009A2FB3 /* Button.swift */,
 				20366C3922293BBF009A2FB3 /* Directory.swift */,
+				20BD161C22294F8E00B8EFDF /* Display.swift */,
 				20366C4022293BBF009A2FB3 /* Document.swift */,
 				20366C3D22293BBF009A2FB3 /* Extensions.swift */,
 				20366C3C22293BBF009A2FB3 /* Image.swift */,
@@ -263,7 +264,6 @@
 				20366C4322293BBF009A2FB3 /* List.swift */,
 				20366C4122293BBF009A2FB3 /* Pdf.swift */,
 				20366C4722293BBF009A2FB3 /* Ruler.swift */,
-				20366C3622293BBF009A2FB3 /* Scroll.swift */,
 				20366C3E22293BBF009A2FB3 /* Skin.swift */,
 				20366C3422293BBF009A2FB3 /* Storage.swift */,
 				20366C4522293BBF009A2FB3 /* Text.swift */,
@@ -523,7 +523,7 @@
 				20366C5B22293BBF009A2FB3 /* Ruler.swift in Sources */,
 				20366C4822293BBF009A2FB3 /* Storage.swift in Sources */,
 				20366C5222293BBF009A2FB3 /* Skin.swift in Sources */,
-				20366C4B22293BBF009A2FB3 /* Scroll.swift in Sources */,
+				20BD161D22294F8E00B8EFDF /* Display.swift in Sources */,
 				20366C4C22293BBF009A2FB3 /* Link.swift in Sources */,
 				20366C4D22293BBF009A2FB3 /* Directory.swift in Sources */,
 			);

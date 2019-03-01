@@ -9,7 +9,9 @@ class Image: NSView {
         let image = NSImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
         image.image = NSImage(contentsOf: document.url)
-        image.imageScaling = .scaleProportionallyUpOrDown
+        image.imageScaling = .scaleProportionallyDown
+        image.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
+        image.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
         addSubview(image)
         
         image.topAnchor.constraint(equalTo: topAnchor, constant: 30).isActive = true

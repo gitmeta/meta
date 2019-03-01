@@ -54,7 +54,7 @@ class Text: NSTextView {
     override func updateRuler() { ruler?.setNeedsDisplay(visibleRect) }
     
     private func adjust() {
-        textContainer!.size.width = Scroll.shared.frame.width - (textContainerInset.width * 2) - Ruler.thickness
+        textContainer!.size.width = Display.shared.frame.width - (textContainerInset.width * 2) - Ruler.thickness
         layoutManager!.ensureLayout(for: textContainer!)
         height.constant = layoutManager!.usedRect(for: textContainer!).size.height + (textContainerInset.height * 2)
         DispatchQueue.main.async { [weak self] in self?.updateRuler() }

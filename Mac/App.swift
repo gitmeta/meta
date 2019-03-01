@@ -45,6 +45,9 @@ import meta
             DispatchQueue.main.async {
                 self.refresh()
                 List.shared.update()
+                if self.user.folder == nil {
+                    List.shared.select()
+                }
             }
         }
     }

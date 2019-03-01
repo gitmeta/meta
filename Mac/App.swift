@@ -17,16 +17,16 @@ import meta
         App.shared = self
         
         contentView!.addSubview(Scroll.shared)
-        contentView!.addSubview(Side.shared)
+        contentView!.addSubview(List.shared)
         contentView!.addSubview(Bar.shared)
         
-        Side.shared.topAnchor.constraint(equalTo: contentView!.topAnchor).isActive = true
-        Side.shared.bottomAnchor.constraint(equalTo: contentView!.bottomAnchor).isActive = true
-        Side.shared.leftAnchor.constraint(equalTo: contentView!.leftAnchor).isActive = true
+        List.shared.topAnchor.constraint(equalTo: contentView!.topAnchor).isActive = true
+        List.shared.bottomAnchor.constraint(equalTo: contentView!.bottomAnchor).isActive = true
+        List.shared.leftAnchor.constraint(equalTo: contentView!.leftAnchor).isActive = true
         
         Bar.shared.topAnchor.constraint(equalTo: contentView!.topAnchor).isActive = true
         Bar.shared.bottomAnchor.constraint(equalTo: contentView!.bottomAnchor).isActive = true
-        Bar.shared.leftAnchor.constraint(equalTo: Side.shared.rightAnchor).isActive = true
+        Bar.shared.leftAnchor.constraint(equalTo: List.shared.rightAnchor).isActive = true
         
         Scroll.shared.topAnchor.constraint(equalTo: contentView!.topAnchor).isActive = true
         Scroll.shared.bottomAnchor.constraint(equalTo: contentView!.bottomAnchor).isActive = true
@@ -36,7 +36,7 @@ import meta
         DispatchQueue.global(qos: .background).async {
             self.user = User.load()
             DispatchQueue.main.async {
-                Side.shared.update()
+                List.shared.update()
             }
         }
     }

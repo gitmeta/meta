@@ -7,12 +7,12 @@ class Bar: NSView {
         super.init(frame: .zero)
         translatesAutoresizingMaskIntoConstraints = false
         
-        let up = Button("up", target: Side.shared, action: #selector(Side.shared.select))
+        let up = Button("up", target: List.shared, action: #selector(List.shared.select))
         up.keyEquivalent = "o"
         up.keyEquivalentModifierMask = .command
         addSubview(up)
         
-        let toggle = Button("listOff", type: .toggle, target: Side.shared, action: #selector(Side.shared.toggle(_:)))
+        let toggle = Button("listOff", type: .toggle, target: List.shared, action: #selector(List.shared.toggle(_:)))
         toggle.state = .on
         toggle.alternateImage = NSImage(named: "listOn")
         toggle.keyEquivalent = "l"

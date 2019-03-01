@@ -4,7 +4,7 @@ class Storage {
     static var shared = Storage()
     private let queue = DispatchQueue(label: String(), qos: .background, target: .global(qos: .background))
     private let _user = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-        .appendingPathComponent("User.tcr")
+        .appendingPathComponent("User.meta")
     
     func user() throws -> User {
         return try JSONDecoder().decode(User.self, from: try Data(contentsOf: _user))

@@ -42,7 +42,7 @@ class Text: NSTextView {
         adjust()
         DispatchQueue.global(qos: .background).async { [weak self] in
             guard let document = self?.document else { return }
-            Side.shared.folder.save(document)
+            List.shared.folder.save(document)
         }
     }
     

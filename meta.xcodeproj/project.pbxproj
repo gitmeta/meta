@@ -25,7 +25,7 @@
 		20366C5422293BBF009A2FB3 /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20366C4022293BBF009A2FB3 /* Document.swift */; };
 		20366C5522293BBF009A2FB3 /* Pdf.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20366C4122293BBF009A2FB3 /* Pdf.swift */; };
 		20366C5622293BBF009A2FB3 /* Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20366C4222293BBF009A2FB3 /* Layout.swift */; };
-		20366C5722293BBF009A2FB3 /* Side.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20366C4322293BBF009A2FB3 /* Side.swift */; };
+		20366C5722293BBF009A2FB3 /* List.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20366C4322293BBF009A2FB3 /* List.swift */; };
 		20366C5822293BBF009A2FB3 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20366C4422293BBF009A2FB3 /* App.swift */; };
 		20366C5922293BBF009A2FB3 /* Text.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20366C4522293BBF009A2FB3 /* Text.swift */; };
 		20366C5A22293BBF009A2FB3 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20366C4622293BBF009A2FB3 /* Button.swift */; };
@@ -128,7 +128,7 @@
 		20366C4022293BBF009A2FB3 /* Document.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Document.swift; sourceTree = "<group>"; };
 		20366C4122293BBF009A2FB3 /* Pdf.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pdf.swift; sourceTree = "<group>"; };
 		20366C4222293BBF009A2FB3 /* Layout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Layout.swift; sourceTree = "<group>"; };
-		20366C4322293BBF009A2FB3 /* Side.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Side.swift; sourceTree = "<group>"; };
+		20366C4322293BBF009A2FB3 /* List.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = List.swift; sourceTree = "<group>"; };
 		20366C4422293BBF009A2FB3 /* App.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 		20366C4522293BBF009A2FB3 /* Text.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Text.swift; sourceTree = "<group>"; };
 		20366C4622293BBF009A2FB3 /* Button.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
@@ -260,10 +260,10 @@
 				20366C3522293BBF009A2FB3 /* Label.swift */,
 				20366C4222293BBF009A2FB3 /* Layout.swift */,
 				20366C3822293BBF009A2FB3 /* Link.swift */,
+				20366C4322293BBF009A2FB3 /* List.swift */,
 				20366C4122293BBF009A2FB3 /* Pdf.swift */,
 				20366C4722293BBF009A2FB3 /* Ruler.swift */,
 				20366C3622293BBF009A2FB3 /* Scroll.swift */,
-				20366C4322293BBF009A2FB3 /* Side.swift */,
 				20366C3E22293BBF009A2FB3 /* Skin.swift */,
 				20366C3422293BBF009A2FB3 /* Storage.swift */,
 				20366C4522293BBF009A2FB3 /* Text.swift */,
@@ -518,7 +518,7 @@
 				20366C5122293BBF009A2FB3 /* Extensions.swift in Sources */,
 				20366C5822293BBF009A2FB3 /* App.swift in Sources */,
 				20366C5622293BBF009A2FB3 /* Layout.swift in Sources */,
-				20366C5722293BBF009A2FB3 /* Side.swift in Sources */,
+				20366C5722293BBF009A2FB3 /* List.swift in Sources */,
 				20366C5422293BBF009A2FB3 /* Document.swift in Sources */,
 				20366C5B22293BBF009A2FB3 /* Ruler.swift in Sources */,
 				20366C4822293BBF009A2FB3 /* Storage.swift in Sources */,

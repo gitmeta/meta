@@ -36,6 +36,6 @@ class Directory: NSView {
         else { return }
         App.shared.user.bookmark = [url: data]
         Scroll.shared.clear()
-        Side.shared.update()
+        List.shared.update()
     }
 }

@@ -28,10 +28,10 @@ class Document: NSControl {
     
     required init?(coder: NSCoder) { return nil }
     
-    override func mouseDown(with: NSEvent) { sendAction(#selector(Side.shared.open(_:)), to: Side.shared) }
+    override func mouseDown(with: NSEvent) { sendAction(#selector(List.shared.open(_:)), to: List.shared) }
     
     func update() {
-        if Side.shared.selected === self {
+        if List.shared.selected === self {
             layer!.backgroundColor = NSColor.shade.cgColor
             label.alphaValue = 0.9
         } else {

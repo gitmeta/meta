@@ -1,12 +1,12 @@
 import AppKit
 import meta
 
-class Side: NSScrollView {
-    static let shared = Side()
+class List: NSScrollView {
+    static let shared = List()
     weak var selected: Document? { didSet { oldValue?.update(); selected?.update() } }
     let folder = Folder()
     private weak var width: NSLayoutConstraint!
-    private weak var link: Link!
+    private weak var title: Label!
     private let open = CGFloat(170)
     
     private init() {
@@ -21,27 +21,26 @@ class Side: NSScrollView {
         documentView!.topAnchor.constraint(equalTo: topAnchor).isActive = true
         documentView!.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
         documentView!.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
+        documentView!.bottomAnchor.constraint(greaterThanOrEqualTo: bottomAnchor).isActive = true
         
         width = widthAnchor.constraint(equalToConstant: open)
         width.isActive = true
         
-        let link = Link(String(), background: .clear, target: self, action: #selector(select))
-        link.alignment = .left
-        documentView!.addSubview(link)
-        self.link = link
+        let title = Label(String(), color: NSColor(white: 1, alpha: 0.5), font: .systemFont(ofSize: 18, weight: .bold))
+        title.maximumNumberOfLines = 2
+        documentView!.addSubview(title)
+        self.title = title
         
-        link.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
-        link.topAnchor.constraint(equalTo: topAnchor, constant: 25).isActive = true
-        link.width.constant = open - 14
-        link.height.constant = 42
+        title.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
+        title.centerYAnchor.constraint(equalTo: topAnchor, constant: 45).isActive = true
+        title.widthAnchor.constraint(equalToConstant: open - 14).isActive = true
     }
     
     required init?(coder: NSCoder) { return nil }
     
     func update() {
         documentView!.subviews.filter({ $0 is Document }).forEach({ $0.removeFromSuperview() })
-        link.attributedTitle = NSAttributedString(string: App.shared.user.folder ?? .local("Side.select"), attributes:
-            [.font: NSFont.systemFont(ofSize: 18, weight: .bold), .foregroundColor: NSColor(white: 1, alpha: 0.5)])
+        title.stringValue = App.shared.user.folder ?? String()
         folder.documents(App.shared.user) {
             var top = self.topAnchor
             $0.enumerated().forEach {
@@ -54,7 +53,7 @@ class Side: NSScrollView {
                 top = document.bottomAnchor
             }
             if self.topAnchor !== top {
-                self.documentView!.bottomAnchor.constraint(equalTo: top, constant: 20).isActive = true
+                self.documentView!.bottomAnchor.constraint(greaterThanOrEqualTo: top, constant: 20).isActive = true
             }
         }
     }
@@ -78,7 +77,7 @@ class Side: NSScrollView {
         let panel = NSOpenPanel()
         panel.canChooseFiles = false
         panel.canChooseDirectories = true
-        panel.message = .local("Side.open")
+        panel.message = .local("List.open")
         panel.begin {
             if $0 == .OK {
                 Scroll.shared.clear()

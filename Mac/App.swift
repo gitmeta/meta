@@ -88,4 +88,8 @@ import StoreKit
     }
     
     @objc func create() { Create() }
+    
+    @IBAction private func showHelp(_: Any?) {
+        Welcome()
+    }
 }

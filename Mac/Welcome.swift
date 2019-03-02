@@ -19,8 +19,8 @@ class Welcome: Sheet {
         open.keyEquivalent = "\r"
         addSubview(open)
         
-        let cancel = Link(.local("Welcome.close"), text: NSColor(white: 1, alpha: 0.5), font: .light(16),
-                          target: self, action: #selector(close))
+        let cancel = Link(.local("Welcome.close"), text: NSColor(white: 1, alpha: 0.6),
+                          font: .systemFont(ofSize: 16, weight: .light), target: self, action: #selector(close))
         addSubview(cancel)
         
         let check = Button("checkOff", type: .toggle, target: self, action: #selector(check(_:)))

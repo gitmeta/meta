@@ -4,8 +4,8 @@ class Link: NSButton {
     private(set) weak var width: NSLayoutConstraint!
     private(set) weak var height: NSLayoutConstraint!
     
-    init(_ title: String, background: NSColor = .clear, text: NSColor = .white, font: NSFont = .bold(16),
-         target: AnyObject, action: Selector) {
+    init(_ title: String, background: NSColor = .clear, text: NSColor = .white,
+         font: NSFont = .systemFont(ofSize: 16, weight: .bold), target: AnyObject, action: Selector) {
         super.init(frame: .zero)
         translatesAutoresizingMaskIntoConstraints = false
         wantsLayer = true

@@ -1,5 +1,6 @@
-import AppKit
 import meta
+import AppKit
+import StoreKit
 
 @NSApplicationMain class App: NSWindow, NSApplicationDelegate {
     enum State {
@@ -9,7 +10,6 @@ import meta
     }
     
     static private(set) weak var shared: App!
-    var state = State.none { didSet { refresh() } }
     private(set) var user: User!
     
     func applicationShouldTerminateAfterLastWindowClosed(_: NSApplication) -> Bool { return true }
@@ -39,11 +39,12 @@ import meta
         Display.shared.bottomAnchor.constraint(equalTo: contentView!.bottomAnchor).isActive = true
         Display.shared.leftAnchor.constraint(equalTo: Bar.shared.rightAnchor).isActive = true
         Display.shared.rightAnchor.constraint(equalTo: contentView!.rightAnchor).isActive = true
+        state = .none
         
         DispatchQueue.global(qos: .background).async {
             self.user = User.load()
+            self.user.ask = { if #available(OSX 10.14, *) { SKStoreReviewController.requestReview() } }
             DispatchQueue.main.async {
-                self.refresh()
                 List.shared.update()
                 if self.user.folder == nil {
                     List.shared.select()
@@ -51,6 +52,23 @@ import meta
             }
         }
     }
+    
+    var state = State.none { didSet {
+        switch state {
+        case .none:
+            Bar.shared.new.isEnabled = false
+            Bar.shared.close.isEnabled = false
+            Menu.shared.fileClose.isEnabled = false
+        case .folder:
+            Bar.shared.new.isEnabled = true
+            Bar.shared.close.isEnabled = false
+            Menu.shared.fileClose.isEnabled = false
+        case .document:
+            Bar.shared.new.isEnabled = true
+            Bar.shared.close.isEnabled = true
+            Menu.shared.fileClose.isEnabled = true
+        }
+    } }
     
     func clear() {
         state = .none
@@ -66,21 +84,4 @@ import meta
     }
     
     @objc func create() { Create() }
-    
-    private func refresh() {
-        switch state {
-        case .none:
-            Bar.shared.new.isEnabled = false
-            Bar.shared.close.isEnabled = false
-            Menu.shared.fileClose.isEnabled = false
-        case .folder:
-            Bar.shared.new.isEnabled = true
-            Bar.shared.close.isEnabled = false
-            Menu.shared.fileClose.isEnabled = false
-        case .document:
-            Bar.shared.new.isEnabled = true
-            Bar.shared.close.isEnabled = true
-            Menu.shared.fileClose.isEnabled = true
-        }
-    }
 }

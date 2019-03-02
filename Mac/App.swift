@@ -11,7 +11,6 @@ import StoreKit
     }
     
     static private(set) weak var shared: App!
-    weak var presenting: Sheet?
     private(set) var user: User!
     
     func applicationShouldTerminateAfterLastWindowClosed(_: NSApplication) -> Bool { return true }
@@ -88,8 +87,5 @@ import StoreKit
     }
     
     @objc func create() { Create() }
-    
-    @IBAction private func showHelp(_: Any?) {
-        Welcome()
-    }
+    @IBAction private func showHelp(_: Any?) { Help() }
 }

@@ -1,7 +1,8 @@
 import AppKit
 
 class Label: NSTextField {
-    init(_ string: String = String(), color: NSColor = .white, font: NSFont = .light(16), align: NSTextAlignment = .left) {
+    init(_ string: String = String(), color: NSColor = .white, font: NSFont = .systemFont(ofSize: 16, weight: .light),
+         align: NSTextAlignment = .left) {
         super.init(frame: .zero)
         translatesAutoresizingMaskIntoConstraints = false
         backgroundColor = .clear

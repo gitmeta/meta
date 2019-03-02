@@ -25,10 +25,7 @@ class Menu: NSMenu {
         windowWelcome.action = #selector(welcome)
     }
     
-    @objc func welcome() {
-        guard App.shared.presenting == nil else { return }
-        Welcome()
-    }
+    @objc func welcome() { Welcome() }
     
     @objc private func toggle() {
         Bar.shared.toggle.state = Bar.shared.toggle.state == .on ? .off : .on

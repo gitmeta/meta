@@ -18,7 +18,7 @@ class Menu: NSMenu {
         fileOpen.action = #selector(List.shared.select)
         
         fileClose.target = App.shared
-        fileClose.action = #selector(App.shared.close)
+        fileClose.action = #selector(App.shared.shut)
     }
     
     @objc private func toggle() {

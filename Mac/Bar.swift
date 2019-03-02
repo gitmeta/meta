@@ -27,7 +27,7 @@ class Bar: NSView {
         new.isHidden = true
         self.new = new
         
-        let close = Button("close", target: App.shared, action: #selector(App.shared.close))
+        let close = Button("close", target: App.shared, action: #selector(App.shared.shut))
         close.keyEquivalent = "w"
         close.keyEquivalentModifierMask = .command
         self.close = close

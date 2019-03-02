@@ -59,7 +59,7 @@ import meta
         List.shared.update()
     }
     
-    @objc override func close() {
+    @objc func shut() {
         state = .folder
         Display.shared.clear()
         List.shared.selected = nil

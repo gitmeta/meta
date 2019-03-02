@@ -7,10 +7,9 @@ class Sheet: NSView {
         App.shared.makeFirstResponder(nil)
         super.init(frame: .zero)
         translatesAutoresizingMaskIntoConstraints = false
-        wantsLayer = true
-        layer!.backgroundColor = NSColor.black.cgColor
         alphaValue = 0
         App.shared.contentView!.addSubview(self)
+        App.shared.presenting = self
         
         let terminate = NSButton()
         terminate.title = String()
@@ -26,7 +25,7 @@ class Sheet: NSView {
         rightAnchor.constraint(equalTo: App.shared.contentView!.rightAnchor).isActive = true
         
         NSAnimationContext.runAnimationGroup({ context in
-            context.duration = 0.3
+            context.duration = 0.4
             context.allowsImplicitAnimation = true
             alphaValue = 1
         }) { App.shared.makeFirstResponder(self) }

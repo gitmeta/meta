@@ -1,5 +1,5 @@
-import AppKit
 import meta
+import AppKit
 
 class Document: NSControl {
     let document: meta.Document

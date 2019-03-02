@@ -1,5 +1,5 @@
-import AppKit
 import meta
+import AppKit
 
 class Directory: NSView {
     private weak var document: meta.Directory?

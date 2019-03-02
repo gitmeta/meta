@@ -12,9 +12,9 @@
                 <application id="hnw-xV-0zn" sceneMemberID="viewController">
                     <menu key="mainMenu" title="Menu" systemMenu="main" autoenablesItems="NO" id="AYu-sK-qS6" customClass="Menu" customModule="metaMac" customModuleProvider="target">
                         <items>
-                            <menuItem title="TCR" id="1Xt-HY-uBw">
+                            <menuItem title="meta" id="1Xt-HY-uBw">
                                 <modifierMask key="keyEquivalentModifierMask"/>
-                                <menu key="submenu" title="TCR" systemMenu="apple" autoenablesItems="NO" id="uQy-DD-JDr">
+                                <menu key="submenu" title="meta" systemMenu="apple" autoenablesItems="NO" id="uQy-DD-JDr">
                                     <items>
                                         <menuItem title="About" id="5kV-Vb-QxS">
                                             <modifierMask key="keyEquivalentModifierMask"/>
@@ -287,7 +287,11 @@
                                                 <action selector="performZoom:" target="Ady-hI-5gd" id="DIl-cC-cCs"/>
                                             </connections>
                                         </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="kIS-P4-7N0"/>
                                         <menuItem title="Sidebar" state="on" keyEquivalent="l" id="gef-zJ-q5g"/>
+                                        <menuItem title="Welcome" id="CMj-lC-Xea">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                        </menuItem>
                                         <menuItem isSeparatorItem="YES" id="eu3-7i-yIM"/>
                                         <menuItem title="Bring All to Front" id="LE2-aR-0XJ">
                                             <modifierMask key="keyEquivalentModifierMask"/>
@@ -317,6 +321,7 @@
                             <outlet property="fileNew" destination="Was-JA-tGl" id="XjI-Wu-hb7"/>
                             <outlet property="fileOpen" destination="IAo-SY-fd9" id="H6K-Dd-oEs"/>
                             <outlet property="sidebar" destination="gef-zJ-q5g" id="Vcr-7Z-yhu"/>
+                            <outlet property="windowWelcome" destination="CMj-lC-Xea" id="YyP-xn-IMl"/>
                         </connections>
                     </menu>
                 </application>
@@ -328,12 +333,12 @@
         <scene sceneID="R2V-B0-nI4">
             <objects>
                 <windowController showSeguePresentationStyle="single" id="B8D-0N-5wS" sceneMemberID="viewController">
-                    <window key="window" title="TCR" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" visibleAtLaunch="NO" animationBehavior="documentWindow" tabbingMode="disallowed" titlebarAppearsTransparent="YES" titleVisibility="hidden" id="IQv-IB-iLA" customClass="App" customModule="metaMac" customModuleProvider="target">
+                    <window key="window" title="meta" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" visibleAtLaunch="NO" animationBehavior="documentWindow" tabbingMode="disallowed" titlebarAppearsTransparent="YES" titleVisibility="hidden" id="IQv-IB-iLA" customClass="App" customModule="metaMac" customModuleProvider="target">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" fullSizeContentView="YES"/>
                         <windowCollectionBehavior key="collectionBehavior" fullScreenNone="YES" fullScreenDisallowsTiling="YES"/>
-                        <rect key="contentRect" x="196" y="240" width="150" height="100"/>
+                        <rect key="contentRect" x="196" y="240" width="300" height="200"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
-                        <value key="minSize" type="size" width="150" height="100"/>
+                        <value key="minSize" type="size" width="300" height="200"/>
                         <connections>
                             <outlet property="delegate" destination="B8D-0N-5wS" id="98r-iN-zZc"/>
                         </connections>
@@ -344,7 +349,7 @@
                 </windowController>
                 <customObject id="Oky-zY-oP4" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="8" y="121"/>
+            <point key="canvasLocation" x="80" y="183"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="hIz-AP-VOD">

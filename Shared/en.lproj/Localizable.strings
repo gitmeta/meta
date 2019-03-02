@@ -1,1 +1,4 @@
 List.open="Select your working directory";
+Welcome.show="Show on start";
+Welcome.select="Directory";
+Welcome.close="Not now";

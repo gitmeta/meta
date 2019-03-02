@@ -1,5 +1,5 @@
-import AppKit
 import meta
+import AppKit
 
 class Text: NSTextView {
     weak var ruler: Ruler?

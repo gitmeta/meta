@@ -7,6 +7,7 @@ class Menu: NSMenu {
     @IBOutlet private weak var fileOpen: NSMenuItem!
     @IBOutlet private(set) weak var fileClose: NSMenuItem!
     @IBOutlet private weak var fileDelete: NSMenuItem!
+    @IBOutlet private weak var windowWelcome: NSMenuItem!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -19,6 +20,14 @@ class Menu: NSMenu {
         
         fileClose.target = App.shared
         fileClose.action = #selector(App.shared.shut)
+        
+        windowWelcome.target = self
+        windowWelcome.action = #selector(welcome)
+    }
+    
+    @objc func welcome() {
+        guard App.shared.presenting == nil else { return }
+        Welcome()
     }
     
     @objc private func toggle() {

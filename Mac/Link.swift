@@ -4,7 +4,8 @@ class Link: NSButton {
     private(set) weak var width: NSLayoutConstraint!
     private(set) weak var height: NSLayoutConstraint!
     
-    init(_ title: String, background: NSColor = .clear, text: NSColor = .white, target: AnyObject, action: Selector) {
+    init(_ title: String, background: NSColor = .clear, text: NSColor = .white, font: NSFont = .bold(16),
+         target: AnyObject, action: Selector) {
         super.init(frame: .zero)
         translatesAutoresizingMaskIntoConstraints = false
         wantsLayer = true
@@ -12,7 +13,7 @@ class Link: NSButton {
         layer!.cornerRadius = 6
         setButtonType(.momentaryChange)
         isBordered = false
-        attributedTitle = NSAttributedString(string: title, attributes: [.font: NSFont.bold(16), .foregroundColor: text])
+        attributedTitle = NSAttributedString(string: title, attributes: [.font: font, .foregroundColor: text])
         self.target = target
         self.action = action
         width = widthAnchor.constraint(equalToConstant: 108)

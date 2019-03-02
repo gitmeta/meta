@@ -2,6 +2,7 @@ import Foundation
 
 public class User: Codable {
     public var folder: String? { return bookmark.first?.key.lastPathComponent }
+    public var welcome = true { didSet { save() } }
     public var ask: (() -> Void)?
     var rate = Date()
     var created = Date()
@@ -30,6 +31,7 @@ public class User: Codable {
         bookmark = try container.decode([URL: Data].self, forKey: .bookmark)
         rate = try container.decode(Date.self, forKey: .rate)
         created = try container.decode(Date.self, forKey: .created)
+        welcome = try container.decode(Bool.self, forKey: .welcome)
     }
     
     public func encode(to: Encoder) throws {
@@ -37,6 +39,7 @@ public class User: Codable {
         try container.encode(bookmark, forKey: .bookmark)
         try container.encode(rate, forKey: .rate)
         try container.encode(created, forKey: .created)
+        try container.encode(welcome, forKey: .welcome)
     }
     
     public var bookmark = [URL: Data]() { didSet {
@@ -55,5 +58,6 @@ public class User: Codable {
         case bookmark
         case rate
         case created
+        case welcome
     }
 }

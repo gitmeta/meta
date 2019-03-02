@@ -66,6 +66,7 @@
 		20366C9922293BE8009A2FB3 /* Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20366C9022293BE8009A2FB3 /* Shared.swift */; };
 		20366C9A22293BE8009A2FB3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 20366C9122293BE8009A2FB3 /* Assets.xcassets */; };
 		20366C9B22293BE8009A2FB3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 20366C9122293BE8009A2FB3 /* Assets.xcassets */; };
+		2037F567222A9149009778BC /* Welcome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2037F566222A9149009778BC /* Welcome.swift */; };
 		20BD161A2229456C00B8EFDF /* Mac.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 20BD16192229456C00B8EFDF /* Mac.xcassets */; };
 		20BD161D22294F8E00B8EFDF /* Display.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20BD161C22294F8E00B8EFDF /* Display.swift */; };
 		20BD1627222961F300B8EFDF /* Sheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20BD1626222961F300B8EFDF /* Sheet.swift */; };
@@ -162,6 +163,7 @@
 		20366C9D22293CE3009A2FB3 /* meta.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = meta.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		20366C9E22293D20009A2FB3 /* libmeta.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libmeta.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		20366C9F22293D59009A2FB3 /* libmeta.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libmeta.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		2037F566222A9149009778BC /* Welcome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Welcome.swift; sourceTree = "<group>"; };
 		20BD16192229456C00B8EFDF /* Mac.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Mac.xcassets; sourceTree = "<group>"; };
 		20BD161B2229472200B8EFDF /* meta.sketch */ = {isa = PBXFileReference; lastKnownFileType = file; path = meta.sketch; sourceTree = "<group>"; };
 		20BD161C22294F8E00B8EFDF /* Display.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Display.swift; sourceTree = "<group>"; };
@@ -268,6 +270,7 @@
 				20366C3E22293BBF009A2FB3 /* Skin.swift */,
 				20366C3422293BBF009A2FB3 /* Storage.swift */,
 				20366C4522293BBF009A2FB3 /* Text.swift */,
+				2037F566222A9149009778BC /* Welcome.swift */,
 				20BD16192229456C00B8EFDF /* Mac.xcassets */,
 			);
 			path = Mac;
@@ -521,6 +524,7 @@
 				20BD162B2229660800B8EFDF /* Menu.swift in Sources */,
 				20366C5622293BBF009A2FB3 /* Layout.swift in Sources */,
 				20BD1627222961F300B8EFDF /* Sheet.swift in Sources */,
+				2037F567222A9149009778BC /* Welcome.swift in Sources */,
 				20366C5722293BBF009A2FB3 /* List.swift in Sources */,
 				20366C5422293BBF009A2FB3 /* Document.swift in Sources */,
 				20366C5B22293BBF009A2FB3 /* Ruler.swift in Sources */,

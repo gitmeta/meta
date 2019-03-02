@@ -1,5 +1,5 @@
-import AppKit
 import meta
+import AppKit
 
 class Image: NSView {
     init(_ document: meta.Image) {

@@ -5,11 +5,13 @@ import StoreKit
 @NSApplicationMain class App: NSWindow, NSApplicationDelegate {
     enum State {
         case none
+        case welcomed
         case folder
         case document
     }
     
     static private(set) weak var shared: App!
+    weak var presenting: Sheet?
     private(set) var user: User!
     
     func applicationShouldTerminateAfterLastWindowClosed(_: NSApplication) -> Bool { return true }
@@ -39,16 +41,14 @@ import StoreKit
         Display.shared.bottomAnchor.constraint(equalTo: contentView!.bottomAnchor).isActive = true
         Display.shared.leftAnchor.constraint(equalTo: Bar.shared.rightAnchor).isActive = true
         Display.shared.rightAnchor.constraint(equalTo: contentView!.rightAnchor).isActive = true
-        state = .none
+        state = .welcomed
         
         DispatchQueue.global(qos: .background).async {
             self.user = User.load()
             self.user.ask = { if #available(OSX 10.14, *) { SKStoreReviewController.requestReview() } }
             DispatchQueue.main.async {
                 List.shared.update()
-                if self.user.folder == nil {
-                    List.shared.select()
-                }
+                if self.user.welcome { Menu.shared.welcome() }
             }
         }
     }
@@ -56,6 +56,10 @@ import StoreKit
     var state = State.none { didSet {
         switch state {
         case .none:
+            Bar.shared.new.isEnabled = false
+            Bar.shared.close.isEnabled = false
+            Menu.shared.fileClose.isEnabled = false
+        case .welcomed:
             Bar.shared.new.isEnabled = false
             Bar.shared.close.isEnabled = false
             Menu.shared.fileClose.isEnabled = false

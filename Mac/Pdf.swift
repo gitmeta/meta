@@ -1,6 +1,5 @@
-import AppKit
 import meta
-import WebKit
+import AppKit
 import Quartz
 
 class Pdf: NSView {

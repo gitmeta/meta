@@ -1,5 +1,5 @@
-import AppKit
 import meta
+import AppKit
 
 class Display: NSView {
     static let shared = Display()

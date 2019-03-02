@@ -39,9 +39,15 @@ class TestUser: XCTestCase {
     
     func testUpdateBookmarkSaves() {
         let expect = expectation(description: String())
-        storage.error = NSError()
         storage.saved = { expect.fulfill() }
         User().bookmark = [:]
+        waitForExpectations(timeout: 1)
+    }
+    
+    func testUpdateWelcomeSaves() {
+        let expect = expectation(description: String())
+        storage.saved = { expect.fulfill() }
+        User().welcome = false
         waitForExpectations(timeout: 1)
     }
     
@@ -76,17 +82,19 @@ class TestUser: XCTestCase {
         user.bookmark = [URL(fileURLWithPath:"/"): Data()]
         user.created = Date(timeIntervalSince1970:0)
         user.rate = Date(timeIntervalSince1970:1000)
+        user.welcome = false
         XCTAssertEqual("""
-{"rate":-978306200,"created":-978307200,"bookmark":["file:\\/\\/\\/",""]}
+{"created":-978307200,"bookmark":["file:\\/\\/\\/",""],"welcome":false,"rate":-978306200}
 """, String(decoding: try JSONEncoder().encode(user), as: UTF8.self))
     }
     
     func testDecode() {
         let decoded = try! JSONDecoder().decode(User.self, from: Data("""
-{"rate":-978306200,"created":-978307200,"bookmark":["file:\\/\\/\\/",""]}
+{"rate":-978306200,"created":-978307200,"bookmark":["file:\\/\\/\\/",""],"welcome":false}
 """.utf8))
         XCTAssertEqual([URL(fileURLWithPath:"/"): Data()], decoded.bookmark)
         XCTAssertEqual(Date(timeIntervalSince1970:0), decoded.created)
         XCTAssertEqual(Date(timeIntervalSince1970:1000), decoded.rate)
+        XCTAssertEqual(false, decoded.welcome)
     }
 }

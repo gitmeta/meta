@@ -7,11 +7,11 @@ class Sheet: NSView {
     init() {
         App.shared.makeFirstResponder(nil)
         super.init(frame: .zero)
-        translatesAutoresizingMaskIntoConstraints = false
-        alphaValue = 0
         if Sheet.presented == nil {
-            App.shared.contentView!.addSubview(self)
             Sheet.presented = self
+            translatesAutoresizingMaskIntoConstraints = false
+            alphaValue = 0
+            App.shared.contentView!.addSubview(self)
             
             let terminate = NSButton()
             terminate.title = String()

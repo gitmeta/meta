@@ -10,6 +10,17 @@ public class Folder {
         timer.setEventHandler { [weak self] in self?.fire() }
     }
     
+    public func documents(_ user: User, result: @escaping(([Document]) -> Void)) {
+        DispatchQueue.global(qos: .background).async { [weak self] in
+            let documents = {
+                $0 == nil ? nil : {
+                    $0 == nil ? nil : self?.load($0!)
+                } (try? FileManager.default.contentsOfDirectory(at: $0!, includingPropertiesForKeys: []))
+            } (user.bookmark.first?.0) ?? []
+            DispatchQueue.main.async { result(documents) }
+        }
+    }
+    
     public func save(_ editable: Editable) {
         queue.removeAll(where: { $0 === editable })
         queue.append(editable)

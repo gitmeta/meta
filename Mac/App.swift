@@ -44,6 +44,11 @@ import StoreKit
         
         DispatchQueue.global(qos: .background).async {
             self.user = User.load()
+            if let data = self.user.bookmark.first?.1 {
+                var stale = false
+                _ = (try! URL(resolvingBookmarkData: data, options: .withSecurityScope, bookmarkDataIsStale: &stale))
+                    .startAccessingSecurityScopedResource()
+            }
             self.user.ask = { if #available(OSX 10.14, *) { SKStoreReviewController.requestReview() } }
             DispatchQueue.main.async {
                 List.shared.update()

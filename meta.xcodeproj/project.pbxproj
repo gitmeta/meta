@@ -10,8 +10,6 @@
 		2005CD5522293F9D00B6972D /* libmeta.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 20366C9F22293D59009A2FB3 /* libmeta.a */; };
 		2005CD5822293FAE00B6972D /* libmeta.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 20366C9F22293D59009A2FB3 /* libmeta.a */; };
 		2005CD5B22293FB900B6972D /* libmeta.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 20366C9E22293D20009A2FB3 /* libmeta.a */; };
-		200A338D222D08ED0055F364 /* Folder+Mac.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200A338C222D08ED0055F364 /* Folder+Mac.swift */; };
-		200A338F222D09570055F364 /* Folder+iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200A338E222D09570055F364 /* Folder+iOS.swift */; };
 		20366C3022293BA4009A2FB3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 20366C2D22293BA4009A2FB3 /* LaunchScreen.storyboard */; };
 		20366C3222293BA4009A2FB3 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20366C2F22293BA4009A2FB3 /* App.swift */; };
 		20366C4822293BBF009A2FB3 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20366C3422293BBF009A2FB3 /* Storage.swift */; };
@@ -54,7 +52,6 @@
 		20366C8422293BDD009A2FB3 /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20366C7122293BDD009A2FB3 /* Document.swift */; };
 		20366C8522293BDD009A2FB3 /* Pdf.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20366C7222293BDD009A2FB3 /* Pdf.swift */; };
 		20366C8622293BDD009A2FB3 /* Pdf.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20366C7222293BDD009A2FB3 /* Pdf.swift */; };
-		20366C8722293BDD009A2FB3 /* Shell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20366C7322293BDD009A2FB3 /* Shell.swift */; };
 		20366C8822293BDD009A2FB3 /* Shell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20366C7322293BDD009A2FB3 /* Shell.swift */; };
 		20366C8922293BDD009A2FB3 /* NonEditable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20366C7422293BDD009A2FB3 /* NonEditable.swift */; };
 		20366C8A22293BDD009A2FB3 /* NonEditable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20366C7422293BDD009A2FB3 /* NonEditable.swift */; };
@@ -116,8 +113,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		200A338C222D08ED0055F364 /* Folder+Mac.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Folder+Mac.swift"; sourceTree = "<group>"; };
-		200A338E222D09570055F364 /* Folder+iOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Folder+iOS.swift"; sourceTree = "<group>"; };
 		20366C2922293B8B009A2FB3 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		20366C2A22293B8B009A2FB3 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		20366C2B22293B8B009A2FB3 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
@@ -309,8 +304,6 @@
 				20366C7122293BDD009A2FB3 /* Document.swift */,
 				20366C7022293BDD009A2FB3 /* Editable.swift */,
 				20366C6C22293BDD009A2FB3 /* Folder.swift */,
-				200A338C222D08ED0055F364 /* Folder+Mac.swift */,
-				200A338E222D09570055F364 /* Folder+iOS.swift */,
 				20366C6D22293BDD009A2FB3 /* Image.swift */,
 				20366C6F22293BDD009A2FB3 /* Md.swift */,
 				20366C7422293BDD009A2FB3 /* NonEditable.swift */,
@@ -570,10 +563,8 @@
 			files = (
 				20366C8322293BDD009A2FB3 /* Document.swift in Sources */,
 				20366C8122293BDD009A2FB3 /* Editable.swift in Sources */,
-				20366C8722293BDD009A2FB3 /* Shell.swift in Sources */,
 				20366C7522293BDD009A2FB3 /* Storage.swift in Sources */,
 				20366C8522293BDD009A2FB3 /* Pdf.swift in Sources */,
-				200A338F222D09570055F364 /* Folder+iOS.swift in Sources */,
 				20366C7B22293BDD009A2FB3 /* Image.swift in Sources */,
 				20366C7F22293BDD009A2FB3 /* Md.swift in Sources */,
 				20366C8922293BDD009A2FB3 /* NonEditable.swift in Sources */,
@@ -594,7 +585,6 @@
 				20366C8622293BDD009A2FB3 /* Pdf.swift in Sources */,
 				20366C7C22293BDD009A2FB3 /* Image.swift in Sources */,
 				20366C8022293BDD009A2FB3 /* Md.swift in Sources */,
-				200A338D222D08ED0055F364 /* Folder+Mac.swift in Sources */,
 				20366C8A22293BDD009A2FB3 /* NonEditable.swift in Sources */,
 				20366C7822293BDD009A2FB3 /* Directory.swift in Sources */,
 				20366C7E22293BDD009A2FB3 /* User.swift in Sources */,

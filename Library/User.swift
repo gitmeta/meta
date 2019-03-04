@@ -14,14 +14,7 @@ public class User: Codable {
             $0.rate = Calendar.current.date(byAdding: components, to: Date())!
             $0.save()
             return $0
-        } (User()) : {
-            if let data = $0.bookmark.first?.1 {
-                var stale = false
-                _ = (try! URL(resolvingBookmarkData: data, options: .withSecurityScope, bookmarkDataIsStale: &stale))
-                    .startAccessingSecurityScopedResource()
-            }
-            return $0
-        } ($0!) } (try? Storage.shared.user())
+        } (User()) : $0! } (try? Storage.shared.user())
     }
     
     init() { }

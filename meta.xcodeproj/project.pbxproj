@@ -69,6 +69,10 @@
 		2037F567222A9149009778BC /* Welcome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2037F566222A9149009778BC /* Welcome.swift */; };
 		20921CE8222BD6A0007FDB7A /* Sheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20921CE7222BD6A0007FDB7A /* Sheet.swift */; };
 		20921CEA222BD6EC007FDB7A /* Welcome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20921CE9222BD6EC007FDB7A /* Welcome.swift */; };
+		20A70CB9222D383B001AE4E8 /* List.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A70CB8222D383B001AE4E8 /* List.swift */; };
+		20A70CBB222D3B15001AE4E8 /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A70CBA222D3B15001AE4E8 /* Document.swift */; };
+		20A70CBD222D45A9001AE4E8 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A70CBC222D45A9001AE4E8 /* Extensions.swift */; };
+		20A70CBF222D4D51001AE4E8 /* Link.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A70CBE222D4D51001AE4E8 /* Link.swift */; };
 		20B5EFB4222AC14A00C12B49 /* Help.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B5EFB3222AC14A00C12B49 /* Help.swift */; };
 		20BD161A2229456C00B8EFDF /* Mac.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 20BD16192229456C00B8EFDF /* Mac.xcassets */; };
 		20BD161D22294F8E00B8EFDF /* Display.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20BD161C22294F8E00B8EFDF /* Display.swift */; };
@@ -170,6 +174,10 @@
 		2037F566222A9149009778BC /* Welcome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Welcome.swift; sourceTree = "<group>"; };
 		20921CE7222BD6A0007FDB7A /* Sheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sheet.swift; sourceTree = "<group>"; };
 		20921CE9222BD6EC007FDB7A /* Welcome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Welcome.swift; sourceTree = "<group>"; };
+		20A70CB8222D383B001AE4E8 /* List.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = List.swift; sourceTree = "<group>"; };
+		20A70CBA222D3B15001AE4E8 /* Document.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Document.swift; sourceTree = "<group>"; };
+		20A70CBC222D45A9001AE4E8 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		20A70CBE222D4D51001AE4E8 /* Link.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Link.swift; sourceTree = "<group>"; };
 		20B5EFB3222AC14A00C12B49 /* Help.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Help.swift; sourceTree = "<group>"; };
 		20BD16192229456C00B8EFDF /* Mac.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Mac.xcassets; sourceTree = "<group>"; };
 		20BD161B2229472200B8EFDF /* meta.sketch */ = {isa = PBXFileReference; lastKnownFileType = file; path = meta.sketch; sourceTree = "<group>"; };
@@ -247,6 +255,10 @@
 				20366C2E22293BA4009A2FB3 /* iOS.plist */,
 				20366C2D22293BA4009A2FB3 /* LaunchScreen.storyboard */,
 				20366C2F22293BA4009A2FB3 /* App.swift */,
+				20A70CBA222D3B15001AE4E8 /* Document.swift */,
+				20A70CBC222D45A9001AE4E8 /* Extensions.swift */,
+				20A70CBE222D4D51001AE4E8 /* Link.swift */,
+				20A70CB8222D383B001AE4E8 /* List.swift */,
 				20921CE7222BD6A0007FDB7A /* Sheet.swift */,
 				20921CE9222BD6EC007FDB7A /* Welcome.swift */,
 				200A3390222D13450055F364 /* iOS.xcassets */,
@@ -556,8 +568,12 @@
 			files = (
 				20921CEA222BD6EC007FDB7A /* Welcome.swift in Sources */,
 				20921CE8222BD6A0007FDB7A /* Sheet.swift in Sources */,
+				20A70CBB222D3B15001AE4E8 /* Document.swift in Sources */,
+				20A70CBF222D4D51001AE4E8 /* Link.swift in Sources */,
 				20366C9922293BE8009A2FB3 /* Shared.swift in Sources */,
+				20A70CB9222D383B001AE4E8 /* List.swift in Sources */,
 				20366C3222293BA4009A2FB3 /* App.swift in Sources */,
+				20A70CBD222D45A9001AE4E8 /* Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

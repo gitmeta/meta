@@ -10,8 +10,8 @@ class TestFolder: XCTestCase {
         storage = TestStorage()
         Storage.shared = storage
         folder = Folder()
-        editable = Editable(URL(fileURLWithPath: "file.json"))
         folder.timeout = 0
+        editable = Editable(URL(fileURLWithPath: "file.json"))
     }
     
     func testSaveUpdates() {
@@ -35,7 +35,7 @@ class TestFolder: XCTestCase {
         }
         folder.save(editable)
         folder.save(Editable(URL(fileURLWithPath: "file.json")))
-        waitForExpectations(timeout: 2)
+        waitForExpectations(timeout: 1)
     }
     
     func testReplaceOnSave() {

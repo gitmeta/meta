@@ -1,8 +1,11 @@
+import meta
 import UIKit
+import StoreKit
 
 @UIApplicationMain class App: UIWindow, UIApplicationDelegate {
     static private(set) weak var shared: App!
     var margin = UIEdgeInsets.zero
+    private(set) var user: User!
     
     func application(_: UIApplication, didFinishLaunchingWithOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         App.shared = self
@@ -17,6 +20,12 @@ import UIKit
         List.shared.bottom = List.shared.bottomAnchor.constraint(equalTo: rootViewController!.view.bottomAnchor)
         List.shared.open = List.shared.rightAnchor.constraint(equalTo: rootViewController!.view.rightAnchor)
         List.shared.close = List.shared.rightAnchor.constraint(equalTo: rootViewController!.view.leftAnchor)
+        
+        DispatchQueue.global(qos: .background).async {
+            self.user = User.load()
+            self.user.bookmark = [FileManager.default.urls(for:.documentDirectory, in:.userDomainMask)[0]: Data()]
+            self.user.ask = { if #available(iOS 10.3, *) { SKStoreReviewController.requestReview() } }
+        }
         
         return true
     }

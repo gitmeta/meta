@@ -21,6 +21,14 @@ public class Folder {
         }
     }
     
+    public func create(_ name: String, user: User) throws {
+        guard user.bookmark.first?.0 != nil
+            else { throw Exception.folderNotFound }
+        guard !FileManager.default.fileExists(atPath: user.bookmark.first!.0.appendingPathComponent(name).path)
+            else { throw Exception.fileAlreadyExists }
+        try Data().write(to: user.bookmark.first!.0.appendingPathComponent(name))
+    }
+    
     public func save(_ editable: Editable) {
         queue.removeAll(where: { $0 === editable })
         queue.append(editable)

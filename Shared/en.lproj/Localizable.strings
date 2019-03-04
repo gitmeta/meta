@@ -1,5 +1,6 @@
 List.open="Select your working directory";
-List.create="Create a file";
+List.new="New file";
+List.cofirm="Create";
 Welcome.show="Show on start";
 Welcome.select="Directory";
 Welcome.close="Not now";

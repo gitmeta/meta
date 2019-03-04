@@ -10,6 +10,7 @@
 		2005CD5522293F9D00B6972D /* libmeta.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 20366C9F22293D59009A2FB3 /* libmeta.a */; };
 		2005CD5822293FAE00B6972D /* libmeta.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 20366C9F22293D59009A2FB3 /* libmeta.a */; };
 		2005CD5B22293FB900B6972D /* libmeta.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 20366C9E22293D20009A2FB3 /* libmeta.a */; };
+		200A3391222D13450055F364 /* iOS.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 200A3390222D13450055F364 /* iOS.xcassets */; };
 		20366C3022293BA4009A2FB3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 20366C2D22293BA4009A2FB3 /* LaunchScreen.storyboard */; };
 		20366C3222293BA4009A2FB3 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20366C2F22293BA4009A2FB3 /* App.swift */; };
 		20366C4822293BBF009A2FB3 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20366C3422293BBF009A2FB3 /* Storage.swift */; };
@@ -113,6 +114,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		200A3390222D13450055F364 /* iOS.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = iOS.xcassets; sourceTree = "<group>"; };
 		20366C2922293B8B009A2FB3 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		20366C2A22293B8B009A2FB3 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		20366C2B22293B8B009A2FB3 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
@@ -247,6 +249,7 @@
 				20366C2F22293BA4009A2FB3 /* App.swift */,
 				20921CE7222BD6A0007FDB7A /* Sheet.swift */,
 				20921CE9222BD6EC007FDB7A /* Welcome.swift */,
+				200A3390222D13450055F364 /* iOS.xcassets */,
 			);
 			path = iOS;
 			sourceTree = "<group>";
@@ -499,6 +502,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				20366C9722293BE8009A2FB3 /* SFMono-Bold.otf in Resources */,
+				200A3391222D13450055F364 /* iOS.xcassets in Resources */,
 				20366C9322293BE8009A2FB3 /* Localizable.strings in Resources */,
 				20366C9522293BE8009A2FB3 /* SFMono-Light.otf in Resources */,
 				20366C9B22293BE8009A2FB3 /* Assets.xcassets in Resources */,
@@ -801,6 +805,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -867,6 +872,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";

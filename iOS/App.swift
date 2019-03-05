@@ -13,6 +13,7 @@ import StoreKit
         rootViewController = UIViewController()
         if #available(iOS 11.0, *) { margin = rootViewController!.view.safeAreaInsets }
         
+        rootViewController!.view.addSubview(Display.shared)
         rootViewController!.view.addSubview(List.shared)
         rootViewController!.view.addSubview(Bar.shared)
         
@@ -25,11 +26,15 @@ import StoreKit
         Bar.shared.leftAnchor.constraint(equalTo: List.shared.rightAnchor).isActive = true
         Bar.shared.widthAnchor.constraint(equalTo: rootViewController!.view.widthAnchor).isActive = true
         
+        Display.shared.topAnchor.constraint(equalTo: rootViewController!.view.topAnchor).isActive = true
+        Display.shared.widthAnchor.constraint(equalTo: rootViewController!.view.widthAnchor).isActive = true
+        Display.shared.leftAnchor.constraint(equalTo: List.shared.rightAnchor).isActive = true
+        Display.shared.bottomAnchor.constraint(equalTo: List.shared.bottomAnchor).isActive = true
+        
         if #available(iOS 11.0, *) {
-            Bar.shared.topAnchor.constraint(equalTo: rootViewController!.view.safeAreaLayoutGuide.topAnchor,
-                                            constant: 20).isActive = true
+            Bar.shared.topAnchor.constraint(equalTo: rootViewController!.view.safeAreaLayoutGuide.topAnchor).isActive = true
         } else {
-            Bar.shared.topAnchor.constraint(equalTo: rootViewController!.view.topAnchor, constant: 20).isActive = true
+            Bar.shared.topAnchor.constraint(equalTo: rootViewController!.view.topAnchor).isActive = true
         }
         
         DispatchQueue.global(qos: .background).async {

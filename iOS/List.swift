@@ -92,11 +92,15 @@ class List: UIScrollView {
     }
     
     @objc func show() {
+        App.shared.endEditing(true)
         close.isActive = false
         open.isActive = true
         UIView.animate(withDuration: 0.4, animations: {
             self.superview!.layoutIfNeeded()
-        }) { _ in self.selected = nil }
+        }) { _ in
+            self.selected = nil
+            Display.shared.clear()
+        }
     }
     
     @objc private func create() {
@@ -131,12 +135,12 @@ class List: UIScrollView {
     @objc private func open(_ item: Document) {
         guard superview!.subviews.first(where: { $0 is Create }) == nil else { return }
         selected = item
+        Bar.shared.title.text = item.document.name
+        Display.shared.open(item.document)
         open.isActive = false
         close.isActive = true
-        Bar.shared.title.text = item.document.name
         UIView.animate(withDuration: 0.4) {
             self.superview!.layoutIfNeeded()
         }
-//        Display.shared.open(item.document)
     }
 }

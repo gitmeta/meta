@@ -23,11 +23,11 @@ class Bar: UIView {
         list.addTarget(List.shared, action: #selector(List.shared.show), for: .touchUpInside)
         addSubview(list)
         
-        heightAnchor.constraint(equalToConstant: 40).isActive = true
+        heightAnchor.constraint(equalToConstant: 50).isActive = true
         
         list.topAnchor.constraint(equalTo: topAnchor).isActive = true
         list.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-        list.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
+        list.leftAnchor.constraint(equalTo: leftAnchor, constant: 10).isActive = true
         list.widthAnchor.constraint(equalToConstant: 60).isActive = true
         
         title.leftAnchor.constraint(equalTo: list.rightAnchor).isActive = true

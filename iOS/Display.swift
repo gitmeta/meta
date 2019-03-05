@@ -7,23 +7,19 @@ class Display: UIScrollView {
     private init() {
         super.init(frame: .zero)
         translatesAutoresizingMaskIntoConstraints = false
-        showsVerticalScrollIndicator = true
-        indicatorStyle = .white
         alwaysBounceVertical = true
         keyboardDismissMode = .interactive
     }
     
-    required init?(coder: NSCoder) {
-        return nil
-    }
+    required init?(coder: NSCoder) { return nil }
     
     func clear() {
         subviews.forEach({ $0.removeFromSuperview() })
         scrollRectToVisible(CGRect(x: 0, y: 0, width: 1, height: 1), animated: false)
     }
     
-    func open(_ document: meta.Document) {
-        let text = Text(document as! Editable)
+    func open(_ document: Editable) {
+        let text = Text(document)
         addSubview(text)
         
         text.topAnchor.constraint(equalTo: topAnchor).isActive = true

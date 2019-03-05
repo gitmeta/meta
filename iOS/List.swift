@@ -48,13 +48,13 @@ class List: UIScrollView {
         folder.documents(App.shared.user) {
             var top = self.topAnchor
             $0.enumerated().forEach {
-                let document = Document($0.1)
+                let document = Document($0.1 as! Editable)
                 document.addTarget(self, action: #selector(self.open(_:)), for: .touchUpInside)
                 self.content.addSubview(document)
                 
                 document.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 10).isActive = true
                 document.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -10).isActive = true
-                document.topAnchor.constraint(equalTo: top, constant: $0.0 == 0 ? 70 + App.shared.margin.top : 10).isActive = true
+                document.topAnchor.constraint(equalTo: top, constant: $0.0 == 0 ? 80 + App.shared.margin.top : 10).isActive = true
                 top = document.bottomAnchor
             }
             if self.topAnchor !== self.topAnchor {

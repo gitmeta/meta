@@ -2,7 +2,7 @@ import Foundation
 
 public class Editable: Document {
     public let name: String
-    let url: URL
+    public let url: URL
     private var cache: String?
     
     public var content: String {

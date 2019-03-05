@@ -13,9 +13,16 @@ import StoreKit
         rootViewController = UIViewController()
         if #available(iOS 11.0, *) { margin = rootViewController!.view.safeAreaInsets }
         
+        let gradient = Gradient()
+        
         rootViewController!.view.addSubview(Display.shared)
         rootViewController!.view.addSubview(List.shared)
+        rootViewController!.view.addSubview(gradient)
         rootViewController!.view.addSubview(Bar.shared)
+        
+        gradient.topAnchor.constraint(equalTo: rootViewController!.view.topAnchor).isActive = true
+        gradient.leftAnchor.constraint(equalTo: rootViewController!.view.leftAnchor).isActive = true
+        gradient.rightAnchor.constraint(equalTo: rootViewController!.view.rightAnchor).isActive = true
         
         List.shared.topAnchor.constraint(equalTo: rootViewController!.view.topAnchor).isActive = true
         List.shared.widthAnchor.constraint(equalTo: rootViewController!.view.widthAnchor).isActive = true

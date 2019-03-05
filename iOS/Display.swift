@@ -7,6 +7,7 @@ class Display: UIScrollView {
     private init() {
         super.init(frame: .zero)
         translatesAutoresizingMaskIntoConstraints = false
+        showsVerticalScrollIndicator = true
         indicatorStyle = .white
         alwaysBounceVertical = true
         keyboardDismissMode = .interactive
@@ -16,7 +17,10 @@ class Display: UIScrollView {
         return nil
     }
     
-    func clear() { subviews.forEach({ $0.removeFromSuperview() }) }
+    func clear() {
+        subviews.forEach({ $0.removeFromSuperview() })
+        scrollRectToVisible(CGRect(x: 0, y: 0, width: 1, height: 1), animated: false)
+    }
     
     func open(_ document: meta.Document) {
         let text = Text(document as! Editable)

@@ -2,7 +2,8 @@ import meta
 import UIKit
 
 class Text: UITextView, UITextViewDelegate {
-    weak var ruler: Ruler!
+    private weak var document: Editable?
+    private weak var ruler: Ruler!
     
     init(_ document: Editable) {
         let storage = Storage()
@@ -26,15 +27,16 @@ class Text: UITextView, UITextViewDelegate {
         autocapitalizationType = .none
         contentInset = .zero
         delegate = self
+        self.document = document
         
         let ruler = Ruler(self, layout: layoutManager as! Layout)
+        self.ruler = ruler
         addSubview(ruler)
         
-        ruler.bottomAnchor.constraint(greaterThanOrEqualTo: bottomAnchor).isActive = true
+        ruler.heightAnchor.constraint(greaterThanOrEqualToConstant: App.shared.frame.height).isActive = true
         ruler.heightAnchor.constraint(greaterThanOrEqualTo: heightAnchor).isActive = true
         ruler.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
         ruler.topAnchor.constraint(equalTo: topAnchor).isActive = true
-        self.ruler = ruler
         
         textContainerInset = UIEdgeInsets(top: 60, left: ruler.thickness + 5, bottom: 20, right: 12)
         if #available(iOS 11.0, *) {
@@ -50,7 +52,12 @@ class Text: UITextView, UITextViewDelegate {
         return rect
     }
     
-    func textViewDidChange(_: UITextView) { update() }
-    func textViewDidBeginEditing(_: UITextView) { update() }
-    private func update() { DispatchQueue.main.async { self.ruler.setNeedsDisplay() } }
+    func textViewDidChange(_: UITextView) {
+        document?.content = text
+        ruler.setNeedsDisplay()
+        DispatchQueue.global(qos: .background).async { [weak self] in
+            guard let document = self?.document else { return }
+            List.shared.folder.save(document)
+        }
+    }
 }

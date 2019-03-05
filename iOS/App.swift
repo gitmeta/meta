@@ -23,8 +23,8 @@ import StoreKit
         List.shared.open = List.shared.rightAnchor.constraint(equalTo: rootViewController!.view.rightAnchor)
         List.shared.close = List.shared.rightAnchor.constraint(equalTo: rootViewController!.view.leftAnchor)
         
-        Bar.shared.leftAnchor.constraint(equalTo: List.shared.rightAnchor).isActive = true
-        Bar.shared.widthAnchor.constraint(equalTo: rootViewController!.view.widthAnchor).isActive = true
+        Bar.shared.leftAnchor.constraint(equalTo: rootViewController!.view.leftAnchor).isActive = true
+        Bar.shared.rightAnchor.constraint(equalTo: rootViewController!.view.rightAnchor).isActive = true
         
         Display.shared.topAnchor.constraint(equalTo: rootViewController!.view.topAnchor).isActive = true
         Display.shared.widthAnchor.constraint(equalTo: rootViewController!.view.widthAnchor).isActive = true
@@ -38,12 +38,8 @@ import StoreKit
         }
         
         DispatchQueue.global(qos: .background).async {
-            self.user = User.load()
-            self.user.bookmark = [FileManager.default.urls(for:.documentDirectory, in:.userDomainMask)[0]: Data()]
-            self.user.ask = { if #available(iOS 10.3, *) { SKStoreReviewController.requestReview() } }
-            DispatchQueue.main.async {
-                List.shared.update()
-            }
+            self.load()
+            DispatchQueue.main.async { List.shared.update() }
         }
         
         return true
@@ -54,5 +50,15 @@ import StoreKit
             super.safeAreaInsetsDidChange()
             margin = rootViewController!.view.safeAreaInsets
         }
+    }
+    
+    private func load() {
+        user = User.load()
+        let url = FileManager.default.urls(for:.documentDirectory, in:.userDomainMask)[0].appendingPathComponent("documents")
+        if !FileManager.default.fileExists(atPath: url.path) {
+            try! FileManager.default.createDirectory(at: url, withIntermediateDirectories: true)
+        }
+        user.bookmark = [url: Data()]
+        user.ask = { if #available(iOS 10.3, *) { SKStoreReviewController.requestReview() } }
     }
 }

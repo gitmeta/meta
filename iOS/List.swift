@@ -1,7 +1,7 @@
 import meta
 import UIKit
 
-class List: UIScrollView, UITextFieldDelegate {
+class List: UIScrollView {
     static let shared = List()
     weak var selected: Document? { didSet { oldValue?.update(); selected?.update() } }
     var bottom: NSLayoutConstraint! { didSet { bottom.isActive = true } }
@@ -9,8 +9,6 @@ class List: UIScrollView, UITextFieldDelegate {
     var close: NSLayoutConstraint!
     let folder = Folder()
     private weak var content: UIView!
-    private weak var base: UIView!
-    private weak var field: UITextField!
     
     private init() {
         super.init(frame:.zero)
@@ -37,35 +35,7 @@ class List: UIScrollView, UITextFieldDelegate {
         create.imageView!.clipsToBounds = true
         create.imageView!.contentMode = .center
         content.addSubview(create)
-        
-        let base = UIView()
-        base.translatesAutoresizingMaskIntoConstraints = false
-        base.backgroundColor = .white
-        base.isHidden = true
-        content.addSubview(base)
-        self.base = base
-        
-        let field = UITextField()
-        field.translatesAutoresizingMaskIntoConstraints = false
-        field.tintColor = .halo
-        field.textColor = .black
-        field.delegate = self
-        field.font = .light(16)
-        field.placeholder = .local("List.new")
-        base.addSubview(field)
-        self.field = field
-        
-        let cancel = UIButton()
-        cancel.translatesAutoresizingMaskIntoConstraints = false
-        cancel.addTarget(self, action: #selector(self.cancel), for: .touchUpInside)
-        cancel.setImage(#imageLiteral(resourceName: "cancel.pdf"), for: [])
-        cancel.imageView!.clipsToBounds = true
-        cancel.imageView!.contentMode = .center
-        base.addSubview(cancel)
-        
-        let confirm = Link(.local("List.cofirm"), target: self, selector: #selector(self.confirm))
-        base.addSubview(confirm)
-        
+
         content.topAnchor.constraint(equalTo: topAnchor).isActive = true
         content.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
         content.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
@@ -80,24 +50,6 @@ class List: UIScrollView, UITextFieldDelegate {
         create.leftAnchor.constraint(equalTo: image.rightAnchor).isActive = true
         create.widthAnchor.constraint(equalToConstant: 60).isActive = true
         create.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        
-        field.topAnchor.constraint(equalTo: base.topAnchor).isActive = true
-        field.bottomAnchor.constraint(equalTo: base.bottomAnchor).isActive = true
-        field.widthAnchor.constraint(equalToConstant: 140).isActive = true
-        field.leftAnchor.constraint(equalTo: cancel.rightAnchor).isActive = true
-        
-        base.heightAnchor.constraint(equalToConstant: 48).isActive = true
-        base.bottomAnchor.constraint(equalTo: content.bottomAnchor).isActive = true
-        base.leftAnchor.constraint(equalTo: content.leftAnchor).isActive = true
-        base.rightAnchor.constraint(equalTo: content.rightAnchor).isActive = true
-        
-        cancel.topAnchor.constraint(equalTo: base.topAnchor).isActive = true
-        cancel.bottomAnchor.constraint(equalTo: base.bottomAnchor).isActive = true
-        cancel.leftAnchor.constraint(equalTo: base.leftAnchor).isActive = true
-        cancel.widthAnchor.constraint(equalToConstant: 60).isActive = true
-        
-        confirm.centerYAnchor.constraint(equalTo: base.centerYAnchor).isActive = true
-        confirm.rightAnchor.constraint(equalTo: base.rightAnchor, constant: -20).isActive = true
         
         if #available(iOS 11.0, *) {
             contentInsetAdjustmentBehavior = .never
@@ -117,14 +69,7 @@ class List: UIScrollView, UITextFieldDelegate {
     
     required init?(coder: NSCoder) { return nil }
     
-    func textFieldShouldReturn(_: UITextField) -> Bool {
-        field.resignFirstResponder()
-        return true
-    }
     
-    func textFieldDidEndEditing(_: UITextField) {
-        base.isHidden = true
-    }
     
     func update() {
         /*guard let name = App.shared.user.folder else { return }
@@ -152,17 +97,23 @@ class List: UIScrollView, UITextFieldDelegate {
     }
     
     @objc private func create() {
-        base.isHidden = false
-        field.becomeFirstResponder()
-    }
-    
-    @objc private func cancel() {
-        field.text = String()
-        field.resignFirstResponder()
-    }
-    
-    @objc private func confirm() {
-        field.resignFirstResponder()
+        guard content.subviews.first(where: { $0 is Create }) == nil else { return }
+        let create = Create()
+        content.addSubview(create)
+        
+        create.leftAnchor.constraint(equalTo: leftAnchor, constant: 10).isActive = true
+        create.rightAnchor.constraint(equalTo: rightAnchor, constant: -10).isActive = true
+        create.heightAnchor.constraint(equalToConstant: 300).isActive = true
+        create.bottom = create.bottomAnchor.constraint(equalTo: content.bottomAnchor, constant: 300)
+        create.bottom.isActive = true
+        content.layoutIfNeeded()
+        create.bottom.constant = 160
+        
+        UIView.animate(withDuration: 0.3, animations: {
+            self.content.layoutIfNeeded()
+        }) { _ in
+            create.field.becomeFirstResponder()
+        }
     }
     
     @objc private func open(_ item: Document) {

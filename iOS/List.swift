@@ -8,6 +8,7 @@ class List: UIScrollView {
     var open: NSLayoutConstraint! { didSet { open.isActive = true } }
     var close: NSLayoutConstraint!
     let folder = Folder()
+    private weak var image: UIImageView!
     private weak var content: UIView!
     
     private init() {
@@ -27,6 +28,7 @@ class List: UIScrollView {
         image.clipsToBounds = true
         image.contentMode = .scaleAspectFit
         content.addSubview(image)
+        self.image = image
         
         let create = UIButton()
         create.translatesAutoresizingMaskIntoConstraints = false
@@ -39,10 +41,11 @@ class List: UIScrollView {
         content.topAnchor.constraint(equalTo: topAnchor).isActive = true
         content.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
         content.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
+        content.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        content.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
         content.heightAnchor.constraint(greaterThanOrEqualTo: heightAnchor).isActive = true
-        content.widthAnchor.constraint(greaterThanOrEqualTo: widthAnchor).isActive = true
         
-        image.leftAnchor.constraint(equalTo: leftAnchor, constant: 20).isActive = true
+        image.leftAnchor.constraint(equalTo: leftAnchor, constant: 5).isActive = true
         image.widthAnchor.constraint(equalToConstant: 50).isActive = true
         image.heightAnchor.constraint(equalToConstant: 50).isActive = true
         
@@ -62,65 +65,78 @@ class List: UIScrollView {
             self.bottom.constant = {
                 $0.minY < self.bounds.height ? -$0.height : 0
             } (($0.userInfo![UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue)
-            UIView.animate(withDuration:
-            ($0.userInfo![UIResponder.keyboardAnimationDurationUserInfoKey] as! NSNumber).doubleValue) { self.layoutIfNeeded() }
-        }
+            UIView.animate(withDuration: ($0.userInfo![UIResponder.keyboardAnimationDurationUserInfoKey] as! NSNumber).doubleValue) {
+                self.superview!.layoutIfNeeded() } }
     }
     
     required init?(coder: NSCoder) { return nil }
     
-    
-    
     func update() {
-        /*guard let name = App.shared.user.folder else { return }
-        App.shared.state = .folder
-        title.stringValue = name
+        content.subviews.filter({ $0 is Document }).forEach({ $0.removeFromSuperview() })
         folder.documents(App.shared.user) {
-            var top = self.topAnchor
-            $0.enumerated().forEach {
-                let document = Document($0.1)
-                self.documentView!.addSubview(document)
+            var top = self.image.bottomAnchor
+            $0.forEach {
+                let document = Document($0)
+                document.addTarget(self, action: #selector(self.open(_:)), for: .touchUpInside)
+                self.content.addSubview(document)
                 
-                document.widthAnchor.constraint(equalToConstant: self.open + 10).isActive = true
-                document.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
-                document.topAnchor.constraint(equalTo: top, constant: $0.0 == 0 ? 80 : 0).isActive = true
+                document.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 10).isActive = true
+                document.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -10).isActive = true
+                document.topAnchor.constraint(equalTo: top, constant: 10).isActive = true
                 top = document.bottomAnchor
             }
-            if self.topAnchor !== top {
-                self.documentView!.bottomAnchor.constraint(greaterThanOrEqualTo: top, constant: 20).isActive = true
+            if self.topAnchor !== self.image.bottomAnchor {
+                self.content.bottomAnchor.constraint(greaterThanOrEqualTo: top, constant: 30).isActive = true
             }
-        }*/
+        }
     }
     
     @objc func show() {
-        
+        close.isActive = false
+        open.isActive = true
+        UIView.animate(withDuration: 0.4, animations: {
+            self.superview!.layoutIfNeeded()
+        }) { _ in self.selected = nil }
     }
     
     @objc private func create() {
-        guard content.subviews.first(where: { $0 is Create }) == nil else { return }
+        guard superview!.subviews.first(where: { $0 is Create }) == nil else { return }
         let create = Create()
-        content.addSubview(create)
+        superview!.addSubview(create)
         
         create.leftAnchor.constraint(equalTo: leftAnchor, constant: 10).isActive = true
         create.rightAnchor.constraint(equalTo: rightAnchor, constant: -10).isActive = true
         create.heightAnchor.constraint(equalToConstant: 300).isActive = true
-        create.bottom = create.bottomAnchor.constraint(equalTo: content.bottomAnchor, constant: 300)
+        create.bottom = create.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 300)
         create.bottom.isActive = true
-        content.layoutIfNeeded()
-        create.bottom.constant = 160
+        superview!.layoutIfNeeded()
+        create.bottom.constant = 150
         
         UIView.animate(withDuration: 0.3, animations: {
-            self.content.layoutIfNeeded()
+            self.superview!.layoutIfNeeded()
+            self.content.alpha = 0.4
         }) { _ in
             create.field.becomeFirstResponder()
+        }
+        
+        create.close = {
+            create.bottom.constant = 300
+            UIView.animate(withDuration: 0.3, animations: {
+                self.superview!.layoutIfNeeded()
+                self.content.alpha = 1
+            }) { _ in create.removeFromSuperview() }
         }
     }
     
     @objc private func open(_ item: Document) {
-        App.shared.endEditing(true)
+        guard superview!.subviews.first(where: { $0 is Create }) == nil else { return }
         selected = item
-//        open.isActive = false
-//        close.isActive = true
+        open.isActive = false
+        close.isActive = true
+        Bar.shared.title.text = item.document.name
+        UIView.animate(withDuration: 0.4) {
+            self.superview!.layoutIfNeeded()
+        }
 //        Display.shared.open(item.document)
     }
 }

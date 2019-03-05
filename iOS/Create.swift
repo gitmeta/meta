@@ -2,6 +2,7 @@ import meta
 import UIKit
 
 class Create: UIView, UITextFieldDelegate {
+    var close: (() -> Void)!
     weak var bottom: NSLayoutConstraint!
     private(set) weak var field: UITextField!
     
@@ -9,6 +10,8 @@ class Create: UIView, UITextFieldDelegate {
         super.init(frame: .zero)
         translatesAutoresizingMaskIntoConstraints = false
         backgroundColor = .shade
+        layer.borderWidth = 1
+        layer.borderColor = UIColor.black.cgColor
         layer.cornerRadius = 6
         
         let label = UILabel()
@@ -24,6 +27,11 @@ class Create: UIView, UITextFieldDelegate {
         field.textColor = .white
         field.delegate = self
         field.font = .light(16)
+        field.autocorrectionType = .no
+        field.autocapitalizationType = .none
+        field.spellCheckingType = .no
+        field.clearButtonMode = .never
+        field.keyboardAppearance = .dark
         addSubview(field)
         self.field = field
         
@@ -48,8 +56,8 @@ class Create: UIView, UITextFieldDelegate {
         label.leftAnchor.constraint(equalTo: cancel.rightAnchor).isActive = true
         
         field.topAnchor.constraint(equalTo: cancel.bottomAnchor).isActive = true
-        field.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        field.rightAnchor.constraint(equalTo: rightAnchor, constant: -20).isActive = true
+        field.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        field.rightAnchor.constraint(equalTo: rightAnchor, constant: -30).isActive = true
         field.leftAnchor.constraint(equalTo: leftAnchor, constant: 20).isActive = true
         
         border.topAnchor.constraint(equalTo: field.bottomAnchor).isActive = true
@@ -59,11 +67,11 @@ class Create: UIView, UITextFieldDelegate {
         
         cancel.topAnchor.constraint(equalTo: topAnchor, constant: 10).isActive = true
         cancel.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
-        cancel.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        cancel.widthAnchor.constraint(equalToConstant: 60).isActive = true
         cancel.heightAnchor.constraint(equalToConstant: 50).isActive = true
         
         confirm.centerYAnchor.constraint(equalTo: cancel.centerYAnchor).isActive = true
-        confirm.rightAnchor.constraint(equalTo: rightAnchor, constant: -20).isActive = true
+        confirm.rightAnchor.constraint(equalTo: rightAnchor, constant: -30).isActive = true
     }
     
     required init?(coder: NSCoder) { return nil }
@@ -73,15 +81,6 @@ class Create: UIView, UITextFieldDelegate {
         return true
     }
     
-    private func close() {
-        bottom.constant = 300
-        UIView.animate(withDuration: 0.3, animations: { [weak self] in
-            self?.superview?.layoutIfNeeded()
-        }) { [weak self] _ in
-            self?.removeFromSuperview()
-        }
-    }
-    
     @objc private func cancel() {
         field.resignFirstResponder()
         close()
@@ -89,9 +88,14 @@ class Create: UIView, UITextFieldDelegate {
     
     @objc private func confirm() {
         field.resignFirstResponder()
-        do {
-            try List.shared.folder.create(field.text!, user: App.shared.user)
+        if field.text!.isEmpty {
             close()
-        } catch { Alert.shared.add(error) }
+        } else {
+            do {
+                try List.shared.folder.create(field.text!, user: App.shared.user)
+                List.shared.update()
+                close()
+            } catch { Alert.shared.add(error) }
+        }
     }
 }

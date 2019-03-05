@@ -13,15 +13,16 @@ class Document: UIControl {
         
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .systemFont(ofSize: 12, weight: .light)
+        label.font = .light(14)
+        label.text = document.name
         addSubview(label)
         self.label = label
         
         label.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-        label.leftAnchor.constraint(equalTo: leftAnchor, constant: 24).isActive = true
-        label.rightAnchor.constraint(equalTo: rightAnchor, constant: -10).isActive = true
+        label.leftAnchor.constraint(equalTo: leftAnchor, constant: 20).isActive = true
+        label.rightAnchor.constraint(equalTo: rightAnchor, constant: -20).isActive = true
         
-        heightAnchor.constraint(equalToConstant: 38).isActive = true
+        heightAnchor.constraint(equalToConstant: 50).isActive = true
         update()
     }
     
@@ -29,11 +30,11 @@ class Document: UIControl {
     
     func update() {
         if List.shared.selected === self {
-            layer.backgroundColor = UIColor.shade.cgColor
-            label.alpha = 0.9
+            backgroundColor = .halo
+            label.textColor = .black
         } else {
-            layer.backgroundColor = nil
-            label.alpha = 0.6
+            backgroundColor = .shade
+            label.textColor = .white
         }
     }
 }

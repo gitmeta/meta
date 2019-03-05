@@ -13,6 +13,11 @@
 		200A3391222D13450055F364 /* iOS.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 200A3390222D13450055F364 /* iOS.xcassets */; };
 		201CE1E1222E5AD5007AE422 /* Create.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201CE1E0222E5AD5007AE422 /* Create.swift */; };
 		201CE1E3222E7432007AE422 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201CE1E2222E7432007AE422 /* Alert.swift */; };
+		201CE1E5222E8E04007AE422 /* Bar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201CE1E4222E8E04007AE422 /* Bar.swift */; };
+		201CE1E7222E9AD4007AE422 /* Text.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201CE1E6222E9AD4007AE422 /* Text.swift */; };
+		201CE1E9222E9FEB007AE422 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201CE1E8222E9FEB007AE422 /* Storage.swift */; };
+		201CE1EB222EA0B7007AE422 /* Skin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201CE1EA222EA0B7007AE422 /* Skin.swift */; };
+		201CE1ED222EA0DD007AE422 /* Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201CE1EC222EA0DD007AE422 /* Layout.swift */; };
 		20366C3022293BA4009A2FB3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 20366C2D22293BA4009A2FB3 /* LaunchScreen.storyboard */; };
 		20366C3222293BA4009A2FB3 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20366C2F22293BA4009A2FB3 /* App.swift */; };
 		20366C4822293BBF009A2FB3 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20366C3422293BBF009A2FB3 /* Storage.swift */; };
@@ -70,7 +75,6 @@
 		20366C9B22293BE8009A2FB3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 20366C9122293BE8009A2FB3 /* Assets.xcassets */; };
 		2037F567222A9149009778BC /* Welcome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2037F566222A9149009778BC /* Welcome.swift */; };
 		20921CE8222BD6A0007FDB7A /* Sheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20921CE7222BD6A0007FDB7A /* Sheet.swift */; };
-		20921CEA222BD6EC007FDB7A /* Welcome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20921CE9222BD6EC007FDB7A /* Welcome.swift */; };
 		20A70CB9222D383B001AE4E8 /* List.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A70CB8222D383B001AE4E8 /* List.swift */; };
 		20A70CBB222D3B15001AE4E8 /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A70CBA222D3B15001AE4E8 /* Document.swift */; };
 		20A70CBD222D45A9001AE4E8 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A70CBC222D45A9001AE4E8 /* Extensions.swift */; };
@@ -126,6 +130,11 @@
 		200A3390222D13450055F364 /* iOS.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = iOS.xcassets; sourceTree = "<group>"; };
 		201CE1E0222E5AD5007AE422 /* Create.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Create.swift; sourceTree = "<group>"; };
 		201CE1E2222E7432007AE422 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
+		201CE1E4222E8E04007AE422 /* Bar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bar.swift; sourceTree = "<group>"; };
+		201CE1E6222E9AD4007AE422 /* Text.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Text.swift; sourceTree = "<group>"; };
+		201CE1E8222E9FEB007AE422 /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
+		201CE1EA222EA0B7007AE422 /* Skin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Skin.swift; sourceTree = "<group>"; };
+		201CE1EC222EA0DD007AE422 /* Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Layout.swift; sourceTree = "<group>"; };
 		20366C2922293B8B009A2FB3 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		20366C2A22293B8B009A2FB3 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		20366C2B22293B8B009A2FB3 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
@@ -180,7 +189,6 @@
 		20366C9F22293D59009A2FB3 /* libmeta.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libmeta.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		2037F566222A9149009778BC /* Welcome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Welcome.swift; sourceTree = "<group>"; };
 		20921CE7222BD6A0007FDB7A /* Sheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sheet.swift; sourceTree = "<group>"; };
-		20921CE9222BD6EC007FDB7A /* Welcome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Welcome.swift; sourceTree = "<group>"; };
 		20A70CB8222D383B001AE4E8 /* List.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = List.swift; sourceTree = "<group>"; };
 		20A70CBA222D3B15001AE4E8 /* Document.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Document.swift; sourceTree = "<group>"; };
 		20A70CBC222D45A9001AE4E8 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -265,13 +273,17 @@
 				20366C2D22293BA4009A2FB3 /* LaunchScreen.storyboard */,
 				201CE1E2222E7432007AE422 /* Alert.swift */,
 				20366C2F22293BA4009A2FB3 /* App.swift */,
+				201CE1E4222E8E04007AE422 /* Bar.swift */,
 				201CE1E0222E5AD5007AE422 /* Create.swift */,
 				20A70CBA222D3B15001AE4E8 /* Document.swift */,
 				20A70CBC222D45A9001AE4E8 /* Extensions.swift */,
+				201CE1EC222EA0DD007AE422 /* Layout.swift */,
 				20A70CBE222D4D51001AE4E8 /* Link.swift */,
 				20A70CB8222D383B001AE4E8 /* List.swift */,
 				20921CE7222BD6A0007FDB7A /* Sheet.swift */,
-				20921CE9222BD6EC007FDB7A /* Welcome.swift */,
+				201CE1EA222EA0B7007AE422 /* Skin.swift */,
+				201CE1E8222E9FEB007AE422 /* Storage.swift */,
+				201CE1E6222E9AD4007AE422 /* Text.swift */,
 				200A3390222D13450055F364 /* iOS.xcassets */,
 			);
 			path = iOS;
@@ -580,14 +592,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				201CE1E1222E5AD5007AE422 /* Create.swift in Sources */,
-				20921CEA222BD6EC007FDB7A /* Welcome.swift in Sources */,
+				201CE1E5222E8E04007AE422 /* Bar.swift in Sources */,
 				20921CE8222BD6A0007FDB7A /* Sheet.swift in Sources */,
 				20A70CBB222D3B15001AE4E8 /* Document.swift in Sources */,
 				20A70CBF222D4D51001AE4E8 /* Link.swift in Sources */,
+				201CE1E9222E9FEB007AE422 /* Storage.swift in Sources */,
 				20366C9922293BE8009A2FB3 /* Shared.swift in Sources */,
+				201CE1EB222EA0B7007AE422 /* Skin.swift in Sources */,
 				20A70CB9222D383B001AE4E8 /* List.swift in Sources */,
 				20366C3222293BA4009A2FB3 /* App.swift in Sources */,
 				201CE1E3222E7432007AE422 /* Alert.swift in Sources */,
+				201CE1ED222EA0DD007AE422 /* Layout.swift in Sources */,
+				201CE1E7222E9AD4007AE422 /* Text.swift in Sources */,
 				20A70CBD222D45A9001AE4E8 /* Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

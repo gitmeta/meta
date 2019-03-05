@@ -14,6 +14,7 @@ import StoreKit
         if #available(iOS 11.0, *) { margin = rootViewController!.view.safeAreaInsets }
         
         rootViewController!.view.addSubview(List.shared)
+        rootViewController!.view.addSubview(Bar.shared)
         
         List.shared.topAnchor.constraint(equalTo: rootViewController!.view.topAnchor).isActive = true
         List.shared.widthAnchor.constraint(equalTo: rootViewController!.view.widthAnchor).isActive = true
@@ -21,10 +22,23 @@ import StoreKit
         List.shared.open = List.shared.rightAnchor.constraint(equalTo: rootViewController!.view.rightAnchor)
         List.shared.close = List.shared.rightAnchor.constraint(equalTo: rootViewController!.view.leftAnchor)
         
+        Bar.shared.leftAnchor.constraint(equalTo: List.shared.rightAnchor).isActive = true
+        Bar.shared.widthAnchor.constraint(equalTo: rootViewController!.view.widthAnchor).isActive = true
+        
+        if #available(iOS 11.0, *) {
+            Bar.shared.topAnchor.constraint(equalTo: rootViewController!.view.safeAreaLayoutGuide.topAnchor,
+                                            constant: 20).isActive = true
+        } else {
+            Bar.shared.topAnchor.constraint(equalTo: rootViewController!.view.topAnchor, constant: 20).isActive = true
+        }
+        
         DispatchQueue.global(qos: .background).async {
             self.user = User.load()
             self.user.bookmark = [FileManager.default.urls(for:.documentDirectory, in:.userDomainMask)[0]: Data()]
             self.user.ask = { if #available(iOS 10.3, *) { SKStoreReviewController.requestReview() } }
+            DispatchQueue.main.async {
+                List.shared.update()
+            }
         }
         
         return true

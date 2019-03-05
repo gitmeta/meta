@@ -1,1 +1,1 @@
-public class Pdf: NonEditable { }
+public class Pdf: Static { }

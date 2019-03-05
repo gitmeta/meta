@@ -1,6 +1,9 @@
 List.open="Select your working directory";
 Create.confirm="Create";
 Create.title="New file";
+Document.deleteTitle="Delete file?";
+Document.deleteCancel="Cancel";
+Document.deleteConfirm="Delete";
 Welcome.show="Show on start";
 Welcome.select="Directory";
 Welcome.close="Not now";
@@ -10,4 +13,5 @@ Help.cancel="Cancel";
 Help.subject="meta support";
 Alert.fileAlreadyExists="File already exists";
 Alert.folderNotFound="Folder not found";
+Alert.fileNoExists="File does not exist";
 Alert.unknown="Unknown error";

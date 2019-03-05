@@ -73,6 +73,14 @@ class Document: UIControl {
     }
     
     @objc private func remove() {
-        
+        let alert = UIAlertController(title: .local("Document.deleteTitle"), message: document.name, preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: .local("Document.deleteCancel"), style: .cancel))
+        alert.addAction(UIAlertAction(title: .local("Document.deleteConfirm"), style: .destructive) { _ in
+            do {
+                try List.shared.folder.delete(self.document)
+                List.shared.update()
+            } catch { Alert.shared.add(error) }
+        })
+        App.shared.rootViewController!.present(alert, animated: true)
     }
 }

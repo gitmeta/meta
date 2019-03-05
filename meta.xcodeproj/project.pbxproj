@@ -61,8 +61,8 @@
 		20366C8522293BDD009A2FB3 /* Pdf.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20366C7222293BDD009A2FB3 /* Pdf.swift */; };
 		20366C8622293BDD009A2FB3 /* Pdf.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20366C7222293BDD009A2FB3 /* Pdf.swift */; };
 		20366C8822293BDD009A2FB3 /* Shell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20366C7322293BDD009A2FB3 /* Shell.swift */; };
-		20366C8922293BDD009A2FB3 /* NonEditable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20366C7422293BDD009A2FB3 /* NonEditable.swift */; };
-		20366C8A22293BDD009A2FB3 /* NonEditable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20366C7422293BDD009A2FB3 /* NonEditable.swift */; };
+		20366C8922293BDD009A2FB3 /* Static.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20366C7422293BDD009A2FB3 /* Static.swift */; };
+		20366C8A22293BDD009A2FB3 /* Static.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20366C7422293BDD009A2FB3 /* Static.swift */; };
 		20366C9222293BE8009A2FB3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 20366C8C22293BE8009A2FB3 /* Localizable.strings */; };
 		20366C9322293BE8009A2FB3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 20366C8C22293BE8009A2FB3 /* Localizable.strings */; };
 		20366C9422293BE8009A2FB3 /* SFMono-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 20366C8E22293BE8009A2FB3 /* SFMono-Light.otf */; };
@@ -82,7 +82,7 @@
 		20A70CBB222D3B15001AE4E8 /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A70CBA222D3B15001AE4E8 /* Document.swift */; };
 		20A70CBD222D45A9001AE4E8 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A70CBC222D45A9001AE4E8 /* Extensions.swift */; };
 		20A70CBF222D4D51001AE4E8 /* Link.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A70CBE222D4D51001AE4E8 /* Link.swift */; };
-		20A70CC1222D6D7D001AE4E8 /* TestDocumentCreate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A70CC0222D6D7D001AE4E8 /* TestDocumentCreate.swift */; };
+		20A70CC1222D6D7D001AE4E8 /* TestDocumentChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A70CC0222D6D7D001AE4E8 /* TestDocumentChange.swift */; };
 		20A70CC3222D6EAD001AE4E8 /* Exception.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A70CC2222D6EAD001AE4E8 /* Exception.swift */; };
 		20A70CC4222D6EAD001AE4E8 /* Exception.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A70CC2222D6EAD001AE4E8 /* Exception.swift */; };
 		20B5EFB4222AC14A00C12B49 /* Help.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B5EFB3222AC14A00C12B49 /* Help.swift */; };
@@ -180,7 +180,7 @@
 		20366C7122293BDD009A2FB3 /* Document.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Document.swift; sourceTree = "<group>"; };
 		20366C7222293BDD009A2FB3 /* Pdf.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pdf.swift; sourceTree = "<group>"; };
 		20366C7322293BDD009A2FB3 /* Shell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shell.swift; sourceTree = "<group>"; };
-		20366C7422293BDD009A2FB3 /* NonEditable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NonEditable.swift; sourceTree = "<group>"; };
+		20366C7422293BDD009A2FB3 /* Static.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Static.swift; sourceTree = "<group>"; };
 		20366C8D22293BE8009A2FB3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		20366C8E22293BE8009A2FB3 /* SFMono-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFMono-Light.otf"; sourceTree = "<group>"; };
 		20366C8F22293BE8009A2FB3 /* SFMono-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFMono-Bold.otf"; sourceTree = "<group>"; };
@@ -199,7 +199,7 @@
 		20A70CBA222D3B15001AE4E8 /* Document.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Document.swift; sourceTree = "<group>"; };
 		20A70CBC222D45A9001AE4E8 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		20A70CBE222D4D51001AE4E8 /* Link.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Link.swift; sourceTree = "<group>"; };
-		20A70CC0222D6D7D001AE4E8 /* TestDocumentCreate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestDocumentCreate.swift; sourceTree = "<group>"; };
+		20A70CC0222D6D7D001AE4E8 /* TestDocumentChange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestDocumentChange.swift; sourceTree = "<group>"; };
 		20A70CC2222D6EAD001AE4E8 /* Exception.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exception.swift; sourceTree = "<group>"; };
 		20B5EFB3222AC14A00C12B49 /* Help.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Help.swift; sourceTree = "<group>"; };
 		20BD16192229456C00B8EFDF /* Mac.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Mac.xcassets; sourceTree = "<group>"; };
@@ -336,7 +336,7 @@
 			children = (
 				20366C6022293BCF009A2FB3 /* Tests.plist */,
 				20366C5F22293BCF009A2FB3 /* TestDocument.swift */,
-				20A70CC0222D6D7D001AE4E8 /* TestDocumentCreate.swift */,
+				20A70CC0222D6D7D001AE4E8 /* TestDocumentChange.swift */,
 				20366C5E22293BCF009A2FB3 /* TestFolder.swift */,
 				20366C6122293BCF009A2FB3 /* TestShell.swift */,
 				20366C6222293BCF009A2FB3 /* TestStorage.swift */,
@@ -355,7 +355,7 @@
 				20366C6C22293BDD009A2FB3 /* Folder.swift */,
 				20366C6D22293BDD009A2FB3 /* Image.swift */,
 				20366C6F22293BDD009A2FB3 /* Md.swift */,
-				20366C7422293BDD009A2FB3 /* NonEditable.swift */,
+				20366C7422293BDD009A2FB3 /* Static.swift */,
 				20366C7222293BDD009A2FB3 /* Pdf.swift */,
 				20366C7322293BDD009A2FB3 /* Shell.swift */,
 				20366C6A22293BDD009A2FB3 /* Storage.swift */,
@@ -630,7 +630,7 @@
 				20366C8522293BDD009A2FB3 /* Pdf.swift in Sources */,
 				20366C7B22293BDD009A2FB3 /* Image.swift in Sources */,
 				20366C7F22293BDD009A2FB3 /* Md.swift in Sources */,
-				20366C8922293BDD009A2FB3 /* NonEditable.swift in Sources */,
+				20366C8922293BDD009A2FB3 /* Static.swift in Sources */,
 				20A70CC3222D6EAD001AE4E8 /* Exception.swift in Sources */,
 				20366C7722293BDD009A2FB3 /* Directory.swift in Sources */,
 				20366C7D22293BDD009A2FB3 /* User.swift in Sources */,
@@ -649,7 +649,7 @@
 				20366C8622293BDD009A2FB3 /* Pdf.swift in Sources */,
 				20366C7C22293BDD009A2FB3 /* Image.swift in Sources */,
 				20366C8022293BDD009A2FB3 /* Md.swift in Sources */,
-				20366C8A22293BDD009A2FB3 /* NonEditable.swift in Sources */,
+				20366C8A22293BDD009A2FB3 /* Static.swift in Sources */,
 				20366C7822293BDD009A2FB3 /* Directory.swift in Sources */,
 				20A70CC4222D6EAD001AE4E8 /* Exception.swift in Sources */,
 				20366C7E22293BDD009A2FB3 /* User.swift in Sources */,
@@ -665,7 +665,7 @@
 				20366C6822293BCF009A2FB3 /* TestStorage.swift in Sources */,
 				20366C6322293BCF009A2FB3 /* TestUser.swift in Sources */,
 				20366C6722293BCF009A2FB3 /* TestShell.swift in Sources */,
-				20A70CC1222D6D7D001AE4E8 /* TestDocumentCreate.swift in Sources */,
+				20A70CC1222D6D7D001AE4E8 /* TestDocumentChange.swift in Sources */,
 				20366C6422293BCF009A2FB3 /* TestFolder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

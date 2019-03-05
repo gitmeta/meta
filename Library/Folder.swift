@@ -29,6 +29,11 @@ public class Folder {
         try Data().write(to: user.bookmark.first!.0.appendingPathComponent(name))
     }
     
+    public func delete(_ document: Document) throws {
+        guard FileManager.default.fileExists(atPath: document.url.path) else { throw Exception.fileNoExists }
+        try FileManager.default.removeItem(at: document.url)
+    }
+    
     public func save(_ editable: Editable) {
         queue.removeAll(where: { $0 === editable })
         queue.append(editable)

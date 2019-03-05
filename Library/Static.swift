@@ -1,6 +1,6 @@
 import Foundation
 
-public class NonEditable: Document {
+public class Static: Document {
     public internal(set) var name: String
     public let url: URL
     

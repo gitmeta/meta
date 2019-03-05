@@ -1,1 +1,1 @@
-public class Image: NonEditable { }
+public class Image: Static { }

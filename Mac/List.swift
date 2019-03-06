@@ -7,7 +7,7 @@ class List: NSScrollView {
     let folder = Folder()
     private weak var width: NSLayoutConstraint!
     private weak var title: Label!
-    private let open = CGFloat(170)
+    private let open = CGFloat(200)
     
     private init() {
         super.init(frame: .zero)

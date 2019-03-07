@@ -2,12 +2,14 @@ import meta
 import AppKit
 
 class Document: NSControl {
+    weak var top: NSLayoutConstraint? { didSet { oldValue?.isActive = false; top?.isActive = true } }
     let document: meta.Document
+    let indent: CGFloat
     private weak var label: Label!
-    private weak var tree: Button?
     
-    init(_ document: meta.Document) {
+    init(_ document: meta.Document, indent: CGFloat) {
         self.document = document
+        self.indent = indent
         super.init(frame: .zero)
         translatesAutoresizingMaskIntoConstraints = false
         wantsLayer = true
@@ -30,23 +32,23 @@ class Document: NSControl {
         image.widthAnchor.constraint(equalToConstant: 30).isActive = true
         image.topAnchor.constraint(equalTo: topAnchor, constant: 10).isActive = true
         image.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10).isActive = true
-        image.leftAnchor.constraint(equalTo: leftAnchor, constant: 30).isActive = true
+        image.leftAnchor.constraint(equalTo: leftAnchor, constant: 30 + (indent * 20)).isActive = true
         
         label.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
         label.leftAnchor.constraint(equalTo: image.rightAnchor, constant: 2).isActive = true
         label.rightAnchor.constraint(equalTo: rightAnchor, constant: -10).isActive = true
         
         if document is meta.Directory {
-            let tree = Button("expand", type: .toggle, target: List.shared, action: #selector(List.shared.toggle))
+            let tree = Button("expand", type: .toggle, target: self, action: #selector(tree(_:)))
             tree.alternateImage = NSImage(named: "collapse")
             addSubview(tree)
-            self.tree = tree
             
             tree.widthAnchor.constraint(equalToConstant: 50).isActive = true
             tree.topAnchor.constraint(equalTo: topAnchor).isActive = true
             tree.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-            tree.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
+            tree.leftAnchor.constraint(equalTo: leftAnchor, constant: indent * 20).isActive = true
         }
+        
         update()
     }
     
@@ -61,6 +63,14 @@ class Document: NSControl {
         } else {
             layer!.backgroundColor = nil
             label.alphaValue = 0.6
+        }
+    }
+    
+    @objc private func tree(_ button: Button) {
+        if button.state == .on {
+            List.shared.expand(self)
+        } else {
+            
         }
     }
 }

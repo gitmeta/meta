@@ -7,7 +7,8 @@ class List: NSScrollView {
     let folder = Folder()
     private weak var width: NSLayoutConstraint!
     private weak var title: Label!
-    private let open = CGFloat(200)
+    private weak var bottom: NSLayoutConstraint? { didSet { oldValue?.isActive = false; bottom?.isActive = true } }
+    private let open = CGFloat(250)
     
     private init() {
         super.init(frame: .zero)
@@ -48,18 +49,19 @@ class List: NSScrollView {
         App.shared.state = .folder
         title.stringValue = name
         folder.documents(App.shared.user) {
-            var top = self.topAnchor
-            $0.enumerated().forEach {
-                let document = Document($0.1)
-                self.documentView!.addSubview(document)
-                
-                document.widthAnchor.constraint(equalToConstant: self.open + 10).isActive = true
-                document.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
-                document.topAnchor.constraint(equalTo: top, constant: $0.0 == 0 ? 80 : 0).isActive = true
-                top = document.bottomAnchor
-            }
-            if self.topAnchor !== top {
-                self.documentView!.bottomAnchor.constraint(greaterThanOrEqualTo: top, constant: 20).isActive = true
+            guard let last = self.render($0, origin: self.topAnchor, margin: 80, indent: 0) else { return }
+            self.bottom = self.documentView!.bottomAnchor.constraint(greaterThanOrEqualTo: last.bottomAnchor, constant: 20)
+        }
+    }
+    
+    func expand(_ document: Document) {
+        folder.documents(document.document.url) {
+            let sibling = self.documentView!.subviews.compactMap({ $0 as? Document }).first(where: { $0.top?.secondItem === document })
+            guard let last = self.render($0, origin: document.bottomAnchor, margin: 0, indent: document.indent + 1) else { return }
+            if let sibling = sibling {
+                sibling.top = sibling.topAnchor.constraint(equalTo: last.bottomAnchor)
+            } else {
+                self.bottom = self.documentView!.bottomAnchor.constraint(greaterThanOrEqualTo: last.bottomAnchor, constant: 20)
             }
         }
     }
@@ -91,6 +93,18 @@ class List: NSScrollView {
                 App.shared.clear()
             }
         }
+    }
+    
+    private func render(_ documents: [meta.Document], origin: NSLayoutYAxisAnchor, margin: CGFloat, indent: CGFloat) -> Document? {
+        return documents.reduce((nil, origin, margin)) {
+            let document = Document($1, indent: indent)
+            documentView!.addSubview(document)
+            
+            document.widthAnchor.constraint(equalToConstant: open + 10).isActive = true
+            document.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
+            document.top = document.topAnchor.constraint(equalTo: $0.1, constant: $0.2)
+            return (document, document.bottomAnchor, 0)
+        }.0
     }
 }
 

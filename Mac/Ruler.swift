@@ -1,7 +1,7 @@
 import AppKit
 
 class Ruler: NSRulerView {
-    static let thickness = CGFloat(40)
+    static let thickness = CGFloat(30)
     private weak var text: Text!
     private weak var layout: Layout!
     
@@ -32,7 +32,7 @@ class Ruler: NSRulerView {
         if layout.extraLineFragmentTextContainer != nil {
             numbers.append((i + 1, layout.extraLineFragmentRect.minY))
         }
-        let y = convert(NSZeroPoint, from: text).y + text.textContainerInset.height + layout.padding
+        let y = convert(NSZeroPoint, from: text).y + text.textContainerInset.height + (layout.padding / 2)
         numbers.map({ (NSAttributedString(string: String($0.0), attributes:
             [.foregroundColor: NSColor(white: 1, alpha: 0.4), .font: NSFont.light(14)]), $0.1) })
             .forEach { $0.0.draw(at: CGPoint(x: ruleThickness - $0.0.size().width, y: $0.1 + y)) }

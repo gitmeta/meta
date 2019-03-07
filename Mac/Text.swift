@@ -21,10 +21,9 @@ class Text: NSTextView {
         insertionPointColor = .halo
         font = .light(Skin.font)
         string = document.content
-        textContainerInset = NSSize(width: 20, height: 30)
+        textContainerInset = NSSize(width: 12, height: 30)
         height = heightAnchor.constraint(greaterThanOrEqualToConstant: 0)
         height.isActive = true
-        adjust()
         self.document = document
     }
     
@@ -34,6 +33,11 @@ class Text: NSTextView {
         var rect = rect
         rect.size.width += 2
         super.drawInsertionPoint(in: rect, color: color, turnedOn: turnedOn)
+    }
+    
+    override func resize(withOldSuperviewSize: NSSize) {
+        super.resize(withOldSuperviewSize: withOldSuperviewSize)
+        adjust()
     }
     
     override func didChangeText() {

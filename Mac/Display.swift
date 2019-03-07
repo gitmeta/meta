@@ -41,8 +41,17 @@ class Display: NSView {
         text.ruler = ruler
         
         configure(scroll)
+        
+        let line = Line()
+        scroll.contentView.addSubview(line, positioned: .below, relativeTo: nil)
+        text.line = line
+        
         text.widthAnchor.constraint(equalTo: widthAnchor, constant: -ruler.ruleThickness).isActive = true
         text.heightAnchor.constraint(greaterThanOrEqualTo: heightAnchor).isActive = true
+        
+        line.top = line.topAnchor.constraint(equalTo: scroll.topAnchor)
+        line.leftAnchor.constraint(equalTo: scroll.leftAnchor, constant: -Ruler.thickness).isActive = true
+        line.rightAnchor.constraint(equalTo: scroll.rightAnchor).isActive = true
     }
     
     private func configure(_ document: NSView) {

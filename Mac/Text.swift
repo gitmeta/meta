@@ -3,6 +3,7 @@ import AppKit
 
 class Text: NSTextView {
     weak var ruler: Ruler?
+    weak var line: Line!
     private weak var document: Editable?
     private weak var height: NSLayoutConstraint!
     
@@ -29,15 +30,17 @@ class Text: NSTextView {
     
     required init?(coder: NSCoder) { return nil }
     
-    override func drawInsertionPoint(in rect: NSRect, color: NSColor, turnedOn: Bool) {
-        var rect = rect
-        rect.size.width += 2
-        super.drawInsertionPoint(in: rect, color: color, turnedOn: turnedOn)
-    }
-    
     override func resize(withOldSuperviewSize: NSSize) {
         super.resize(withOldSuperviewSize: withOldSuperviewSize)
         adjust()
+    }
+    
+    override func drawInsertionPoint(in rect: NSRect, color: NSColor, turnedOn: Bool) {
+        var rect = rect
+        rect.size.width += 2
+        line.top.constant = rect.origin.y
+        line.height.constant = rect.height
+        super.drawInsertionPoint(in: rect, color: color, turnedOn: turnedOn)
     }
     
     override func didChangeText() {
@@ -48,6 +51,16 @@ class Text: NSTextView {
             guard let document = self?.document else { return }
             List.shared.folder.save(document)
         }
+    }
+    
+    override func becomeFirstResponder() -> Bool {
+        line.isHidden = false
+        return super.becomeFirstResponder()
+    }
+    
+    override func resignFirstResponder() -> Bool {
+        line.isHidden = true
+        return super.resignFirstResponder()
     }
     
     override func viewDidEndLiveResize() {

@@ -2,6 +2,7 @@ import meta
 import AppKit
 
 class Document: NSControl {
+    weak var parent: Document?
     weak var top: NSLayoutConstraint? { didSet { oldValue?.isActive = false; top?.isActive = true } }
     let document: meta.Document
     let indent: CGFloat
@@ -70,7 +71,7 @@ class Document: NSControl {
         if button.state == .on {
             List.shared.expand(self)
         } else {
-            
+            List.shared.collapse(self)
         }
     }
 }

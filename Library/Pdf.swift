@@ -1,1 +1,1 @@
-public class Pdf: Static { }
+public class Pdf: Document { }

@@ -1,1 +1,1 @@
-public class Image: Static { }
+public class Image: Document { }

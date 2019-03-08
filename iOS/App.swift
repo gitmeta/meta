@@ -23,6 +23,7 @@ import StoreKit
         gradient.topAnchor.constraint(equalTo: rootViewController!.view.topAnchor).isActive = true
         gradient.leftAnchor.constraint(equalTo: rootViewController!.view.leftAnchor).isActive = true
         gradient.rightAnchor.constraint(equalTo: rootViewController!.view.rightAnchor).isActive = true
+        gradient.bottomAnchor.constraint(equalTo: Bar.shared.bottomAnchor, constant: 10).isActive = true
         
         List.shared.topAnchor.constraint(equalTo: rootViewController!.view.topAnchor).isActive = true
         List.shared.widthAnchor.constraint(equalTo: rootViewController!.view.widthAnchor).isActive = true

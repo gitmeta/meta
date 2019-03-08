@@ -31,7 +31,7 @@ class Bar: UIView {
         title.alpha = 0
         title.translatesAutoresizingMaskIntoConstraints = false
         title.font = .bold(15)
-        title.textColor = UIColor(white: 1, alpha: 0.5)
+        title.textColor = .halo
         addSubview(title)
         self.title = title
         

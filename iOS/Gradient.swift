@@ -13,7 +13,6 @@ class Gradient: UIView {
         (layer as! CAGradientLayer).colors = [UIColor(white: 0, alpha: 0.9).cgColor,
                                               UIColor(white: 0, alpha: 0.6).cgColor,
                                               UIColor(white: 0, alpha: 0).cgColor]
-        heightAnchor.constraint(equalToConstant: 70).isActive = true
     }
     
     required init?(coder: NSCoder) { return nil }

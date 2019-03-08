@@ -7,6 +7,7 @@ class Ruler: UIView {
     
     init(_ text: Text, layout: Layout) {
         super.init(frame: .zero)
+        backgroundColor = .clear
         translatesAutoresizingMaskIntoConstraints = false
         widthAnchor.constraint(equalToConstant: thickness).isActive = true
         self.text = text

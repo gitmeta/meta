@@ -11,11 +11,13 @@ class Bar: UIView {
         super.init(frame: .zero)
         translatesAutoresizingMaskIntoConstraints = false
         
-        let image = UIImageView(image: #imageLiteral(resourceName: "welcome.pdf"))
-        image.translatesAutoresizingMaskIntoConstraints = false
-        image.clipsToBounds = true
-        image.contentMode = .scaleAspectFit
-        addSubview(image)
+        let nose = UIButton()
+        nose.translatesAutoresizingMaskIntoConstraints = false
+        nose.setImage(#imageLiteral(resourceName: "nose.pdf"), for: [])
+        nose.addTarget(self, action: #selector(help), for: .touchUpInside)
+        nose.imageView!.clipsToBounds = true
+        nose.imageView!.contentMode = .center
+        addSubview(nose)
         
         let create = UIButton()
         create.translatesAutoresizingMaskIntoConstraints = false
@@ -45,14 +47,15 @@ class Bar: UIView {
         
         heightAnchor.constraint(equalToConstant: 50).isActive = true
         
-        image.topAnchor.constraint(equalTo: topAnchor).isActive = true
-        image.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-        image.widthAnchor.constraint(equalToConstant: 50).isActive = true
-        closed = image.leftAnchor.constraint(equalTo: leftAnchor, constant: 5)
-        opened = image.rightAnchor.constraint(equalTo: rightAnchor, constant: -15)
+        nose.topAnchor.constraint(equalTo: topAnchor).isActive = true
+        nose.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        nose.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        nose.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        closed = nose.leftAnchor.constraint(equalTo: leftAnchor, constant: 5)
+        opened = nose.rightAnchor.constraint(equalTo: rightAnchor, constant: -5)
         
-        create.centerYAnchor.constraint(equalTo: image.centerYAnchor).isActive = true
-        create.leftAnchor.constraint(equalTo: image.rightAnchor, constant: 15).isActive = true
+        create.centerYAnchor.constraint(equalTo: nose.centerYAnchor).isActive = true
+        create.leftAnchor.constraint(equalTo: nose.rightAnchor, constant: 5).isActive = true
         create.widthAnchor.constraint(equalToConstant: 60).isActive = true
         create.heightAnchor.constraint(equalToConstant: 40).isActive = true
         
@@ -87,4 +90,6 @@ class Bar: UIView {
             self.layoutIfNeeded()
         }
     }
+    
+    @objc private func help() { }
 }

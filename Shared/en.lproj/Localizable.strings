@@ -7,6 +7,7 @@ Document.deleteConfirm="Delete";
 Welcome.show="Show on start";
 Welcome.select="Directory";
 Welcome.close="Not now";
+Welcome.create="New file";
 Help.title="meta@iturbi.de";
 Help.write="Write";
 Help.cancel="Cancel";

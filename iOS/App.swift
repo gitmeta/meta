@@ -46,7 +46,10 @@ import StoreKit
         
         DispatchQueue.global(qos: .background).async {
             self.load()
-            DispatchQueue.main.async { List.shared.update() }
+            DispatchQueue.main.async {
+                List.shared.update()
+                if self.user.welcome { Welcome() }
+            }
         }
         
         return true

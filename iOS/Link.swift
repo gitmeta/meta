@@ -11,8 +11,8 @@ class Link: UIButton {
         addTarget(target, action: selector, for: .touchUpInside)
         setTitle(title, for: [])
         setTitleColor(.black, for: .normal)
-        setTitleColor(UIColor(white:0, alpha:0.2), for: .highlighted)
-        titleLabel!.font = .systemFont(ofSize:15, weight: .medium)
+        setTitleColor(UIColor(white: 0, alpha: 0.2), for: .highlighted)
+        titleLabel!.font = .systemFont(ofSize: 15, weight: .medium)
         
         heightAnchor.constraint(equalToConstant: 30).isActive = true
         width = widthAnchor.constraint(equalToConstant: 88)

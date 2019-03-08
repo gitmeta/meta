@@ -91,5 +91,5 @@ class Bar: UIView {
         }
     }
     
-    @objc private func help() { }
+    @objc private func help() { Help() }
 }

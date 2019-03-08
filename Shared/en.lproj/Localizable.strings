@@ -12,6 +12,7 @@ Help.title="meta@iturbi.de";
 Help.write="Write";
 Help.cancel="Cancel";
 Help.subject="meta support";
+Help.version="meta\n";
 Alert.fileAlreadyExists="File already exists";
 Alert.folderNotFound="Folder not found";
 Alert.fileNoExists="File does not exist";

@@ -84,6 +84,7 @@
 		20A70CC3222D6EAD001AE4E8 /* Exception.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A70CC2222D6EAD001AE4E8 /* Exception.swift */; };
 		20A70CC4222D6EAD001AE4E8 /* Exception.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A70CC2222D6EAD001AE4E8 /* Exception.swift */; };
 		20ABA348223262D400C1A8AA /* Welcome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20ABA347223262D400C1A8AA /* Welcome.swift */; };
+		20ABA34A22326E2400C1A8AA /* Help.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20ABA34922326E2400C1A8AA /* Help.swift */; };
 		20B5EFB4222AC14A00C12B49 /* Help.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B5EFB3222AC14A00C12B49 /* Help.swift */; };
 		20BD161A2229456C00B8EFDF /* Mac.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 20BD16192229456C00B8EFDF /* Mac.xcassets */; };
 		20BD161D22294F8E00B8EFDF /* Display.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20BD161C22294F8E00B8EFDF /* Display.swift */; };
@@ -201,6 +202,7 @@
 		20A70CC0222D6D7D001AE4E8 /* TestDocumentChange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestDocumentChange.swift; sourceTree = "<group>"; };
 		20A70CC2222D6EAD001AE4E8 /* Exception.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exception.swift; sourceTree = "<group>"; };
 		20ABA347223262D400C1A8AA /* Welcome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Welcome.swift; sourceTree = "<group>"; };
+		20ABA34922326E2400C1A8AA /* Help.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Help.swift; sourceTree = "<group>"; };
 		20B5EFB3222AC14A00C12B49 /* Help.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Help.swift; sourceTree = "<group>"; };
 		20BD16192229456C00B8EFDF /* Mac.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Mac.xcassets; sourceTree = "<group>"; };
 		20BD161B2229472200B8EFDF /* meta.sketch */ = {isa = PBXFileReference; lastKnownFileType = file; path = meta.sketch; sourceTree = "<group>"; };
@@ -286,6 +288,7 @@
 				20A70CBA222D3B15001AE4E8 /* Document.swift */,
 				20A70CBC222D45A9001AE4E8 /* Extensions.swift */,
 				20592A80222ED6EA00EAFD63 /* Gradient.swift */,
+				20ABA34922326E2400C1A8AA /* Help.swift */,
 				201CE1EC222EA0DD007AE422 /* Layout.swift */,
 				20A70CBE222D4D51001AE4E8 /* Link.swift */,
 				20A70CB8222D383B001AE4E8 /* List.swift */,
@@ -609,6 +612,7 @@
 				20A70CBB222D3B15001AE4E8 /* Document.swift in Sources */,
 				20592A81222ED6EA00EAFD63 /* Gradient.swift in Sources */,
 				20A70CBF222D4D51001AE4E8 /* Link.swift in Sources */,
+				20ABA34A22326E2400C1A8AA /* Help.swift in Sources */,
 				201CE1E9222E9FEB007AE422 /* Storage.swift in Sources */,
 				20366C9922293BE8009A2FB3 /* Shared.swift in Sources */,
 				201CE1EB222EA0B7007AE422 /* Skin.swift in Sources */,

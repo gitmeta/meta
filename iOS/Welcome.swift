@@ -39,7 +39,7 @@ class Welcome: Sheet {
         label.textColor = UIColor(white: 1, alpha: 0.7)
         addSubview(label)
         
-        image.rightAnchor.constraint(equalTo: centerXAnchor, constant: -10).isActive = true
+        image.rightAnchor.constraint(equalTo: centerXAnchor, constant: -20).isActive = true
         image.bottomAnchor.constraint(equalTo: centerYAnchor).isActive = true
         image.widthAnchor.constraint(equalToConstant: 100).isActive = true
         image.heightAnchor.constraint(equalToConstant: 100).isActive = true

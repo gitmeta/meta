@@ -58,7 +58,7 @@ class Text: UITextView, UITextViewDelegate {
     override func caretRect(for position: UITextPosition) -> CGRect {
         var rect = super.caretRect(for: position)
         rect.size.width += 2
-        line.top.constant = rect.origin.y
+        line.top.constant = rect.origin.y != .infinity ? rect.origin.y : line.top.constant
         line.height.constant = rect.height
         return rect
     }

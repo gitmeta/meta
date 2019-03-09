@@ -289,6 +289,7 @@
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="kIS-P4-7N0"/>
                                         <menuItem title="Sidebar" state="on" keyEquivalent="l" id="gef-zJ-q5g"/>
+                                        <menuItem title="Console" state="on" keyEquivalent="C" id="9zq-iQ-Fyh"/>
                                         <menuItem title="Welcome" id="CMj-lC-Xea">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                         </menuItem>
@@ -316,12 +317,13 @@
                             </menuItem>
                         </items>
                         <connections>
+                            <outlet property="console" destination="9zq-iQ-Fyh" id="wxT-gR-cz1"/>
                             <outlet property="fileClose" destination="DVo-aG-piG" id="gFy-Pu-bww"/>
                             <outlet property="fileDelete" destination="pxx-59-PXV" id="F81-CP-JUK"/>
                             <outlet property="fileNew" destination="Was-JA-tGl" id="XjI-Wu-hb7"/>
                             <outlet property="fileOpen" destination="IAo-SY-fd9" id="H6K-Dd-oEs"/>
                             <outlet property="sidebar" destination="gef-zJ-q5g" id="Vcr-7Z-yhu"/>
-                            <outlet property="windowWelcome" destination="CMj-lC-Xea" id="YyP-xn-IMl"/>
+                            <outlet property="welcome" destination="CMj-lC-Xea" id="YyP-xn-IMl"/>
                         </connections>
                     </menu>
                 </application>

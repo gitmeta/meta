@@ -96,6 +96,7 @@
 		20F242F72233E35C006C26DF /* Delete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20F242F62233E35C006C26DF /* Delete.swift */; };
 		20F242F92233ED3F006C26DF /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20F242F82233ED3F006C26DF /* Alert.swift */; };
 		20F242FB223406BF006C26DF /* Git.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20F242FA223406BF006C26DF /* Git.swift */; };
+		20F242FD2234110E006C26DF /* Console.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20F242FC2234110E006C26DF /* Console.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -219,6 +220,7 @@
 		20F242F62233E35C006C26DF /* Delete.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Delete.swift; sourceTree = "<group>"; };
 		20F242F82233ED3F006C26DF /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		20F242FA223406BF006C26DF /* Git.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Git.swift; sourceTree = "<group>"; };
+		20F242FC2234110E006C26DF /* Console.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Console.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -322,6 +324,7 @@
 				20366C4422293BBF009A2FB3 /* App.swift */,
 				20366C3B22293BBF009A2FB3 /* Bar.swift */,
 				20366C4622293BBF009A2FB3 /* Button.swift */,
+				20F242FC2234110E006C26DF /* Console.swift */,
 				20F242FA223406BF006C26DF /* Git.swift */,
 				20BD16282229624F00B8EFDF /* Create.swift */,
 				20F242F62233E35C006C26DF /* Delete.swift */,
@@ -590,6 +593,7 @@
 				20F242F72233E35C006C26DF /* Delete.swift in Sources */,
 				20366C5022293BBF009A2FB3 /* Image.swift in Sources */,
 				20366C5922293BBF009A2FB3 /* Text.swift in Sources */,
+				20F242FD2234110E006C26DF /* Console.swift in Sources */,
 				20366C4A22293BBF009A2FB3 /* Label.swift in Sources */,
 				20366C5A22293BBF009A2FB3 /* Button.swift in Sources */,
 				20366C5522293BBF009A2FB3 /* Pdf.swift in Sources */,

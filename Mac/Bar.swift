@@ -2,7 +2,8 @@ import AppKit
 
 class Bar: NSView {
     static let shared = Bar()
-    private(set) weak var toggle: Button!
+    private(set) weak var sidebar: Button!
+    private(set) weak var console: Button!
     private(set) weak var new: Button!
     private(set) weak var close: Button!
     private(set) weak var delete: Button!
@@ -15,12 +16,19 @@ class Bar: NSView {
         up.keyEquivalent = "o"
         up.keyEquivalentModifierMask = .command
         
-        let toggle = Button("listOff", type: .toggle, target: List.shared, action: #selector(List.shared.toggle))
-        toggle.state = .on
-        toggle.alternateImage = NSImage(named: "listOn")
-        toggle.keyEquivalent = "l"
-        toggle.keyEquivalentModifierMask = .command
-        self.toggle = toggle
+        let sidebar = Button("listOff", type: .toggle, target: List.shared, action: #selector(List.shared.toggle))
+        sidebar.state = .on
+        sidebar.alternateImage = NSImage(named: "listOn")
+        sidebar.keyEquivalent = "l"
+        sidebar.keyEquivalentModifierMask = .command
+        self.sidebar = sidebar
+        
+        let console = Button("consoleOff", type: .toggle, target: Console.shared, action: #selector(Console.shared.toggle))
+        console.state = .on
+        console.alternateImage = NSImage(named: "consoleOn")
+        console.keyEquivalent = "c"
+        console.keyEquivalentModifierMask = [.shift, .command]
+        self.console = console
         
         let new = Button("new", target: App.shared, action: #selector(App.shared.create))
         new.keyEquivalent = "n"
@@ -37,7 +45,7 @@ class Bar: NSView {
         delete.keyEquivalentModifierMask = .command
         self.delete = delete
         
-        [up, toggle, new, close, delete].forEach {
+        [up, sidebar, console, new, close, delete].forEach {
             addSubview($0)
             $0.heightAnchor.constraint(equalToConstant: 30).isActive = true
             $0.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
@@ -46,8 +54,9 @@ class Bar: NSView {
         
         widthAnchor.constraint(equalToConstant: 70).isActive = true
         up.topAnchor.constraint(equalTo: topAnchor, constant: 30).isActive = true
-        toggle.topAnchor.constraint(equalTo: up.bottomAnchor, constant: 5).isActive = true
-        new.topAnchor.constraint(equalTo: toggle.bottomAnchor, constant: 5).isActive = true
+        sidebar.topAnchor.constraint(equalTo: up.bottomAnchor, constant: 5).isActive = true
+        console.topAnchor.constraint(equalTo: sidebar.bottomAnchor, constant: 5).isActive = true
+        new.topAnchor.constraint(equalTo: console.bottomAnchor, constant: 5).isActive = true
         close.topAnchor.constraint(equalTo: new.bottomAnchor, constant: 5).isActive = true
         delete.topAnchor.constraint(equalTo: close.bottomAnchor, constant: 5).isActive = true
     }

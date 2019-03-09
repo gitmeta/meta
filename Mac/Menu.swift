@@ -3,17 +3,21 @@ import AppKit
 class Menu: NSMenu {
     static private(set) weak var shared: Menu!
     @IBOutlet private(set) weak var sidebar: NSMenuItem!
+    @IBOutlet private(set) weak var console: NSMenuItem!
     @IBOutlet private(set) weak var fileNew: NSMenuItem!
     @IBOutlet private weak var fileOpen: NSMenuItem!
     @IBOutlet private(set) weak var fileClose: NSMenuItem!
     @IBOutlet private(set) weak var fileDelete: NSMenuItem!
-    @IBOutlet private weak var windowWelcome: NSMenuItem!
+    @IBOutlet private weak var welcome: NSMenuItem!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         Menu.shared = self
         sidebar.target = self
-        sidebar.action = #selector(toggle)
+        sidebar.action = #selector(toggleSidebar)
+        
+        console.target = self
+        console.action = #selector(toggleConsole)
         
         fileNew.target = App.shared
         fileNew.action = #selector(App.shared.create)
@@ -24,14 +28,19 @@ class Menu: NSMenu {
         fileClose.target = App.shared
         fileClose.action = #selector(App.shared.shut)
         
-        windowWelcome.target = self
-        windowWelcome.action = #selector(welcome)
+        welcome.target = self
+        welcome.action = #selector(openWelcome)
     }
     
-    @objc func welcome() { Welcome() }
+    @objc func openWelcome() { Welcome() }
     
-    @objc private func toggle() {
-        Bar.shared.toggle.state = Bar.shared.toggle.state == .on ? .off : .on
+    @objc private func toggleSidebar() {
+        Bar.shared.sidebar.state = Bar.shared.sidebar.state == .on ? .off : .on
         List.shared.toggle()
+    }
+    
+    @objc private func toggleConsole() {
+        Bar.shared.console.state = Bar.shared.console.state == .on ? .off : .on
+        Console.shared.toggle()
     }
 }

@@ -27,22 +27,27 @@ import StoreKit
         contentView!.addSubview(Display.shared)
         contentView!.addSubview(List.shared)
         contentView!.addSubview(Git.shared)
+        contentView!.addSubview(Console.shared)
         contentView!.addSubview(Bar.shared)
         
         List.shared.topAnchor.constraint(equalTo: contentView!.topAnchor).isActive = true
         List.shared.bottomAnchor.constraint(equalTo: Git.shared.topAnchor).isActive = true
         List.shared.leftAnchor.constraint(equalTo: contentView!.leftAnchor).isActive = true
         
-        Git.shared.bottomAnchor.constraint(equalTo: contentView!.bottomAnchor).isActive = true
+        Git.shared.bottomAnchor.constraint(equalTo: Console.shared.topAnchor).isActive = true
         Git.shared.widthAnchor.constraint(equalTo: List.shared.widthAnchor).isActive = true
         Git.shared.rightAnchor.constraint(equalTo: List.shared.rightAnchor).isActive = true
         
+        Console.shared.bottomAnchor.constraint(equalTo: contentView!.bottomAnchor).isActive = true
+        Console.shared.leftAnchor.constraint(equalTo: contentView!.leftAnchor).isActive = true
+        Console.shared.rightAnchor.constraint(equalTo: contentView!.rightAnchor).isActive = true
+        
         Bar.shared.topAnchor.constraint(equalTo: contentView!.topAnchor).isActive = true
-        Bar.shared.bottomAnchor.constraint(equalTo: contentView!.bottomAnchor).isActive = true
+        Bar.shared.bottomAnchor.constraint(equalTo: Console.shared.topAnchor).isActive = true
         Bar.shared.leftAnchor.constraint(equalTo: List.shared.rightAnchor).isActive = true
         
         Display.shared.topAnchor.constraint(equalTo: contentView!.topAnchor).isActive = true
-        Display.shared.bottomAnchor.constraint(equalTo: contentView!.bottomAnchor).isActive = true
+        Display.shared.bottomAnchor.constraint(equalTo: Console.shared.topAnchor).isActive = true
         Display.shared.leftAnchor.constraint(equalTo: Bar.shared.rightAnchor).isActive = true
         Display.shared.rightAnchor.constraint(equalTo: contentView!.rightAnchor).isActive = true
         state = .welcomed
@@ -57,7 +62,7 @@ import StoreKit
             self.user.ask = { if #available(OSX 10.14, *) { SKStoreReviewController.requestReview() } }
             DispatchQueue.main.async {
                 List.shared.update()
-                if self.user.welcome { Menu.shared.welcome() }
+                if self.user.welcome { Menu.shared.openWelcome() }
             }
         }
     }

@@ -9,6 +9,7 @@ class Line: NSView {
         translatesAutoresizingMaskIntoConstraints = false
         wantsLayer = true
         layer!.backgroundColor = NSColor.shade.withAlphaComponent(0.6).cgColor
+        layer!.cornerRadius = 6
         isHidden = true
         
         height = heightAnchor.constraint(equalToConstant: 0)

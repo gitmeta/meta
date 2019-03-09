@@ -1,6 +1,7 @@
 List.open="Select your working directory";
 Create.confirm="Create";
 Create.title="New file";
+Create.cancel="Cancel";
 Document.deleteTitle="Delete file?";
 Document.deleteCancel="Cancel";
 Document.deleteConfirm="Delete";

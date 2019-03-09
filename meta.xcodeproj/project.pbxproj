@@ -93,6 +93,8 @@
 		20BD16292229624F00B8EFDF /* Create.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20BD16282229624F00B8EFDF /* Create.swift */; };
 		20BD162B2229660800B8EFDF /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20BD162A2229660800B8EFDF /* Menu.swift */; };
 		20DCEA8922314E280005B61D /* Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20DCEA8822314E280005B61D /* Line.swift */; };
+		20F242F72233E35C006C26DF /* Delete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20F242F62233E35C006C26DF /* Delete.swift */; };
+		20F242F92233ED3F006C26DF /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20F242F82233ED3F006C26DF /* Alert.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -213,6 +215,8 @@
 		20BD16282229624F00B8EFDF /* Create.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Create.swift; sourceTree = "<group>"; };
 		20BD162A2229660800B8EFDF /* Menu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
 		20DCEA8822314E280005B61D /* Line.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Line.swift; sourceTree = "<group>"; };
+		20F242F62233E35C006C26DF /* Delete.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Delete.swift; sourceTree = "<group>"; };
+		20F242F82233ED3F006C26DF /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -312,10 +316,12 @@
 				20366C3722293BBF009A2FB3 /* Mac.entitlements */,
 				20366C3F22293BBF009A2FB3 /* Mac.plist */,
 				20366C3A22293BBF009A2FB3 /* Mac.storyboard */,
+				20F242F82233ED3F006C26DF /* Alert.swift */,
 				20366C4422293BBF009A2FB3 /* App.swift */,
 				20366C3B22293BBF009A2FB3 /* Bar.swift */,
 				20366C4622293BBF009A2FB3 /* Button.swift */,
 				20BD16282229624F00B8EFDF /* Create.swift */,
+				20F242F62233E35C006C26DF /* Delete.swift */,
 				20366C3922293BBF009A2FB3 /* Directory.swift */,
 				20BD161C22294F8E00B8EFDF /* Display.swift */,
 				20366C4022293BBF009A2FB3 /* Document.swift */,
@@ -578,6 +584,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				20F242F72233E35C006C26DF /* Delete.swift in Sources */,
 				20366C5022293BBF009A2FB3 /* Image.swift in Sources */,
 				20366C5922293BBF009A2FB3 /* Text.swift in Sources */,
 				20366C4A22293BBF009A2FB3 /* Label.swift in Sources */,
@@ -595,6 +602,7 @@
 				20366C5722293BBF009A2FB3 /* List.swift in Sources */,
 				20366C5422293BBF009A2FB3 /* Document.swift in Sources */,
 				20366C5B22293BBF009A2FB3 /* Ruler.swift in Sources */,
+				20F242F92233ED3F006C26DF /* Alert.swift in Sources */,
 				20366C4822293BBF009A2FB3 /* Storage.swift in Sources */,
 				20366C5222293BBF009A2FB3 /* Skin.swift in Sources */,
 				20BD161D22294F8E00B8EFDF /* Display.swift in Sources */,

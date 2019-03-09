@@ -5,6 +5,7 @@ class Bar: NSView {
     private(set) weak var toggle: Button!
     private(set) weak var new: Button!
     private(set) weak var close: Button!
+    private(set) weak var delete: Button!
     
     private init() {
         super.init(frame: .zero)
@@ -31,7 +32,12 @@ class Bar: NSView {
         close.keyEquivalentModifierMask = .command
         self.close = close
         
-        [up, toggle, new, close].forEach {
+        let delete = Button("trash", target: App.shared, action: #selector(App.shared.delete))
+        delete.keyEquivalent = "d"
+        delete.keyEquivalentModifierMask = .command
+        self.delete = delete
+        
+        [up, toggle, new, close, delete].forEach {
             addSubview($0)
             $0.heightAnchor.constraint(equalToConstant: 30).isActive = true
             $0.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
@@ -43,6 +49,7 @@ class Bar: NSView {
         toggle.topAnchor.constraint(equalTo: up.bottomAnchor, constant: 5).isActive = true
         new.topAnchor.constraint(equalTo: toggle.bottomAnchor, constant: 5).isActive = true
         close.topAnchor.constraint(equalTo: new.bottomAnchor, constant: 5).isActive = true
+        delete.topAnchor.constraint(equalTo: close.bottomAnchor, constant: 5).isActive = true
     }
     
     required init?(coder: NSCoder) { return nil }

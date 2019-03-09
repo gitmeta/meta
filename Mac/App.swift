@@ -62,19 +62,31 @@ import StoreKit
         case .none:
             Bar.shared.new.isEnabled = false
             Bar.shared.close.isEnabled = false
+            Bar.shared.delete.isEnabled = false
+            Menu.shared.fileNew.isEnabled = false
             Menu.shared.fileClose.isEnabled = false
+            Menu.shared.fileDelete.isEnabled = false
         case .welcomed:
             Bar.shared.new.isEnabled = false
             Bar.shared.close.isEnabled = false
+            Bar.shared.delete.isEnabled = false
+            Menu.shared.fileNew.isEnabled = false
             Menu.shared.fileClose.isEnabled = false
+            Menu.shared.fileDelete.isEnabled = false
         case .folder:
             Bar.shared.new.isEnabled = true
             Bar.shared.close.isEnabled = false
+            Bar.shared.delete.isEnabled = false
+            Menu.shared.fileNew.isEnabled = true
             Menu.shared.fileClose.isEnabled = false
+            Menu.shared.fileDelete.isEnabled = false
         case .document:
             Bar.shared.new.isEnabled = true
             Bar.shared.close.isEnabled = true
+            Bar.shared.delete.isEnabled = true
+            Menu.shared.fileNew.isEnabled = true
             Menu.shared.fileClose.isEnabled = true
+            Menu.shared.fileDelete.isEnabled = true
         }
     } }
     
@@ -91,6 +103,7 @@ import StoreKit
         List.shared.selected = nil
     }
     
+    @objc func delete() { Delete() }
     @objc func create() { Create() }
     @IBAction private func showHelp(_: Any?) { Help() }
 }

@@ -8,7 +8,7 @@ class List: NSScrollView {
     private weak var width: NSLayoutConstraint!
     private weak var title: Label!
     private weak var bottom: NSLayoutConstraint? { didSet { oldValue?.isActive = false; bottom?.isActive = true } }
-    private let open = CGFloat(200)
+    private let open = CGFloat(300)
     
     private init() {
         super.init(frame: .zero)
@@ -27,7 +27,7 @@ class List: NSScrollView {
         width = widthAnchor.constraint(equalToConstant: open)
         width.isActive = true
         
-        let title = Label(String(), color: NSColor(white: 1, alpha: 0.5), font: .systemFont(ofSize: 18, weight: .bold))
+        let title = Label(String(), color: .halo, font: .systemFont(ofSize: 18, weight: .regular))
         title.maximumNumberOfLines = 2
         documentView!.addSubview(title)
         self.title = title

@@ -3,10 +3,10 @@ import AppKit
 class Menu: NSMenu {
     static private(set) weak var shared: Menu!
     @IBOutlet private(set) weak var sidebar: NSMenuItem!
-    @IBOutlet private weak var fileNew: NSMenuItem!
+    @IBOutlet private(set) weak var fileNew: NSMenuItem!
     @IBOutlet private weak var fileOpen: NSMenuItem!
     @IBOutlet private(set) weak var fileClose: NSMenuItem!
-    @IBOutlet private weak var fileDelete: NSMenuItem!
+    @IBOutlet private(set) weak var fileDelete: NSMenuItem!
     @IBOutlet private weak var windowWelcome: NSMenuItem!
     
     override func awakeFromNib() {
@@ -14,6 +14,9 @@ class Menu: NSMenu {
         Menu.shared = self
         sidebar.target = self
         sidebar.action = #selector(toggle)
+        
+        fileNew.target = App.shared
+        fileNew.action = #selector(App.shared.create)
         
         fileOpen.target = List.shared
         fileOpen.action = #selector(List.shared.select)

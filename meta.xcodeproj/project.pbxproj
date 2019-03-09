@@ -95,6 +95,7 @@
 		20DCEA8922314E280005B61D /* Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20DCEA8822314E280005B61D /* Line.swift */; };
 		20F242F72233E35C006C26DF /* Delete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20F242F62233E35C006C26DF /* Delete.swift */; };
 		20F242F92233ED3F006C26DF /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20F242F82233ED3F006C26DF /* Alert.swift */; };
+		20F242FB223406BF006C26DF /* Git.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20F242FA223406BF006C26DF /* Git.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -217,6 +218,7 @@
 		20DCEA8822314E280005B61D /* Line.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Line.swift; sourceTree = "<group>"; };
 		20F242F62233E35C006C26DF /* Delete.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Delete.swift; sourceTree = "<group>"; };
 		20F242F82233ED3F006C26DF /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
+		20F242FA223406BF006C26DF /* Git.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Git.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -320,6 +322,7 @@
 				20366C4422293BBF009A2FB3 /* App.swift */,
 				20366C3B22293BBF009A2FB3 /* Bar.swift */,
 				20366C4622293BBF009A2FB3 /* Button.swift */,
+				20F242FA223406BF006C26DF /* Git.swift */,
 				20BD16282229624F00B8EFDF /* Create.swift */,
 				20F242F62233E35C006C26DF /* Delete.swift */,
 				20366C3922293BBF009A2FB3 /* Directory.swift */,
@@ -597,6 +600,7 @@
 				20366C5822293BBF009A2FB3 /* App.swift in Sources */,
 				20BD162B2229660800B8EFDF /* Menu.swift in Sources */,
 				20366C5622293BBF009A2FB3 /* Layout.swift in Sources */,
+				20F242FB223406BF006C26DF /* Git.swift in Sources */,
 				20BD1627222961F300B8EFDF /* Sheet.swift in Sources */,
 				2037F567222A9149009778BC /* Welcome.swift in Sources */,
 				20366C5722293BBF009A2FB3 /* List.swift in Sources */,

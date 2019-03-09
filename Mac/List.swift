@@ -8,7 +8,7 @@ class List: NSScrollView {
     private weak var width: NSLayoutConstraint!
     private weak var title: Label!
     private weak var bottom: NSLayoutConstraint? { didSet { oldValue?.isActive = false; bottom?.isActive = true } }
-    private let open = CGFloat(300)
+    private let open = CGFloat(350)
     
     private init() {
         super.init(frame: .zero)

@@ -26,11 +26,16 @@ import StoreKit
         
         contentView!.addSubview(Display.shared)
         contentView!.addSubview(List.shared)
+        contentView!.addSubview(Git.shared)
         contentView!.addSubview(Bar.shared)
         
         List.shared.topAnchor.constraint(equalTo: contentView!.topAnchor).isActive = true
-        List.shared.bottomAnchor.constraint(equalTo: contentView!.bottomAnchor).isActive = true
+        List.shared.bottomAnchor.constraint(equalTo: Git.shared.topAnchor).isActive = true
         List.shared.leftAnchor.constraint(equalTo: contentView!.leftAnchor).isActive = true
+        
+        Git.shared.bottomAnchor.constraint(equalTo: contentView!.bottomAnchor).isActive = true
+        Git.shared.widthAnchor.constraint(equalTo: List.shared.widthAnchor).isActive = true
+        Git.shared.rightAnchor.constraint(equalTo: List.shared.rightAnchor).isActive = true
         
         Bar.shared.topAnchor.constraint(equalTo: contentView!.topAnchor).isActive = true
         Bar.shared.bottomAnchor.constraint(equalTo: contentView!.bottomAnchor).isActive = true

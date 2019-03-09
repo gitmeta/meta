@@ -2,13 +2,7 @@ import AppKit
 
 class Welcome: Sheet {
     @discardableResult override init() {
-        super.init()
-        let blur = NSVisualEffectView()
-        blur.translatesAutoresizingMaskIntoConstraints = false
-        blur.blendingMode = .behindWindow
-        blur.material = .dark
-        addSubview(blur)
-        
+        super.init()        
         let image = NSImageView()
         image.image = NSImage(named: "welcome")
         image.translatesAutoresizingMaskIntoConstraints = false
@@ -31,11 +25,6 @@ class Welcome: Sheet {
         let show = Label(.local("Welcome.show"), color: NSColor(white: 1, alpha: 0.7),
                          font: .systemFont(ofSize: 14, weight: .light))
         addSubview(show)
-        
-        blur.topAnchor.constraint(equalTo: topAnchor).isActive = true
-        blur.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-        blur.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
-        blur.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
         
         image.centerXAnchor.constraint(equalTo: centerXAnchor, constant: -65).isActive = true
         image.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true

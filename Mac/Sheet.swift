@@ -10,6 +10,8 @@ class Sheet: NSView {
         if Sheet.presented == nil {
             Sheet.presented = self
             translatesAutoresizingMaskIntoConstraints = false
+            wantsLayer = true
+            layer!.backgroundColor = NSColor.shade.cgColor
             alphaValue = 0
             App.shared.contentView!.addSubview(self)
             

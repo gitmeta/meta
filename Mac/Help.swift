@@ -3,12 +3,6 @@ import AppKit
 class Help: Sheet {
     @discardableResult override init() {
         super.init()
-        let blur = NSVisualEffectView()
-        blur.translatesAutoresizingMaskIntoConstraints = false
-        blur.blendingMode = .behindWindow
-        blur.material = .dark
-        addSubview(blur)
-        
         let title = Label(.local("Help.title"), font: .bold(20))
         addSubview(title)
         
@@ -25,11 +19,6 @@ class Help: Sheet {
         let cancel = Link(.local("Help.cancel"), text: NSColor(white: 1, alpha: 0.6),
                           font: .systemFont(ofSize: 16, weight: .light), target: self, action: #selector(close))
         addSubview(cancel)
-        
-        blur.topAnchor.constraint(equalTo: topAnchor).isActive = true
-        blur.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-        blur.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
-        blur.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
         
         image.centerXAnchor.constraint(equalTo: centerXAnchor, constant: -65).isActive = true
         image.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true

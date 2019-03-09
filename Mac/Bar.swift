@@ -24,7 +24,6 @@ class Bar: NSView {
         let new = Button("new", target: App.shared, action: #selector(App.shared.create))
         new.keyEquivalent = "n"
         new.keyEquivalentModifierMask = .command
-        new.isHidden = true
         self.new = new
         
         let close = Button("close", target: App.shared, action: #selector(App.shared.shut))
@@ -43,7 +42,7 @@ class Bar: NSView {
         up.topAnchor.constraint(equalTo: topAnchor, constant: 30).isActive = true
         toggle.topAnchor.constraint(equalTo: up.bottomAnchor, constant: 5).isActive = true
         new.topAnchor.constraint(equalTo: toggle.bottomAnchor, constant: 5).isActive = true
-        close.topAnchor.constraint(equalTo: toggle.bottomAnchor, constant: 5).isActive = true
+        close.topAnchor.constraint(equalTo: new.bottomAnchor, constant: 5).isActive = true
     }
     
     required init?(coder: NSCoder) { return nil }

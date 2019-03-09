@@ -3,7 +3,8 @@ import AppKit
 class Help: Sheet {
     @discardableResult override init() {
         super.init()
-        let title = Label(.local("Help.title"), font: .bold(20))
+        let title = Label(.local("Help.title"), font: .light(18))
+        title.isSelectable = true
         addSubview(title)
         
         let image = NSImageView()

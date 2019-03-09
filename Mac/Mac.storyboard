@@ -53,10 +53,10 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="File" autoenablesItems="NO" id="bib-Uj-vzu">
                                     <items>
-                                        <menuItem title="New" hidden="YES" keyEquivalent="n" id="Was-JA-tGl"/>
+                                        <menuItem title="New" keyEquivalent="n" id="Was-JA-tGl"/>
                                         <menuItem title="Open…" keyEquivalent="o" id="IAo-SY-fd9"/>
                                         <menuItem title="Close" keyEquivalent="w" id="DVo-aG-piG"/>
-                                        <menuItem title="Delete" hidden="YES" keyEquivalent="d" id="pxx-59-PXV"/>
+                                        <menuItem title="Delete" keyEquivalent="d" id="pxx-59-PXV"/>
                                     </items>
                                 </menu>
                             </menuItem>

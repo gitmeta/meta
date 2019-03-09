@@ -8,7 +8,7 @@ class Line: NSView {
         super.init(frame: .zero)
         translatesAutoresizingMaskIntoConstraints = false
         wantsLayer = true
-        layer!.backgroundColor = NSColor.shade.cgColor
+        layer!.backgroundColor = NSColor.shade.withAlphaComponent(0.6).cgColor
         isHidden = true
         
         height = heightAnchor.constraint(equalToConstant: 0)

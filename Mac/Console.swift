@@ -1,6 +1,6 @@
 import AppKit
 
-class Console: NSView {
+class Console: NSScrollView {
     static let shared = Console()
     private weak var height: NSLayoutConstraint!
     private let open = CGFloat(180)
@@ -8,14 +8,31 @@ class Console: NSView {
     private init() {
         super.init(frame: .zero)
         translatesAutoresizingMaskIntoConstraints = false
-        wantsLayer = true
-        layer!.backgroundColor = NSColor.shade.withAlphaComponent(0.4).cgColor
-        
+        backgroundColor = NSColor.shade.withAlphaComponent(0.4)
+        documentView = {
+            $0.drawsBackground = false
+            $0.isRichText = false
+            $0.font = .light(12)
+            $0.textContainerInset = NSSize(width: 10, height: 10)
+            $0.isVerticallyResizable = true
+            $0.isHorizontallyResizable = true
+            $0.isEditable = false
+            return $0
+        } (NSTextView())
+        hasVerticalScroller = true
+        verticalScroller!.controlSize = .mini
+        horizontalScrollElasticity = .none
+        verticalScrollElasticity = .allowed
         height = heightAnchor.constraint(equalToConstant: open)
         height.isActive = true
     }
     
     required init?(coder: NSCoder) { return nil }
+    
+    func log(_ message: String) {
+        (documentView as! NSTextView).string += "\n" + message
+        (documentView as! NSTextView).scrollRangeToVisible(NSMakeRange((documentView as! NSTextView).string.count, 0))
+    }
     
     @objc func toggle() {
         Menu.shared.console.state = Bar.shared.console.state == .on ? .on : .off

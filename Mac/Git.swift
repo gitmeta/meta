@@ -1,17 +1,19 @@
+import meta
 import AppKit
 
 class Git: NSView {
     static let shared = Git()
+    private let git = meta.Git()
     
     private init() {
         super.init(frame: .zero)
         translatesAutoresizingMaskIntoConstraints = false
         
-        let status = button("status", target: self, action: #selector(App.shared.close))
-        let commit = button("commit", target: self, action: #selector(App.shared.close))
-        let reset = button("reset", target: self, action: #selector(App.shared.close))
-        let pull = button("pull", target: self, action: #selector(App.shared.close))
-        let push = button("push", target: self, action: #selector(App.shared.close))
+        let status = button("status", target: self, action: #selector(self.status))
+        let commit = button("commit", target: self, action: #selector(self.commit))
+        let reset = button("reset", target: self, action: #selector(self.reset))
+        let pull = button("pull", target: self, action: #selector(self.pull))
+        let push = button("push", target: self, action: #selector(self.push))
         
         heightAnchor.constraint(equalToConstant: 60).isActive = true
         
@@ -34,4 +36,10 @@ class Git: NSView {
             return $0
         } (Link(text, background: .shade, text: .halo, font: .systemFont(ofSize: 11, weight: .medium), target: target, action: action))
     }
+    
+    @objc private func status() { Console.shared.log(git.status(App.shared.user)) }
+    @objc private func commit() { Console.shared.log(git.commit(App.shared.user)) }
+    @objc private func reset() { Console.shared.log(git.reset(App.shared.user)) }
+    @objc private func pull() { Console.shared.log(git.pull(App.shared.user)) }
+    @objc private func push() { Console.shared.log(git.push(App.shared.user)) }
 }

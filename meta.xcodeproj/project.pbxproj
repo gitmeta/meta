@@ -75,6 +75,7 @@
 		20592A7D222EAE6000EAFD63 /* Ruler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20592A7C222EAE6000EAFD63 /* Ruler.swift */; };
 		20592A7F222EBB4600EAFD63 /* Display.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20592A7E222EBB4600EAFD63 /* Display.swift */; };
 		20592A81222ED6EA00EAFD63 /* Gradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20592A80222ED6EA00EAFD63 /* Gradient.swift */; };
+		207C003C223566AC004CFEBC /* Git.swift in Sources */ = {isa = PBXBuildFile; fileRef = 207C003B223566AC004CFEBC /* Git.swift */; };
 		20921CE8222BD6A0007FDB7A /* Sheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20921CE7222BD6A0007FDB7A /* Sheet.swift */; };
 		20A70CB9222D383B001AE4E8 /* List.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A70CB8222D383B001AE4E8 /* List.swift */; };
 		20A70CBB222D3B15001AE4E8 /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A70CBA222D3B15001AE4E8 /* Document.swift */; };
@@ -199,6 +200,7 @@
 		20592A7C222EAE6000EAFD63 /* Ruler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ruler.swift; sourceTree = "<group>"; };
 		20592A7E222EBB4600EAFD63 /* Display.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Display.swift; sourceTree = "<group>"; };
 		20592A80222ED6EA00EAFD63 /* Gradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gradient.swift; sourceTree = "<group>"; };
+		207C003B223566AC004CFEBC /* Git.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Git.swift; sourceTree = "<group>"; };
 		20921CE7222BD6A0007FDB7A /* Sheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sheet.swift; sourceTree = "<group>"; };
 		20A70CB8222D383B001AE4E8 /* List.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = List.swift; sourceTree = "<group>"; };
 		20A70CBA222D3B15001AE4E8 /* Document.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Document.swift; sourceTree = "<group>"; };
@@ -377,6 +379,7 @@
 				20366C6D22293BDD009A2FB3 /* Image.swift */,
 				20366C6F22293BDD009A2FB3 /* Md.swift */,
 				20366C7222293BDD009A2FB3 /* Pdf.swift */,
+				207C003B223566AC004CFEBC /* Git.swift */,
 				20366C7322293BDD009A2FB3 /* Shell.swift */,
 				20366C6A22293BDD009A2FB3 /* Storage.swift */,
 				20366C6E22293BDD009A2FB3 /* User.swift */,
@@ -677,6 +680,7 @@
 				20366C7C22293BDD009A2FB3 /* Image.swift in Sources */,
 				20366C8022293BDD009A2FB3 /* Md.swift in Sources */,
 				20366C7822293BDD009A2FB3 /* Directory.swift in Sources */,
+				207C003C223566AC004CFEBC /* Git.swift in Sources */,
 				20A70CC4222D6EAD001AE4E8 /* Exception.swift in Sources */,
 				20366C7E22293BDD009A2FB3 /* User.swift in Sources */,
 				20366C7A22293BDD009A2FB3 /* Folder.swift in Sources */,

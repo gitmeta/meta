@@ -3,7 +3,8 @@ import AppKit
 class Console: NSScrollView {
     static let shared = Console()
     private weak var height: NSLayoutConstraint!
-    private let open = CGFloat(180)
+    private let open = CGFloat(250)
+    private let format = DateFormatter()
     
     private init() {
         super.init(frame: .zero)
@@ -13,6 +14,7 @@ class Console: NSScrollView {
             $0.drawsBackground = false
             $0.isRichText = false
             $0.font = .light(12)
+            $0.textColor = NSColor(white: 1, alpha: 0.7)
             $0.textContainerInset = NSSize(width: 10, height: 10)
             $0.isVerticallyResizable = true
             $0.isHorizontallyResizable = true
@@ -25,12 +27,14 @@ class Console: NSScrollView {
         verticalScrollElasticity = .allowed
         height = heightAnchor.constraint(equalToConstant: open)
         height.isActive = true
+        format.dateStyle = .none
+        format.timeStyle = .medium
     }
     
     required init?(coder: NSCoder) { return nil }
     
     func log(_ message: String) {
-        (documentView as! NSTextView).string += "\n" + message
+        (documentView as! NSTextView).string += format.string(from: Date()) + " " + message + "\n"
         (documentView as! NSTextView).scrollRangeToVisible(NSMakeRange((documentView as! NSTextView).string.count, 0))
     }
     

@@ -2,7 +2,7 @@ public class Git {
     public init() { }
     
     public func status(_ user: User) -> String {
-        return try! Shell.message("git config --global user.name", location: user.bookmark.first!.0) + ":"
+        return try! Shell.message("git config --list", location: user.bookmark.first!.0) + ":"
             + (try! Shell.message("git config --global user.email", location: user.bookmark.first!.0)) + "\n"
             + (try! Shell.message("git status", location: user.bookmark.first!.0)) + "\n"
     }

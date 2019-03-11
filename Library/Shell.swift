@@ -16,6 +16,7 @@ class Shell {
             process.currentDirectoryPath = location?.absoluteString ?? String()
             process.launch()
         }
+        process.waitUntilExit()
         return {
             $0.last == "\n" ? String($0.dropLast()) : $0
         } (String(decoding: pipe.fileHandleForReading.readDataToEndOfFile(), as: UTF8.self))

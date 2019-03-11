@@ -1,22 +1,22 @@
 import Foundation
 
 class Shell {
-    @discardableResult class func message(_ string: String, location: URL? = nil) throws -> String {
+    @discardableResult class func message(_ string: String, location: URL) throws -> String {
         let process = Process()
         let pipe = Pipe()
         process.arguments = string.components(separatedBy: " ")
         process.standardOutput = pipe
         process.standardError = pipe
         process.environment = ProcessInfo.processInfo.environment
-        process.environment!["HOME"] = NSHomeDirectory()
-        print(process.environment)
+        process.environment!["HOME"] = "/Users/" + NSUserName()
+//        process.environment = [:]
         if #available(OSX 10.13, *) {
             process.executableURL = URL(fileURLWithPath: "/usr/bin/env")
-            process.currentDirectoryURL = location ?? URL(fileURLWithPath: NSHomeDirectory())
+            process.currentDirectoryURL = location
             try process.run()
         } else {
             process.launchPath = "/usr/bin/env"
-            process.currentDirectoryPath = location?.absoluteString ?? String()
+            process.currentDirectoryPath = location.path
             process.launch()
         }
         process.waitUntilExit()

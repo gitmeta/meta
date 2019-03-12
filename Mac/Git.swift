@@ -12,7 +12,6 @@ class Git: NSView {
     private let git = meta.Git()
     private let open = CGFloat(50)
     
-    
     private init() {
         super.init(frame: .zero)
         translatesAutoresizingMaskIntoConstraints = false
@@ -23,7 +22,7 @@ class Git: NSView {
         icon.imageScaling = .scaleNone
         addSubview(icon)
         
-        let activate = link(.local("Git.activate"), target: self, action: #selector(self.status))
+        let activate = link(.local("Git.activate"), target: self, action: #selector(self.activate))
         statusLink = link("status", target: self, action: #selector(self.status))
         commitLink = link("commit", target: self, action: #selector(self.commit))
         resetLink = link("reset", target: self, action: #selector(self.reset))
@@ -46,6 +45,18 @@ class Git: NSView {
     
     required init?(coder: NSCoder) { return nil }
     
+    var enabled: Bool {
+        get { return false }
+        set {
+            [statusLink, commitLink, resetLink, pullLink, pushLink].forEach {
+                $0.isEnabled = newValue
+            }
+            [Menu.shared.gitStatus, Menu.shared.gitCommit, Menu.shared.gitReset, Menu.shared.gitPush, Menu.shared.gitPull].forEach {
+                $0.isEnabled = newValue
+            }
+        }
+    }
+    
     @objc func toggle() {
         Menu.shared.git.state = Bar.shared.git.state == .on ? .on : .off
         height.constant = Bar.shared.git.state == .on ? open : 0
@@ -56,6 +67,28 @@ class Git: NSView {
         }) { }
     }
     
+    @objc func activate() { Activate() }
+    
+    @objc func status() {
+        DispatchQueue.global(qos: .background).async { Console.shared.log(self.git.status(App.shared.user)) }
+    }
+    
+    @objc func commit() {
+        DispatchQueue.global(qos: .background).async { Console.shared.log(self.git.commit(App.shared.user)) }
+    }
+    
+    @objc func reset() {
+        DispatchQueue.global(qos: .background).async { Console.shared.log(self.git.reset(App.shared.user)) }
+    }
+    
+    @objc func pull() {
+        DispatchQueue.global(qos: .background).async { Console.shared.log(self.git.pull(App.shared.user)) }
+    }
+    
+    @objc func push() {
+        DispatchQueue.global(qos: .background).async { Console.shared.log(self.git.push(App.shared.user)) }
+    }
+    
     private func link(_ text: String, target: AnyObject, action: Selector) -> Link {
         return {
             $0.width.constant = 70
@@ -64,26 +97,6 @@ class Git: NSView {
             addSubview($0)
             $0.topAnchor.constraint(equalTo: topAnchor, constant: 14).isActive = true
             return $0
-        } (Link(text, background: .shade, text: .halo, font: .systemFont(ofSize: 12, weight: .medium), target: target, action: action))
-    }
-    
-    @objc private func status() {
-        DispatchQueue.global(qos: .background).async { Console.shared.log(self.git.status(App.shared.user)) }
-    }
-    
-    @objc private func commit() {
-        DispatchQueue.global(qos: .background).async { Console.shared.log(self.git.commit(App.shared.user)) }
-    }
-    
-    @objc private func reset() {
-        DispatchQueue.global(qos: .background).async { Console.shared.log(self.git.reset(App.shared.user)) }
-    }
-    
-    @objc private func pull() {
-        DispatchQueue.global(qos: .background).async { Console.shared.log(self.git.pull(App.shared.user)) }
-    }
-    
-    @objc private func push() {
-        DispatchQueue.global(qos: .background).async { Console.shared.log(self.git.push(App.shared.user)) }
+            } (Link(text, background: .shade, text: .halo, font: .systemFont(ofSize: 12, weight: .medium), target: target, action: action))
     }
 }

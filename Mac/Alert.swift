@@ -10,12 +10,14 @@ class Alert {
         Exception.fileAlreadyExists: .local("Alert.fileAlreadyExists"),
         Exception.folderNotFound: .local("Alert.folderNotFound"),
         Exception.fileNoExists: .local("Alert.fileNoExists"),
+        Exception.invalidHome: .local("Alert.invalidHome"),
         Exception.unknown: .local("Alert.unknown")]
     
     private init() { }
+    func add(_ error: Error) { add(messages[error as? Exception] ?? .local("Alert.unknown")) }
     
-    func add(_ error: Error) {
-        alert.append(messages[error as? Exception] ?? .local("Alert.unknown"))
+    func add(_ message: String) {
+        alert.append(message)
         DispatchQueue.main.async { if self.view === nil { self.pop() } }
     }
     
@@ -28,7 +30,7 @@ class Alert {
         view.title = String()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.wantsLayer = true
-        view.layer!.backgroundColor = NSColor(red: 0.84, green: 0.87, blue: 0.9, alpha: 0.97).cgColor
+        view.layer!.backgroundColor = NSColor.halo.cgColor
         view.layer!.cornerRadius = 4
         view.alphaValue = 0
         App.shared.contentView!.addSubview(view)
@@ -55,7 +57,7 @@ class Alert {
             view.alphaValue = 1
             App.shared.contentView!.layoutSubtreeIfNeeded()
         }) {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 8) { [weak view] in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 5) { [weak view] in
                 if view != nil && view === self.view {
                     self.remove()
                 }

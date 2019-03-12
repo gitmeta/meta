@@ -47,21 +47,23 @@ import StoreKit
         
         DispatchQueue.global(qos: .background).async {
             self.user = User.load()
-            if let data = self.user.access?.data {
+            [self.user.access?.data, self.user.home?.data].forEach {
+                guard $0 != nil else { return }
                 var stale = false
-                _ = (try! URL(resolvingBookmarkData: data, options: .withSecurityScope, bookmarkDataIsStale: &stale))
+                _ = (try! URL(resolvingBookmarkData: $0!, options: .withSecurityScope, bookmarkDataIsStale: &stale))
                     .startAccessingSecurityScopedResource()
             }
             self.user.ask = { if #available(OSX 10.14, *) { SKStoreReviewController.requestReview() } }
             DispatchQueue.main.async {
                 List.shared.update()
-                if self.user.welcome { Menu.shared.openWelcome() }
+                if self.user.welcome { List.shared.select() }
             }
         }
     }
     
     func state() {
         Bar.shared.new.isEnabled = user?.access != nil
+        Git.shared.enabled = user?.home != nil
         Bar.shared.close.isEnabled = List.shared.selected != nil
         Bar.shared.delete.isEnabled = List.shared.selected != nil
         Menu.shared.fileNew.isEnabled = Bar.shared.new.isEnabled

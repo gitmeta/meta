@@ -9,7 +9,12 @@ class Menu: NSMenu {
     @IBOutlet private weak var fileOpen: NSMenuItem!
     @IBOutlet private(set) weak var fileClose: NSMenuItem!
     @IBOutlet private(set) weak var fileDelete: NSMenuItem!
-    @IBOutlet private weak var welcome: NSMenuItem!
+    @IBOutlet private(set) weak var gitStatus: NSMenuItem!
+    @IBOutlet private(set) weak var gitCommit: NSMenuItem!
+    @IBOutlet private(set) weak var gitReset: NSMenuItem!
+    @IBOutlet private(set) weak var gitPush: NSMenuItem!
+    @IBOutlet private(set) weak var gitPull: NSMenuItem!
+    @IBOutlet private weak var activate: NSMenuItem!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -32,11 +37,24 @@ class Menu: NSMenu {
         fileClose.target = App.shared
         fileClose.action = #selector(App.shared.shut)
         
-        welcome.target = self
-        welcome.action = #selector(openWelcome)
+        gitStatus.target = Git.shared
+        gitStatus.action = #selector(Git.shared.status)
+        
+        gitCommit.target = Git.shared
+        gitCommit.action = #selector(Git.shared.commit)
+        
+        gitReset.target = Git.shared
+        gitReset.action = #selector(Git.shared.reset)
+        
+        gitPush.target = Git.shared
+        gitPush.action = #selector(Git.shared.push)
+        
+        gitPull.target = Git.shared
+        gitPull.action = #selector(Git.shared.pull)
+        
+        activate.target = Git.shared
+        activate.action = #selector(Git.shared.activate)
     }
-    
-    @objc func openWelcome() { Welcome() }
     
     @objc private func toggleSidebar() {
         Bar.shared.sidebar.state = Bar.shared.sidebar.state == .on ? .off : .on

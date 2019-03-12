@@ -97,18 +97,7 @@ class List: NSScrollView {
         }) { }
     }
     
-    @objc func select() {
-        let panel = NSOpenPanel()
-        panel.canChooseFiles = false
-        panel.canChooseDirectories = true
-        panel.message = .local("List.open")
-        panel.begin {
-            if $0 == .OK {
-                App.shared.user.access = Access(panel.url!)
-                App.shared.clear()
-            }
-        }
-    }
+    @objc func select() { Welcome() }
     
     private func render(_ documents: [meta.Document],
                         origin: NSLayoutYAxisAnchor, margin: CGFloat, parent: Document?) -> Document? {

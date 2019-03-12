@@ -68,20 +68,14 @@
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="zZP-PG-oUo"/>
-                                        <menuItem title="Status" id="U0X-aX-h2G">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                        <menuItem title="Status" keyEquivalent="S" id="U0X-aX-h2G"/>
+                                        <menuItem title="Commit" keyEquivalent="C" id="QwG-0M-lAC"/>
+                                        <menuItem title="Reset" keyEquivalent="R" id="Rfq-vL-RX9"/>
+                                        <menuItem title="Push" keyEquivalent="" id="FxV-0n-XMg">
+                                            <modifierMask key="keyEquivalentModifierMask" shift="YES" command="YES"/>
                                         </menuItem>
-                                        <menuItem title="Commit" id="QwG-0M-lAC">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                        </menuItem>
-                                        <menuItem title="Reset" id="Rfq-vL-RX9">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                        </menuItem>
-                                        <menuItem title="Push" id="FxV-0n-XMg">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                        </menuItem>
-                                        <menuItem title="Pull" id="B3T-xF-qd0">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                        <menuItem title="Pull" keyEquivalent="" id="B3T-xF-qd0">
+                                            <modifierMask key="keyEquivalentModifierMask" shift="YES" command="YES"/>
                                         </menuItem>
                                     </items>
                                 </menu>
@@ -321,9 +315,6 @@
                                         <menuItem title="Console" state="on" keyEquivalent="c" id="9zq-iQ-Fyh">
                                             <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
                                         </menuItem>
-                                        <menuItem title="Welcome" id="CMj-lC-Xea">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                        </menuItem>
                                         <menuItem isSeparatorItem="YES" id="eu3-7i-yIM"/>
                                         <menuItem title="Bring All to Front" id="LE2-aR-0XJ">
                                             <modifierMask key="keyEquivalentModifierMask"/>
@@ -348,14 +339,19 @@
                             </menuItem>
                         </items>
                         <connections>
+                            <outlet property="activate" destination="nTN-Gf-qSe" id="xSY-xe-UGN"/>
                             <outlet property="console" destination="9zq-iQ-Fyh" id="wxT-gR-cz1"/>
                             <outlet property="fileClose" destination="DVo-aG-piG" id="gFy-Pu-bww"/>
                             <outlet property="fileDelete" destination="pxx-59-PXV" id="F81-CP-JUK"/>
                             <outlet property="fileNew" destination="Was-JA-tGl" id="XjI-Wu-hb7"/>
                             <outlet property="fileOpen" destination="IAo-SY-fd9" id="H6K-Dd-oEs"/>
                             <outlet property="git" destination="PpU-0T-Vol" id="JrQ-d4-amj"/>
+                            <outlet property="gitCommit" destination="QwG-0M-lAC" id="TZC-YG-eis"/>
+                            <outlet property="gitPull" destination="B3T-xF-qd0" id="PQt-vF-8hn"/>
+                            <outlet property="gitPush" destination="FxV-0n-XMg" id="hOJ-Qx-D0W"/>
+                            <outlet property="gitReset" destination="Rfq-vL-RX9" id="e4H-Px-092"/>
+                            <outlet property="gitStatus" destination="U0X-aX-h2G" id="6je-Du-wdU"/>
                             <outlet property="sidebar" destination="gef-zJ-q5g" id="Vcr-7Z-yhu"/>
-                            <outlet property="welcome" destination="CMj-lC-Xea" id="YyP-xn-IMl"/>
                         </connections>
                     </menu>
                 </application>

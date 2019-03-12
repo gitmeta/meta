@@ -65,8 +65,19 @@ class Console: NSView {
                     .font: NSFont.light(12), .foregroundColor: NSColor(white: 1, alpha: 0.75)]))
                 return $0
             } (NSMutableAttributedString()))
-            self.text.scrollRangeToVisible(NSMakeRange(self.text.string.count, 0))
+            DispatchQueue.main.async {
+                self.scroll()
+            }
         }
+        
+    }
+    
+    private func scroll() {
+        NSAnimationContext.runAnimationGroup({ context in
+            context.duration = 0.4
+            context.allowsImplicitAnimation = true
+            text.scrollRangeToVisible(NSMakeRange(text.textStorage!.length, 0))
+        }) { }
     }
     
     @objc func toggle() {

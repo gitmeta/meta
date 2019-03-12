@@ -1,3 +1,4 @@
+import meta
 import AppKit
 
 class Welcome: Sheet {
@@ -8,6 +9,12 @@ class Welcome: Sheet {
         image.translatesAutoresizingMaskIntoConstraints = false
         image.imageScaling = .scaleNone
         addSubview(image)
+        
+        let title = Label(.local("Welcome.title"), color: .white, font: .systemFont(ofSize: 20, weight: .bold))
+        addSubview(title)
+        
+        let info = Label(.local("Welcome.info"), color: .white, font: .systemFont(ofSize: 16, weight: .ultraLight))
+        addSubview(info)
         
         let open = Link(.local("Welcome.select"), background: .halo, text: .black, target: self, action: #selector(self.open))
         open.keyEquivalent = "\r"
@@ -26,14 +33,21 @@ class Welcome: Sheet {
                          font: .systemFont(ofSize: 14, weight: .light))
         addSubview(show)
         
-        image.centerXAnchor.constraint(equalTo: centerXAnchor, constant: -65).isActive = true
-        image.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        image.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        image.bottomAnchor.constraint(equalTo: centerYAnchor, constant: -100).isActive = true
         
-        open.centerYAnchor.constraint(equalTo: image.centerYAnchor, constant: -10).isActive = true
-        open.leftAnchor.constraint(equalTo: image.rightAnchor, constant: 10).isActive = true
+        title.topAnchor.constraint(equalTo: image.bottomAnchor, constant: 40).isActive = true
+        title.leftAnchor.constraint(equalTo: info.leftAnchor).isActive = true
         
-        cancel.centerXAnchor.constraint(equalTo: open.centerXAnchor).isActive = true
-        cancel.topAnchor.constraint(equalTo: open.bottomAnchor, constant: 5).isActive = true
+        info.topAnchor.constraint(equalTo: title.bottomAnchor, constant: 5).isActive = true
+        info.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        
+        open.topAnchor.constraint(equalTo: info.bottomAnchor, constant: 40).isActive = true
+        open.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        open.width.constant = 220
+        
+        cancel.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        cancel.topAnchor.constraint(equalTo: open.bottomAnchor, constant: 10).isActive = true
         
         check.leftAnchor.constraint(equalTo: leftAnchor, constant: 20).isActive = true
         check.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20).isActive = true
@@ -45,8 +59,17 @@ class Welcome: Sheet {
     required init?(coder: NSCoder) { return nil }
     
     @objc private func open() {
-        List.shared.select()
-        close()
+        let panel = NSOpenPanel()
+        panel.canChooseFiles = false
+        panel.canChooseDirectories = true
+        panel.begin {
+            if $0 == .OK {
+                App.shared.user.access = Access(panel.url!)
+                App.shared.clear()
+                self.close()
+                Alert.shared.add(.local("Welcome.ready"))
+            }
+        }
     }
     
     @objc private func check(_ button: Button) {

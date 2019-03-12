@@ -53,10 +53,36 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="File" autoenablesItems="NO" id="bib-Uj-vzu">
                                     <items>
-                                        <menuItem title="Open…" keyEquivalent="o" id="IAo-SY-fd9"/>
+                                        <menuItem title="Directory" keyEquivalent="o" id="IAo-SY-fd9"/>
                                         <menuItem title="New" keyEquivalent="n" id="Was-JA-tGl"/>
                                         <menuItem title="Close" keyEquivalent="w" id="DVo-aG-piG"/>
                                         <menuItem title="Delete" keyEquivalent="d" id="pxx-59-PXV"/>
+                                    </items>
+                                </menu>
+                            </menuItem>
+                            <menuItem title="Git" id="tyh-KG-OVW">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="Git" autoenablesItems="NO" id="3pD-3D-LPL">
+                                    <items>
+                                        <menuItem title="Configure" id="nTN-Gf-qSe">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="zZP-PG-oUo"/>
+                                        <menuItem title="Status" id="U0X-aX-h2G">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                        </menuItem>
+                                        <menuItem title="Commit" id="QwG-0M-lAC">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                        </menuItem>
+                                        <menuItem title="Reset" id="Rfq-vL-RX9">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                        </menuItem>
+                                        <menuItem title="Push" id="FxV-0n-XMg">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                        </menuItem>
+                                        <menuItem title="Pull" id="B3T-xF-qd0">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                        </menuItem>
                                     </items>
                                 </menu>
                             </menuItem>
@@ -288,8 +314,13 @@
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="kIS-P4-7N0"/>
-                                        <menuItem title="Sidebar" state="on" keyEquivalent="l" id="gef-zJ-q5g"/>
-                                        <menuItem title="Console" state="on" keyEquivalent="C" id="9zq-iQ-Fyh"/>
+                                        <menuItem title="Bar" state="on" keyEquivalent="l" id="gef-zJ-q5g"/>
+                                        <menuItem title="Git" state="on" keyEquivalent="g" id="PpU-0T-Vol">
+                                            <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
+                                        </menuItem>
+                                        <menuItem title="Console" state="on" keyEquivalent="c" id="9zq-iQ-Fyh">
+                                            <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
+                                        </menuItem>
                                         <menuItem title="Welcome" id="CMj-lC-Xea">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                         </menuItem>
@@ -322,6 +353,7 @@
                             <outlet property="fileDelete" destination="pxx-59-PXV" id="F81-CP-JUK"/>
                             <outlet property="fileNew" destination="Was-JA-tGl" id="XjI-Wu-hb7"/>
                             <outlet property="fileOpen" destination="IAo-SY-fd9" id="H6K-Dd-oEs"/>
+                            <outlet property="git" destination="PpU-0T-Vol" id="JrQ-d4-amj"/>
                             <outlet property="sidebar" destination="gef-zJ-q5g" id="Vcr-7Z-yhu"/>
                             <outlet property="welcome" destination="CMj-lC-Xea" id="YyP-xn-IMl"/>
                         </connections>

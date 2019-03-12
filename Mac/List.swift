@@ -46,7 +46,7 @@ class List: NSScrollView {
     
     func update() {
         guard let name = App.shared.user.access?.url.lastPathComponent else { return }
-        App.shared.state = .folder
+        App.shared.state()
         title.stringValue = name
         folder.documents(App.shared.user) {
             guard let last = self.render($0, origin: self.topAnchor, margin: 80, parent: nil) else { return }

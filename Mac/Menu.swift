@@ -3,6 +3,7 @@ import AppKit
 class Menu: NSMenu {
     static private(set) weak var shared: Menu!
     @IBOutlet private(set) weak var sidebar: NSMenuItem!
+    @IBOutlet private(set) weak var git: NSMenuItem!
     @IBOutlet private(set) weak var console: NSMenuItem!
     @IBOutlet private(set) weak var fileNew: NSMenuItem!
     @IBOutlet private weak var fileOpen: NSMenuItem!
@@ -15,6 +16,9 @@ class Menu: NSMenu {
         Menu.shared = self
         sidebar.target = self
         sidebar.action = #selector(toggleSidebar)
+        
+        git.target = self
+        git.action = #selector(toggleGit)
         
         console.target = self
         console.action = #selector(toggleConsole)
@@ -37,6 +41,11 @@ class Menu: NSMenu {
     @objc private func toggleSidebar() {
         Bar.shared.sidebar.state = Bar.shared.sidebar.state == .on ? .off : .on
         List.shared.toggle()
+    }
+    
+    @objc private func toggleGit() {
+        Bar.shared.git.state = Bar.shared.git.state == .on ? .off : .on
+        Git.shared.toggle()
     }
     
     @objc private func toggleConsole() {

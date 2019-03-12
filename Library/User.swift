@@ -3,6 +3,8 @@ import Foundation
 public class User: Codable {
     public var welcome = true { didSet { save() } }
     public var ask: (() -> Void)?
+    public var access: Access? { didSet { save() } }
+    public var home: Access? { didSet { save() } }
     var rate = Date()
     var created = Date()
     
@@ -21,6 +23,7 @@ public class User: Codable {
     public required init(from: Decoder) throws {
         let container = try from.container(keyedBy: Keys.self)
         access = try? container.decode(Access.self, forKey: .access)
+        home = try? container.decode(Access.self, forKey: .home)
         rate = try container.decode(Date.self, forKey: .rate)
         created = try container.decode(Date.self, forKey: .created)
         welcome = try container.decode(Bool.self, forKey: .welcome)
@@ -29,25 +32,25 @@ public class User: Codable {
     public func encode(to: Encoder) throws {
         var container = to.container(keyedBy: Keys.self)
         try container.encode(access, forKey: .access)
+        try container.encode(home, forKey: .home)
         try container.encode(rate, forKey: .rate)
         try container.encode(created, forKey: .created)
         try container.encode(welcome, forKey: .welcome)
     }
     
-    public var access: Access? { didSet {
+    private func save() {
         if Date() >= rate {
             var components = DateComponents()
             components.month = 4
             rate = Calendar.current.date(byAdding: components, to: Date())!
             DispatchQueue.main.async { [weak self] in self?.ask?() }
         }
-        save()
-    } }
-    
-    private func save() { Storage.shared.save(self) }
+        Storage.shared.save(self)
+    }
     
     private enum Keys: CodingKey {
         case access
+        case home
         case rate
         case created
         case welcome

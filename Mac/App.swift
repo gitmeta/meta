@@ -3,13 +3,6 @@ import AppKit
 import StoreKit
 
 @NSApplicationMain class App: NSWindow, NSApplicationDelegate {
-    enum State {
-        case none
-        case welcomed
-        case folder
-        case document
-    }
-    
     static private(set) weak var shared: App!
     private(set) var user: User!
     
@@ -35,22 +28,22 @@ import StoreKit
         List.shared.leftAnchor.constraint(equalTo: contentView!.leftAnchor).isActive = true
         
         Git.shared.bottomAnchor.constraint(equalTo: Console.shared.topAnchor).isActive = true
-        Git.shared.widthAnchor.constraint(equalTo: List.shared.widthAnchor).isActive = true
-        Git.shared.rightAnchor.constraint(equalTo: List.shared.rightAnchor).isActive = true
+        Git.shared.leftAnchor.constraint(equalTo: contentView!.leftAnchor).isActive = true
+        Git.shared.rightAnchor.constraint(equalTo: contentView!.rightAnchor).isActive = true
         
         Console.shared.bottomAnchor.constraint(equalTo: contentView!.bottomAnchor).isActive = true
         Console.shared.leftAnchor.constraint(equalTo: contentView!.leftAnchor).isActive = true
         Console.shared.rightAnchor.constraint(equalTo: contentView!.rightAnchor).isActive = true
         
         Bar.shared.topAnchor.constraint(equalTo: contentView!.topAnchor).isActive = true
-        Bar.shared.bottomAnchor.constraint(equalTo: Console.shared.topAnchor).isActive = true
+        Bar.shared.bottomAnchor.constraint(equalTo: Git.shared.topAnchor).isActive = true
         Bar.shared.leftAnchor.constraint(equalTo: List.shared.rightAnchor).isActive = true
         
         Display.shared.topAnchor.constraint(equalTo: contentView!.topAnchor).isActive = true
-        Display.shared.bottomAnchor.constraint(equalTo: Console.shared.topAnchor).isActive = true
+        Display.shared.bottomAnchor.constraint(equalTo: Git.shared.topAnchor).isActive = true
         Display.shared.leftAnchor.constraint(equalTo: Bar.shared.rightAnchor).isActive = true
         Display.shared.rightAnchor.constraint(equalTo: contentView!.rightAnchor).isActive = true
-        state = .welcomed
+        state()
         
         DispatchQueue.global(qos: .background).async {
             self.user = User.load()
@@ -67,50 +60,26 @@ import StoreKit
         }
     }
     
-    var state = State.none { didSet {
-        switch state {
-        case .none:
-            Bar.shared.new.isEnabled = false
-            Bar.shared.close.isEnabled = false
-            Bar.shared.delete.isEnabled = false
-            Menu.shared.fileNew.isEnabled = false
-            Menu.shared.fileClose.isEnabled = false
-            Menu.shared.fileDelete.isEnabled = false
-        case .welcomed:
-            Bar.shared.new.isEnabled = false
-            Bar.shared.close.isEnabled = false
-            Bar.shared.delete.isEnabled = false
-            Menu.shared.fileNew.isEnabled = false
-            Menu.shared.fileClose.isEnabled = false
-            Menu.shared.fileDelete.isEnabled = false
-        case .folder:
-            Bar.shared.new.isEnabled = true
-            Bar.shared.close.isEnabled = false
-            Bar.shared.delete.isEnabled = false
-            Menu.shared.fileNew.isEnabled = true
-            Menu.shared.fileClose.isEnabled = false
-            Menu.shared.fileDelete.isEnabled = false
-        case .document:
-            Bar.shared.new.isEnabled = true
-            Bar.shared.close.isEnabled = true
-            Bar.shared.delete.isEnabled = true
-            Menu.shared.fileNew.isEnabled = true
-            Menu.shared.fileClose.isEnabled = true
-            Menu.shared.fileDelete.isEnabled = true
-        }
-    } }
+    func state() {
+        Bar.shared.new.isEnabled = user?.access != nil
+        Bar.shared.close.isEnabled = List.shared.selected != nil
+        Bar.shared.delete.isEnabled = List.shared.selected != nil
+        Menu.shared.fileNew.isEnabled = Bar.shared.new.isEnabled
+        Menu.shared.fileClose.isEnabled = Bar.shared.close.isEnabled
+        Menu.shared.fileDelete.isEnabled = Bar.shared.delete.isEnabled
+    }
     
     func clear() {
-        state = .none
         Display.shared.clear()
         List.shared.clear()
         List.shared.update()
+        state()
     }
     
     @objc func shut() {
-        state = .folder
         Display.shared.clear()
         List.shared.selected = nil
+        state()
     }
     
     @objc func delete() { Delete() }

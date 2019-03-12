@@ -1,7 +1,6 @@
 import Foundation
 
 public class User: Codable {
-    public var folder: String? { return bookmark.first?.key.lastPathComponent }
     public var welcome = true { didSet { save() } }
     public var ask: (() -> Void)?
     var rate = Date()
@@ -21,7 +20,7 @@ public class User: Codable {
     
     public required init(from: Decoder) throws {
         let container = try from.container(keyedBy: Keys.self)
-        bookmark = try container.decode([URL: Data].self, forKey: .bookmark)
+        access = try? container.decode(Access.self, forKey: .access)
         rate = try container.decode(Date.self, forKey: .rate)
         created = try container.decode(Date.self, forKey: .created)
         welcome = try container.decode(Bool.self, forKey: .welcome)
@@ -29,13 +28,13 @@ public class User: Codable {
     
     public func encode(to: Encoder) throws {
         var container = to.container(keyedBy: Keys.self)
-        try container.encode(bookmark, forKey: .bookmark)
+        try container.encode(access, forKey: .access)
         try container.encode(rate, forKey: .rate)
         try container.encode(created, forKey: .created)
         try container.encode(welcome, forKey: .welcome)
     }
     
-    public var bookmark = [URL: Data]() { didSet {
+    public var access: Access? { didSet {
         if Date() >= rate {
             var components = DateComponents()
             components.month = 4
@@ -48,7 +47,7 @@ public class User: Codable {
     private func save() { Storage.shared.save(self) }
     
     private enum Keys: CodingKey {
-        case bookmark
+        case access
         case rate
         case created
         case welcome

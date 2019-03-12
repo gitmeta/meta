@@ -10,6 +10,8 @@
 		2005CD5522293F9D00B6972D /* libmeta.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 20366C9F22293D59009A2FB3 /* libmeta.a */; };
 		2005CD5822293FAE00B6972D /* libmeta.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 20366C9F22293D59009A2FB3 /* libmeta.a */; };
 		2005CD5B22293FB900B6972D /* libmeta.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 20366C9E22293D20009A2FB3 /* libmeta.a */; };
+		20079147223788D90086976A /* Access.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20079146223788D90086976A /* Access.swift */; };
+		20079148223788D90086976A /* Access.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20079146223788D90086976A /* Access.swift */; };
 		200A3391222D13450055F364 /* iOS.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 200A3390222D13450055F364 /* iOS.xcassets */; };
 		201CE1E1222E5AD5007AE422 /* Create.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201CE1E0222E5AD5007AE422 /* Create.swift */; };
 		201CE1E3222E7432007AE422 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201CE1E2222E7432007AE422 /* Alert.swift */; };
@@ -137,6 +139,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		20079146223788D90086976A /* Access.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Access.swift; sourceTree = "<group>"; };
 		200A3390222D13450055F364 /* iOS.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = iOS.xcassets; sourceTree = "<group>"; };
 		201CE1E0222E5AD5007AE422 /* Create.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Create.swift; sourceTree = "<group>"; };
 		201CE1E2222E7432007AE422 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
@@ -371,15 +374,16 @@
 		20366C6922293BDD009A2FB3 /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				20079146223788D90086976A /* Access.swift */,
 				20366C6B22293BDD009A2FB3 /* Directory.swift */,
 				20366C7122293BDD009A2FB3 /* Document.swift */,
 				20366C7022293BDD009A2FB3 /* Editable.swift */,
 				20A70CC2222D6EAD001AE4E8 /* Exception.swift */,
 				20366C6C22293BDD009A2FB3 /* Folder.swift */,
+				207C003B223566AC004CFEBC /* Git.swift */,
 				20366C6D22293BDD009A2FB3 /* Image.swift */,
 				20366C6F22293BDD009A2FB3 /* Md.swift */,
 				20366C7222293BDD009A2FB3 /* Pdf.swift */,
-				207C003B223566AC004CFEBC /* Git.swift */,
 				20366C7322293BDD009A2FB3 /* Shell.swift */,
 				20366C6A22293BDD009A2FB3 /* Storage.swift */,
 				20366C6E22293BDD009A2FB3 /* User.swift */,
@@ -655,6 +659,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				20079147223788D90086976A /* Access.swift in Sources */,
 				20366C8322293BDD009A2FB3 /* Document.swift in Sources */,
 				20366C8122293BDD009A2FB3 /* Editable.swift in Sources */,
 				20366C7522293BDD009A2FB3 /* Storage.swift in Sources */,
@@ -681,6 +686,7 @@
 				20366C8022293BDD009A2FB3 /* Md.swift in Sources */,
 				20366C7822293BDD009A2FB3 /* Directory.swift in Sources */,
 				207C003C223566AC004CFEBC /* Git.swift in Sources */,
+				20079148223788D90086976A /* Access.swift in Sources */,
 				20A70CC4222D6EAD001AE4E8 /* Exception.swift in Sources */,
 				20366C7E22293BDD009A2FB3 /* User.swift in Sources */,
 				20366C7A22293BDD009A2FB3 /* Folder.swift in Sources */,

@@ -4,8 +4,14 @@ import AppKit
 class Git: NSView {
     static let shared = Git()
     private weak var height: NSLayoutConstraint!
+    private weak var statusLink: Link!
+    private weak var commitLink: Link!
+    private weak var resetLink: Link!
+    private weak var pullLink: Link!
+    private weak var pushLink: Link!
     private let git = meta.Git()
     private let open = CGFloat(50)
+    
     
     private init() {
         super.init(frame: .zero)
@@ -17,12 +23,12 @@ class Git: NSView {
         icon.imageScaling = .scaleNone
         addSubview(icon)
         
-        let set = button("Set", target: self, action: #selector(self.status))
-        let status = button("status", target: self, action: #selector(self.status))
-        let commit = button("commit", target: self, action: #selector(self.commit))
-        let reset = button("reset", target: self, action: #selector(self.reset))
-        let pull = button("pull", target: self, action: #selector(self.pull))
-        let push = button("push", target: self, action: #selector(self.push))
+        let activate = link(.local("Git.activate"), target: self, action: #selector(self.status))
+        statusLink = link("status", target: self, action: #selector(self.status))
+        commitLink = link("commit", target: self, action: #selector(self.commit))
+        resetLink = link("reset", target: self, action: #selector(self.reset))
+        pullLink = link("pull", target: self, action: #selector(self.pull))
+        pushLink = link("push", target: self, action: #selector(self.push))
         
         height = heightAnchor.constraint(equalToConstant: open)
         height.isActive = true
@@ -32,7 +38,7 @@ class Git: NSView {
         icon.heightAnchor.constraint(equalToConstant: open).isActive = true
         
         var right = leftAnchor
-        [icon, set, status, commit, reset, pull, push].forEach {
+        [icon, activate, statusLink!, commitLink!, resetLink!, pullLink!, pushLink!].forEach {
             $0.leftAnchor.constraint(equalTo: right, constant: 4).isActive = true
             right = $0.rightAnchor
         }
@@ -50,9 +56,9 @@ class Git: NSView {
         }) { }
     }
     
-    private func button(_ text: String, target: AnyObject, action: Selector) -> Link {
+    private func link(_ text: String, target: AnyObject, action: Selector) -> Link {
         return {
-            $0.width.constant = 68
+            $0.width.constant = 70
             $0.height.constant = 22
             $0.layer!.cornerRadius = 2
             addSubview($0)
@@ -61,9 +67,23 @@ class Git: NSView {
         } (Link(text, background: .shade, text: .halo, font: .systemFont(ofSize: 12, weight: .medium), target: target, action: action))
     }
     
-    @objc private func status() { Console.shared.log(git.status(App.shared.user)) }
-    @objc private func commit() { Console.shared.log(git.commit(App.shared.user)) }
-    @objc private func reset() { Console.shared.log(git.reset(App.shared.user)) }
-    @objc private func pull() { Console.shared.log(git.pull(App.shared.user)) }
-    @objc private func push() { Console.shared.log(git.push(App.shared.user)) }
+    @objc private func status() {
+        DispatchQueue.global(qos: .background).async { Console.shared.log(self.git.status(App.shared.user)) }
+    }
+    
+    @objc private func commit() {
+        DispatchQueue.global(qos: .background).async { Console.shared.log(self.git.commit(App.shared.user)) }
+    }
+    
+    @objc private func reset() {
+        DispatchQueue.global(qos: .background).async { Console.shared.log(self.git.reset(App.shared.user)) }
+    }
+    
+    @objc private func pull() {
+        DispatchQueue.global(qos: .background).async { Console.shared.log(self.git.pull(App.shared.user)) }
+    }
+    
+    @objc private func push() {
+        DispatchQueue.global(qos: .background).async { Console.shared.log(self.git.push(App.shared.user)) }
+    }
 }

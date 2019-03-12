@@ -64,7 +64,7 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="Git" autoenablesItems="NO" id="3pD-3D-LPL">
                                     <items>
-                                        <menuItem title="Configure" id="nTN-Gf-qSe">
+                                        <menuItem title="Activate" id="nTN-Gf-qSe">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="zZP-PG-oUo"/>

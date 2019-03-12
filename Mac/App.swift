@@ -54,7 +54,7 @@ import StoreKit
         
         DispatchQueue.global(qos: .background).async {
             self.user = User.load()
-            if let data = self.user.bookmark.first?.1 {
+            if let data = self.user.access?.data {
                 var stale = false
                 _ = (try! URL(resolvingBookmarkData: data, options: .withSecurityScope, bookmarkDataIsStale: &stale))
                     .startAccessingSecurityScopedResource()

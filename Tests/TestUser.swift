@@ -40,7 +40,7 @@ class TestUser: XCTestCase {
     func testUpdateBookmarkSaves() {
         let expect = expectation(description: String())
         storage.saved = { expect.fulfill() }
-        User().bookmark = [:]
+        User().access = nil
         waitForExpectations(timeout: 1)
     }
     
@@ -56,7 +56,7 @@ class TestUser: XCTestCase {
         let user = User()
         user.rate = Date()
         user.ask = { expect.fulfill() }
-        user.bookmark = [:]
+        user.access = nil
         var components = DateComponents()
         components.month = 3
         XCTAssertLessThan(Calendar.current.date(byAdding: components, to: Date())!, user.rate)
@@ -72,29 +72,29 @@ class TestUser: XCTestCase {
             expect.fulfill()
         }
         DispatchQueue.global(qos: .background).async {
-            user.bookmark = [:]
+            user.access = nil
         }
         waitForExpectations(timeout: 1)
     }
     
     func testEncode() {
         let user = User()
-        user.bookmark = [URL(fileURLWithPath:"/"): Data()]
-        user.created = Date(timeIntervalSince1970:0)
-        user.rate = Date(timeIntervalSince1970:1000)
+        user.access = Access(URL(fileURLWithPath: "/"))
+        user.created = Date(timeIntervalSince1970: 0)
+        user.rate = Date(timeIntervalSince1970: 1000)
         user.welcome = false
         XCTAssertEqual("""
-{"created":-978307200,"bookmark":["file:\\/\\/\\/",""],"welcome":false,"rate":-978306200}
+{"created":-978307200,"access":{"url":"file:\\/\\/\\/","data":"Ym9va7wBAAAAAAQQMAAAAD0Kw8DfhjxLTH+UeMiX9hOR1ZJHtc9C9z2vlnN4aSN83AAAAAQAAAADAwAAAAgAKAAAAAABBgAADAAAAAEBAABNYWNpbnRvc2ggSEQIAAAAAAQAAEHA5oVqAw5zGAAAAAECAAAKAAAAAAAAAA8AAAAAAAAAAAAAAAAAAAAIAAAAAQkAAGZpbGU6Ly8vCAAAAAQDAAAAUAZeOgAAACQAAAABAQAAOUEzQ0Y1QjgtRTdDMC00QThFLUI4QzEtQkNBQzRFMjJCMjVCGAAAAAECAACBAAAAAQAAAO8TAAABAAAAAAAAAAAAAAABAAAAAQEAAC8AAAAAAAAAAQUAAKgAAAD+\\/\\/\\/\\/AQAAAAAAAAANAAAABBAAABAAAAAAAAAAEBAAADwAAAAAAAAAIBAAABgAAAAAAAAAQBAAACwAAAAAAAAAAiAAAMgAAAAAAAAABSAAAFwAAAAAAAAAECAAABgAAAAAAAAAESAAAHwAAAAAAAAAEiAAAGwAAAAAAAAAEyAAACwAAAAAAAAAICAAAKgAAAAAAAAAMCAAANQAAAAAAAAAENAAAAQAAAAAAAAA"},"welcome":false,"rate":-978306200}
 """, String(decoding: try JSONEncoder().encode(user), as: UTF8.self))
     }
     
     func testDecode() {
         let decoded = try! JSONDecoder().decode(User.self, from: Data("""
-{"rate":-978306200,"created":-978307200,"bookmark":["file:\\/\\/\\/",""],"welcome":false}
+{"rate":-978306200,"created":-978307200,"access":{"url":"file:\\/\\/\\/","data":""},"welcome":false}
 """.utf8))
-        XCTAssertEqual([URL(fileURLWithPath:"/"): Data()], decoded.bookmark)
-        XCTAssertEqual(Date(timeIntervalSince1970:0), decoded.created)
-        XCTAssertEqual(Date(timeIntervalSince1970:1000), decoded.rate)
+        XCTAssertEqual(URL(fileURLWithPath: "/"), decoded.access?.url)
+        XCTAssertEqual(Date(timeIntervalSince1970: 0), decoded.created)
+        XCTAssertEqual(Date(timeIntervalSince1970: 1000), decoded.rate)
         XCTAssertEqual(false, decoded.welcome)
     }
 }

@@ -1,7 +1,7 @@
 import Foundation
 
 class Shell {
-    @discardableResult class func message(_ string: String, location: URL) throws -> String {
+    @discardableResult class func message(_ string: String, location: URL? = nil) throws -> String {
         let process = Process()
         let pipe = Pipe()
         process.arguments = string.components(separatedBy: " ")
@@ -12,11 +12,11 @@ class Shell {
 //        process.environment = [:]
         if #available(OSX 10.13, *) {
             process.executableURL = URL(fileURLWithPath: "/usr/bin/env")
-            process.currentDirectoryURL = location
+            process.currentDirectoryURL = location ?? URL(fileURLWithPath: NSHomeDirectory())
             try process.run()
         } else {
             process.launchPath = "/usr/bin/env"
-            process.currentDirectoryPath = location.path
+            process.currentDirectoryPath = location?.absoluteString ?? String()
             process.launch()
         }
         process.waitUntilExit()

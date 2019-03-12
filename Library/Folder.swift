@@ -11,7 +11,7 @@ public class Folder {
     }
     
     public func documents(_ user: User, result: @escaping(([Document]) -> Void)) {
-        user.bookmark.first?.0 == nil ? result([]) : documents(user.bookmark.first!.0, result: result)
+        user.access == nil ? result([]) : documents(user.access!.url, result: result)
     }
     
     public func documents(_ url: URL, result: @escaping(([Document]) -> Void)) {
@@ -24,11 +24,11 @@ public class Folder {
     }
     
     public func create(_ name: String, user: User) throws {
-        guard user.bookmark.first?.0 != nil
+        guard user.access != nil
             else { throw Exception.folderNotFound }
-        guard !FileManager.default.fileExists(atPath: user.bookmark.first!.0.appendingPathComponent(name).path)
+        guard !FileManager.default.fileExists(atPath: user.access!.url.appendingPathComponent(name).path)
             else { throw Exception.fileAlreadyExists }
-        try Data().write(to: user.bookmark.first!.0.appendingPathComponent(name))
+        try Data().write(to: user.access!.url.appendingPathComponent(name))
     }
     
     public func delete(_ document: Document) throws {

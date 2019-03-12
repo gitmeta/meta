@@ -45,7 +45,7 @@ class List: NSScrollView {
     }
     
     func update() {
-        guard let name = App.shared.user.folder else { return }
+        guard let name = App.shared.user.access?.url.lastPathComponent else { return }
         App.shared.state = .folder
         title.stringValue = name
         folder.documents(App.shared.user) {
@@ -104,7 +104,7 @@ class List: NSScrollView {
         panel.message = .local("List.open")
         panel.begin {
             if $0 == .OK {
-                App.shared.user.bookmark = [panel.url!: try! panel.url!.bookmarkData(options: .withSecurityScope)]
+                App.shared.user.access = Access(panel.url!)
                 App.shared.clear()
             }
         }

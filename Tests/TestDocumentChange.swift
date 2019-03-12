@@ -11,7 +11,7 @@ class TestDocumentChange: XCTestCase {
         Storage.shared = storage
         user = User()
         folder = Folder()
-        user.bookmark = [URL(fileURLWithPath: NSTemporaryDirectory()) : Data()]
+        user.access = Access(URL(fileURLWithPath: NSTemporaryDirectory()))
         clear()
     }
     

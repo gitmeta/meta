@@ -1,7 +1,7 @@
 import Foundation
 
 public class Folder {
-    var timeout = TimeInterval(3)
+    var timeout = TimeInterval(1)
     private(set) var queue = [Editable]()
     private let timer = DispatchSource.makeTimerSource(queue: .global(qos: .background))
     

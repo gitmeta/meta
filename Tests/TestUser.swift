@@ -84,6 +84,20 @@ class TestUser: XCTestCase {
         waitForExpectations(timeout: 1)
     }
     
+    func testInvalidHome() {
+        XCTAssertThrowsError(try User().update(URL(fileURLWithPath: "/")))
+        XCTAssertThrowsError(try User().update(URL(fileURLWithPath: "/Users/")))
+        XCTAssertThrowsError(try User().update(URL(fileURLWithPath: "/Users/test/alpha")))
+        XCTAssertThrowsError(try User().update(URL(fileURLWithPath: "/test/Users/alpha")))
+    }
+    
+    func testValidHome() {
+        let user = User()
+        let url = URL(fileURLWithPath: "/Users/test")
+        XCTAssertNoThrow(try user.update(url))
+        XCTAssertEqual(url, user.home?.url)
+    }
+    
     func testEncode() {
         let user = User()
         user.welcome = false

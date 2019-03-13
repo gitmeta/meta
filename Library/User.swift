@@ -4,7 +4,7 @@ public class User: Codable {
     public var welcome = true { didSet { save() } }
     public var ask: (() -> Void)?
     public var access: Access? { didSet { save() } }
-    public var home: Access? { didSet { save() } }
+    public internal(set) var home: Access? { didSet { save() } }
     var rate = Date()
     var created = Date()
     
@@ -36,6 +36,30 @@ public class User: Codable {
         try container.encode(rate, forKey: .rate)
         try container.encode(created, forKey: .created)
         try container.encode(welcome, forKey: .welcome)
+    }
+    
+    public func update(_ home: URL) throws {
+        try {
+            if $0.count == 2,
+                $0[1].count > 0,
+                $0[1].components(separatedBy: "/").count == 1,
+                $0[0].components(separatedBy: "/").count == 1 {
+                self.home = Access(home)
+            } else {
+                throw Exception.invalidHome
+            }
+        } (home.path.components(separatedBy: "/Users/"))
+        /*
+        if $0.count == 2,
+            $0[1].count > 0 {
+            App.shared.user.home = Access(panel.url!)
+            App.shared.state()
+            self.close()
+            Alert.shared.add(.local("Activate.ready"))
+        } else {
+            Alert.shared.add(Exception.invalidHome)
+        }
+        } (panel.url!.path.components(separatedBy: "/Users/"))*/
     }
     
     private func save() {

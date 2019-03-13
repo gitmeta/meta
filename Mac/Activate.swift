@@ -61,17 +61,14 @@ class Activate: Sheet {
         panel.canChooseDirectories = true
         panel.begin {
             if $0 == .OK {
-                {
-                    if $0.count == 2,
-                        $0[1].count > 0 {
-                        App.shared.user.home = Access(panel.url!)
-                        App.shared.state()
-                        self.close()
-                        Alert.shared.add(.local("Activate.ready"))
-                    } else {
-                        Alert.shared.add(Exception.invalidHome)
-                    }
-                } (panel.url!.path.components(separatedBy: "/Users/"))
+                do {
+                    try App.shared.user.update(panel.url!)
+                    App.shared.state()
+                    self.close()
+                    Alert.shared.add(.local("Activate.ready"))
+                } catch {
+                    Alert.shared.add(error)
+                }
             }
         }
     }

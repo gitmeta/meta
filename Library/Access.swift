@@ -5,7 +5,7 @@ public struct Access: Codable {
     public let data: Data
     
     public init(_ url: URL) {
-        data = try! url.bookmarkData(options: .withSecurityScope)
+        data = (try? url.bookmarkData(options: .withSecurityScope)) ?? Data()
         self.url = url
     }
 }

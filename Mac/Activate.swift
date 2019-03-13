@@ -64,8 +64,8 @@ class Activate: Sheet {
                 do {
                     try App.shared.user.update(panel.url!)
                     App.shared.state()
-                    self.close()
                     Alert.shared.add(.local("Activate.ready"))
+                    self.close()
                 } catch {
                     Alert.shared.add(error)
                 }

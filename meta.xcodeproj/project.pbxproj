@@ -89,6 +89,8 @@
 		20ABA348223262D400C1A8AA /* Welcome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20ABA347223262D400C1A8AA /* Welcome.swift */; };
 		20ABA34A22326E2400C1A8AA /* Help.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20ABA34922326E2400C1A8AA /* Help.swift */; };
 		20ABA34C223272E600C1A8AA /* Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20ABA34B223272E600C1A8AA /* Line.swift */; };
+		20B4C5FB2238E791006FA61C /* User+Access.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B4C5FA2238E791006FA61C /* User+Access.swift */; };
+		20B4C5FD2238E7AC006FA61C /* TestUser_Access.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B4C5FC2238E7AC006FA61C /* TestUser_Access.swift */; };
 		20B5EFB4222AC14A00C12B49 /* Help.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B5EFB3222AC14A00C12B49 /* Help.swift */; };
 		20BD161A2229456C00B8EFDF /* Mac.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 20BD16192229456C00B8EFDF /* Mac.xcassets */; };
 		20BD161D22294F8E00B8EFDF /* Display.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20BD161C22294F8E00B8EFDF /* Display.swift */; };
@@ -215,6 +217,8 @@
 		20ABA347223262D400C1A8AA /* Welcome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Welcome.swift; sourceTree = "<group>"; };
 		20ABA34922326E2400C1A8AA /* Help.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Help.swift; sourceTree = "<group>"; };
 		20ABA34B223272E600C1A8AA /* Line.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Line.swift; sourceTree = "<group>"; };
+		20B4C5FA2238E791006FA61C /* User+Access.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+Access.swift"; sourceTree = "<group>"; };
+		20B4C5FC2238E7AC006FA61C /* TestUser_Access.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUser_Access.swift; sourceTree = "<group>"; };
 		20B5EFB3222AC14A00C12B49 /* Help.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Help.swift; sourceTree = "<group>"; };
 		20BD16192229456C00B8EFDF /* Mac.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Mac.xcassets; sourceTree = "<group>"; };
 		20BD161B2229472200B8EFDF /* meta.sketch */ = {isa = PBXFileReference; lastKnownFileType = file; path = meta.sketch; sourceTree = "<group>"; };
@@ -370,6 +374,7 @@
 				20366C6122293BCF009A2FB3 /* TestShell.swift */,
 				20366C6222293BCF009A2FB3 /* TestStorage.swift */,
 				20366C5D22293BCF009A2FB3 /* TestUser.swift */,
+				20B4C5FC2238E7AC006FA61C /* TestUser_Access.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -390,6 +395,7 @@
 				20366C7322293BDD009A2FB3 /* Shell.swift */,
 				20366C6A22293BDD009A2FB3 /* Storage.swift */,
 				20366C6E22293BDD009A2FB3 /* User.swift */,
+				20B4C5FA2238E791006FA61C /* User+Access.swift */,
 			);
 			path = Library;
 			sourceTree = "<group>";
@@ -687,6 +693,7 @@
 				20366C7622293BDD009A2FB3 /* Storage.swift in Sources */,
 				20366C8622293BDD009A2FB3 /* Pdf.swift in Sources */,
 				20366C7C22293BDD009A2FB3 /* Image.swift in Sources */,
+				20B4C5FB2238E791006FA61C /* User+Access.swift in Sources */,
 				20366C8022293BDD009A2FB3 /* Md.swift in Sources */,
 				20366C7822293BDD009A2FB3 /* Directory.swift in Sources */,
 				207C003C223566AC004CFEBC /* Git.swift in Sources */,
@@ -707,6 +714,7 @@
 				20366C6722293BCF009A2FB3 /* TestShell.swift in Sources */,
 				20A70CC1222D6D7D001AE4E8 /* TestDocumentChange.swift in Sources */,
 				20366C6422293BCF009A2FB3 /* TestFolder.swift in Sources */,
+				20B4C5FD2238E7AC006FA61C /* TestUser_Access.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

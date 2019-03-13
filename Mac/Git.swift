@@ -70,7 +70,20 @@ class Git: NSView {
     @objc func activate() { Activate() }
     
     @objc func status() {
-        DispatchQueue.global(qos: .background).async { Console.shared.log(self.git.status(App.shared.user)) }
+        //DispatchQueue.global(qos: .background).async { Console.shared.log(self.git.status(App.shared.user)) }
+        
+        
+        let connection = NSXPCConnection(serviceName: "meta.Shell")
+        connection.remoteObjectInterface = NSXPCInterface(with: Shell.self)
+        connection.resume()
+        
+        let service = connection.remoteObjectProxyWithErrorHandler { error in
+            print("Received error:", error.localizedDescription)
+            } as! Shell
+        service.hello{
+            print($0)
+        }
+        print("service \(service)")
     }
     
     @objc func commit() {

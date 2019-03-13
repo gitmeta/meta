@@ -14,7 +14,6 @@ class Menu: NSMenu {
     @IBOutlet private(set) weak var gitReset: NSMenuItem!
     @IBOutlet private(set) weak var gitPush: NSMenuItem!
     @IBOutlet private(set) weak var gitPull: NSMenuItem!
-    @IBOutlet private weak var activate: NSMenuItem!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -51,9 +50,6 @@ class Menu: NSMenu {
         
         gitPull.target = Git.shared
         gitPull.action = #selector(Git.shared.pull)
-        
-        activate.target = Git.shared
-        activate.action = #selector(Git.shared.activate)
     }
     
     @objc private func toggleSidebar() {

@@ -64,10 +64,6 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="Git" autoenablesItems="NO" id="3pD-3D-LPL">
                                     <items>
-                                        <menuItem title="Activate" id="nTN-Gf-qSe">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                        </menuItem>
-                                        <menuItem isSeparatorItem="YES" id="zZP-PG-oUo"/>
                                         <menuItem title="Status" keyEquivalent="S" id="U0X-aX-h2G"/>
                                         <menuItem title="Commit" keyEquivalent="C" id="QwG-0M-lAC"/>
                                         <menuItem title="Reset" keyEquivalent="R" id="Rfq-vL-RX9"/>
@@ -339,7 +335,6 @@
                             </menuItem>
                         </items>
                         <connections>
-                            <outlet property="activate" destination="nTN-Gf-qSe" id="xSY-xe-UGN"/>
                             <outlet property="console" destination="9zq-iQ-Fyh" id="wxT-gR-cz1"/>
                             <outlet property="fileClose" destination="DVo-aG-piG" id="gFy-Pu-bww"/>
                             <outlet property="fileDelete" destination="pxx-59-PXV" id="F81-CP-JUK"/>

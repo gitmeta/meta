@@ -1,5 +1,5 @@
 import Foundation
 
-let delegate = Bash()
-NSXPCListener.service().delegate = delegate
+let listener = Shell()
+NSXPCListener.service().delegate = listener
 NSXPCListener.service().resume()

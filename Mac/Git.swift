@@ -1,4 +1,5 @@
 import meta
+import Shell
 import AppKit
 
 class Git: NSView {
@@ -9,10 +10,16 @@ class Git: NSView {
     private weak var resetLink: Link!
     private weak var pullLink: Link!
     private weak var pushLink: Link!
+    private let shell: Service
     private let git = meta.Git()
     private let open = CGFloat(50)
     
     private init() {
+        let service = NSXPCConnection(serviceName: "meta.Shell")
+        service.remoteObjectInterface = NSXPCInterface(with: Service.self)
+        service.resume()
+        shell = service.remoteObjectProxyWithErrorHandler { fatalError($0.localizedDescription) } as! Service
+        
         super.init(frame: .zero)
         translatesAutoresizingMaskIntoConstraints = false
         
@@ -22,7 +29,6 @@ class Git: NSView {
         icon.imageScaling = .scaleNone
         addSubview(icon)
         
-        let activate = link(.local("Git.activate"), target: self, action: #selector(self.activate))
         statusLink = link("status", target: self, action: #selector(self.status))
         commitLink = link("commit", target: self, action: #selector(self.commit))
         resetLink = link("reset", target: self, action: #selector(self.reset))
@@ -37,25 +43,13 @@ class Git: NSView {
         icon.heightAnchor.constraint(equalToConstant: open).isActive = true
         
         var right = leftAnchor
-        [icon, activate, statusLink!, commitLink!, resetLink!, pullLink!, pushLink!].forEach {
+        [icon, statusLink!, commitLink!, resetLink!, pullLink!, pushLink!].forEach {
             $0.leftAnchor.constraint(equalTo: right, constant: 4).isActive = true
             right = $0.rightAnchor
         }
     }
     
     required init?(coder: NSCoder) { return nil }
-    
-    var enabled: Bool {
-        get { return false }
-        set {
-            [statusLink, commitLink, resetLink, pullLink, pushLink].forEach {
-                $0.isEnabled = newValue
-            }
-            [Menu.shared.gitStatus, Menu.shared.gitCommit, Menu.shared.gitReset, Menu.shared.gitPush, Menu.shared.gitPull].forEach {
-                $0.isEnabled = newValue
-            }
-        }
-    }
     
     @objc func toggle() {
         Menu.shared.git.state = Bar.shared.git.state == .on ? .on : .off
@@ -67,44 +61,15 @@ class Git: NSView {
         }) { }
     }
     
-    @objc func activate() { Activate() }
-    
-    @objc func status() {
-        //DispatchQueue.global(qos: .background).async { Console.shared.log(self.git.status(App.shared.user)) }
-        
-        
-        let connection = NSXPCConnection(serviceName: "meta.Shell")
-        connection.remoteObjectInterface = NSXPCInterface(with: Shell.self)
-        connection.resume()
-        
-        let service = connection.remoteObjectProxyWithErrorHandler { error in
-            print("Received error:", error.localizedDescription)
-            } as! Shell
-        service.hello{
-            print($0)
-        }
-        print("service \(service)")
-    }
-    
-    @objc func commit() {
-        DispatchQueue.global(qos: .background).async { Console.shared.log(self.git.commit(App.shared.user)) }
-    }
-    
-    @objc func reset() {
-        DispatchQueue.global(qos: .background).async { Console.shared.log(self.git.reset(App.shared.user)) }
-    }
-    
-    @objc func pull() {
-        DispatchQueue.global(qos: .background).async { Console.shared.log(self.git.pull(App.shared.user)) }
-    }
-    
-    @objc func push() {
-        DispatchQueue.global(qos: .background).async { Console.shared.log(self.git.push(App.shared.user)) }
-    }
+    @objc func status() { shell.status(App.shared.user.access!.url) { Console.shared.log($0) } }
+    @objc func commit() { shell.commit(App.shared.user.access!.url) { Console.shared.log($0) } }
+    @objc func reset() { shell.reset(App.shared.user.access!.url) { Console.shared.log($0) } }
+    @objc func pull() { shell.pull(App.shared.user.access!.url) { Console.shared.log($0) } }
+    @objc func push() { shell.push(App.shared.user.access!.url) { Console.shared.log($0) } }
     
     private func link(_ text: String, target: AnyObject, action: Selector) -> Link {
         return {
-            $0.width.constant = 70
+            $0.width.constant = 64
             $0.height.constant = 22
             $0.layer!.cornerRadius = 2
             addSubview($0)

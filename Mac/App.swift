@@ -58,7 +58,6 @@ import StoreKit
     
     func state() {
         Bar.shared.new.isEnabled = user?.access != nil
-        Git.shared.enabled = user?.home != nil
         Bar.shared.close.isEnabled = List.shared.selected != nil
         Bar.shared.delete.isEnabled = List.shared.selected != nil
         Menu.shared.fileNew.isEnabled = Bar.shared.new.isEnabled

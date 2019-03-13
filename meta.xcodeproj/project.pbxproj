@@ -98,12 +98,11 @@
 		20BD16292229624F00B8EFDF /* Create.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20BD16282229624F00B8EFDF /* Create.swift */; };
 		20BD162B2229660800B8EFDF /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20BD162A2229660800B8EFDF /* Menu.swift */; };
 		20DCEA8922314E280005B61D /* Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20DCEA8822314E280005B61D /* Line.swift */; };
-		20E670BE223918FF00F682EF /* Shell.m in Sources */ = {isa = PBXBuildFile; fileRef = 20E670BD223918FF00F682EF /* Shell.m */; };
 		20E670C4223918FF00F682EF /* Shell.xpc in Embed XPC Services */ = {isa = PBXBuildFile; fileRef = 20E670B9223918FF00F682EF /* Shell.xpc */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		20E670CA223919AE00F682EF /* Shell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E670C9223919AE00F682EF /* Shell.swift */; };
 		20E670CC22391B8600F682EF /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E670CB22391B8600F682EF /* main.swift */; };
-		20E670CD2239211900F682EF /* Shell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E670C9223919AE00F682EF /* Shell.swift */; };
-		20F1B5112237D32900028F9D /* Activate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20F1B5102237D32900028F9D /* Activate.swift */; };
+		20E670CF2239253100F682EF /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E670CE2239253100F682EF /* Service.swift */; };
+		20E670D1223928FF00F682EF /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E670D0223928FF00F682EF /* Message.swift */; };
 		20F242F72233E35C006C26DF /* Delete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20F242F62233E35C006C26DF /* Delete.swift */; };
 		20F242F92233ED3F006C26DF /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20F242F82233ED3F006C26DF /* Alert.swift */; };
 		20F242FB223406BF006C26DF /* Git.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20F242FA223406BF006C26DF /* Git.swift */; };
@@ -251,13 +250,11 @@
 		20BD162A2229660800B8EFDF /* Menu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
 		20DCEA8822314E280005B61D /* Line.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Line.swift; sourceTree = "<group>"; };
 		20E670B9223918FF00F682EF /* Shell.xpc */ = {isa = PBXFileReference; explicitFileType = "wrapper.xpc-service"; includeInIndex = 0; path = Shell.xpc; sourceTree = BUILT_PRODUCTS_DIR; };
-		20E670BB223918FF00F682EF /* ShellProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShellProtocol.h; sourceTree = "<group>"; };
-		20E670BC223918FF00F682EF /* Shell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Shell.h; sourceTree = "<group>"; };
-		20E670BD223918FF00F682EF /* Shell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Shell.m; sourceTree = "<group>"; };
 		20E670C1223918FF00F682EF /* Shell.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Shell.plist; sourceTree = "<group>"; };
 		20E670C9223919AE00F682EF /* Shell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shell.swift; sourceTree = "<group>"; };
 		20E670CB22391B8600F682EF /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
-		20F1B5102237D32900028F9D /* Activate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Activate.swift; sourceTree = "<group>"; };
+		20E670CE2239253100F682EF /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
+		20E670D0223928FF00F682EF /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		20F242F62233E35C006C26DF /* Delete.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Delete.swift; sourceTree = "<group>"; };
 		20F242F82233ED3F006C26DF /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		20F242FA223406BF006C26DF /* Git.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Git.swift; sourceTree = "<group>"; };
@@ -370,7 +367,6 @@
 				20366C3722293BBF009A2FB3 /* Mac.entitlements */,
 				20366C3F22293BBF009A2FB3 /* Mac.plist */,
 				20366C3A22293BBF009A2FB3 /* Mac.storyboard */,
-				20F1B5102237D32900028F9D /* Activate.swift */,
 				20F242F82233ED3F006C26DF /* Alert.swift */,
 				20366C4422293BBF009A2FB3 /* App.swift */,
 				20366C3B22293BBF009A2FB3 /* Bar.swift */,
@@ -454,11 +450,10 @@
 		20E670BA223918FF00F682EF /* Shell */ = {
 			isa = PBXGroup;
 			children = (
-				20E670BB223918FF00F682EF /* ShellProtocol.h */,
-				20E670BC223918FF00F682EF /* Shell.h */,
-				20E670BD223918FF00F682EF /* Shell.m */,
-				20E670CB22391B8600F682EF /* main.swift */,
 				20E670C1223918FF00F682EF /* Shell.plist */,
+				20E670CB22391B8600F682EF /* main.swift */,
+				20E670D0223928FF00F682EF /* Message.swift */,
+				20E670CE2239253100F682EF /* Service.swift */,
 				20E670C9223919AE00F682EF /* Shell.swift */,
 			);
 			path = Shell;
@@ -689,7 +684,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				20F1B5112237D32900028F9D /* Activate.swift in Sources */,
 				20F242F72233E35C006C26DF /* Delete.swift in Sources */,
 				20366C5022293BBF009A2FB3 /* Image.swift in Sources */,
 				20366C5922293BBF009A2FB3 /* Text.swift in Sources */,
@@ -701,7 +695,6 @@
 				20B5EFB4222AC14A00C12B49 /* Help.swift in Sources */,
 				20366C9822293BE8009A2FB3 /* Shared.swift in Sources */,
 				20366C5122293BBF009A2FB3 /* Extensions.swift in Sources */,
-				20E670CD2239211900F682EF /* Shell.swift in Sources */,
 				20366C5822293BBF009A2FB3 /* App.swift in Sources */,
 				20BD162B2229660800B8EFDF /* Menu.swift in Sources */,
 				20366C5622293BBF009A2FB3 /* Layout.swift in Sources */,
@@ -807,8 +800,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				20E670CA223919AE00F682EF /* Shell.swift in Sources */,
+				20E670CF2239253100F682EF /* Service.swift in Sources */,
 				20E670CC22391B8600F682EF /* main.swift in Sources */,
-				20E670BE223918FF00F682EF /* Shell.m in Sources */,
+				20E670D1223928FF00F682EF /* Message.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

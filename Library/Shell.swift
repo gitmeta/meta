@@ -7,9 +7,6 @@ class Shell {
         process.arguments = string.components(separatedBy: " ")
         process.standardOutput = pipe
         process.standardError = pipe
-        process.environment = ProcessInfo.processInfo.environment
-        process.environment!["HOME"] = "/Users/" + NSUserName()
-//        process.environment = [:]
         if #available(OSX 10.13, *) {
             process.executableURL = URL(fileURLWithPath: "/usr/bin/env")
             process.currentDirectoryURL = location ?? URL(fileURLWithPath: NSHomeDirectory())

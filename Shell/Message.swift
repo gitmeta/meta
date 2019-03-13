@@ -8,8 +8,6 @@ class Message {
             process.arguments = string.components(separatedBy: " ")
             process.standardOutput = pipe
             process.standardError = pipe
-            response(ProcessInfo.processInfo.environment["PATH"]!)
-            return
             if #available(OSX 10.13, *) {
                 process.executableURL = URL(fileURLWithPath: "/usr/bin/env")
                 process.currentDirectoryURL = location

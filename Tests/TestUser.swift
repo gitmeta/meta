@@ -44,13 +44,6 @@ class TestUser: XCTestCase {
         waitForExpectations(timeout: 1)
     }
     
-    func testUpdateHomeSaves() {
-        let expect = expectation(description: String())
-        storage.saved = { expect.fulfill() }
-        User().home = nil
-        waitForExpectations(timeout: 1)
-    }
-    
     func testUpdateWelcomeSaves() {
         let expect = expectation(description: String())
         storage.saved = { expect.fulfill() }
@@ -84,38 +77,22 @@ class TestUser: XCTestCase {
         waitForExpectations(timeout: 1)
     }
     
-    func testInvalidHome() {
-        XCTAssertThrowsError(try User().update(URL(fileURLWithPath: "/")))
-        XCTAssertThrowsError(try User().update(URL(fileURLWithPath: "/Users/")))
-        XCTAssertThrowsError(try User().update(URL(fileURLWithPath: "/Users/test/alpha")))
-        XCTAssertThrowsError(try User().update(URL(fileURLWithPath: "/test/Users/alpha")))
-    }
-    
-    func testValidHome() {
-        let user = User()
-        let url = URL(fileURLWithPath: "/Users/test")
-        XCTAssertNoThrow(try user.update(url))
-        XCTAssertEqual(url, user.home?.url)
-    }
-    
     func testEncode() {
         let user = User()
         user.welcome = false
         user.access = Access(URL(fileURLWithPath: "/"))
-        user.home = Access(URL(fileURLWithPath: "/"))
         user.created = Date(timeIntervalSince1970: 0)
         user.rate = Date(timeIntervalSince1970: 1000)
         XCTAssertEqual("""
-{"home":{"url":"file:\\/\\/\\/","data":"Ym9va7wBAAAAAAQQMAAAAD0Kw8DfhjxLTH+UeMiX9hOR1ZJHtc9C9z2vlnN4aSN83AAAAAQAAAADAwAAAAgAKAAAAAABBgAADAAAAAEBAABNYWNpbnRvc2ggSEQIAAAAAAQAAEHA5oVqAw5zGAAAAAECAAAKAAAAAAAAAA8AAAAAAAAAAAAAAAAAAAAIAAAAAQkAAGZpbGU6Ly8vCAAAAAQDAAAAUAZeOgAAACQAAAABAQAAOUEzQ0Y1QjgtRTdDMC00QThFLUI4QzEtQkNBQzRFMjJCMjVCGAAAAAECAACBAAAAAQAAAO8TAAABAAAAAAAAAAAAAAABAAAAAQEAAC8AAAAAAAAAAQUAAKgAAAD+\\/\\/\\/\\/AQAAAAAAAAANAAAABBAAABAAAAAAAAAAEBAAADwAAAAAAAAAIBAAABgAAAAAAAAAQBAAACwAAAAAAAAAAiAAAMgAAAAAAAAABSAAAFwAAAAAAAAAECAAABgAAAAAAAAAESAAAHwAAAAAAAAAEiAAAGwAAAAAAAAAEyAAACwAAAAAAAAAICAAAKgAAAAAAAAAMCAAANQAAAAAAAAAENAAAAQAAAAAAAAA"},"access":{"url":"file:\\/\\/\\/","data":"Ym9va7wBAAAAAAQQMAAAAD0Kw8DfhjxLTH+UeMiX9hOR1ZJHtc9C9z2vlnN4aSN83AAAAAQAAAADAwAAAAgAKAAAAAABBgAADAAAAAEBAABNYWNpbnRvc2ggSEQIAAAAAAQAAEHA5oVqAw5zGAAAAAECAAAKAAAAAAAAAA8AAAAAAAAAAAAAAAAAAAAIAAAAAQkAAGZpbGU6Ly8vCAAAAAQDAAAAUAZeOgAAACQAAAABAQAAOUEzQ0Y1QjgtRTdDMC00QThFLUI4QzEtQkNBQzRFMjJCMjVCGAAAAAECAACBAAAAAQAAAO8TAAABAAAAAAAAAAAAAAABAAAAAQEAAC8AAAAAAAAAAQUAAKgAAAD+\\/\\/\\/\\/AQAAAAAAAAANAAAABBAAABAAAAAAAAAAEBAAADwAAAAAAAAAIBAAABgAAAAAAAAAQBAAACwAAAAAAAAAAiAAAMgAAAAAAAAABSAAAFwAAAAAAAAAECAAABgAAAAAAAAAESAAAHwAAAAAAAAAEiAAAGwAAAAAAAAAEyAAACwAAAAAAAAAICAAAKgAAAAAAAAAMCAAANQAAAAAAAAAENAAAAQAAAAAAAAA"},"created":-978307200,"welcome":false,"rate":-978306200}
+{"created":-978307200,"access":{"url":"file:\\/\\/\\/","data":"Ym9va7wBAAAAAAQQMAAAAD0Kw8DfhjxLTH+UeMiX9hOR1ZJHtc9C9z2vlnN4aSN83AAAAAQAAAADAwAAAAgAKAAAAAABBgAADAAAAAEBAABNYWNpbnRvc2ggSEQIAAAAAAQAAEHA5oVqAw5zGAAAAAECAAAKAAAAAAAAAA8AAAAAAAAAAAAAAAAAAAAIAAAAAQkAAGZpbGU6Ly8vCAAAAAQDAAAAUAZeOgAAACQAAAABAQAAOUEzQ0Y1QjgtRTdDMC00QThFLUI4QzEtQkNBQzRFMjJCMjVCGAAAAAECAACBAAAAAQAAAO8TAAABAAAAAAAAAAAAAAABAAAAAQEAAC8AAAAAAAAAAQUAAKgAAAD+\\/\\/\\/\\/AQAAAAAAAAANAAAABBAAABAAAAAAAAAAEBAAADwAAAAAAAAAIBAAABgAAAAAAAAAQBAAACwAAAAAAAAAAiAAAMgAAAAAAAAABSAAAFwAAAAAAAAAECAAABgAAAAAAAAAESAAAHwAAAAAAAAAEiAAAGwAAAAAAAAAEyAAACwAAAAAAAAAICAAAKgAAAAAAAAAMCAAANQAAAAAAAAAENAAAAQAAAAAAAAA"},"welcome":false,"rate":-978306200}
 """, String(decoding: try JSONEncoder().encode(user), as: UTF8.self))
     }
     
     func testDecode() {
         let decoded = try! JSONDecoder().decode(User.self, from: Data("""
-{"rate":-978306200,"created":-978307200,"access":{"url":"file:\\/\\/\\/","data":""},"home":{"url":"file:\\/\\/\\/","data":""},"welcome":false}
+{"rate":-978306200,"created":-978307200,"access":{"url":"file:\\/\\/\\/","data":""},"welcome":false}
 """.utf8))
         XCTAssertEqual(URL(fileURLWithPath: "/"), decoded.access?.url)
-        XCTAssertEqual(URL(fileURLWithPath: "/"), decoded.home?.url)
         XCTAssertEqual(Date(timeIntervalSince1970: 0), decoded.created)
         XCTAssertEqual(Date(timeIntervalSince1970: 1000), decoded.rate)
         XCTAssertEqual(false, decoded.welcome)

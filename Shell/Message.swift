@@ -2,11 +2,17 @@ import Foundation
 
 class Message {
     class func send(_ string: String, location: URL, response: @escaping((String) -> Void)) {
+//        response(Bundle(for: Message.self).url(forResource: "xcrun", withExtension: nil)?.path ?? "nein")
+//        return
+        
+        
         let process = Process()
         let pipe = Pipe()
         process.arguments = string.components(separatedBy: " ")
         process.standardOutput = pipe
         process.standardError = pipe
+        process.environment = ProcessInfo.processInfo.environment
+        process.environment!["PATH"] = "/Applications/Xcode.app/Contents/Developer/usr/bin:" + process.environment!["PATH"]!
         if #available(OSX 10.13, *) {
             process.executableURL = URL(fileURLWithPath: "/usr/bin/env")
             process.currentDirectoryURL = location

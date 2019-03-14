@@ -320,6 +320,7 @@
 				20366C8B22293BE8009A2FB3 /* Shared */,
 				20E670BA223918FF00F682EF /* Shell */,
 				20366C5C22293BCF009A2FB3 /* Tests */,
+				203BDA1E223A60AC0064B06F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -431,6 +432,13 @@
 				20366C8C22293BE8009A2FB3 /* Localizable.strings */,
 			);
 			path = Shared;
+			sourceTree = "<group>";
+		};
+		203BDA1E223A60AC0064B06F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		20E670BA223918FF00F682EF /* Shell */ = {

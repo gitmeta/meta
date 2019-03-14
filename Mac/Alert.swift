@@ -14,7 +14,7 @@ class Alert {
         Exception.unknown: .local("Alert.unknown")]
     
     private init() { }
-    func add(_ error: Error) { add(messages[error as? Exception] ?? .local("Alert.unknown")) }
+    func add(_ error: Error) { add(messages[error as? Exception] ?? error.localizedDescription) }
     
     func add(_ message: String) {
         alert.append(message)

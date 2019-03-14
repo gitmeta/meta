@@ -6,7 +6,7 @@
 	<true/>
 	<key>com.apple.security.temporary-exception.files.absolute-path.read-only</key>
 	<array>
-		<string>/</string>
+		<string>/Applications/Xcode.app/Contents/Developer/usr/bin/</string>
 	</array>
 </dict>
 </plist>

@@ -10,15 +10,10 @@ class Git: NSView {
     private weak var resetLink: Link!
     private weak var pullLink: Link!
     private weak var pushLink: Link!
-    private let shell: Service
+    private var shell: Service?
     private let open = CGFloat(50)
     
     private init() {
-        let service = NSXPCConnection(serviceName: "meta.Shell")
-        service.remoteObjectInterface = NSXPCInterface(with: Service.self)
-        service.resume()
-        shell = service.remoteObjectProxyWithErrorHandler { fatalError($0.localizedDescription) } as! Service
-        
         super.init(frame: .zero)
         translatesAutoresizingMaskIntoConstraints = false
         
@@ -50,6 +45,20 @@ class Git: NSView {
     
     required init?(coder: NSCoder) { return nil }
     
+    func update() {
+        if let access = App.shared.user.access {
+            let service = NSXPCConnection(serviceName: "meta.Shell")
+            service.remoteObjectInterface = NSXPCInterface(with: Service.self)
+            service.resume()
+            
+            let data = try! access.url.bookmarkData()
+            shell = service.remoteObjectProxyWithErrorHandler { Alert.shared.add($0) } as? Service
+            shell!.activate(access.url, data: data)
+        } else {
+            shell = nil
+        }
+    }
+    
     @objc func toggle() {
         Menu.shared.git.state = Bar.shared.git.state == .on ? .on : .off
         height.constant = Bar.shared.git.state == .on ? open : 0
@@ -60,11 +69,11 @@ class Git: NSView {
         }) { }
     }
     
-    @objc func status() { shell.status(App.shared.user.access!.url) { Console.shared.log($0) } }
-    @objc func commit() { shell.commit(App.shared.user.access!.url) { Console.shared.log($0) } }
-    @objc func reset() { shell.reset(App.shared.user.access!.url) { Console.shared.log($0) } }
-    @objc func pull() { shell.pull(App.shared.user.access!.url) { Console.shared.log($0) } }
-    @objc func push() { shell.push(App.shared.user.access!.url) { Console.shared.log($0) } }
+    @objc func status() { shell?.status { Console.shared.log($0) } }
+    @objc func commit() { shell?.commit { Console.shared.log($0) } }
+    @objc func reset() { shell?.reset { Console.shared.log($0) } }
+    @objc func pull() { shell?.pull { Console.shared.log($0) } }
+    @objc func push() { shell?.push { Console.shared.log($0) } }
     
     private func link(_ text: String, target: AnyObject, action: Selector) -> Link {
         return {

@@ -11,7 +11,6 @@ class Git: NSView {
     private weak var pullLink: Link!
     private weak var pushLink: Link!
     private let shell: Service
-    private let git = meta.Git()
     private let open = CGFloat(50)
     
     private init() {

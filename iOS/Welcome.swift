@@ -39,21 +39,40 @@ class Welcome: Sheet {
         label.textColor = UIColor(white: 1, alpha: 0.7)
         addSubview(label)
         
-        image.rightAnchor.constraint(equalTo: centerXAnchor, constant: -20).isActive = true
-        image.bottomAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        let title = UILabel()
+        title.translatesAutoresizingMaskIntoConstraints = false
+        title.font = .systemFont(ofSize: 20, weight: .bold)
+        title.text = .local("Welcome.title")
+        title.textColor = .white
+        addSubview(title)
+        
+        let info = UILabel()
+        info.translatesAutoresizingMaskIntoConstraints = false
+        info.font = .systemFont(ofSize: 16, weight: .ultraLight)
+        info.text = .local("Welcome.infoFile")
+        info.textColor = .white
+        addSubview(info)
+        
+        image.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        image.bottomAnchor.constraint(equalTo: centerYAnchor, constant: -50).isActive = true
         image.widthAnchor.constraint(equalToConstant: 100).isActive = true
         image.heightAnchor.constraint(equalToConstant: 100).isActive = true
         
-        create.topAnchor.constraint(equalTo: image.topAnchor, constant: 15).isActive = true
-        create.leftAnchor.constraint(equalTo: image.rightAnchor, constant: 20).isActive = true
+        title.topAnchor.constraint(equalTo: image.bottomAnchor, constant: 20).isActive = true
+        title.leftAnchor.constraint(equalTo: info.leftAnchor).isActive = true
         
-        cancel.leftAnchor.constraint(equalTo: create.leftAnchor).isActive = true
-        cancel.rightAnchor.constraint(equalTo: create.rightAnchor).isActive = true
-        cancel.topAnchor.constraint(equalTo: create.bottomAnchor, constant: 15).isActive = true
-        cancel.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        info.topAnchor.constraint(equalTo: title.bottomAnchor, constant: 5).isActive = true
+        info.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         
-        check.leftAnchor.constraint(equalTo: leftAnchor, constant: 20).isActive = true
-        check.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20).isActive = true
+        create.topAnchor.constraint(equalTo: info.bottomAnchor, constant: 40).isActive = true
+        create.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        create.width.constant = 200
+        
+        cancel.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        cancel.topAnchor.constraint(equalTo: create.bottomAnchor, constant: 10).isActive = true
+        
+        check.leftAnchor.constraint(equalTo: leftAnchor, constant: 10).isActive = true
+        check.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10).isActive = true
         check.widthAnchor.constraint(equalToConstant: 56).isActive = true
         check.heightAnchor.constraint(equalToConstant: 56).isActive = true
         

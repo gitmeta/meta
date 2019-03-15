@@ -65,11 +65,11 @@ import StoreKit
     
     private func load() {
         user = User.load()
-        let url = FileManager.default.urls(for:.documentDirectory, in:.userDomainMask)[0].appendingPathComponent("documents")
+        let url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("documents")
         if !FileManager.default.fileExists(atPath: url.path) {
             try! FileManager.default.createDirectory(at: url, withIntermediateDirectories: true)
         }
-        user.bookmark = [url: Data()]
+        user.access = Access(url, data: Data())
         user.ask = { if #available(iOS 10.3, *) { SKStoreReviewController.requestReview() } }
     }
 }

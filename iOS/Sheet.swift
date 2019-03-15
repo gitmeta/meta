@@ -6,17 +6,8 @@ class Sheet: UIView {
         super.init(frame: .zero)
         translatesAutoresizingMaskIntoConstraints = false
         alpha = 0
+        backgroundColor = .shade
         App.shared.rootViewController!.view.addSubview(self)
-        
-        let blur = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
-        blur.isUserInteractionEnabled = false
-        blur.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(blur)
-        
-        blur.topAnchor.constraint(equalTo: topAnchor).isActive = true
-        blur.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-        blur.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
-        blur.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
         
         topAnchor.constraint(equalTo: App.shared.rootViewController!.view.topAnchor).isActive = true
         bottomAnchor.constraint(equalTo: App.shared.rootViewController!.view.bottomAnchor).isActive = true

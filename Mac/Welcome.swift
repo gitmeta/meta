@@ -13,7 +13,7 @@ class Welcome: Sheet {
         let title = Label(.local("Welcome.title"), color: .white, font: .systemFont(ofSize: 20, weight: .bold))
         addSubview(title)
         
-        let info = Label(.local("Welcome.info"), color: .white, font: .systemFont(ofSize: 16, weight: .ultraLight))
+        let info = Label(.local("Welcome.infoDirectory"), color: .white, font: .systemFont(ofSize: 16, weight: .ultraLight))
         addSubview(info)
         
         let open = Link(.local("Welcome.select"), background: .halo, text: .black, target: self, action: #selector(self.open))

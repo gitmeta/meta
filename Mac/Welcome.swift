@@ -64,7 +64,7 @@ class Welcome: Sheet {
         panel.canChooseDirectories = true
         panel.begin {
             if $0 == .OK {
-                App.shared.user.access = Access(panel.url!)
+                App.shared.user.access = Access(panel.url!, data: (try! panel.url!.bookmarkData(options: .withSecurityScope)))
                 App.shared.clear()
                 self.close()
                 Alert.shared.add(.local("Welcome.ready"))

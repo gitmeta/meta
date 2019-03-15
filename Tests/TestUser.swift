@@ -80,11 +80,11 @@ class TestUser: XCTestCase {
     func testEncode() {
         let user = User()
         user.welcome = false
-        user.access = Access(URL(fileURLWithPath: "/"))
+        user.access = Access(URL(fileURLWithPath: "/"), data: Data())
         user.created = Date(timeIntervalSince1970: 0)
         user.rate = Date(timeIntervalSince1970: 1000)
         XCTAssertEqual("""
-{"created":-978307200,"access":{"url":"file:\\/\\/\\/","data":"Ym9va7wBAAAAAAQQMAAAAD0Kw8DfhjxLTH+UeMiX9hOR1ZJHtc9C9z2vlnN4aSN83AAAAAQAAAADAwAAAAgAKAAAAAABBgAADAAAAAEBAABNYWNpbnRvc2ggSEQIAAAAAAQAAEHA5oVqAw5zGAAAAAECAAAKAAAAAAAAAA8AAAAAAAAAAAAAAAAAAAAIAAAAAQkAAGZpbGU6Ly8vCAAAAAQDAAAAUAZeOgAAACQAAAABAQAAOUEzQ0Y1QjgtRTdDMC00QThFLUI4QzEtQkNBQzRFMjJCMjVCGAAAAAECAACBAAAAAQAAAO8TAAABAAAAAAAAAAAAAAABAAAAAQEAAC8AAAAAAAAAAQUAAKgAAAD+\\/\\/\\/\\/AQAAAAAAAAANAAAABBAAABAAAAAAAAAAEBAAADwAAAAAAAAAIBAAABgAAAAAAAAAQBAAACwAAAAAAAAAAiAAAMgAAAAAAAAABSAAAFwAAAAAAAAAECAAABgAAAAAAAAAESAAAHwAAAAAAAAAEiAAAGwAAAAAAAAAEyAAACwAAAAAAAAAICAAAKgAAAAAAAAAMCAAANQAAAAAAAAAENAAAAQAAAAAAAAA"},"welcome":false,"rate":-978306200}
+{"created":-978307200,"access":{"url":"file:\\/\\/\\/","data":""},"welcome":false,"rate":-978306200}
 """, String(decoding: try JSONEncoder().encode(user), as: UTF8.self))
     }
     

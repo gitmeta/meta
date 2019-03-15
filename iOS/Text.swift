@@ -49,7 +49,7 @@ class Text: UITextView, UITextViewDelegate {
         line.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
         line.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
         
-        textContainerInset = UIEdgeInsets(top: 60, left: ruler.thickness + 5, bottom: 20, right: 12)
+        textContainerInset = UIEdgeInsets(top: 60, left: ruler.thickness + 10, bottom: 20, right: 12)
         if #available(iOS 11.0, *) { contentInsetAdjustmentBehavior = .never }
     }
     
@@ -70,6 +70,10 @@ class Text: UITextView, UITextViewDelegate {
             guard let document = self?.document else { return }
             List.shared.folder.save(document)
         }
+    }
+    
+    func textViewDidChangeSelection(_: UITextView) {
+        ruler.setNeedsDisplay()
     }
     
     func textViewDidBeginEditing(_: UITextView) {

@@ -54,7 +54,7 @@ class List: UIScrollView {
                 
                 document.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 10).isActive = true
                 document.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -10).isActive = true
-                document.topAnchor.constraint(equalTo: top, constant: $0.0 == 0 ? 80 + App.shared.margin.top : 10).isActive = true
+                document.topAnchor.constraint(equalTo: top, constant: $0.0 == 0 ? 70 + App.shared.margin.top : 4).isActive = true
                 top = document.bottomAnchor
             }
             if self.topAnchor !== self.topAnchor {

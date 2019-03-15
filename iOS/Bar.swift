@@ -11,13 +11,13 @@ class Bar: UIView {
         super.init(frame: .zero)
         translatesAutoresizingMaskIntoConstraints = false
         
-        let nose = UIButton()
-        nose.translatesAutoresizingMaskIntoConstraints = false
-        nose.setImage(#imageLiteral(resourceName: "nose.pdf"), for: [])
-        nose.addTarget(self, action: #selector(help), for: .touchUpInside)
-        nose.imageView!.clipsToBounds = true
-        nose.imageView!.contentMode = .center
-        addSubview(nose)
+        let help = UIButton()
+        help.translatesAutoresizingMaskIntoConstraints = false
+        help.setImage(#imageLiteral(resourceName: "info.pdf"), for: [])
+        help.addTarget(self, action: #selector(self.help), for: .touchUpInside)
+        help.imageView!.clipsToBounds = true
+        help.imageView!.contentMode = .center
+        addSubview(help)
         
         let create = UIButton()
         create.translatesAutoresizingMaskIntoConstraints = false
@@ -30,7 +30,7 @@ class Bar: UIView {
         let title = UILabel()
         title.alpha = 0
         title.translatesAutoresizingMaskIntoConstraints = false
-        title.font = .bold(15)
+        title.font = .bold(18)
         title.textColor = .halo
         addSubview(title)
         self.title = title
@@ -47,15 +47,14 @@ class Bar: UIView {
         
         heightAnchor.constraint(equalToConstant: 50).isActive = true
         
-        nose.topAnchor.constraint(equalTo: topAnchor).isActive = true
-        nose.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-        nose.widthAnchor.constraint(equalToConstant: 50).isActive = true
-        nose.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        closed = nose.leftAnchor.constraint(equalTo: leftAnchor, constant: 5)
-        opened = nose.rightAnchor.constraint(equalTo: rightAnchor, constant: -5)
+        help.topAnchor.constraint(equalTo: topAnchor).isActive = true
+        help.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        help.widthAnchor.constraint(equalToConstant: 60).isActive = true
+        closed = help.leftAnchor.constraint(equalTo: leftAnchor)
+        opened = help.leftAnchor.constraint(equalTo: rightAnchor)
         
-        create.centerYAnchor.constraint(equalTo: nose.centerYAnchor).isActive = true
-        create.leftAnchor.constraint(equalTo: nose.rightAnchor, constant: 5).isActive = true
+        create.centerYAnchor.constraint(equalTo: help.centerYAnchor).isActive = true
+        create.leftAnchor.constraint(equalTo: help.rightAnchor).isActive = true
         create.widthAnchor.constraint(equalToConstant: 60).isActive = true
         create.heightAnchor.constraint(equalToConstant: 40).isActive = true
         

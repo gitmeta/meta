@@ -8,7 +8,7 @@ class Line: UIView {
         super.init(frame: .zero)
         isUserInteractionEnabled = false
         translatesAutoresizingMaskIntoConstraints = false
-        backgroundColor = .shade
+        backgroundColor = UIColor.shade.withAlphaComponent(0.6)
         isHidden = true
         
         height = heightAnchor.constraint(equalToConstant: 0)

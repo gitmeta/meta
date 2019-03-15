@@ -40,12 +40,12 @@ class Document: UIControl {
         
         export.topAnchor.constraint(equalTo: topAnchor).isActive = true
         export.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-        export.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        export.widthAnchor.constraint(equalToConstant: 40).isActive = true
         export.rightAnchor.constraint(equalTo: delete.leftAnchor).isActive = true
         
         delete.topAnchor.constraint(equalTo: topAnchor).isActive = true
         delete.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-        delete.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        delete.widthAnchor.constraint(equalToConstant: 40).isActive = true
         delete.rightAnchor.constraint(equalTo: rightAnchor, constant: -10).isActive = true
         
         heightAnchor.constraint(equalToConstant: 50).isActive = true

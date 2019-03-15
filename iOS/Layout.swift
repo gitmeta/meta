@@ -10,7 +10,7 @@ class Layout: NSLayoutManager, NSLayoutManagerDelegate {
     
     required init?(coder: NSCoder) { return nil }
     
-    func layoutManager(_:NSLayoutManager, shouldSetLineFragmentRect: UnsafeMutablePointer<CGRect>,
+    func layoutManager(_: NSLayoutManager, shouldSetLineFragmentRect: UnsafeMutablePointer<CGRect>,
                        lineFragmentUsedRect: UnsafeMutablePointer<CGRect>, baselineOffset: UnsafeMutablePointer<CGFloat>,
                        in: NSTextContainer, forGlyphRange: NSRange) -> Bool {
         baselineOffset.pointee = baselineOffset.pointee + padding

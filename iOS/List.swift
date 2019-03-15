@@ -35,7 +35,7 @@ class List: UIScrollView {
         
         NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillChangeFrameNotification, object: nil, queue: .main) {
             self.bottom.constant = {
-                $0.minY < self.bounds.height ? -$0.height : 0
+                $0.minY < App.shared.frame.height ? -$0.height : 0
             } (($0.userInfo![UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue)
             UIView.animate(withDuration: ($0.userInfo![UIResponder.keyboardAnimationDurationUserInfoKey] as! NSNumber).doubleValue) {
                 self.superview!.layoutIfNeeded() } }
@@ -77,21 +77,21 @@ class List: UIScrollView {
     }
     
     @objc func create() {
-        guard superview!.subviews.first(where: { $0 is Create }) == nil else { return }
+        guard !App.shared.creating else { return }
         let create = Create()
         superview!.addSubview(create)
         
         create.leftAnchor.constraint(equalTo: leftAnchor, constant: 10).isActive = true
         create.rightAnchor.constraint(equalTo: rightAnchor, constant: -10).isActive = true
-        create.heightAnchor.constraint(equalToConstant: 300).isActive = true
-        create.bottom = create.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 300)
+        create.heightAnchor.constraint(equalToConstant: 250).isActive = true
+        create.bottom = create.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 250)
         create.bottom.isActive = true
         superview!.layoutIfNeeded()
-        create.bottom.constant = 150
+        create.bottom.constant = 70
         
         UIView.animate(withDuration: 0.3, animations: {
             self.superview!.layoutIfNeeded()
-            self.content.alpha = 0.4
+            self.content.alpha = 0.5
         }) { _ in
             create.field.becomeFirstResponder()
         }
@@ -106,7 +106,7 @@ class List: UIScrollView {
     }
     
     @objc private func open(_ item: Document) {
-        guard superview!.subviews.first(where: { $0 is Create }) == nil else { return }
+        guard !App.shared.creating else { return }
         selected = item
         Bar.shared.open(item.document.name)
         Display.shared.open(item.document)

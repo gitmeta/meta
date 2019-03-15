@@ -5,6 +5,7 @@ import StoreKit
 @UIApplicationMain class App: UIWindow, UIApplicationDelegate {
     static private(set) weak var shared: App!
     var margin = UIEdgeInsets.zero
+    var creating: Bool { return rootViewController!.view.subviews.first(where: { $0 is Create }) != nil }
     private(set) var user: User!
     
     func application(_: UIApplication, didFinishLaunchingWithOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {

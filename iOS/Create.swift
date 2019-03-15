@@ -11,14 +11,14 @@ class Create: UIView, UITextFieldDelegate {
         translatesAutoresizingMaskIntoConstraints = false
         backgroundColor = .shade
         layer.borderWidth = 1
-        layer.borderColor = UIColor.black.cgColor
+        layer.borderColor = UIColor.halo.cgColor
         layer.cornerRadius = 6
         
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = .local("Create.title")
         label.font = .systemFont(ofSize: 16, weight: .bold)
-        label.textColor = UIColor(white: 1, alpha: 0.4)
+        label.textColor = .halo
         addSubview(label)
         
         let field = UITextField()
@@ -46,7 +46,7 @@ class Create: UIView, UITextFieldDelegate {
         let border = UIView()
         border.translatesAutoresizingMaskIntoConstraints = false
         border.isUserInteractionEnabled = false
-        border.backgroundColor = UIColor(white: 1, alpha: 0.2)
+        border.backgroundColor = .halo
         addSubview(border)
         
         let confirm = Link(.local("Create.confirm"), target: self, selector: #selector(self.confirm))
@@ -55,7 +55,7 @@ class Create: UIView, UITextFieldDelegate {
         label.centerYAnchor.constraint(equalTo: cancel.centerYAnchor).isActive = true
         label.leftAnchor.constraint(equalTo: cancel.rightAnchor).isActive = true
         
-        field.topAnchor.constraint(equalTo: cancel.bottomAnchor).isActive = true
+        field.topAnchor.constraint(equalTo: cancel.bottomAnchor, constant: 20).isActive = true
         field.heightAnchor.constraint(equalToConstant: 50).isActive = true
         field.rightAnchor.constraint(equalTo: rightAnchor, constant: -30).isActive = true
         field.leftAnchor.constraint(equalTo: leftAnchor, constant: 20).isActive = true
@@ -65,7 +65,7 @@ class Create: UIView, UITextFieldDelegate {
         border.rightAnchor.constraint(equalTo: field.rightAnchor).isActive = true
         border.heightAnchor.constraint(equalToConstant: 1).isActive = true
         
-        cancel.topAnchor.constraint(equalTo: topAnchor, constant: 10).isActive = true
+        cancel.topAnchor.constraint(equalTo: topAnchor, constant: 20).isActive = true
         cancel.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
         cancel.widthAnchor.constraint(equalToConstant: 60).isActive = true
         cancel.heightAnchor.constraint(equalToConstant: 50).isActive = true

@@ -91,5 +91,9 @@ class Bar: UIView {
         }
     }
     
-    @objc private func help() { Help() }
+    @objc private func help() {
+        if !App.shared.creating {
+            Help()
+        }
+    }
 }

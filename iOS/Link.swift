@@ -14,7 +14,7 @@ class Link: UIButton {
         setTitleColor(UIColor(white: 0, alpha: 0.2), for: .highlighted)
         titleLabel!.font = .systemFont(ofSize: 15, weight: .medium)
         
-        heightAnchor.constraint(equalToConstant: 30).isActive = true
+        heightAnchor.constraint(equalToConstant: 36).isActive = true
         width = widthAnchor.constraint(equalToConstant: 88)
         width.isActive = true
     }

@@ -70,6 +70,7 @@ class Welcome: Sheet {
         
         cancel.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         cancel.topAnchor.constraint(equalTo: create.bottomAnchor, constant: 10).isActive = true
+        cancel.heightAnchor.constraint(equalToConstant: 40).isActive = true
         
         check.leftAnchor.constraint(equalTo: leftAnchor, constant: 10).isActive = true
         check.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10).isActive = true

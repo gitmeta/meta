@@ -27,13 +27,16 @@ class Ruler: NSRulerView {
                                         actualCharacterRange: nil).upperBound
             numbers.append((i, layout.lineFragmentRect(forGlyphAt: c, effectiveRange: nil,
                                                        withoutAdditionalLayout: true).minY, {
-            (layout.extraLineFragmentTextContainer == nil && $0.lowerBound == end) || ($0.lowerBound < end && $0.upperBound >= c) ?
+                                                        App.shared.firstResponder === text &&
+                ((layout.extraLineFragmentTextContainer == nil && $0.lowerBound == end) ||
+                ($0.lowerBound < end && $0.upperBound >= c)) ?
                 0.7 : 0.4
             } (text.selectedRange())))
             c = end
         }
         if layout.extraLineFragmentTextContainer != nil {
-            numbers.append((i + 1, layout.extraLineFragmentRect.minY, text.selectedRange().lowerBound == c ? 0.7 : 0.4))
+            numbers.append((i + 1, layout.extraLineFragmentRect.minY,
+                            text.selectedRange().lowerBound == c && App.shared.firstResponder === text ? 0.7 : 0.4))
         }
         let y = convert(NSZeroPoint, from: text).y + text.textContainerInset.height + (layout.padding / 2)
         numbers.map({ (NSAttributedString(string: String($0.0), attributes:

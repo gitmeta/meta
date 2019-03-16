@@ -14,8 +14,9 @@ class Git: NSView {
     private let open = CGFloat(50)
     
     private init() {
-        super.init(frame: .zero)
         git_libgit2_init()
+        
+        super.init(frame: .zero)
         translatesAutoresizingMaskIntoConstraints = false
         
         let icon = NSImageView()
@@ -70,7 +71,48 @@ class Git: NSView {
         }) { }
     }
     
-    @objc func status() { shell?.status { Console.shared.log($0) } }
+    @objc func status() {
+        var repo: OpaquePointer?
+        Console.shared.log(String(git_repository_open_ext(&repo, App.shared.user.access!.url.path, GIT_REPOSITORY_OPEN_NO_SEARCH.rawValue, nil)))
+        
+
+        
+        
+        Console.shared.log(String(git_repository_open_ext(nil, App.shared.user.access!.url.path, GIT_REPOSITORY_OPEN_NO_SEARCH.rawValue, nil)))
+        
+        
+        
+        
+        
+        
+        var statuses: OpaquePointer?
+        
+        
+        git_status_list_new(&statuses, repo, nil)
+        
+        let count = git_status_list_entrycount(statuses)
+        for i in 0 ..< count {
+            
+            let s = git_status_byindex(statuses, i)
+            Console.shared.log(String(s!.pointee.status.rawValue))
+            Console.shared.log(s?.pointee.head_to_index?.pointee.old_file.path.map(String.init(cString:)) ?? String())
+            Console.shared.log(s?.pointee.head_to_index?.pointee.new_file.path.map(String.init(cString:)) ?? String())
+            Console.shared.log(s?.pointee.index_to_workdir?.pointee.old_file.path.map(String.init(cString:)) ?? String())
+            Console.shared.log(s?.pointee.index_to_workdir?.pointee.new_file.path.map(String.init(cString:)) ?? String())
+            
+            /*
+            if s?.pointee.status.rawValue == GIT_STATUS_CURRENT.rawValue {
+                continue
+            }
+            
+            let statusEntry = StatusEntry(from: s!.pointee)
+            returnArray.append(statusEntry)*/
+            
+        }
+        
+        //shell?.status { Console.shared.log($0) }
+    }
+    
     @objc func commit() { shell?.commit { Console.shared.log($0) } }
     @objc func reset() { shell?.reset { Console.shared.log($0) } }
     @objc func pull() { shell?.pull { Console.shared.log($0) } }

@@ -101,6 +101,16 @@
 		20E81141223D25350065FD65 /* libgit2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 20E81140223D25350065FD65 /* libgit2.a */; };
 		20E81142223D25760065FD65 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2031AF25223D17CD0009218F /* libz.tbd */; };
 		20E81143223D25890065FD65 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2031AF21223D17A50009218F /* libiconv.tbd */; };
+		20E81145223D34CB0065FD65 /* TestGit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E81144223D34CB0065FD65 /* TestGit.swift */; };
+		20E81147223D35B50065FD65 /* Git.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E81146223D35B50065FD65 /* Git.swift */; };
+		20E81148223D35B50065FD65 /* Git.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E81146223D35B50065FD65 /* Git.swift */; };
+		20E8114A223D35BD0065FD65 /* Libgit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E81149223D35BD0065FD65 /* Libgit.swift */; };
+		20E8114B223D35BD0065FD65 /* Libgit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E81149223D35BD0065FD65 /* Libgit.swift */; };
+		20E8114D223D35FD0065FD65 /* TestLibgit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E8114C223D35FD0065FD65 /* TestLibgit.swift */; };
+		20E8114F223D3C6A0065FD65 /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E8114E223D3C6A0065FD65 /* Repository.swift */; };
+		20E81150223D3C6A0065FD65 /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E8114E223D3C6A0065FD65 /* Repository.swift */; };
+		20E81152223D3E990065FD65 /* GitError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E81151223D3E990065FD65 /* GitError.swift */; };
+		20E81153223D3E990065FD65 /* GitError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E81151223D3E990065FD65 /* GitError.swift */; };
 		20F242F72233E35C006C26DF /* Delete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20F242F62233E35C006C26DF /* Delete.swift */; };
 		20F242F92233ED3F006C26DF /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20F242F82233ED3F006C26DF /* Alert.swift */; };
 		20F242FB223406BF006C26DF /* Git.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20F242FA223406BF006C26DF /* Git.swift */; };
@@ -345,6 +355,12 @@
 		20E670CE2239253100F682EF /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		20E670D0223928FF00F682EF /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		20E81140223D25350065FD65 /* libgit2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libgit2.a; sourceTree = "<group>"; };
+		20E81144223D34CB0065FD65 /* TestGit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestGit.swift; sourceTree = "<group>"; };
+		20E81146223D35B50065FD65 /* Git.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Git.swift; sourceTree = "<group>"; };
+		20E81149223D35BD0065FD65 /* Libgit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Libgit.swift; sourceTree = "<group>"; };
+		20E8114C223D35FD0065FD65 /* TestLibgit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestLibgit.swift; sourceTree = "<group>"; };
+		20E8114E223D3C6A0065FD65 /* Repository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
+		20E81151223D3E990065FD65 /* GitError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitError.swift; sourceTree = "<group>"; };
 		20F242F62233E35C006C26DF /* Delete.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Delete.swift; sourceTree = "<group>"; };
 		20F242F82233ED3F006C26DF /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		20F242FA223406BF006C26DF /* Git.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Git.swift; sourceTree = "<group>"; };
@@ -607,6 +623,8 @@
 				20366C5F22293BCF009A2FB3 /* TestDocument.swift */,
 				20A70CC0222D6D7D001AE4E8 /* TestDocumentChange.swift */,
 				20366C5E22293BCF009A2FB3 /* TestFolder.swift */,
+				20E81144223D34CB0065FD65 /* TestGit.swift */,
+				20E8114C223D35FD0065FD65 /* TestLibgit.swift */,
 				20366C6222293BCF009A2FB3 /* TestStorage.swift */,
 				20366C5D22293BCF009A2FB3 /* TestUser.swift */,
 			);
@@ -622,7 +640,11 @@
 				20366C7022293BDD009A2FB3 /* Editable.swift */,
 				20A70CC2222D6EAD001AE4E8 /* Exception.swift */,
 				20366C6C22293BDD009A2FB3 /* Folder.swift */,
+				20E81146223D35B50065FD65 /* Git.swift */,
+				20E81151223D3E990065FD65 /* GitError.swift */,
+				20E8114E223D3C6A0065FD65 /* Repository.swift */,
 				20366C6D22293BDD009A2FB3 /* Image.swift */,
+				20E81149223D35BD0065FD65 /* Libgit.swift */,
 				20366C6F22293BDD009A2FB3 /* Md.swift */,
 				20366C7222293BDD009A2FB3 /* Pdf.swift */,
 				20366C6A22293BDD009A2FB3 /* Storage.swift */,
@@ -963,10 +985,14 @@
 				20366C8322293BDD009A2FB3 /* Document.swift in Sources */,
 				20366C8122293BDD009A2FB3 /* Editable.swift in Sources */,
 				20366C7522293BDD009A2FB3 /* Storage.swift in Sources */,
+				20E8114A223D35BD0065FD65 /* Libgit.swift in Sources */,
 				20366C8522293BDD009A2FB3 /* Pdf.swift in Sources */,
 				20366C7B22293BDD009A2FB3 /* Image.swift in Sources */,
+				20E8114F223D3C6A0065FD65 /* Repository.swift in Sources */,
+				20E81152223D3E990065FD65 /* GitError.swift in Sources */,
 				20366C7F22293BDD009A2FB3 /* Md.swift in Sources */,
 				20A70CC3222D6EAD001AE4E8 /* Exception.swift in Sources */,
+				20E81147223D35B50065FD65 /* Git.swift in Sources */,
 				20366C7722293BDD009A2FB3 /* Directory.swift in Sources */,
 				20366C7D22293BDD009A2FB3 /* User.swift in Sources */,
 				20366C7922293BDD009A2FB3 /* Folder.swift in Sources */,
@@ -981,10 +1007,14 @@
 				20366C8222293BDD009A2FB3 /* Editable.swift in Sources */,
 				20366C7622293BDD009A2FB3 /* Storage.swift in Sources */,
 				20366C8622293BDD009A2FB3 /* Pdf.swift in Sources */,
+				20E8114B223D35BD0065FD65 /* Libgit.swift in Sources */,
 				20366C7C22293BDD009A2FB3 /* Image.swift in Sources */,
 				20366C8022293BDD009A2FB3 /* Md.swift in Sources */,
+				20E81150223D3C6A0065FD65 /* Repository.swift in Sources */,
+				20E81153223D3E990065FD65 /* GitError.swift in Sources */,
 				20366C7822293BDD009A2FB3 /* Directory.swift in Sources */,
 				20079148223788D90086976A /* Access.swift in Sources */,
+				20E81148223D35B50065FD65 /* Git.swift in Sources */,
 				20A70CC4222D6EAD001AE4E8 /* Exception.swift in Sources */,
 				20366C7E22293BDD009A2FB3 /* User.swift in Sources */,
 				20366C7A22293BDD009A2FB3 /* Folder.swift in Sources */,
@@ -997,8 +1027,10 @@
 			files = (
 				20366C6522293BCF009A2FB3 /* TestDocument.swift in Sources */,
 				20366C6822293BCF009A2FB3 /* TestStorage.swift in Sources */,
+				20E8114D223D35FD0065FD65 /* TestLibgit.swift in Sources */,
 				20366C6322293BCF009A2FB3 /* TestUser.swift in Sources */,
 				20A70CC1222D6D7D001AE4E8 /* TestDocumentChange.swift in Sources */,
+				20E81145223D34CB0065FD65 /* TestGit.swift in Sources */,
 				20366C6422293BCF009A2FB3 /* TestFolder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

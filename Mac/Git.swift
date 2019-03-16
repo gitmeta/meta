@@ -81,13 +81,16 @@ class Git: NSView {
         Console.shared.log(String(git_repository_open_ext(nil, App.shared.user.access!.url.path, GIT_REPOSITORY_OPEN_NO_SEARCH.rawValue, nil)))
         
         
-        
+        let pointer = UnsafeMutablePointer<git_status_options>.allocate(capacity: 1)
+        let optionsResult = git_status_init_options(pointer, UInt32(GIT_STATUS_OPTIONS_VERSION))
+        var options = pointer.move()
+        pointer.deallocate()
         
         
         
         var statuses: OpaquePointer?
         
-        
+        print(GIT_STATUS_IGNORED.rawValue)
         git_status_list_new(&statuses, repo, nil)
         
         let count = git_status_list_entrycount(statuses)

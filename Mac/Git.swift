@@ -15,6 +15,7 @@ class Git: NSView {
     
     private init() {
         super.init(frame: .zero)
+        git_libgit2_init()
         translatesAutoresizingMaskIntoConstraints = false
         
         let icon = NSImageView()

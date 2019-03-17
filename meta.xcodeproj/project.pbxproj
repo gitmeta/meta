@@ -20,6 +20,7 @@
 		201CE1E9222E9FEB007AE422 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201CE1E8222E9FEB007AE422 /* Storage.swift */; };
 		201CE1EB222EA0B7007AE422 /* Skin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201CE1EA222EA0B7007AE422 /* Skin.swift */; };
 		201CE1ED222EA0DD007AE422 /* Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201CE1EC222EA0DD007AE422 /* Layout.swift */; };
+		202B57F0223E7ECE00E98EFC /* Libgit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2058C223223E4FBE00A23F2B /* Libgit.swift */; };
 		20366C3022293BA4009A2FB3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 20366C2D22293BA4009A2FB3 /* LaunchScreen.storyboard */; };
 		20366C3222293BA4009A2FB3 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20366C2F22293BA4009A2FB3 /* App.swift */; };
 		20366C4822293BBF009A2FB3 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20366C3422293BBF009A2FB3 /* Storage.swift */; };
@@ -72,10 +73,14 @@
 		20366C9A22293BE8009A2FB3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 20366C9122293BE8009A2FB3 /* Assets.xcassets */; };
 		20366C9B22293BE8009A2FB3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 20366C9122293BE8009A2FB3 /* Assets.xcassets */; };
 		2037F567222A9149009778BC /* Welcome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2037F566222A9149009778BC /* Welcome.swift */; };
+		203C6EB7223E740D00C64AEA /* libgit2Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 203C6EB5223E73F300C64AEA /* libgit2Mac.a */; };
+		203C6EB8223E742500C64AEA /* libgit2iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 203C6EB6223E73F400C64AEA /* libgit2iOS.a */; };
 		2058C224223E4FBE00A23F2B /* Libgit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2058C223223E4FBE00A23F2B /* Libgit.swift */; };
 		20592A7D222EAE6000EAFD63 /* Ruler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20592A7C222EAE6000EAFD63 /* Ruler.swift */; };
 		20592A7F222EBB4600EAFD63 /* Display.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20592A7E222EBB4600EAFD63 /* Display.swift */; };
 		20592A81222ED6EA00EAFD63 /* Gradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20592A80222ED6EA00EAFD63 /* Gradient.swift */; };
+		20724539223E83FA00D0DE1F /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 20724538223E83FA00D0DE1F /* libz.tbd */; };
+		2072453B223E840200D0DE1F /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2072453A223E840200D0DE1F /* libiconv.tbd */; };
 		20921CE8222BD6A0007FDB7A /* Sheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20921CE7222BD6A0007FDB7A /* Sheet.swift */; };
 		20A70CB9222D383B001AE4E8 /* List.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A70CB8222D383B001AE4E8 /* List.swift */; };
 		20A70CBB222D3B15001AE4E8 /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A70CBA222D3B15001AE4E8 /* Document.swift */; };
@@ -94,7 +99,6 @@
 		20BD16292229624F00B8EFDF /* Create.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20BD16282229624F00B8EFDF /* Create.swift */; };
 		20BD162B2229660800B8EFDF /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20BD162A2229660800B8EFDF /* Menu.swift */; };
 		20DCEA8922314E280005B61D /* Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20DCEA8822314E280005B61D /* Line.swift */; };
-		20E81141223D25350065FD65 /* libgit2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 20E81140223D25350065FD65 /* libgit2.a */; };
 		20E81142223D25760065FD65 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2031AF25223D17CD0009218F /* libz.tbd */; };
 		20E81143223D25890065FD65 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2031AF21223D17A50009218F /* libiconv.tbd */; };
 		20E81145223D34CB0065FD65 /* TestGit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E81144223D34CB0065FD65 /* TestGit.swift */; };
@@ -312,10 +316,14 @@
 		20366C9E22293D20009A2FB3 /* libmeta.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libmeta.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		20366C9F22293D59009A2FB3 /* libmeta.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libmeta.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		2037F566222A9149009778BC /* Welcome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Welcome.swift; sourceTree = "<group>"; };
+		203C6EB5223E73F300C64AEA /* libgit2Mac.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libgit2Mac.a; sourceTree = "<group>"; };
+		203C6EB6223E73F400C64AEA /* libgit2iOS.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libgit2iOS.a; sourceTree = "<group>"; };
 		2058C223223E4FBE00A23F2B /* Libgit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Libgit.swift; sourceTree = "<group>"; };
 		20592A7C222EAE6000EAFD63 /* Ruler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ruler.swift; sourceTree = "<group>"; };
 		20592A7E222EBB4600EAFD63 /* Display.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Display.swift; sourceTree = "<group>"; };
 		20592A80222ED6EA00EAFD63 /* Gradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gradient.swift; sourceTree = "<group>"; };
+		20724538223E83FA00D0DE1F /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.1.sdk/usr/lib/libz.tbd; sourceTree = DEVELOPER_DIR; };
+		2072453A223E840200D0DE1F /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.1.sdk/usr/lib/libiconv.tbd; sourceTree = DEVELOPER_DIR; };
 		20921CE7222BD6A0007FDB7A /* Sheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sheet.swift; sourceTree = "<group>"; };
 		20A70CB8222D383B001AE4E8 /* List.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = List.swift; sourceTree = "<group>"; };
 		20A70CBA222D3B15001AE4E8 /* Document.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Document.swift; sourceTree = "<group>"; };
@@ -334,7 +342,6 @@
 		20BD16282229624F00B8EFDF /* Create.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Create.swift; sourceTree = "<group>"; };
 		20BD162A2229660800B8EFDF /* Menu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
 		20DCEA8822314E280005B61D /* Line.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Line.swift; sourceTree = "<group>"; };
-		20E81140223D25350065FD65 /* libgit2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libgit2.a; sourceTree = "<group>"; };
 		20E81144223D34CB0065FD65 /* TestGit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestGit.swift; sourceTree = "<group>"; };
 		20E81146223D35B50065FD65 /* Git.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Git.swift; sourceTree = "<group>"; };
 		20E81149223D35BD0065FD65 /* Libgit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Libgit.swift; sourceTree = "<group>"; };
@@ -353,7 +360,7 @@
 			files = (
 				20E81143223D25890065FD65 /* libiconv.tbd in Frameworks */,
 				20E81142223D25760065FD65 /* libz.tbd in Frameworks */,
-				20E81141223D25350065FD65 /* libgit2.a in Frameworks */,
+				203C6EB7223E740D00C64AEA /* libgit2Mac.a in Frameworks */,
 				2005CD5822293FAE00B6972D /* libmeta.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -362,6 +369,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2072453B223E840200D0DE1F /* libiconv.tbd in Frameworks */,
+				20724539223E83FA00D0DE1F /* libz.tbd in Frameworks */,
+				203C6EB8223E742500C64AEA /* libgit2iOS.a in Frameworks */,
 				2005CD5B22293FB900B6972D /* libmeta.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -501,7 +511,8 @@
 			children = (
 				20366C2A22293B8B009A2FB3 /* .gitignore */,
 				20366C2B22293B8B009A2FB3 /* LICENSE */,
-				20E81140223D25350065FD65 /* libgit2.a */,
+				203C6EB6223E73F400C64AEA /* libgit2iOS.a */,
+				203C6EB5223E73F300C64AEA /* libgit2Mac.a */,
 				20366C9E22293D20009A2FB3 /* libmeta.a */,
 				20366C9F22293D59009A2FB3 /* libmeta.a */,
 				20366C9C22293CBB009A2FB3 /* meta.app */,
@@ -570,7 +581,6 @@
 				20366C3C22293BBF009A2FB3 /* Image.swift */,
 				20366C3522293BBF009A2FB3 /* Label.swift */,
 				20366C4222293BBF009A2FB3 /* Layout.swift */,
-				2058C223223E4FBE00A23F2B /* Libgit.swift */,
 				20DCEA8822314E280005B61D /* Line.swift */,
 				20366C3822293BBF009A2FB3 /* Link.swift */,
 				20366C4322293BBF009A2FB3 /* List.swift */,
@@ -628,6 +638,7 @@
 			children = (
 				20366C8F22293BE8009A2FB3 /* SFMono-Bold.otf */,
 				20366C8E22293BE8009A2FB3 /* SFMono-Light.otf */,
+				2058C223223E4FBE00A23F2B /* Libgit.swift */,
 				20366C9022293BE8009A2FB3 /* Shared.swift */,
 				20366C9122293BE8009A2FB3 /* Assets.xcassets */,
 				20366C8C22293BE8009A2FB3 /* Localizable.strings */,
@@ -638,7 +649,9 @@
 		203BDA1E223A60AC0064B06F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2072453A223E840200D0DE1F /* libiconv.tbd */,
 				2031AF25223D17CD0009218F /* libz.tbd */,
+				20724538223E83FA00D0DE1F /* libz.tbd */,
 				2031AF23223D17B40009218F /* libSystem.tbd */,
 				2031AF21223D17A50009218F /* libiconv.tbd */,
 			);
@@ -888,6 +901,7 @@
 				20366C9922293BE8009A2FB3 /* Shared.swift in Sources */,
 				20ABA34C223272E600C1A8AA /* Line.swift in Sources */,
 				201CE1EB222EA0B7007AE422 /* Skin.swift in Sources */,
+				202B57F0223E7ECE00E98EFC /* Libgit.swift in Sources */,
 				20592A7D222EAE6000EAFD63 /* Ruler.swift in Sources */,
 				20ABA348223262D400C1A8AA /* Welcome.swift in Sources */,
 				20A70CB9222D383B001AE4E8 /* List.swift in Sources */,
@@ -1217,6 +1231,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1224,6 +1242,7 @@
 				PRODUCT_MODULE_NAME = metaiOS;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OBJC_BRIDGING_HEADER = libggit2/git2.h;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -1279,12 +1298,17 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = meta.iOS;
 				PRODUCT_MODULE_NAME = metaiOS;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OBJC_BRIDGING_HEADER = libggit2/git2.h;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};

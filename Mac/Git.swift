@@ -1,5 +1,4 @@
 import meta
-import Shell
 import AppKit
 
 class Git: NSView {
@@ -10,7 +9,6 @@ class Git: NSView {
     private weak var resetLink: Link!
     private weak var pullLink: Link!
     private weak var pushLink: Link!
-    private var shell: Service?
     private let open = CGFloat(50)
     
     private init() {
@@ -48,7 +46,7 @@ class Git: NSView {
     required init?(coder: NSCoder) { return nil }
     
     func update() {
-        if let access = App.shared.user.access {
+        /*if let access = App.shared.user.access {
             let service = NSXPCConnection(serviceName: "meta.Shell")
             service.remoteObjectInterface = NSXPCInterface(with: Service.self)
             service.resume()
@@ -58,7 +56,7 @@ class Git: NSView {
             shell!.activate(access.url, data: data)
         } else {
             shell = nil
-        }
+        }*/
     }
     
     @objc func toggle() {
@@ -116,10 +114,10 @@ class Git: NSView {
         //shell?.status { Console.shared.log($0) }
     }
     
-    @objc func commit() { shell?.commit { Console.shared.log($0) } }
-    @objc func reset() { shell?.reset { Console.shared.log($0) } }
-    @objc func pull() { shell?.pull { Console.shared.log($0) } }
-    @objc func push() { shell?.push { Console.shared.log($0) } }
+    @objc func commit() { /*shell?.commit { Console.shared.log($0) }*/ }
+    @objc func reset() { /*shell?.reset { Console.shared.log($0) }*/ }
+    @objc func pull() { /*shell?.pull { Console.shared.log($0) }*/ }
+    @objc func push() { /*shell?.push { Console.shared.log($0) }*/ }
     
     private func link(_ text: String, target: AnyObject, action: Selector) -> Link {
         return {

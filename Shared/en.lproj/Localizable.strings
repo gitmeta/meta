@@ -4,6 +4,7 @@ Create.cancel="Cancel";
 Document.deleteTitle="Delete file?";
 Document.deleteCancel="Cancel";
 Document.deleteConfirm="Delete";
+List.update="Directory: ";
 Console.clear="Clear";
 Welcome.ready="Directory updated";
 Welcome.show="Show on start";

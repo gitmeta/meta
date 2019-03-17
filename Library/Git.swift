@@ -9,15 +9,16 @@ public class Git {
     public func url(_ url: URL) {
         queue.async { [weak self] in
             if let current = self?.repository {
-                Libgit.shared.release(current.pointer)
+                Libgit.shared.release(repository: current.pointer)
             }
-            guard let pointer = Libgit.shared.repository(url) else { return }
-            self?.repository = Repository(pointer: pointer, url: url)
+            self?.repository = {
+               $0 == nil ? nil : Repository(pointer: $0, url: url)
+            } (Libgit.shared.repository(url))
         }
     }
     
     public func status(_ result: @escaping((String) -> Void)) throws {
-        guard let repository = self.repository else { throw GitError.noRepository }
+        guard let repository = self.repository else { throw Exception.noRepository }
         queue.async {
             DispatchQueue.main.async {
                 result(Libgit.shared.status(repository.pointer))

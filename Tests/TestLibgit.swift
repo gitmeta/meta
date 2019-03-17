@@ -3,7 +3,7 @@ import Foundation
 
 class TestLibgit: Libgit {
     var _repository: (() -> Void)?
-    var _release: (() -> Void)?
+    var _releaseRepository: (() -> Void)?
     var _status: (() -> Void)?
     
     override func repository(_ url: URL) -> OpaquePointer? {
@@ -11,8 +11,8 @@ class TestLibgit: Libgit {
         return nil
     }
     
-    override func release(_ pointer: OpaquePointer!) {
-        _release?()
+    override func release(repository: OpaquePointer!) {
+        _releaseRepository?()
     }
     
     override func status(_ repository: OpaquePointer!) -> String {

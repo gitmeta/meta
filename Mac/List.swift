@@ -40,14 +40,14 @@ class List: NSScrollView {
     required init?(coder: NSCoder) { return nil }
     
     func clear() {
-        documentView!.subviews.filter({ $0 is Document }).forEach({ $0.removeFromSuperview() })
+        documentView!.subviews.filter({ $0 is Document }).forEach { $0.removeFromSuperview() }
         title.stringValue = String()
     }
     
     func update() {
         guard let name = App.shared.user.access?.url.lastPathComponent else { return }
         App.shared.state()
-        Console.shared.log(.local("List.update") + name)
+        Git.shared.update()
         title.stringValue = name
         folder.documents(App.shared.user) {
             guard let last = self.render($0, origin: self.topAnchor, margin: 80, parent: nil) else { return }

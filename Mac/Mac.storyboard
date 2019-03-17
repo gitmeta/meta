@@ -65,12 +65,12 @@
                                 <menu key="submenu" title="Git" autoenablesItems="NO" id="3pD-3D-LPL">
                                     <items>
                                         <menuItem title="Status" keyEquivalent="S" id="U0X-aX-h2G"/>
-                                        <menuItem title="Commit" keyEquivalent="C" id="QwG-0M-lAC"/>
-                                        <menuItem title="Reset" keyEquivalent="R" id="Rfq-vL-RX9"/>
-                                        <menuItem title="Push" keyEquivalent="" id="FxV-0n-XMg">
+                                        <menuItem title="Commit" hidden="YES" keyEquivalent="C" id="QwG-0M-lAC"/>
+                                        <menuItem title="Reset" hidden="YES" keyEquivalent="R" id="Rfq-vL-RX9"/>
+                                        <menuItem title="Push" hidden="YES" keyEquivalent="" id="FxV-0n-XMg">
                                             <modifierMask key="keyEquivalentModifierMask" shift="YES" command="YES"/>
                                         </menuItem>
-                                        <menuItem title="Pull" keyEquivalent="" id="B3T-xF-qd0">
+                                        <menuItem title="Pull" hidden="YES" keyEquivalent="" id="B3T-xF-qd0">
                                             <modifierMask key="keyEquivalentModifierMask" shift="YES" command="YES"/>
                                         </menuItem>
                                     </items>

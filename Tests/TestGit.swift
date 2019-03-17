@@ -20,9 +20,20 @@ class TestGit: XCTestCase {
     
     func testUpdatesFreeRepository() {
         let expect = expectation(description: String())
-        libgit._release = { expect.fulfill() }
+        libgit._releaseRepository = { expect.fulfill() }
         git.repository = Repository(pointer: nil, url: URL(fileURLWithPath: "/"))
         git.url(URL(fileURLWithPath: "/"))
+        waitForExpectations(timeout: 1)
+    }
+    
+    func testUpdatesRemoveRepository() {
+        let expect = expectation(description: String())
+        git.repository = Repository(pointer: nil, url: URL(fileURLWithPath: "/"))
+        git.url(URL(fileURLWithPath: "/"))
+        DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + 0.03) {
+            XCTAssertNil(self.git.repository)
+            expect.fulfill()
+        }
         waitForExpectations(timeout: 1)
     }
     

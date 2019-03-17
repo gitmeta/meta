@@ -11,6 +11,7 @@ class Alert {
         Exception.folderNotFound: .local("Alert.folderNotFound"),
         Exception.fileNoExists: .local("Alert.fileNoExists"),
         Exception.invalidHome: .local("Alert.invalidHome"),
+        Exception.noRepository: .local("Alert.noRepository"),
         Exception.unknown: .local("Alert.unknown")]
     
     private init() { }
@@ -57,7 +58,7 @@ class Alert {
             view.alphaValue = 1
             App.shared.contentView!.layoutSubtreeIfNeeded()
         }) {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 5) { [weak view] in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [weak view] in
                 if view != nil && view === self.view {
                     self.remove()
                 }

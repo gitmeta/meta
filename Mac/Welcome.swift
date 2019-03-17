@@ -68,6 +68,7 @@ class Welcome: Sheet {
                 App.shared.clear()
                 self.close()
                 Alert.shared.add(.local("Welcome.ready"))
+                Console.shared.log(.local("Welcome.update") + panel.url!.lastPathComponent)
             }
         }
     }

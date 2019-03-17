@@ -5,5 +5,6 @@ public enum Exception: LocalizedError {
     case fileAlreadyExists
     case fileNoExists
     case invalidHome
+    case noRepository
     case unknown
 }

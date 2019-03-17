@@ -9,11 +9,10 @@ class Git: NSView {
     private weak var resetLink: Link!
     private weak var pullLink: Link!
     private weak var pushLink: Link!
+    private let git = meta.Git()
     private let open = CGFloat(50)
     
     private init() {
-        git_libgit2_init()
-        
         super.init(frame: .zero)
         translatesAutoresizingMaskIntoConstraints = false
         
@@ -28,6 +27,10 @@ class Git: NSView {
         resetLink = link("reset", target: self, action: #selector(self.reset))
         pullLink = link("pull", target: self, action: #selector(self.pull))
         pushLink = link("push", target: self, action: #selector(self.push))
+        commitLink.isHidden = true
+        resetLink.isHidden = true
+        pullLink.isHidden = true
+        pushLink.isHidden = true
         
         height = heightAnchor.constraint(equalToConstant: open)
         height.isActive = true
@@ -41,22 +44,15 @@ class Git: NSView {
             $0.leftAnchor.constraint(equalTo: right, constant: 4).isActive = true
             right = $0.rightAnchor
         }
+        
+        meta.Libgit.shared = Libgit()
     }
     
     required init?(coder: NSCoder) { return nil }
     
     func update() {
-        /*if let access = App.shared.user.access {
-            let service = NSXPCConnection(serviceName: "meta.Shell")
-            service.remoteObjectInterface = NSXPCInterface(with: Service.self)
-            service.resume()
-            
-            let data = try! access.url.bookmarkData()
-            shell = service.remoteObjectProxyWithErrorHandler { Alert.shared.add($0) } as? Service
-            shell!.activate(access.url, data: data)
-        } else {
-            shell = nil
-        }*/
+        guard let url = App.shared.user.access?.url else { return }
+        git.url(url)
     }
     
     @objc func toggle() {
@@ -70,48 +66,9 @@ class Git: NSView {
     }
     
     @objc func status() {
-        var repo: OpaquePointer?
-        Console.shared.log(String(git_repository_open_ext(&repo, App.shared.user.access!.url.path, GIT_REPOSITORY_OPEN_NO_SEARCH.rawValue, nil)))
-        
-
-        
-        
-        Console.shared.log(String(git_repository_open_ext(nil, App.shared.user.access!.url.path, GIT_REPOSITORY_OPEN_NO_SEARCH.rawValue, nil)))
-        
-        
-        let pointer = UnsafeMutablePointer<git_status_options>.allocate(capacity: 1)
-        let optionsResult = git_status_init_options(pointer, UInt32(GIT_STATUS_OPTIONS_VERSION))
-        var options = pointer.move()
-        pointer.deallocate()
-        
-        
-        
-        var statuses: OpaquePointer?
-        
-        print(GIT_STATUS_IGNORED.rawValue)
-        git_status_list_new(&statuses, repo, nil)
-        
-        let count = git_status_list_entrycount(statuses)
-        for i in 0 ..< count {
-            
-            let s = git_status_byindex(statuses, i)
-            Console.shared.log(String(s!.pointee.status.rawValue))
-            Console.shared.log(s?.pointee.head_to_index?.pointee.old_file.path.map(String.init(cString:)) ?? String())
-            Console.shared.log(s?.pointee.head_to_index?.pointee.new_file.path.map(String.init(cString:)) ?? String())
-            Console.shared.log(s?.pointee.index_to_workdir?.pointee.old_file.path.map(String.init(cString:)) ?? String())
-            Console.shared.log(s?.pointee.index_to_workdir?.pointee.new_file.path.map(String.init(cString:)) ?? String())
-            
-            /*
-            if s?.pointee.status.rawValue == GIT_STATUS_CURRENT.rawValue {
-                continue
-            }
-            
-            let statusEntry = StatusEntry(from: s!.pointee)
-            returnArray.append(statusEntry)*/
-            
-        }
-        
-        //shell?.status { Console.shared.log($0) }
+        do {
+            try git.status { Console.shared.log($0) }
+        } catch { Alert.shared.add(error) }
     }
     
     @objc func commit() { /*shell?.commit { Console.shared.log($0) }*/ }

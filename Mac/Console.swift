@@ -69,7 +69,6 @@ class Console: NSView {
                 self.scroll()
             }
         }
-        
     }
     
     private func scroll() {

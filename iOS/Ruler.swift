@@ -31,17 +31,17 @@ class Ruler: UIView {
             !text.isFirstResponder ? 0 : {
                 ($0.lowerBound < end && $0.upperBound > c) ||
                 $0.upperBound == c ||
-                (layout.extraLineFragmentTextContainer == nil && $0.upperBound == end && end == range.upperBound) ? 0.5 : 0
+                (layout.extraLineFragmentTextContainer == nil && $0.upperBound == end && end == range.upperBound) ? 0.6 : 0
             } (text.selectedRange)))
             c = end
         }
         if layout.extraLineFragmentTextContainer != nil {
             numbers.append((i + 1, layout.extraLineFragmentRect.minY, text.isFirstResponder && text.selectedRange.lowerBound == c ?
-                0.5 : 0))
+                0.6 : 0))
         }
         let y = text.textContainerInset.top + layout.padding
         numbers.map({ (NSAttributedString(string: String($0.0), attributes:
-            [.foregroundColor: UIColor(white: 1, alpha: 0.4 + $0.2), .font: UIFont.light(14)]), $0.1) })
+            [.foregroundColor: UIColor(white: 1, alpha: 0.3 + $0.2), .font: UIFont.light(14)]), $0.1) })
             .forEach { $0.0.draw(at: CGPoint(x: thickness - $0.0.size().width, y: $0.1 + y)) }
     }
 }

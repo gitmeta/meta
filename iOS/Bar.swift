@@ -11,21 +11,12 @@ class Bar: UIView {
         super.init(frame: .zero)
         translatesAutoresizingMaskIntoConstraints = false
         
-        let help = UIButton()
-        help.translatesAutoresizingMaskIntoConstraints = false
-        help.setImage(#imageLiteral(resourceName: "info.pdf"), for: [])
-        help.addTarget(self, action: #selector(self.help), for: .touchUpInside)
-        help.imageView!.clipsToBounds = true
-        help.imageView!.contentMode = .center
-        addSubview(help)
-        
-        let create = UIButton()
-        create.translatesAutoresizingMaskIntoConstraints = false
-        create.addTarget(List.shared, action: #selector(List.shared.create), for: .touchUpInside)
-        create.setImage(#imageLiteral(resourceName: "new.pdf"), for: [])
-        create.imageView!.clipsToBounds = true
-        create.imageView!.contentMode = .center
-        addSubview(create)
+        let help = button(#imageLiteral(resourceName: "info.pdf"), target: self, action: #selector(self.help))
+        let git = button(#imageLiteral(resourceName: "gitOn.pdf"), target: List.shared, action: #selector(List.shared.git))
+        let create = button(#imageLiteral(resourceName: "new.pdf"), target: List.shared, action: #selector(List.shared.create))
+        let list = button(#imageLiteral(resourceName: "listOn.pdf"), target: List.shared, action: #selector(List.shared.show))
+        list.alpha = 0
+        self.list = list
         
         let title = UILabel()
         title.alpha = 0
@@ -35,33 +26,13 @@ class Bar: UIView {
         addSubview(title)
         self.title = title
         
-        let list = UIButton()
-        list.alpha = 0
-        list.translatesAutoresizingMaskIntoConstraints = false
-        list.setImage(#imageLiteral(resourceName: "listOn.pdf"), for: [])
-        list.imageView!.clipsToBounds = true
-        list.imageView!.contentMode = .center
-        list.addTarget(List.shared, action: #selector(List.shared.show), for: .touchUpInside)
-        addSubview(list)
-        self.list = list
-        
-        heightAnchor.constraint(equalToConstant: 50).isActive = true
-        
-        help.topAnchor.constraint(equalTo: topAnchor).isActive = true
-        help.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-        help.widthAnchor.constraint(equalToConstant: 60).isActive = true
         closed = help.leftAnchor.constraint(equalTo: leftAnchor)
         opened = help.leftAnchor.constraint(equalTo: rightAnchor)
         
-        create.centerYAnchor.constraint(equalTo: help.centerYAnchor).isActive = true
-        create.leftAnchor.constraint(equalTo: help.rightAnchor).isActive = true
-        create.widthAnchor.constraint(equalToConstant: 60).isActive = true
-        create.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        
-        list.topAnchor.constraint(equalTo: topAnchor).isActive = true
-        list.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-        list.leftAnchor.constraint(equalTo: leftAnchor, constant: 10).isActive = true
-        list.widthAnchor.constraint(equalToConstant: 60).isActive = true
+        heightAnchor.constraint(equalToConstant: 50).isActive = true
+        git.leftAnchor.constraint(equalTo: help.rightAnchor).isActive = true
+        create.leftAnchor.constraint(equalTo: git.rightAnchor).isActive = true
+        list.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
         
         title.leftAnchor.constraint(equalTo: list.rightAnchor).isActive = true
         title.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
@@ -69,12 +40,21 @@ class Bar: UIView {
     
     required init?(coder: NSCoder) { return nil }
     
-    func open(_ title: String) {
+    func document(_ title: String) {
         closed.isActive = false
         opened.isActive = true
         self.title.text = title
         UIView.animate(withDuration: 0.5) {
             self.title.alpha = 1
+            self.list.alpha = 1
+            self.layoutIfNeeded()
+        }
+    }
+    
+    func git() {
+        closed.isActive = false
+        opened.isActive = true
+        UIView.animate(withDuration: 0.5) {
             self.list.alpha = 1
             self.layoutIfNeeded()
         }
@@ -88,6 +68,22 @@ class Bar: UIView {
             self.list.alpha = 0
             self.layoutIfNeeded()
         }
+    }
+    
+    private func button(_ image: UIImage, target: AnyObject, action: Selector) -> UIButton {
+        return {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.addTarget(target, action: action, for: .touchUpInside)
+            $0.setImage(image, for: [])
+            $0.imageView!.clipsToBounds = true
+            $0.imageView!.contentMode = .center
+            addSubview($0)
+            
+            $0.topAnchor.constraint(equalTo: topAnchor).isActive = true
+            $0.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+            $0.widthAnchor.constraint(equalToConstant: 60).isActive = true
+            return $0
+        } (UIButton())
     }
     
     @objc private func help() {

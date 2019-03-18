@@ -17,6 +17,7 @@ import StoreKit
         let gradient = Gradient()
         
         rootViewController!.view.addSubview(Display.shared)
+        rootViewController!.view.addSubview(Git.shared)
         rootViewController!.view.addSubview(List.shared)
         rootViewController!.view.addSubview(gradient)
         rootViewController!.view.addSubview(Bar.shared)
@@ -40,6 +41,11 @@ import StoreKit
         Display.shared.leftAnchor.constraint(equalTo: List.shared.rightAnchor).isActive = true
         Display.shared.bottomAnchor.constraint(equalTo: List.shared.bottomAnchor).isActive = true
         
+        Git.shared.topAnchor.constraint(equalTo: rootViewController!.view.topAnchor).isActive = true
+        Git.shared.widthAnchor.constraint(equalTo: rootViewController!.view.widthAnchor).isActive = true
+        Git.shared.leftAnchor.constraint(equalTo: List.shared.rightAnchor).isActive = true
+        Git.shared.bottomAnchor.constraint(equalTo: List.shared.bottomAnchor).isActive = true
+        
         if #available(iOS 11.0, *) {
             Bar.shared.topAnchor.constraint(equalTo: rootViewController!.view.safeAreaLayoutGuide.topAnchor).isActive = true
         } else {
@@ -50,7 +56,7 @@ import StoreKit
             self.load()
             DispatchQueue.main.async {
                 List.shared.update()
-                if self.user.welcome { Welcome() }
+                if self.user.welcome { Welcome(false) }
             }
         }
         

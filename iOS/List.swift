@@ -72,8 +72,16 @@ class List: UIScrollView {
             self.superview!.layoutIfNeeded()
         }) { _ in
             self.selected = nil
+            Git.shared.isHidden = true
             Display.shared.clear()
         }
+    }
+    
+    @objc func git() {
+        guard !App.shared.creating else { return }
+        Git.shared.isHidden = false
+        Bar.shared.git()
+        hide()
     }
     
     @objc func create() {
@@ -105,15 +113,19 @@ class List: UIScrollView {
         }
     }
     
-    @objc private func open(_ item: Document) {
-        guard !App.shared.creating else { return }
-        selected = item
-        Bar.shared.open(item.document.name)
-        Display.shared.open(item.document)
+    private func hide() {
         open.isActive = false
         close.isActive = true
         UIView.animate(withDuration: 0.4) {
             self.superview!.layoutIfNeeded()
         }
+    }
+    
+    @objc private func open(_ item: Document) {
+        guard !App.shared.creating else { return }
+        selected = item
+        Bar.shared.document(item.document.name)
+        Display.shared.open(item.document)
+        hide()
     }
 }

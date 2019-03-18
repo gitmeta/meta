@@ -89,6 +89,7 @@
 		20A70CC1222D6D7D001AE4E8 /* TestDocumentChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A70CC0222D6D7D001AE4E8 /* TestDocumentChange.swift */; };
 		20A70CC3222D6EAD001AE4E8 /* Exception.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A70CC2222D6EAD001AE4E8 /* Exception.swift */; };
 		20A70CC4222D6EAD001AE4E8 /* Exception.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A70CC2222D6EAD001AE4E8 /* Exception.swift */; };
+		20A8EB92223F796A001D8D86 /* Git.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A8EB91223F796A001D8D86 /* Git.swift */; };
 		20ABA348223262D400C1A8AA /* Welcome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20ABA347223262D400C1A8AA /* Welcome.swift */; };
 		20ABA34A22326E2400C1A8AA /* Help.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20ABA34922326E2400C1A8AA /* Help.swift */; };
 		20ABA34C223272E600C1A8AA /* Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20ABA34B223272E600C1A8AA /* Line.swift */; };
@@ -331,6 +332,7 @@
 		20A70CBE222D4D51001AE4E8 /* Link.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Link.swift; sourceTree = "<group>"; };
 		20A70CC0222D6D7D001AE4E8 /* TestDocumentChange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestDocumentChange.swift; sourceTree = "<group>"; };
 		20A70CC2222D6EAD001AE4E8 /* Exception.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exception.swift; sourceTree = "<group>"; };
+		20A8EB91223F796A001D8D86 /* Git.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Git.swift; sourceTree = "<group>"; };
 		20ABA347223262D400C1A8AA /* Welcome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Welcome.swift; sourceTree = "<group>"; };
 		20ABA34922326E2400C1A8AA /* Help.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Help.swift; sourceTree = "<group>"; };
 		20ABA34B223272E600C1A8AA /* Line.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Line.swift; sourceTree = "<group>"; };
@@ -542,6 +544,7 @@
 				20592A7E222EBB4600EAFD63 /* Display.swift */,
 				20A70CBA222D3B15001AE4E8 /* Document.swift */,
 				20A70CBC222D45A9001AE4E8 /* Extensions.swift */,
+				20A8EB91223F796A001D8D86 /* Git.swift */,
 				20592A80222ED6EA00EAFD63 /* Gradient.swift */,
 				20ABA34922326E2400C1A8AA /* Help.swift */,
 				201CE1EC222EA0DD007AE422 /* Layout.swift */,
@@ -910,6 +913,7 @@
 				201CE1ED222EA0DD007AE422 /* Layout.swift in Sources */,
 				201CE1E7222E9AD4007AE422 /* Text.swift in Sources */,
 				20592A7F222EBB4600EAFD63 /* Display.swift in Sources */,
+				20A8EB92223F796A001D8D86 /* Git.swift in Sources */,
 				20A70CBD222D45A9001AE4E8 /* Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

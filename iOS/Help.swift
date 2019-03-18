@@ -2,8 +2,8 @@ import UIKit
 import MessageUI
 
 class Help: Sheet, MFMailComposeViewControllerDelegate {
-    @discardableResult override init() {
-        super.init()
+    @discardableResult init() {
+        super.init(true)
         
         let image = UIImageView(image: #imageLiteral(resourceName: "help.pdf"))
         image.translatesAutoresizingMaskIntoConstraints = false

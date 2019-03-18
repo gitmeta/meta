@@ -1,8 +1,8 @@
 import UIKit
 
 class Welcome: Sheet {
-    @discardableResult override init() {
-        super.init()
+    @discardableResult override init(_ animated: Bool = true) {
+        super.init(animated)
         
         let image = UIImageView(image: #imageLiteral(resourceName: "welcome.pdf"))
         image.translatesAutoresizingMaskIntoConstraints = false

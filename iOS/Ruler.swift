@@ -1,7 +1,7 @@
 import UIKit
 
 class Ruler: UIView {
-    let thickness = CGFloat(34)
+    let thickness = CGFloat(30)
     private weak var text: Text!
     private weak var layout: Layout!
     

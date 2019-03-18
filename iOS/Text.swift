@@ -49,7 +49,7 @@ class Text: UITextView, UITextViewDelegate {
         line.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
         line.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
         
-        textContainerInset = UIEdgeInsets(top: 60, left: ruler.thickness + 10, bottom: 20, right: 12)
+        textContainerInset = UIEdgeInsets(top: 50 + App.shared.margin.top, left: ruler.thickness + 6, bottom: 20, right: 12)
         if #available(iOS 11.0, *) { contentInsetAdjustmentBehavior = .never }
     }
     

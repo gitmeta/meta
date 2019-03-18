@@ -1,8 +1,10 @@
+import meta
 import UIKit
 
 class Git: UIView {
     static let shared = Git()
     private weak var text: UITextView!
+    private let git = meta.Git()
     private let format = DateFormatter()
     
     private init() {
@@ -15,22 +17,39 @@ class Git: UIView {
         text.backgroundColor = .clear
         text.alwaysBounceVertical = true
         text.contentSize = .zero
-        text.textContainerInset = UIEdgeInsets(top: 60, left: 12, bottom: 20, right: 12)
+        text.textContainerInset = UIEdgeInsets(top: 20, left: 12, bottom: 20, right: 12)
         text.isEditable = false
         self.text = text
         addSubview(text)
         
-        text.topAnchor.constraint(equalTo: topAnchor).isActive = true
+        let status = Link("status", target: self, selector: #selector(self.status))
+        addSubview(status)
+        
+        status.leftAnchor.constraint(equalTo: leftAnchor, constant: 15).isActive = true
+        status.width.constant = 100
+        
+        text.topAnchor.constraint(equalTo: status.bottomAnchor).isActive = true
         text.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
         text.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
         text.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
         
+        if #available(iOS 11.0, *) {
+            status.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 50).isActive = true
+        } else {
+            status.topAnchor.constraint(equalTo: topAnchor, constant: 50).isActive = true
+        }
+        
         format.dateStyle = .none
         format.timeStyle = .medium
         log("hello world")
+        meta.Libgit.shared = Libgit()
     }
     
     required init?(coder: NSCoder) { return nil }
+    
+    func update() {
+        git.url(App.shared.user.access!.url)
+    }
     
     func log(_ message: String) {
         DispatchQueue.main.async {
@@ -47,5 +66,11 @@ class Git: UIView {
                 }
             }
         }
+    }
+    
+    @objc private func status() {
+        do {
+            try git.status { self.log($0) }
+        } catch { Alert.shared.add(error) }
     }
 }

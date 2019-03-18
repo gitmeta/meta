@@ -11,6 +11,7 @@ class Alert {
         Exception.folderNotFound: .local("Alert.folderNotFound"),
         Exception.fileNoExists: .local("Alert.fileNoExists"),
         Exception.invalidHome: .local("Alert.invalidHome"),
+        Exception.noRepository: .local("Alert.noRepository"),
         Exception.unknown: .local("Alert.unknown")]
     
     private init() { }
@@ -25,7 +26,7 @@ class Alert {
         let view = UIControl()
         view.addTarget(self, action: #selector(remove), for: .touchUpInside)
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = UIColor(red: 0.76, green: 0.78, blue: 0.8, alpha: 0.97)
+        view.backgroundColor = .halo
         view.layer.cornerRadius = 6
         view.alpha = 0
         App.shared.rootViewController!.view.addSubview(view)
@@ -65,7 +66,7 @@ class Alert {
     
     @objc private func remove() {
         bottom?.constant = 0
-        UIView.animate(withDuration: 0.4, animations: {
+        UIView.animate(withDuration: 0.3, animations: {
             self.view?.alpha = 0
             App.shared.rootViewController!.view.layoutIfNeeded()
         }) { _ in

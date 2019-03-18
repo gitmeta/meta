@@ -48,7 +48,7 @@ class List: UIScrollView {
         folder.documents(App.shared.user) {
             var top = self.topAnchor
             $0.enumerated().forEach {
-                let document = Document($0.1 as! Editable)
+                let document = Document($0.1)
                 document.addTarget(self, action: #selector(self.open(_:)), for: .touchUpInside)
                 self.content.addSubview(document)
                 
@@ -125,7 +125,9 @@ class List: UIScrollView {
         guard !App.shared.creating else { return }
         selected = item
         Bar.shared.document(item.document.name)
-        Display.shared.open(item.document)
+        if let editable = item.document as? Editable {
+            Display.shared.open(editable)
+        }
         hide()
     }
 }

@@ -22,9 +22,16 @@ class Git: UIView {
         self.text = text
         addSubview(text)
         
+        let create = Link("init", target: self, selector: #selector(self.create))
+        addSubview(create)
+        
         let status = Link("status", target: self, selector: #selector(self.status))
         addSubview(status)
         
+        create.leftAnchor.constraint(equalTo: leftAnchor, constant: 15).isActive = true
+        create.width.constant = 100
+        
+        status.topAnchor.constraint(equalTo: create.bottomAnchor).isActive = true
         status.leftAnchor.constraint(equalTo: leftAnchor, constant: 15).isActive = true
         status.width.constant = 100
         
@@ -34,9 +41,9 @@ class Git: UIView {
         text.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
         
         if #available(iOS 11.0, *) {
-            status.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 50).isActive = true
+            create.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 50).isActive = true
         } else {
-            status.topAnchor.constraint(equalTo: topAnchor, constant: 50).isActive = true
+            create.topAnchor.constraint(equalTo: topAnchor, constant: 50).isActive = true
         }
         
         format.dateStyle = .none
@@ -66,6 +73,13 @@ class Git: UIView {
                 }
             }
         }
+    }
+    
+    @objc private func create() {
+        do {
+            try git.create(App.shared.user.access!.url)
+            log(.local("Git.init"))
+        } catch { Alert.shared.add(error) }
     }
     
     @objc private func status() {

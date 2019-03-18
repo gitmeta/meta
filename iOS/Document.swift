@@ -2,10 +2,10 @@ import meta
 import UIKit
 
 class Document: UIControl {
-    let document: Editable
+    let document: meta.Document
     private weak var label: UILabel!
     
-    init(_ document: Editable) {
+    init(_ document: meta.Document) {
         self.document = document
         super.init(frame: .zero)
         translatesAutoresizingMaskIntoConstraints = false

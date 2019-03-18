@@ -6,16 +6,9 @@ class Alert {
     private weak var view: NSView?
     private weak var bottom: NSLayoutConstraint?
     private var alert = [String]()
-    private let messages: [Exception?: String] = [
-        Exception.fileAlreadyExists: .local("Alert.fileAlreadyExists"),
-        Exception.folderNotFound: .local("Alert.folderNotFound"),
-        Exception.fileNoExists: .local("Alert.fileNoExists"),
-        Exception.noRepository: .local("Alert.noRepository"),
-        Exception.alreadyRepository: .local("Alert.alreadyRepository"),
-        Exception.unknown: .local("Alert.unknown")]
     
     private init() { }
-    func add(_ error: Error) { add(messages[error as? Exception] ?? error.localizedDescription) }
+    func add(_ error: Error) { add((error as? Exception)?.local ?? error.localizedDescription) }
     
     func add(_ message: String) {
         alert.append(message)

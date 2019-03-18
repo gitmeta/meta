@@ -19,6 +19,7 @@ Help.write="Write";
 Help.cancel="Cancel";
 Help.subject="meta support";
 Help.version="meta\n";
+Git.init="Started new repository";
 Git.unborn="New repository";
 Git.branch="Branch ";
 Git.modified="   modified: ";

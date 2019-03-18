@@ -69,6 +69,7 @@ class Git: NSView {
         guard let url = App.shared.user.access?.url else { return Alert.shared.add(Exception.folderNotFound) }
         do {
             try git.create(url)
+            Console.shared.log(.local("Git.init"))
             DispatchQueue.main.async { App.shared.clear() }
         } catch { Alert.shared.add(error) }
     }

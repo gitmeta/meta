@@ -6,16 +6,11 @@ class Alert {
     private weak var view: UIView?
     private weak var bottom: NSLayoutConstraint?
     private var alert = [String]()
-    private let messages: [Exception?: String] = [
-        Exception.fileAlreadyExists: .local("Alert.fileAlreadyExists"),
-        Exception.folderNotFound: .local("Alert.folderNotFound"),
-        Exception.noRepository: .local("Alert.noRepository"),
-        Exception.unknown: .local("Alert.unknown")]
     
     private init() { }
     
     func add(_ error: Error) {
-        alert.append(messages[error as? Exception] ?? .local("Alert.unknown"))
+        alert.append((error as? Exception)?.local ?? error.localizedDescription)
         DispatchQueue.main.async { if self.view == nil { self.pop() } }
     }
     

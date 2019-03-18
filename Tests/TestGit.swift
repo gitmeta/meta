@@ -52,4 +52,16 @@ class TestGit: XCTestCase {
         }
         waitForExpectations(timeout: 1)
     }
+    
+    func testCreateWithRepositoryThrows() {
+        git.repository = Repository(pointer: nil, url: URL(fileURLWithPath: "/"))
+        XCTAssertThrowsError(try git.create(URL(fileURLWithPath: "/")) )
+    }
+    
+    func testCreate() {
+        let expect = expectation(description: String())
+        libgit._create = { expect.fulfill() }
+        try! git.create(URL(fileURLWithPath: "/"))
+        waitForExpectations(timeout: 1)
+    }
 }

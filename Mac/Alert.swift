@@ -10,8 +10,8 @@ class Alert {
         Exception.fileAlreadyExists: .local("Alert.fileAlreadyExists"),
         Exception.folderNotFound: .local("Alert.folderNotFound"),
         Exception.fileNoExists: .local("Alert.fileNoExists"),
-        Exception.invalidHome: .local("Alert.invalidHome"),
         Exception.noRepository: .local("Alert.noRepository"),
+        Exception.alreadyRepository: .local("Alert.alreadyRepository"),
         Exception.unknown: .local("Alert.unknown")]
     
     private init() { }

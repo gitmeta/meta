@@ -65,6 +65,14 @@ class Git: NSView {
         }) { }
     }
     
+    @objc func create() {
+        guard let url = App.shared.user.access?.url else { return Alert.shared.add(Exception.folderNotFound) }
+        do {
+            try git.create(url)
+            DispatchQueue.main.async { App.shared.clear() }
+        } catch { Alert.shared.add(error) }
+    }
+    
     @objc func status() {
         do {
             try git.status { Console.shared.log($0) }

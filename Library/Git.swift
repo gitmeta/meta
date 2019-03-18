@@ -17,11 +17,19 @@ public class Git {
         }
     }
     
+    public func create(_ url: URL) throws {
+        guard self.repository == nil else { throw Exception.alreadyRepository }
+        queue.async { [weak self] in
+            self?.repository = Repository(pointer: Libgit.shared.create(url), url: url)
+        }
+    }
+    
     public func status(_ result: @escaping((String) -> Void)) throws {
         guard let repository = self.repository else { throw Exception.noRepository }
         queue.async {
+            let status = Libgit.shared.status(repository.pointer)
             DispatchQueue.main.async {
-                result(Libgit.shared.status(repository.pointer))
+                result(status)
             }
         }
     }

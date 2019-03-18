@@ -9,6 +9,7 @@ class Menu: NSMenu {
     @IBOutlet private weak var fileOpen: NSMenuItem!
     @IBOutlet private(set) weak var fileClose: NSMenuItem!
     @IBOutlet private(set) weak var fileDelete: NSMenuItem!
+    @IBOutlet private(set) weak var gitInit: NSMenuItem!
     @IBOutlet private(set) weak var gitStatus: NSMenuItem!
     @IBOutlet private(set) weak var gitCommit: NSMenuItem!
     @IBOutlet private(set) weak var gitReset: NSMenuItem!
@@ -35,6 +36,9 @@ class Menu: NSMenu {
         
         fileClose.target = App.shared
         fileClose.action = #selector(App.shared.shut)
+        
+        gitInit.target = Git.shared
+        gitInit.action = #selector(Git.shared.create)
         
         gitStatus.target = Git.shared
         gitStatus.action = #selector(Git.shared.status)

@@ -9,8 +9,6 @@ class Alert {
     private let messages: [Exception?: String] = [
         Exception.fileAlreadyExists: .local("Alert.fileAlreadyExists"),
         Exception.folderNotFound: .local("Alert.folderNotFound"),
-        Exception.fileNoExists: .local("Alert.fileNoExists"),
-        Exception.invalidHome: .local("Alert.invalidHome"),
         Exception.noRepository: .local("Alert.noRepository"),
         Exception.unknown: .local("Alert.unknown")]
     

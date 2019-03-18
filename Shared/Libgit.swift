@@ -17,10 +17,16 @@ class Libgit: meta.Libgit {
         git_repository_free(repository)
     }
     
+    override func create(_ url: URL) -> OpaquePointer! {
+        var repository: OpaquePointer?
+        git_repository_init(&repository, url.path, 0)
+        return repository
+    }
+    
     override func status(_ repository: OpaquePointer!) -> String {
         var list: OpaquePointer?
         git_status_list_new(&list, repository, nil)
-        let result = (0 ..< git_status_list_entrycount(list)).reduce(into: .local("Git.branch") + branch(repository)) {
+        let result = (0 ..< git_status_list_entrycount(list)).reduce(into: branch(repository)) {
             $0 += {
                 var status = "\n"
                 switch $0.pointee.status {
@@ -38,20 +44,24 @@ class Libgit: meta.Libgit {
     }
     
     private func branch(_ repository: OpaquePointer) -> String {
-        var head: OpaquePointer?
-        git_repository_head(&head, repository)
-        let name: String
-        if git_reference_is_branch(head) != 0 || git_reference_is_remote(head) != 0 {
-            var pointer: UnsafePointer<Int8>?
-            git_branch_name(&pointer, head)
-            name = String(validatingUTF8: pointer!)!
-        } else if git_reference_is_tag(head) != 0 {
-            name = String(validatingUTF8: git_reference_name(head))!.components(separatedBy: "/").last!
+        if git_repository_head_unborn(repository) == 1 {
+            return .local("Git.unborn")
         } else {
-            name = String(validatingUTF8: git_reference_shorthand(head))!
+            var head: OpaquePointer?
+            git_repository_head(&head, repository)
+            let name: String
+            if git_reference_is_branch(head) != 0 || git_reference_is_remote(head) != 0 {
+                var pointer: UnsafePointer<Int8>?
+                git_branch_name(&pointer, head)
+                name = String(validatingUTF8: pointer!)!
+            } else if git_reference_is_tag(head) != 0 {
+                name = String(validatingUTF8: git_reference_name(head))!.components(separatedBy: "/").last!
+            } else {
+                name = String(validatingUTF8: git_reference_shorthand(head))!
+            }
+            git_reference_free(head)
+            return .local("Git.branch") + name
         }
-        git_reference_free(head)
-        return name
     }
     
     private func name(_ status: git_status_entry) -> String {

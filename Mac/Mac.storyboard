@@ -64,6 +64,9 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="Git" autoenablesItems="NO" id="3pD-3D-LPL">
                                     <items>
+                                        <menuItem title="Init" id="MKf-78-g2q">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                        </menuItem>
                                         <menuItem title="Status" keyEquivalent="S" id="U0X-aX-h2G"/>
                                         <menuItem title="Commit" hidden="YES" keyEquivalent="C" id="QwG-0M-lAC"/>
                                         <menuItem title="Reset" hidden="YES" keyEquivalent="R" id="Rfq-vL-RX9"/>
@@ -342,6 +345,7 @@
                             <outlet property="fileOpen" destination="IAo-SY-fd9" id="H6K-Dd-oEs"/>
                             <outlet property="git" destination="PpU-0T-Vol" id="JrQ-d4-amj"/>
                             <outlet property="gitCommit" destination="QwG-0M-lAC" id="TZC-YG-eis"/>
+                            <outlet property="gitInit" destination="MKf-78-g2q" id="VUC-Np-AJx"/>
                             <outlet property="gitPull" destination="B3T-xF-qd0" id="PQt-vF-8hn"/>
                             <outlet property="gitPush" destination="FxV-0n-XMg" id="hOJ-Qx-D0W"/>
                             <outlet property="gitReset" destination="Rfq-vL-RX9" id="e4H-Px-092"/>

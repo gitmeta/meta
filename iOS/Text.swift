@@ -20,6 +20,10 @@ class Text: UITextView, UITextViewDelegate {
         self.line = line
         line.top = line.topAnchor.constraint(equalTo: topAnchor)
         
+        let ruler = Ruler(self, layout: layoutManager as! Layout)
+        self.ruler = ruler
+        addSubview(ruler)
+        
         translatesAutoresizingMaskIntoConstraints = false
         backgroundColor = .clear
         isScrollEnabled = false
@@ -35,10 +39,6 @@ class Text: UITextView, UITextViewDelegate {
         contentInset = .zero
         delegate = self
         self.document = document
-        
-        let ruler = Ruler(self, layout: layoutManager as! Layout)
-        addSubview(ruler)
-        self.ruler = ruler
         
         ruler.heightAnchor.constraint(greaterThanOrEqualToConstant: App.shared.frame.height).isActive = true
         ruler.heightAnchor.constraint(greaterThanOrEqualTo: heightAnchor).isActive = true
@@ -65,22 +65,30 @@ class Text: UITextView, UITextViewDelegate {
     
     func textViewDidChange(_: UITextView) {
         document?.content = text
-        ruler.setNeedsDisplay()
         DispatchQueue.global(qos: .background).async { [weak self] in
             guard let document = self?.document else { return }
             List.shared.folder.save(document)
+            self?.rerule()
         }
     }
     
     func textViewDidChangeSelection(_: UITextView) {
-        ruler.setNeedsDisplay()
+        rerule()
     }
     
     func textViewDidBeginEditing(_: UITextView) {
         line.isHidden = false
+        rerule()
     }
     
     func textViewDidEndEditing(_: UITextView) {
         line.isHidden = true
+        rerule()
+    }
+    
+    private func rerule() {
+        DispatchQueue.main.async { [weak self] in
+            self?.ruler.setNeedsDisplay()
+        }
     }
 }

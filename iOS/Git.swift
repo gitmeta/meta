@@ -22,18 +22,10 @@ class Git: UIView {
         self.text = text
         addSubview(text)
         
-        let create = Link("init", target: self, selector: #selector(self.create))
-        addSubview(create)
+        let create = link("init", selector: #selector(self.create))
+        let status = link("status", selector: #selector(self.status))
         
-        let status = Link("status", target: self, selector: #selector(self.status))
-        addSubview(status)
-        
-        create.leftAnchor.constraint(equalTo: leftAnchor, constant: 15).isActive = true
-        create.width.constant = 100
-        
-        status.topAnchor.constraint(equalTo: create.bottomAnchor).isActive = true
-        status.leftAnchor.constraint(equalTo: leftAnchor, constant: 15).isActive = true
-        status.width.constant = 100
+        status.topAnchor.constraint(equalTo: create.bottomAnchor, constant: 10).isActive = true
         
         text.topAnchor.constraint(equalTo: status.bottomAnchor).isActive = true
         text.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
@@ -73,6 +65,19 @@ class Git: UIView {
                 }
             }
         }
+    }
+    
+    private func link(_ title: String, selector: Selector) -> Link {
+        return {
+            $0.backgroundColor = .shade
+            $0.setTitleColor(.halo, for: .normal)
+            $0.setTitleColor(UIColor.halo.withAlphaComponent(0.2), for: .highlighted)
+            addSubview($0)
+            
+            $0.leftAnchor.constraint(equalTo: leftAnchor, constant: 15).isActive = true
+            $0.width.constant = 120
+            return $0
+        } (Link(title, target: self, selector: selector))
     }
     
     @objc private func create() {

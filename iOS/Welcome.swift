@@ -1,6 +1,8 @@
 import UIKit
 
 class Welcome: Sheet {
+    private weak var create: Link!
+    
     @discardableResult override init(_ animated: Bool = true) {
         super.init(animated)
         
@@ -10,17 +12,10 @@ class Welcome: Sheet {
         image.contentMode = .center
         addSubview(image)
         
-        let create = Link(.local("Welcome.create"), target: self, selector: #selector(self.create))
-        addSubview(create)
+        let create = link(.local("Welcome.create"), selector: #selector(start))
+        self.create = create
         
-        let cancel = UIButton()
-        cancel.translatesAutoresizingMaskIntoConstraints = false
-        cancel.setTitle(.local("Welcome.close"), for: [])
-        cancel.setTitleColor(UIColor(white: 1, alpha: 0.6), for: .normal)
-        cancel.setTitleColor(UIColor(white: 1, alpha: 0.2), for: .highlighted)
-        cancel.titleLabel!.font = .systemFont(ofSize: 15, weight: .medium)
-        cancel.addTarget(self, action: #selector(close), for: .touchUpInside)
-        addSubview(cancel)
+        let clone = link(.local("Welcome.clone"), selector: #selector(close))
         
         let check = UIButton()
         check.translatesAutoresizingMaskIntoConstraints = false
@@ -46,31 +41,16 @@ class Welcome: Sheet {
         title.textColor = .white
         addSubview(title)
         
-        let info = UILabel()
-        info.translatesAutoresizingMaskIntoConstraints = false
-        info.font = .systemFont(ofSize: 16, weight: .ultraLight)
-        info.text = .local("Welcome.infoFile")
-        info.textColor = .white
-        addSubview(info)
-        
         image.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         image.bottomAnchor.constraint(equalTo: centerYAnchor, constant: -50).isActive = true
         image.widthAnchor.constraint(equalToConstant: 100).isActive = true
         image.heightAnchor.constraint(equalToConstant: 100).isActive = true
         
         title.topAnchor.constraint(equalTo: image.bottomAnchor, constant: 20).isActive = true
-        title.leftAnchor.constraint(equalTo: info.leftAnchor).isActive = true
+        title.leftAnchor.constraint(equalTo: create.leftAnchor).isActive = true
         
-        info.topAnchor.constraint(equalTo: title.bottomAnchor, constant: 5).isActive = true
-        info.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-        
-        create.topAnchor.constraint(equalTo: info.bottomAnchor, constant: 40).isActive = true
-        create.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-        create.width.constant = 200
-        
-        cancel.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-        cancel.topAnchor.constraint(equalTo: create.bottomAnchor, constant: 10).isActive = true
-        cancel.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        create.topAnchor.constraint(equalTo: title.bottomAnchor, constant: 40).isActive = true
+        clone.topAnchor.constraint(equalTo: create.bottomAnchor, constant: 20).isActive = true
         
         check.leftAnchor.constraint(equalTo: leftAnchor, constant: 10).isActive = true
         check.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10).isActive = true
@@ -79,11 +59,26 @@ class Welcome: Sheet {
         
         label.centerYAnchor.constraint(equalTo: check.centerYAnchor).isActive = true
         label.leftAnchor.constraint(equalTo: check.rightAnchor).isActive = true
+        
+        DispatchQueue.global(qos: .background).async { [weak self] in self?.validate() }
     }
     
     required init?(coder: NSCoder) { return nil }
     
-    @objc private func create() {
+    private func link(_ title: String, selector: Selector) -> Link {
+        return {
+            addSubview($0)
+            $0.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+            $0.width.constant = 220
+            return $0
+        } (Link(title, target: self, selector: selector))
+    }
+    
+    private func validate() {
+        
+    }
+    
+    @objc private func start() {
         close()
         List.shared.create()
     }

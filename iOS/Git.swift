@@ -22,10 +22,7 @@ class Git: UIView {
         self.text = text
         addSubview(text)
         
-        let create = link("init", selector: #selector(self.create))
         let status = link("status", selector: #selector(self.status))
-        
-        status.topAnchor.constraint(equalTo: create.bottomAnchor, constant: 10).isActive = true
         
         text.topAnchor.constraint(equalTo: status.bottomAnchor).isActive = true
         text.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
@@ -33,14 +30,13 @@ class Git: UIView {
         text.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
         
         if #available(iOS 11.0, *) {
-            create.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 50).isActive = true
+            status.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 50).isActive = true
         } else {
-            create.topAnchor.constraint(equalTo: topAnchor, constant: 50).isActive = true
+            status.topAnchor.constraint(equalTo: topAnchor, constant: 50).isActive = true
         }
         
         format.dateStyle = .none
         format.timeStyle = .medium
-        log("hello world")
         meta.Libgit.shared = Libgit()
     }
     

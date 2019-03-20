@@ -1,9 +1,6 @@
 import UIKit
 
 class Welcome: Sheet {
-    private weak var create: Link!
-    private weak var done: Link!
-    
     @discardableResult override init(_ animated: Bool = true) {
         super.init(animated)
         
@@ -13,12 +10,11 @@ class Welcome: Sheet {
         image.contentMode = .center
         addSubview(image)
         
-        let create = link(.local("Welcome.create"), selector: #selector(start))
-        self.create = create
+        let create = link(.local("Welcome.create"), selector: #selector(self.create))
+        create.isHidden = true
         
-        let done = link(.local("Welcome.continue"), selector: #selector(close))
+        let done = link(.local("Welcome.continue"), selector: #selector(self.done))
         done.isHidden = true
-        self.done = done
         
         let clone = link(.local("Welcome.clone"), selector: #selector(close))
         
@@ -66,7 +62,12 @@ class Welcome: Sheet {
         label.centerYAnchor.constraint(equalTo: check.centerYAnchor).isActive = true
         label.leftAnchor.constraint(equalTo: check.rightAnchor).isActive = true
         
-        DispatchQueue.global(qos: .background).async { [weak self] in self?.validate() }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [weak create, weak done] in
+            {
+                create?.isHidden = $0
+                done?.isHidden = !$0
+            } (Git.shared.git.isRepository())
+        }
     }
     
     required init?(coder: NSCoder) { return nil }
@@ -80,16 +81,12 @@ class Welcome: Sheet {
         } (Link(title, target: self, selector: selector))
     }
     
-    private func validate() {
-        if Git.shared.git.isRepository(App.shared.user.access!.url) {
-            DispatchQueue.main.async { [weak self] in
-                self?.create.isHidden = true
-                self?.done.isHidden = false
-            }
-        }
+    @objc private func done() {
+        Git.shared.log(.local("Welcome.current"))
+        close()
     }
     
-    @objc private func start() {
+    @objc private func create() {
         Git.shared.create()
         List.shared.update()
         close()

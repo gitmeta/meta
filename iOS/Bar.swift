@@ -14,6 +14,7 @@ class Bar: UIView {
         let help = button(#imageLiteral(resourceName: "info.pdf"), target: self, action: #selector(self.help))
         let git = button(#imageLiteral(resourceName: "gitOn.pdf"), target: List.shared, action: #selector(List.shared.git))
         let create = button(#imageLiteral(resourceName: "new.pdf"), target: List.shared, action: #selector(List.shared.create))
+        let welcome = button(#imageLiteral(resourceName: "up.pdf"), target: self, action: #selector(self.welcome))
         let list = button(#imageLiteral(resourceName: "listOn.pdf"), target: List.shared, action: #selector(List.shared.show))
         list.alpha = 0
         self.list = list
@@ -32,6 +33,7 @@ class Bar: UIView {
         heightAnchor.constraint(equalToConstant: 50).isActive = true
         git.leftAnchor.constraint(equalTo: help.rightAnchor).isActive = true
         create.leftAnchor.constraint(equalTo: git.rightAnchor).isActive = true
+        welcome.leftAnchor.constraint(equalTo: create.rightAnchor).isActive = true
         list.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
         
         title.leftAnchor.constraint(equalTo: list.rightAnchor).isActive = true
@@ -85,6 +87,8 @@ class Bar: UIView {
             return $0
         } (UIButton())
     }
+    
+    @objc private func welcome() { Welcome() }
     
     @objc private func help() {
         if !App.shared.creating {

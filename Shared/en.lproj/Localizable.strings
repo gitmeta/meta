@@ -15,6 +15,7 @@ Welcome.continue="Use current repository";
 Welcome.clone="Checkout a repository";
 Welcome.title="Ready?";
 Welcome.infoDirectory="Select your working directory";
+Welcome.current="Using current repository";
 Help.title="meta@iturbi.de";
 Help.write="Write";
 Help.cancel="Cancel";

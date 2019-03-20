@@ -11,6 +11,7 @@ Welcome.show="Show on start";
 Welcome.select="Select";
 Welcome.close="Not now";
 Welcome.create="Start a repository";
+Welcome.continue="Use current repository";
 Welcome.clone="Checkout a repository";
 Welcome.title="Ready?";
 Welcome.infoDirectory="Select your working directory";

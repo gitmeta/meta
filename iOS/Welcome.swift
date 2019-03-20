@@ -2,6 +2,7 @@ import UIKit
 
 class Welcome: Sheet {
     private weak var create: Link!
+    private weak var done: Link!
     
     @discardableResult override init(_ animated: Bool = true) {
         super.init(animated)
@@ -14,6 +15,10 @@ class Welcome: Sheet {
         
         let create = link(.local("Welcome.create"), selector: #selector(start))
         self.create = create
+        
+        let done = link(.local("Welcome.continue"), selector: #selector(close))
+        done.isHidden = true
+        self.done = done
         
         let clone = link(.local("Welcome.clone"), selector: #selector(close))
         
@@ -51,6 +56,7 @@ class Welcome: Sheet {
         
         create.topAnchor.constraint(equalTo: title.bottomAnchor, constant: 40).isActive = true
         clone.topAnchor.constraint(equalTo: create.bottomAnchor, constant: 20).isActive = true
+        done.topAnchor.constraint(equalTo: create.topAnchor).isActive = true
         
         check.leftAnchor.constraint(equalTo: leftAnchor, constant: 10).isActive = true
         check.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10).isActive = true
@@ -75,12 +81,18 @@ class Welcome: Sheet {
     }
     
     private func validate() {
-        
+        if Git.shared.git.isRepository(App.shared.user.access!.url) {
+            DispatchQueue.main.async { [weak self] in
+                self?.create.isHidden = true
+                self?.done.isHidden = false
+            }
+        }
     }
     
     @objc private func start() {
+        Git.shared.create()
+        List.shared.update()
         close()
-        List.shared.create()
     }
     
     @objc private func check(_ button: UIButton) {

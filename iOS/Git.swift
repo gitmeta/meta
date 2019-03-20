@@ -3,8 +3,8 @@ import UIKit
 
 class Git: UIView {
     static let shared = Git()
+    let git = meta.Git()
     private weak var text: UITextView!
-    private let git = meta.Git()
     private let format = DateFormatter()
     
     private init() {
@@ -67,6 +67,13 @@ class Git: UIView {
         }
     }
     
+    @objc func create() {
+        do {
+            try git.create(App.shared.user.access!.url)
+            log(.local("Git.init"))
+        } catch { Alert.shared.add(error) }
+    }
+    
     private func link(_ title: String, selector: Selector) -> Link {
         return {
             $0.backgroundColor = .shade
@@ -78,13 +85,6 @@ class Git: UIView {
             $0.width.constant = 120
             return $0
         } (Link(title, target: self, selector: selector))
-    }
-    
-    @objc private func create() {
-        do {
-            try git.create(App.shared.user.access!.url)
-            log(.local("Git.init"))
-        } catch { Alert.shared.add(error) }
     }
     
     @objc private func status() {

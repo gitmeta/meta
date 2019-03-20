@@ -33,4 +33,13 @@ public class Git {
             }
         }
     }
+    
+    public func isRepository(_ url: URL) -> Bool {
+        let repository = Libgit.shared.repository(url)
+        if repository != nil {
+            Libgit.shared.release(repository: repository)
+            return true
+        }
+        return false
+    }
 }

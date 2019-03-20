@@ -64,4 +64,11 @@ class TestGit: XCTestCase {
         try! git.create(URL(fileURLWithPath: "/"))
         waitForExpectations(timeout: 1)
     }
+    
+    func testValidate() {
+        let expect = expectation(description: String())
+        libgit._repository = { expect.fulfill() }
+        _ = git.isRepository(URL(fileURLWithPath: "/"))
+        waitForExpectations(timeout: 1)
+    }
 }

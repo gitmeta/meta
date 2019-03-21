@@ -52,9 +52,9 @@ class List: UIScrollView {
                 document.addTarget(self, action: #selector(self.open(_:)), for: .touchUpInside)
                 self.content.addSubview(document)
                 
-                document.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 10).isActive = true
-                document.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -10).isActive = true
-                document.topAnchor.constraint(equalTo: top, constant: $0.0 == 0 ? 70 + App.shared.margin.top : 4).isActive = true
+                document.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
+                document.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
+                document.topAnchor.constraint(equalTo: top, constant: $0.0 == 0 ? 70 + App.shared.margin.top : 0).isActive = true
                 top = document.bottomAnchor
             }
             if self.topAnchor !== self.topAnchor {

@@ -21,6 +21,8 @@ class Alert {
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .halo
         view.layer.cornerRadius = 6
+        view.layer.borderColor = UIColor.black.cgColor
+        view.layer.borderWidth = 1
         view.alpha = 0
         App.shared.rootViewController!.view.addSubview(view)
         self.view = view

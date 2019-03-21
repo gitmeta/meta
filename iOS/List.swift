@@ -47,7 +47,7 @@ class List: UIScrollView {
     func update() {
         content.subviews.filter({ $0 is Document }).forEach({ $0.removeFromSuperview() })
         folder.documents(App.shared.user) {
-            guard let last = self.render($0, origin: self.topAnchor, margin: 80, parent: nil) else { return }
+            guard let last = self.render($0, origin: self.topAnchor, margin: 60 + App.shared.margin.top, parent: nil) else { return }
             self.align(last)
         }
     }

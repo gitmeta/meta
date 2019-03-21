@@ -31,13 +31,13 @@ class Document: UIControl {
         addSubview(label)
         self.label = label
         
-        image.topAnchor.constraint(equalTo: topAnchor, constant: 10).isActive = true
-        image.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10).isActive = true
-        image.widthAnchor.constraint(equalToConstant: 40).isActive = true
-        image.leftAnchor.constraint(equalTo: leftAnchor, constant: 10 + (indent * 40)).isActive = true
+        image.topAnchor.constraint(equalTo: topAnchor, constant: 15).isActive = true
+        image.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -15).isActive = true
+        image.widthAnchor.constraint(equalToConstant: 32).isActive = true
+        image.leftAnchor.constraint(equalTo: leftAnchor, constant: 10 + (indent * 30)).isActive = true
         
         label.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-        label.leftAnchor.constraint(equalTo: image.rightAnchor, constant: 10).isActive = true
+        label.leftAnchor.constraint(equalTo: image.rightAnchor).isActive = true
         label.rightAnchor.constraint(equalTo: rightAnchor, constant: -10).isActive = true
         
         if document is meta.Directory {

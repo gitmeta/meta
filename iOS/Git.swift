@@ -24,7 +24,7 @@ class Git: UIView {
         
         let status = link("status", selector: #selector(self.status))
         
-        text.topAnchor.constraint(equalTo: status.bottomAnchor).isActive = true
+        text.topAnchor.constraint(equalTo: status.bottomAnchor, constant: 2).isActive = true
         text.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
         text.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
         text.rightAnchor.constraint(equalTo: rightAnchor).isActive = true

@@ -5,6 +5,7 @@ class Create: UIView, UITextFieldDelegate {
     var close: (() -> Void)!
     weak var bottom: NSLayoutConstraint!
     private(set) weak var field: UITextField!
+    private weak var segmented: UISegmentedControl!
     
     init() {
         super.init(frame: .zero)
@@ -52,10 +53,17 @@ class Create: UIView, UITextFieldDelegate {
         let confirm = Link(.local("Create.confirm"), target: self, selector: #selector(self.confirm))
         addSubview(confirm)
         
+        let segmented = UISegmentedControl(items: [String.local("Create.file"), String.local("Create.directory")])
+        segmented.translatesAutoresizingMaskIntoConstraints = false
+        segmented.tintColor = .halo
+        segmented.selectedSegmentIndex = 0
+        addSubview(segmented)
+        self.segmented = segmented
+        
         label.centerYAnchor.constraint(equalTo: cancel.centerYAnchor).isActive = true
         label.leftAnchor.constraint(equalTo: cancel.rightAnchor).isActive = true
         
-        field.topAnchor.constraint(equalTo: cancel.bottomAnchor, constant: 20).isActive = true
+        field.topAnchor.constraint(equalTo: segmented.bottomAnchor, constant: 20).isActive = true
         field.heightAnchor.constraint(equalToConstant: 50).isActive = true
         field.rightAnchor.constraint(equalTo: rightAnchor, constant: -30).isActive = true
         field.leftAnchor.constraint(equalTo: leftAnchor, constant: 20).isActive = true
@@ -65,13 +73,16 @@ class Create: UIView, UITextFieldDelegate {
         border.rightAnchor.constraint(equalTo: field.rightAnchor).isActive = true
         border.heightAnchor.constraint(equalToConstant: 1).isActive = true
         
-        cancel.topAnchor.constraint(equalTo: topAnchor, constant: 20).isActive = true
+        cancel.topAnchor.constraint(equalTo: topAnchor, constant: 10).isActive = true
         cancel.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
         cancel.widthAnchor.constraint(equalToConstant: 60).isActive = true
-        cancel.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        cancel.heightAnchor.constraint(equalToConstant: 45).isActive = true
         
-        confirm.centerYAnchor.constraint(equalTo: cancel.centerYAnchor).isActive = true
+        confirm.topAnchor.constraint(equalTo: topAnchor, constant: 20).isActive = true
         confirm.rightAnchor.constraint(equalTo: rightAnchor, constant: -30).isActive = true
+        
+        segmented.topAnchor.constraint(equalTo: cancel.bottomAnchor).isActive = true
+        segmented.leftAnchor.constraint(equalTo: cancel.leftAnchor,constant: 20).isActive = true
     }
     
     required init?(coder: NSCoder) { return nil }

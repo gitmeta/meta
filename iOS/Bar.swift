@@ -88,7 +88,11 @@ class Bar: UIView {
         } (UIButton())
     }
     
-    @objc private func welcome() { Welcome() }
+    @objc private func welcome() {
+        if !App.shared.creating {
+            Welcome()
+        }
+    }
     
     @objc private func help() {
         if !App.shared.creating {

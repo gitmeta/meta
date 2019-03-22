@@ -1,6 +1,8 @@
 Create.confirm="Create";
-Create.title="New file";
+Create.title="New";
 Create.cancel="Cancel";
+Create.file="File";
+Create.directory="Directory";
 Document.deleteTitle="Delete file?";
 Document.deleteCancel="Cancel";
 Document.deleteConfirm="Delete";

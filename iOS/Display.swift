@@ -20,17 +20,26 @@ class Display: UIScrollView {
         isHidden = true
     }
     
-    func open(_ document: Editable) {
-        let text = Text(document)
-        addSubview(text)
+    func open(_ document: meta.Document) {
+        clear()
+        switch document {
+        case let document as meta.Image: configure(Image(document))
+        case let document as meta.Pdf: configure(Pdf(document))
+        case let document as Editable: configure(Text(document))
+        default: break
+        }
+    }
+    
+    private func configure(_ view: UIView) {
+        addSubview(view)
         isHidden = false
         
-        text.topAnchor.constraint(equalTo: topAnchor).isActive = true
-        text.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
-        text.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
-        text.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
-        text.bottomAnchor.constraint(greaterThanOrEqualTo: bottomAnchor).isActive = true
-        text.heightAnchor.constraint(greaterThanOrEqualTo: heightAnchor).isActive = true
+        view.topAnchor.constraint(equalTo: topAnchor).isActive = true
+        view.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
+        view.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
+        view.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
+        view.bottomAnchor.constraint(greaterThanOrEqualTo: bottomAnchor).isActive = true
+        view.heightAnchor.constraint(greaterThanOrEqualTo: heightAnchor).isActive = true
         layoutIfNeeded()
     }
 }

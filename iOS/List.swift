@@ -164,9 +164,7 @@ class List: UIScrollView {
         } else {
             selected = item
             Bar.shared.document(item.document.name)
-            if let editable = item.document as? Editable {
-                Display.shared.open(editable)
-            }
+            Display.shared.open(item.document)
             hide()
         }
     }

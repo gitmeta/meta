@@ -84,7 +84,7 @@ class Create: Sheet, NSTextFieldDelegate {
         App.shared.makeFirstResponder(nil)
         guard !name.stringValue.isEmpty else { return close() }
         do {
-            try List.shared.folder.create(name.stringValue, user: App.shared.user)
+            try List.shared.folder.createFile(name.stringValue, user: App.shared.user)
             App.shared.clear()
             close()
         } catch { Alert.shared.add(error) }

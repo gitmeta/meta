@@ -19,20 +19,33 @@ class TestDocumentChange: XCTestCase {
         clear()
     }
     
-    func testCreate() {
-        XCTAssertNoThrow(try folder.create("hello.txt", user: user))
+    func testCreateFile() {
+        XCTAssertNoThrow(try folder.createFile("hello.txt", user: user))
         XCTAssertTrue(FileManager.default.fileExists(atPath: URL(fileURLWithPath:
             NSTemporaryDirectory()).appendingPathComponent("hello.txt").path))
     }
     
-    func testDuplicateThrows() {
-        try! folder.create("hello.txt", user: user)
-        XCTAssertThrowsError(try folder.create("hello.txt", user: user))
+    func testCreateDirectory() {
+        XCTAssertNoThrow(try folder.createDirectory("hello", user: user))
+        var dir: ObjCBool = false
+        XCTAssertTrue(FileManager.default.fileExists(atPath: URL(fileURLWithPath:
+            NSTemporaryDirectory()).appendingPathComponent("hello").path, isDirectory: &dir))
+        XCTAssertTrue(dir.boolValue)
+    }
+    
+    func testCreateFileDuplicateThrows() {
+        try! folder.createFile("hello.txt", user: user)
+        XCTAssertThrowsError(try folder.createFile("hello.txt", user: user))
+    }
+    
+    func testCreateDirectoryDuplicateThrows() {
+        try! folder.createDirectory("hello", user: user)
+        XCTAssertThrowsError(try folder.createDirectory("hello", user: user))
     }
     
     func testDelete() {
         let url = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent("hello.txt")
-        try! folder.create("hello.txt", user: user)
+        try! folder.createFile("hello.txt", user: user)
         XCTAssertTrue(FileManager.default.fileExists(atPath: url.path))
         try! folder.delete(Editable(url))
         XCTAssertFalse(FileManager.default.fileExists(atPath: url.path))

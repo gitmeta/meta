@@ -23,12 +23,21 @@ public class Folder {
         }
     }
     
-    public func create(_ name: String, user: User) throws {
+    public func createFile(_ name: String, user: User) throws {
         guard user.access != nil
             else { throw Exception.folderNotFound }
         guard !FileManager.default.fileExists(atPath: user.access!.url.appendingPathComponent(name).path)
             else { throw Exception.fileAlreadyExists }
         try Data().write(to: user.access!.url.appendingPathComponent(name))
+    }
+    
+    public func createDirectory(_ name: String, user: User) throws {
+        guard user.access != nil
+            else { throw Exception.folderNotFound }
+        guard !FileManager.default.fileExists(atPath: user.access!.url.appendingPathComponent(name).path)
+            else { throw Exception.fileAlreadyExists }
+        try FileManager.default.createDirectory(at: user.access!.url.appendingPathComponent(name),
+                                                withIntermediateDirectories: false)
     }
     
     public func delete(_ document: Document) throws {

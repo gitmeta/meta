@@ -34,7 +34,7 @@ class Document: UIControl {
         image.topAnchor.constraint(equalTo: topAnchor, constant: 15).isActive = true
         image.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -15).isActive = true
         image.widthAnchor.constraint(equalToConstant: 32).isActive = true
-        image.leftAnchor.constraint(equalTo: leftAnchor, constant: 10 + (indent * 30)).isActive = true
+        image.leftAnchor.constraint(equalTo: leftAnchor, constant: 10 + (indent * 40)).isActive = true
         
         label.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
         label.leftAnchor.constraint(equalTo: image.rightAnchor).isActive = true

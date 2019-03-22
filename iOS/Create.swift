@@ -103,7 +103,11 @@ class Create: UIView, UITextFieldDelegate {
             close()
         } else {
             do {
-                try List.shared.folder.create(field.text!, user: App.shared.user)
+                if segmented.selectedSegmentIndex == 0 {
+                    try List.shared.folder.createFile(field.text!, user: App.shared.user)
+                } else {
+                    try List.shared.folder.createDirectory(field.text!, user: App.shared.user)
+                }
                 List.shared.update()
                 close()
             } catch { Alert.shared.add(error) }

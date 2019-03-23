@@ -23,24 +23,21 @@ class Libgit: meta.Libgit {
         return repository
     }
     
-    override func status(_ repository: OpaquePointer!) -> String {
+    override func status(_ repository: OpaquePointer!) -> Status {
         var list: OpaquePointer?
         git_status_list_new(&list, repository, nil)
-        let result = (0 ..< git_status_list_entrycount(list)).reduce(into: branch(repository)) {
-            $0 += {
-                var status = "\n"
-                switch $0.pointee.status {
-                case GIT_STATUS_WT_MODIFIED, GIT_STATUS_INDEX_MODIFIED: status += .local("Git.modified")
-                case GIT_STATUS_WT_NEW: status += .local("Git.untracked")
-                case GIT_STATUS_INDEX_NEW: status += .local("Git.added")
-                case GIT_STATUS_WT_DELETED, GIT_STATUS_INDEX_DELETED: status += .local("Git.deleted")
-                default: return String()
-                }
-                return status + name($0.pointee)
-            } (git_status_byindex(list, $1)!)
+        var status = (0 ..< git_status_list_entrycount(list)).reduce(into: Status()) {
+            switch git_status_byindex(list, $1)!.pointee.status {
+            case GIT_STATUS_WT_MODIFIED, GIT_STATUS_INDEX_MODIFIED: $0.modified.append(name(git_status_byindex(list, $1)!.pointee))
+//            case GIT_STATUS_WT_NEW: status += .local("Git.untracked")
+//            case GIT_STATUS_INDEX_NEW: status += .local("Git.added")
+//            case GIT_STATUS_WT_DELETED, GIT_STATUS_INDEX_DELETED: status += .local("Git.deleted")
+            default: break
+            }
         }
         git_status_list_free(list)
-        return result
+        status.branch = branch(repository)
+        return status
     }
     
     private func branch(_ repository: OpaquePointer) -> String {

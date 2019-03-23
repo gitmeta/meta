@@ -1,7 +1,7 @@
 import Foundation
 
 public class Git {
-    var repository: Repository?
+    public internal(set) var repository: Repository?
     private let queue = DispatchQueue(label: String(), qos: .background, target: .global(qos: .background))
     
     public init() { }
@@ -29,10 +29,8 @@ public class Git {
         queue.async {
             let status = Libgit.shared.status(repository.pointer)
             DispatchQueue.main.async {
-                result(status)
+                result(status.description)
             }
         }
     }
-    
-    public func isRepository() -> Bool { return repository != nil }
 }

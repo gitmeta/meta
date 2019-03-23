@@ -21,8 +21,8 @@ class TestLibgit: Libgit {
         return nil
     }
     
-    override func status(_ repository: OpaquePointer!) -> String {
+    override func status(_ repository: OpaquePointer!) -> Status {
         _status?()
-        return String()
+        return Status()
     }
 }

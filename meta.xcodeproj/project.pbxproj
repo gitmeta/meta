@@ -101,6 +101,8 @@
 		20BD1627222961F300B8EFDF /* Sheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20BD1626222961F300B8EFDF /* Sheet.swift */; };
 		20BD16292229624F00B8EFDF /* Create.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20BD16282229624F00B8EFDF /* Create.swift */; };
 		20BD162B2229660800B8EFDF /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20BD162A2229660800B8EFDF /* Menu.swift */; };
+		20C2BD532245A90A002B6546 /* Status.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C2BD522245A90A002B6546 /* Status.swift */; };
+		20C2BD542245A90A002B6546 /* Status.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C2BD522245A90A002B6546 /* Status.swift */; };
 		20DCEA8922314E280005B61D /* Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20DCEA8822314E280005B61D /* Line.swift */; };
 		20E81142223D25760065FD65 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2031AF25223D17CD0009218F /* libz.tbd */; };
 		20E81143223D25890065FD65 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2031AF21223D17A50009218F /* libiconv.tbd */; };
@@ -112,6 +114,7 @@
 		20E8114D223D35FD0065FD65 /* TestLibgit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E8114C223D35FD0065FD65 /* TestLibgit.swift */; };
 		20E8114F223D3C6A0065FD65 /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E8114E223D3C6A0065FD65 /* Repository.swift */; };
 		20E81150223D3C6A0065FD65 /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E8114E223D3C6A0065FD65 /* Repository.swift */; };
+		20E99E012245AE5100EEDF45 /* TestStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E99E002245AE5100EEDF45 /* TestStatus.swift */; };
 		20F242F72233E35C006C26DF /* Delete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20F242F62233E35C006C26DF /* Delete.swift */; };
 		20F242F92233ED3F006C26DF /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20F242F82233ED3F006C26DF /* Alert.swift */; };
 		20F242FB223406BF006C26DF /* Git.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20F242FA223406BF006C26DF /* Git.swift */; };
@@ -347,12 +350,14 @@
 		20BD1626222961F300B8EFDF /* Sheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sheet.swift; sourceTree = "<group>"; };
 		20BD16282229624F00B8EFDF /* Create.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Create.swift; sourceTree = "<group>"; };
 		20BD162A2229660800B8EFDF /* Menu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
+		20C2BD522245A90A002B6546 /* Status.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Status.swift; sourceTree = "<group>"; };
 		20DCEA8822314E280005B61D /* Line.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Line.swift; sourceTree = "<group>"; };
 		20E81144223D34CB0065FD65 /* TestGit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestGit.swift; sourceTree = "<group>"; };
 		20E81146223D35B50065FD65 /* Git.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Git.swift; sourceTree = "<group>"; };
 		20E81149223D35BD0065FD65 /* Libgit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Libgit.swift; sourceTree = "<group>"; };
 		20E8114C223D35FD0065FD65 /* TestLibgit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestLibgit.swift; sourceTree = "<group>"; };
 		20E8114E223D3C6A0065FD65 /* Repository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
+		20E99E002245AE5100EEDF45 /* TestStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestStatus.swift; sourceTree = "<group>"; };
 		20F242F62233E35C006C26DF /* Delete.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Delete.swift; sourceTree = "<group>"; };
 		20F242F82233ED3F006C26DF /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		20F242FA223406BF006C26DF /* Git.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Git.swift; sourceTree = "<group>"; };
@@ -614,6 +619,7 @@
 				20A70CC0222D6D7D001AE4E8 /* TestDocumentChange.swift */,
 				20366C5E22293BCF009A2FB3 /* TestFolder.swift */,
 				20E81144223D34CB0065FD65 /* TestGit.swift */,
+				20E99E002245AE5100EEDF45 /* TestStatus.swift */,
 				20E8114C223D35FD0065FD65 /* TestLibgit.swift */,
 				20366C6222293BCF009A2FB3 /* TestStorage.swift */,
 				20366C5D22293BCF009A2FB3 /* TestUser.swift */,
@@ -631,6 +637,7 @@
 				20A70CC2222D6EAD001AE4E8 /* Exception.swift */,
 				20366C6C22293BDD009A2FB3 /* Folder.swift */,
 				20E81146223D35B50065FD65 /* Git.swift */,
+				20C2BD522245A90A002B6546 /* Status.swift */,
 				20E8114E223D3C6A0065FD65 /* Repository.swift */,
 				20366C6D22293BDD009A2FB3 /* Image.swift */,
 				20E81149223D35BD0065FD65 /* Libgit.swift */,
@@ -941,6 +948,7 @@
 				20366C7F22293BDD009A2FB3 /* Md.swift in Sources */,
 				20A70CC3222D6EAD001AE4E8 /* Exception.swift in Sources */,
 				20E81147223D35B50065FD65 /* Git.swift in Sources */,
+				20C2BD532245A90A002B6546 /* Status.swift in Sources */,
 				20366C7722293BDD009A2FB3 /* Directory.swift in Sources */,
 				20366C7D22293BDD009A2FB3 /* User.swift in Sources */,
 				20366C7922293BDD009A2FB3 /* Folder.swift in Sources */,
@@ -962,6 +970,7 @@
 				20366C7822293BDD009A2FB3 /* Directory.swift in Sources */,
 				20079148223788D90086976A /* Access.swift in Sources */,
 				20E81148223D35B50065FD65 /* Git.swift in Sources */,
+				20C2BD542245A90A002B6546 /* Status.swift in Sources */,
 				20A70CC4222D6EAD001AE4E8 /* Exception.swift in Sources */,
 				20366C7E22293BDD009A2FB3 /* User.swift in Sources */,
 				20366C7A22293BDD009A2FB3 /* Folder.swift in Sources */,
@@ -979,6 +988,7 @@
 				20A70CC1222D6D7D001AE4E8 /* TestDocumentChange.swift in Sources */,
 				20E81145223D34CB0065FD65 /* TestGit.swift in Sources */,
 				20366C6422293BCF009A2FB3 /* TestFolder.swift in Sources */,
+				20E99E012245AE5100EEDF45 /* TestStatus.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

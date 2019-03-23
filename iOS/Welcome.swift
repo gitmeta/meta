@@ -66,7 +66,7 @@ class Welcome: Sheet {
             {
                 create?.isHidden = $0
                 done?.isHidden = !$0
-            } (Git.shared.git.isRepository())
+            } (Git.shared.git.repository == nil)
         }
     }
     

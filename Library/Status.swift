@@ -8,6 +8,16 @@ public struct Status: CustomStringConvertible {
     public init() { }
     
     public var description: String {
-        return String()
+        return branch
+            .appending(list(untracked, title: "untracked"))
+            .appending(list(added, title: "added"))
+            .appending(list(modified, title: "modified"))
+            .appending(list(deleted, title: "deleted"))
+    }
+    
+    private func list(_ list: [String], title: String) -> String {
+        return list.isEmpty ? String() : {
+            "\n" + $0 + ":" + list.sorted().flatMap { "\n   - " + $0 }
+        } (title)
     }
 }

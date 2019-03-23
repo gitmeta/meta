@@ -6,7 +6,7 @@ class TestStatus: XCTestCase {
     
     override func setUp() {
         status = Status()
-        status.branch = "hello-world"
+        status.branch = "hello world"
         status.untracked = ["d", "t"]
         status.added = ["b", "a"]
         status.modified = ["x"]
@@ -30,6 +30,17 @@ deleted:
     }
     
     func testPrintEmpty() {
+        status.untracked = []
+        status.modified = []
+        status.added = []
+        status.deleted = []
+        XCTAssertEqual("""
+hello world
+""", status.description)
+    }
+    
+    func testPrintOnlyDeleted() {
+        status.untracked = []
         status.modified = []
         status.added = []
         XCTAssertEqual("""

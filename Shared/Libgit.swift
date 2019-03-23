@@ -26,12 +26,12 @@ class Libgit: meta.Libgit {
     override func status(_ repository: OpaquePointer!) -> Status {
         var list: OpaquePointer?
         git_status_list_new(&list, repository, nil)
-        var status = (0 ..< git_status_list_entrycount(list)).reduce(into: Status()) {
-            switch git_status_byindex(list, $1)!.pointee.status {
-            case GIT_STATUS_WT_MODIFIED, GIT_STATUS_INDEX_MODIFIED: $0.modified.append(name(git_status_byindex(list, $1)!.pointee))
-//            case GIT_STATUS_WT_NEW: status += .local("Git.untracked")
-//            case GIT_STATUS_INDEX_NEW: status += .local("Git.added")
-//            case GIT_STATUS_WT_DELETED, GIT_STATUS_INDEX_DELETED: status += .local("Git.deleted")
+        var status = (0 ..< git_status_list_entrycount(list)).map({ git_status_byindex(list, $0)! }).reduce(into: Status()) {
+            switch $1.pointee.status {
+            case GIT_STATUS_WT_MODIFIED, GIT_STATUS_INDEX_MODIFIED: $0.modified.append(name($1.pointee))
+            case GIT_STATUS_WT_NEW: $0.untracked.append(name($1.pointee))
+            case GIT_STATUS_INDEX_NEW: $0.added.append(name($1.pointee))
+            case GIT_STATUS_WT_DELETED, GIT_STATUS_INDEX_DELETED: $0.deleted.append(name($1.pointee))
             default: break
             }
         }

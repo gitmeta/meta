@@ -64,8 +64,8 @@ class Welcome: Sheet {
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [weak create, weak done] in
             {
-                create?.isHidden = $0
-                done?.isHidden = !$0
+                create?.isHidden = !$0
+                done?.isHidden = $0
             } (Git.shared.git.repository == nil)
         }
     }

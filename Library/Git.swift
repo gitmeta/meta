@@ -24,13 +24,10 @@ public class Git {
         }
     }
     
-    public func status(_ result: @escaping((String) -> Void)) throws {
+    public func status(_ result: @escaping((Status) -> Void)) throws {
         guard let repository = self.repository else { throw Exception.noRepository }
         queue.async {
-            let status = Libgit.shared.status(repository.pointer)
-            DispatchQueue.main.async {
-                result(status.description)
-            }
+            result(Libgit.shared.status(repository.pointer))
         }
     }
 }

@@ -76,7 +76,7 @@ class Git: NSView {
     
     @objc func status() {
         do {
-            try git.status { Console.shared.log($0) }
+            try git.status { Console.shared.log($0.description) }
         } catch { Alert.shared.add(error) }
     }
     

@@ -23,8 +23,11 @@ class Git: UIView {
         addSubview(text)
         
         let status = link("status", selector: #selector(self.status))
+        let commit = link("commit", selector: #selector(self.commit))
         
-        text.topAnchor.constraint(equalTo: status.bottomAnchor, constant: 2).isActive = true
+        commit.topAnchor.constraint(equalTo: status.bottomAnchor, constant: 10).isActive = true
+        
+        text.topAnchor.constraint(equalTo: commit.bottomAnchor, constant: 4).isActive = true
         text.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
         text.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
         text.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
@@ -85,7 +88,19 @@ class Git: UIView {
     
     @objc private func status() {
         do {
-            try git.status { self.log($0) }
+            try git.status { self.log($0.description) }
+        } catch { Alert.shared.add(error) }
+    }
+    
+    @objc private func commit() {
+        do {
+            try git.status {
+                if $0.untracked.isEmpty {
+                    
+                } else {
+                    
+                }
+            }
         } catch { Alert.shared.add(error) }
     }
 }

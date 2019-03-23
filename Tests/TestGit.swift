@@ -46,10 +46,7 @@ class TestGit: XCTestCase {
         let expectResult = expectation(description: String())
         libgit._status = { expectLib.fulfill() }
         git.repository = Repository(pointer: nil, url: URL(fileURLWithPath: "/"))
-        try! git.status { _ in
-            XCTAssertEqual(Thread.main, Thread.current)
-            expectResult.fulfill()
-        }
+        try! git.status { _ in expectResult.fulfill() }
         waitForExpectations(timeout: 1)
     }
     

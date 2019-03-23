@@ -72,8 +72,12 @@ import StoreKit
     
     private func load() {
         user = User.load()
-        let url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("documents")
+        var directory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+        let url = directory.appendingPathComponent("documents")
         if !FileManager.default.fileExists(atPath: url.path) {
+            var resources = URLResourceValues()
+            resources.isExcludedFromBackup = true
+            try! directory.setResourceValues(resources)
             try! FileManager.default.createDirectory(at: url, withIntermediateDirectories: true)
         }
         user.access = Access(url, data: Data())

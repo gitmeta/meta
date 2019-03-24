@@ -19,8 +19,8 @@ class Git: UIView {
         text.contentSize = .zero
         text.textContainerInset = UIEdgeInsets(top: 20, left: 12, bottom: 20, right: 12)
         text.isEditable = false
-        self.text = text
         addSubview(text)
+        self.text = text
         
         let clear = UIButton()
         clear.translatesAutoresizingMaskIntoConstraints = false

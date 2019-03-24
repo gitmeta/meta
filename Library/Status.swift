@@ -17,7 +17,7 @@ public struct Status: CustomStringConvertible {
     
     private func list(_ list: [String], title: String) -> String {
         return list.isEmpty ? String() : {
-            "\n" + $0 + ":" + list.sorted().flatMap { "\n   - " + $0 }
+            "\n" + $0 + ":" + list.sorted().flatMap { "\n- " + $0 }
         } (title)
     }
 }

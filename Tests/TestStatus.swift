@@ -17,15 +17,15 @@ class TestStatus: XCTestCase {
         XCTAssertEqual("""
 hello world
 untracked:
-   - d
-   - t
+- d
+- t
 added:
-   - a
-   - b
+- a
+- b
 modified:
-   - x
+- x
 deleted:
-   - h
+- h
 """, status.description)
     }
     
@@ -46,7 +46,7 @@ hello world
         XCTAssertEqual("""
 hello world
 deleted:
-   - h
+- h
 """, status.description)
     }
 }

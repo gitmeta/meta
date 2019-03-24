@@ -8,7 +8,6 @@ class List: UIScrollView {
     var open: NSLayoutConstraint! { didSet { open.isActive = true } }
     var close: NSLayoutConstraint!
     let folder = Folder()
-    private weak var content: UIView!
     private weak var contentBottom: NSLayoutConstraint? { didSet { oldValue?.isActive = false; contentBottom?.isActive = true } }
     
     private init() {
@@ -17,18 +16,6 @@ class List: UIScrollView {
         alwaysBounceVertical = true
         showsVerticalScrollIndicator = false
         showsHorizontalScrollIndicator = false
-        
-        let content = UIView()
-        content.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(content)
-        self.content = content
-
-        content.topAnchor.constraint(equalTo: topAnchor).isActive = true
-        content.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
-        content.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
-        content.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-        content.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
-        content.heightAnchor.constraint(greaterThanOrEqualTo: heightAnchor).isActive = true
         
         if #available(iOS 11.0, *) {
             contentInsetAdjustmentBehavior = .never
@@ -45,7 +32,7 @@ class List: UIScrollView {
     required init?(coder: NSCoder) { return nil }
     
     func update() {
-        content.subviews.filter({ $0 is Document }).forEach({ $0.removeFromSuperview() })
+        subviews.filter({ $0 is Document }).forEach({ $0.removeFromSuperview() })
         folder.documents(App.shared.user) {
             guard let last = self.render($0, origin: self.topAnchor, margin: 60 + App.shared.margin.top, parent: nil) else { return }
             self.align(last)
@@ -88,7 +75,7 @@ class List: UIScrollView {
         
         UIView.animate(withDuration: 0.3, animations: {
             self.superview!.layoutIfNeeded()
-            self.content.alpha = 0.5
+            self.alpha = 0.5
         }) { _ in
             create.field.becomeFirstResponder()
         }
@@ -97,7 +84,7 @@ class List: UIScrollView {
             create.bottom.constant = 300
             UIView.animate(withDuration: 0.3, animations: {
                 self.superview!.layoutIfNeeded()
-                self.content.alpha = 1
+                self.alpha = 1
             }) { _ in create.removeFromSuperview() }
         }
     }
@@ -112,7 +99,7 @@ class List: UIScrollView {
     
     private func expand(_ document: Document) {
         folder.documents(document.document.url) {
-            let sibling = self.content.subviews.compactMap({ $0 as? Document }).first(where: { $0.top?.secondItem === document })
+            let sibling = self.subviews.compactMap({ $0 as? Document }).first(where: { $0.top?.secondItem === document })
             guard let last = self.render($0, origin: document.bottomAnchor, margin: 0, parent: document) else { return }
             if let sibling = sibling {
                 sibling.top = sibling.topAnchor.constraint(equalTo: last.bottomAnchor)
@@ -123,15 +110,15 @@ class List: UIScrollView {
     }
     
     private func collapse(_ document: Document) {
-        if let sibling = content.subviews.compactMap({ $0 as? Document }).filter({ $0.parent !== document }).first(where:
+        if let sibling = subviews.compactMap({ $0 as? Document }).filter({ $0.parent !== document }).first(where:
             { ($0.top?.secondItem as? Document)?.parent === document }) {
             sibling.top = sibling.topAnchor.constraint(equalTo: document.bottomAnchor)
         } else {
-            if (bottom?.secondItem as? Document)?.parent === document {
+            if (contentBottom?.secondItem as? Document)?.parent === document {
                 align(document)
             }
         }
-        content.subviews.compactMap({ $0 as? Document }).filter({ $0.parent === document }).forEach {
+        subviews.compactMap({ $0 as? Document }).filter({ $0.parent === document }).forEach {
             collapse($0)
             $0.removeFromSuperview()
         }
@@ -143,7 +130,7 @@ class List: UIScrollView {
             let document = Document($1, indent: parent == nil ? 0 : parent!.indent + 1)
             document.parent = parent
             document.addTarget(self, action: #selector(self.open(_:)), for: .touchUpInside)
-            content.addSubview(document)
+            addSubview(document)
             
             document.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
             document.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
@@ -153,7 +140,7 @@ class List: UIScrollView {
     }
     
     private func align(_ bottom: UIView) {
-        self.contentBottom = content.bottomAnchor.constraint(greaterThanOrEqualTo: bottom.bottomAnchor, constant: 30)
+        contentBottom = bottomAnchor.constraint(greaterThanOrEqualTo: bottom.bottomAnchor, constant: 30)
     }
     
     @objc private func open(_ item: Document) {

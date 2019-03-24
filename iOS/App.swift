@@ -44,7 +44,7 @@ import StoreKit
         Git.shared.topAnchor.constraint(equalTo: rootViewController!.view.topAnchor).isActive = true
         Git.shared.widthAnchor.constraint(equalTo: rootViewController!.view.widthAnchor).isActive = true
         Git.shared.leftAnchor.constraint(equalTo: List.shared.rightAnchor).isActive = true
-        Git.shared.bottomAnchor.constraint(equalTo: List.shared.bottomAnchor).isActive = true
+        Git.shared.bottomAnchor.constraint(equalTo: rootViewController!.view.bottomAnchor).isActive = true
         
         if #available(iOS 11.0, *) {
             Bar.shared.topAnchor.constraint(equalTo: rootViewController!.view.safeAreaLayoutGuide.topAnchor).isActive = true

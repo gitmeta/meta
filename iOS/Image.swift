@@ -6,9 +6,8 @@ class Image: UIView {
         super.init(frame: .zero)
         translatesAutoresizingMaskIntoConstraints = false
         
-        let image = UIImageView()
+        let image = UIImageView(image: UIImage(data: try! Data(contentsOf: document.url)))
         image.translatesAutoresizingMaskIntoConstraints = false
-        image.image = UIImage(data: try! Data(contentsOf: document.url))
         image.contentMode = .scaleAspectFit
         image.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
         image.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)

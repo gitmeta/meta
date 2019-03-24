@@ -39,6 +39,7 @@ class Commiting: UIControl {
     required init?(coder: NSCoder) { return nil }
     
     override var isSelected: Bool { didSet { image.isHidden = !isSelected } }
+    override var isHighlighted: Bool { didSet { backgroundColor = isHighlighted ? UIColor(white: 1, alpha: 0.1) : .clear } }
     
     @objc private func toggle() {
         isSelected.toggle()

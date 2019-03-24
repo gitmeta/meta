@@ -120,9 +120,9 @@ class Commit: Sheet, UITextViewDelegate {
         header.font = .bold(14)
         scroll.addSubview(header)
         
-        header.topAnchor.constraint(equalTo: top).isActive = true
+        header.topAnchor.constraint(equalTo: top, constant: 20).isActive = true
         header.leftAnchor.constraint(equalTo: leftAnchor, constant: 20).isActive = true
-        header.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        header.heightAnchor.constraint(equalToConstant: 30).isActive = true
         var top = header.bottomAnchor
         
         items.forEach {
@@ -139,8 +139,7 @@ class Commit: Sheet, UITextViewDelegate {
     }
     
     @objc private func commit() {
-        App.shared.endEditing(true)
-        close()
+        let spinner = Spinner()
     }
     
     @objc private func done() { App.shared.endEditing(true) }

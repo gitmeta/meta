@@ -12,7 +12,7 @@ class Bar: UIView {
         translatesAutoresizingMaskIntoConstraints = false
         
         let help = button(#imageLiteral(resourceName: "info.pdf"), target: self, action: #selector(self.help))
-        let git = button(#imageLiteral(resourceName: "gitOn.pdf"), target: List.shared, action: #selector(List.shared.git))
+        let git = button(#imageLiteral(resourceName: "git.pdf"), target: List.shared, action: #selector(List.shared.git))
         let create = button(#imageLiteral(resourceName: "new.pdf"), target: List.shared, action: #selector(List.shared.create))
         let welcome = button(#imageLiteral(resourceName: "up.pdf"), target: self, action: #selector(self.welcome))
         let list = button(#imageLiteral(resourceName: "listOn.pdf"), target: List.shared, action: #selector(List.shared.show))

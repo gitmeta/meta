@@ -80,6 +80,7 @@
 		20592A7F222EBB4600EAFD63 /* Display.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20592A7E222EBB4600EAFD63 /* Display.swift */; };
 		20592A81222ED6EA00EAFD63 /* Gradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20592A80222ED6EA00EAFD63 /* Gradient.swift */; };
 		205D8DD52247B84D003FDBCF /* Commiting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205D8DD42247B84D003FDBCF /* Commiting.swift */; };
+		205D8E0E2247C40E003FDBCF /* Spinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205D8E0D2247C40E003FDBCF /* Spinner.swift */; };
 		20724539223E83FA00D0DE1F /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 20724538223E83FA00D0DE1F /* libz.tbd */; };
 		2072453B223E840200D0DE1F /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2072453A223E840200D0DE1F /* libiconv.tbd */; };
 		2086C14122445D54006E994C /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086C14022445D54006E994C /* Image.swift */; };
@@ -331,6 +332,7 @@
 		20592A7E222EBB4600EAFD63 /* Display.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Display.swift; sourceTree = "<group>"; };
 		20592A80222ED6EA00EAFD63 /* Gradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gradient.swift; sourceTree = "<group>"; };
 		205D8DD42247B84D003FDBCF /* Commiting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Commiting.swift; sourceTree = "<group>"; };
+		205D8E0D2247C40E003FDBCF /* Spinner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spinner.swift; sourceTree = "<group>"; };
 		20724538223E83FA00D0DE1F /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.1.sdk/usr/lib/libz.tbd; sourceTree = DEVELOPER_DIR; };
 		2072453A223E840200D0DE1F /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.1.sdk/usr/lib/libiconv.tbd; sourceTree = DEVELOPER_DIR; };
 		2086C14022445D54006E994C /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
@@ -571,6 +573,7 @@
 				20592A7C222EAE6000EAFD63 /* Ruler.swift */,
 				20921CE7222BD6A0007FDB7A /* Sheet.swift */,
 				201CE1EA222EA0B7007AE422 /* Skin.swift */,
+				205D8E0D2247C40E003FDBCF /* Spinner.swift */,
 				201CE1E8222E9FEB007AE422 /* Storage.swift */,
 				201CE1E6222E9AD4007AE422 /* Text.swift */,
 				20ABA347223262D400C1A8AA /* Welcome.swift */,
@@ -913,6 +916,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				201CE1E1222E5AD5007AE422 /* Create.swift in Sources */,
+				205D8E0E2247C40E003FDBCF /* Spinner.swift in Sources */,
 				201CE1E5222E8E04007AE422 /* Bar.swift in Sources */,
 				2086C14122445D54006E994C /* Image.swift in Sources */,
 				20921CE8222BD6A0007FDB7A /* Sheet.swift in Sources */,

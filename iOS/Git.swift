@@ -22,6 +22,17 @@ class Git: UIView {
         self.text = text
         addSubview(text)
         
+        let clear = UIButton()
+        clear.translatesAutoresizingMaskIntoConstraints = false
+        clear.layer.cornerRadius = 4
+        clear.backgroundColor = UIColor(white: 0.2, alpha: 0.7)
+        clear.setTitleColor(UIColor(white: 1, alpha: 0.5), for: .normal)
+        clear.setTitleColor(UIColor(white: 1, alpha: 0.2), for: .highlighted)
+        clear.setTitle(.local("Console.clear"), for: [])
+        clear.titleLabel!.font = .systemFont(ofSize: 11, weight: .light)
+        clear.addTarget(self, action: #selector(self.clear), for: .touchUpInside)
+        addSubview(clear)
+        
         let status = link("status", selector: #selector(self.status))
         let commit = link("commit", selector: #selector(self.commit))
         
@@ -32,10 +43,16 @@ class Git: UIView {
         text.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
         text.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
         
+        clear.rightAnchor.constraint(equalTo: rightAnchor, constant: -20).isActive = true
+        clear.widthAnchor.constraint(equalToConstant: 60).isActive = true
+        clear.heightAnchor.constraint(equalToConstant: 32).isActive = true
+        
         if #available(iOS 11.0, *) {
             status.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 50).isActive = true
+            clear.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -20).isActive = true
         } else {
             status.topAnchor.constraint(equalTo: topAnchor, constant: 50).isActive = true
+            clear.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20).isActive = true
         }
         
         format.dateStyle = .none
@@ -94,13 +111,11 @@ class Git: UIView {
     
     @objc private func commit() {
         do {
-            try git.status {
-                if $0.untracked.isEmpty {
-                    
-                } else {
-                    
-                }
+            try git.status { status in
+                DispatchQueue.main.async { Commit(status) }
             }
         } catch { Alert.shared.add(error) }
     }
+    
+    @objc private func clear() { text.text = String() }
 }

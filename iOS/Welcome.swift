@@ -76,7 +76,7 @@ class Welcome: Sheet {
         return {
             addSubview($0)
             $0.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-            $0.width.constant = 220
+            $0.width.constant = 180
             return $0
         } (Link(title, target: self, selector: selector))
     }

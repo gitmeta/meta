@@ -56,7 +56,11 @@ import StoreKit
             self.load()
             DispatchQueue.main.async {
                 List.shared.update()
-                if self.user.welcome { Welcome(false) }
+                if self.user.welcome {
+                    Welcome(false)
+                } else {
+                    Git.shared.log(.local("Welcome.current"))
+                }
             }
         }
         

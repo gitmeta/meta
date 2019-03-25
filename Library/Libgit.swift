@@ -9,4 +9,5 @@ open class Libgit {
     open func release(repository: OpaquePointer!) {  }
     open func create(_ url: URL) -> OpaquePointer! { return nil }
     open func status(_ repository: OpaquePointer!) -> Status { return Status() }
+    open func add(_ repository: OpaquePointer!, file: String) { }
 }

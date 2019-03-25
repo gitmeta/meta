@@ -138,8 +138,16 @@ class Commit: Sheet, UITextViewDelegate {
         return top
     }
     
+    private func commit(_ spinner: Spinner) {
+        status.untracked.forEach { item in
+            guard subviews.compactMap({ $0 as? Commiting }).first(where: { $0.label.text == item })!.isSelected else { return }
+            
+        }
+    }
+    
     @objc private func commit() {
         let spinner = Spinner()
+        DispatchQueue.global(qos: .background).async { [weak self] in self?.commit(spinner) }
     }
     
     @objc private func done() { App.shared.endEditing(true) }

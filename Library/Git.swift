@@ -30,4 +30,11 @@ public class Git {
             result(Libgit.shared.status(repository.pointer))
         }
     }
+    
+    public func add(_ file: String) {
+        queue.async { [weak self] in
+            guard let repository = self?.repository else { return }
+            Libgit.shared.add(repository.pointer, file: file)
+        }
+    }
 }

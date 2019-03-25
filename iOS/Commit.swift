@@ -4,6 +4,7 @@ import UIKit
 class Commit: Sheet, UITextViewDelegate {
     private weak var text: UITextView!
     private weak var placeholder: UILabel!
+    private weak var scroll: UIScrollView!
     private let status: Status
     
     @discardableResult init(_ status: Status) {
@@ -63,6 +64,7 @@ class Commit: Sheet, UITextViewDelegate {
         scroll.alwaysBounceVertical = true
         scroll.indicatorStyle = .black
         addSubview(scroll)
+        self.scroll = scroll
         
         let border = UIView()
         border.translatesAutoresizingMaskIntoConstraints = false
@@ -138,16 +140,19 @@ class Commit: Sheet, UITextViewDelegate {
         return top
     }
     
-    private func commit(_ spinner: Spinner) {
+    private func perform(_ spinner: Spinner) {
         status.untracked.forEach { item in
-            guard subviews.compactMap({ $0 as? Commiting }).first(where: { $0.label.text == item })!.isSelected else { return }
+            guard scroll.subviews.compactMap({ $0 as? Commiting }).first(where: { $0.label.text == item })!.isSelected
+                else { return }
             Git.shared.git.add(item)
         }
+        spinner.close()
+        close()
     }
     
     @objc private func commit() {
         let spinner = Spinner()
-        DispatchQueue.global(qos: .background).async { [weak self] in self?.commit(spinner) }
+        DispatchQueue.main.async { [weak self] in self?.perform(spinner) }
     }
     
     @objc private func done() { App.shared.endEditing(true) }

@@ -46,4 +46,12 @@ class Spinner: UIView {
     }
     
     required init?(coder: NSCoder) { return nil }
+    
+    func close() {
+        DispatchQueue.main.async {
+            UIView.animate(withDuration: 0.3, animations: { [weak self] in
+                self?.alpha = 0
+            }) { [weak self] _ in self?.removeFromSuperview() }
+        }
+    }
 }

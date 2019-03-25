@@ -44,20 +44,9 @@ class Libgit: meta.Libgit {
         var file = UnsafeMutablePointer<Int8>(mutating: (file as NSString).utf8String)
         var paths = git_strarray(strings: &file, count: 1)
         let index = self.index(repository)
-        
-        return unsafeIndex().flatMap { index in
-            defer { git_index_free(index) }
-            let addResult = git_index_add_all(index, &paths, 0, nil, nil)
-            guard addResult == GIT_OK.rawValue else {
-                return .failure(NSError(gitError: addResult, pointOfFailure: "git_index_add_all"))
-            }
-            // write index to disk
-            let writeResult = git_index_write(index)
-            guard writeResult == GIT_OK.rawValue else {
-                return .failure(NSError(gitError: writeResult, pointOfFailure: "git_index_write"))
-            }
-            return .success(())
-        }
+        git_index_add_all(index, &paths, 0, nil, nil)
+        git_index_write(index)
+        git_index_free(index)
     }
     
     private func index(_ repository: OpaquePointer) -> OpaquePointer {

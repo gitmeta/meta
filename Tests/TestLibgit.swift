@@ -7,6 +7,7 @@ class TestLibgit: Libgit {
     var _create: (() -> Void)?
     var _status: (() -> Void)?
     var _add: (() -> Void)?
+    var _commit: (() -> Void)?
     
     override func repository(_ url: URL) -> OpaquePointer? {
         _repository?()
@@ -29,5 +30,9 @@ class TestLibgit: Libgit {
     
     override func add(_ repository: OpaquePointer!, file: String) {
         _add?()
+    }
+    
+    override func commit(_ message: String, credentials: Credentials, repository: OpaquePointer!) {
+        _commit?()
     }
 }

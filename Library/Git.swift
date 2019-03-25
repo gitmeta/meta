@@ -37,4 +37,11 @@ public class Git {
             Libgit.shared.add(repository.pointer, file: file)
         }
     }
+    
+    public func commit(_ message: String, credentials: Credentials) {
+        queue.async { [weak self] in
+            guard let repository = self?.repository else { return }
+            Libgit.shared.commit(message, credentials: credentials, repository: repository.pointer)
+        }
+    }
 }

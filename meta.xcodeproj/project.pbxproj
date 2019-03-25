@@ -79,6 +79,9 @@
 		20592A7D222EAE6000EAFD63 /* Ruler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20592A7C222EAE6000EAFD63 /* Ruler.swift */; };
 		20592A7F222EBB4600EAFD63 /* Display.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20592A7E222EBB4600EAFD63 /* Display.swift */; };
 		20592A81222ED6EA00EAFD63 /* Gradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20592A80222ED6EA00EAFD63 /* Gradient.swift */; };
+		205AEC4B224915CA00E39DFD /* Credentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205AEC4A224915CA00E39DFD /* Credentials.swift */; };
+		205AEC4C224915CA00E39DFD /* Credentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205AEC4A224915CA00E39DFD /* Credentials.swift */; };
+		205AEC4E22491BF200E39DFD /* Credentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205AEC4D22491BF200E39DFD /* Credentials.swift */; };
 		205D8DD52247B84D003FDBCF /* Commiting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205D8DD42247B84D003FDBCF /* Commiting.swift */; };
 		205D8E0E2247C40E003FDBCF /* Spinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205D8E0D2247C40E003FDBCF /* Spinner.swift */; };
 		20724539223E83FA00D0DE1F /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 20724538223E83FA00D0DE1F /* libz.tbd */; };
@@ -331,6 +334,8 @@
 		20592A7C222EAE6000EAFD63 /* Ruler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ruler.swift; sourceTree = "<group>"; };
 		20592A7E222EBB4600EAFD63 /* Display.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Display.swift; sourceTree = "<group>"; };
 		20592A80222ED6EA00EAFD63 /* Gradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gradient.swift; sourceTree = "<group>"; };
+		205AEC4A224915CA00E39DFD /* Credentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Credentials.swift; sourceTree = "<group>"; };
+		205AEC4D22491BF200E39DFD /* Credentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Credentials.swift; sourceTree = "<group>"; };
 		205D8DD42247B84D003FDBCF /* Commiting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Commiting.swift; sourceTree = "<group>"; };
 		205D8E0D2247C40E003FDBCF /* Spinner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spinner.swift; sourceTree = "<group>"; };
 		20724538223E83FA00D0DE1F /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.1.sdk/usr/lib/libz.tbd; sourceTree = DEVELOPER_DIR; };
@@ -558,6 +563,7 @@
 				20A2AF812247892E003E68A7 /* Commit.swift */,
 				205D8DD42247B84D003FDBCF /* Commiting.swift */,
 				201CE1E0222E5AD5007AE422 /* Create.swift */,
+				205AEC4D22491BF200E39DFD /* Credentials.swift */,
 				20592A7E222EBB4600EAFD63 /* Display.swift */,
 				20A70CBA222D3B15001AE4E8 /* Document.swift */,
 				20A70CBC222D45A9001AE4E8 /* Extensions.swift */,
@@ -640,18 +646,19 @@
 			isa = PBXGroup;
 			children = (
 				20079146223788D90086976A /* Access.swift */,
+				205AEC4A224915CA00E39DFD /* Credentials.swift */,
 				20366C6B22293BDD009A2FB3 /* Directory.swift */,
 				20366C7122293BDD009A2FB3 /* Document.swift */,
 				20366C7022293BDD009A2FB3 /* Editable.swift */,
 				20A70CC2222D6EAD001AE4E8 /* Exception.swift */,
 				20366C6C22293BDD009A2FB3 /* Folder.swift */,
 				20E81146223D35B50065FD65 /* Git.swift */,
-				20C2BD522245A90A002B6546 /* Status.swift */,
-				20E8114E223D3C6A0065FD65 /* Repository.swift */,
 				20366C6D22293BDD009A2FB3 /* Image.swift */,
 				20E81149223D35BD0065FD65 /* Libgit.swift */,
 				20366C6F22293BDD009A2FB3 /* Md.swift */,
 				20366C7222293BDD009A2FB3 /* Pdf.swift */,
+				20E8114E223D3C6A0065FD65 /* Repository.swift */,
+				20C2BD522245A90A002B6546 /* Status.swift */,
 				20366C6A22293BDD009A2FB3 /* Storage.swift */,
 				20366C6E22293BDD009A2FB3 /* User.swift */,
 			);
@@ -925,6 +932,7 @@
 				2086C14322445E3D006E994C /* Pdf.swift in Sources */,
 				205D8DD52247B84D003FDBCF /* Commiting.swift in Sources */,
 				20A70CBF222D4D51001AE4E8 /* Link.swift in Sources */,
+				205AEC4E22491BF200E39DFD /* Credentials.swift in Sources */,
 				20ABA34A22326E2400C1A8AA /* Help.swift in Sources */,
 				201CE1E9222E9FEB007AE422 /* Storage.swift in Sources */,
 				20366C9922293BE8009A2FB3 /* Shared.swift in Sources */,
@@ -959,6 +967,7 @@
 				20E8114F223D3C6A0065FD65 /* Repository.swift in Sources */,
 				20366C7F22293BDD009A2FB3 /* Md.swift in Sources */,
 				20A70CC3222D6EAD001AE4E8 /* Exception.swift in Sources */,
+				205AEC4B224915CA00E39DFD /* Credentials.swift in Sources */,
 				20E81147223D35B50065FD65 /* Git.swift in Sources */,
 				20C2BD532245A90A002B6546 /* Status.swift in Sources */,
 				20366C7722293BDD009A2FB3 /* Directory.swift in Sources */,
@@ -981,6 +990,7 @@
 				20E81150223D3C6A0065FD65 /* Repository.swift in Sources */,
 				20366C7822293BDD009A2FB3 /* Directory.swift in Sources */,
 				20079148223788D90086976A /* Access.swift in Sources */,
+				205AEC4C224915CA00E39DFD /* Credentials.swift in Sources */,
 				20E81148223D35B50065FD65 /* Git.swift in Sources */,
 				20C2BD542245A90A002B6546 /* Status.swift in Sources */,
 				20A70CC4222D6EAD001AE4E8 /* Exception.swift in Sources */,

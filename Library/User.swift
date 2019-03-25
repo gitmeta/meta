@@ -1,9 +1,10 @@
 import Foundation
 
 public class User: Codable {
+    public var credentials: Credentials? { didSet { save() } }
     public var welcome = true { didSet { save() } }
-    public var ask: (() -> Void)?
     public var access: Access? { didSet { save() } }
+    public var ask: (() -> Void)?
     var rate = Date()
     var created = Date()
     
@@ -21,6 +22,7 @@ public class User: Codable {
     
     public required init(from: Decoder) throws {
         let container = try from.container(keyedBy: Keys.self)
+        credentials = try? container.decode(Credentials.self, forKey: .credentials)
         access = try? container.decode(Access.self, forKey: .access)
         rate = try container.decode(Date.self, forKey: .rate)
         created = try container.decode(Date.self, forKey: .created)
@@ -33,6 +35,9 @@ public class User: Codable {
         try container.encode(rate, forKey: .rate)
         try container.encode(created, forKey: .created)
         try container.encode(welcome, forKey: .welcome)
+        if let credentials = self.credentials {
+            try container.encode(credentials, forKey: .credentials)
+        }
     }
     
     private func save() {
@@ -46,6 +51,7 @@ public class User: Codable {
     }
     
     private enum Keys: CodingKey {
+        case credentials
         case access
         case rate
         case created

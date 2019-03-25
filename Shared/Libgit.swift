@@ -40,6 +40,32 @@ class Libgit: meta.Libgit {
         return status
     }
     
+    override func add(_ repository: OpaquePointer!, file: String) {
+        var file = UnsafeMutablePointer<Int8>(mutating: (file as NSString).utf8String)
+        var paths = git_strarray(strings: &file, count: 1)
+        let index = self.index(repository)
+        
+        return unsafeIndex().flatMap { index in
+            defer { git_index_free(index) }
+            let addResult = git_index_add_all(index, &paths, 0, nil, nil)
+            guard addResult == GIT_OK.rawValue else {
+                return .failure(NSError(gitError: addResult, pointOfFailure: "git_index_add_all"))
+            }
+            // write index to disk
+            let writeResult = git_index_write(index)
+            guard writeResult == GIT_OK.rawValue else {
+                return .failure(NSError(gitError: writeResult, pointOfFailure: "git_index_write"))
+            }
+            return .success(())
+        }
+    }
+    
+    private func index(_ repository: OpaquePointer) -> OpaquePointer {
+        var index: OpaquePointer?
+        git_repository_index(&index, repository)
+        return index!
+    }
+    
     private func branch(_ repository: OpaquePointer) -> String {
         if git_repository_head_unborn(repository) == 1 {
             return .local("Git.unborn")

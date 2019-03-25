@@ -141,7 +141,7 @@ class Commit: Sheet, UITextViewDelegate {
     private func commit(_ spinner: Spinner) {
         status.untracked.forEach { item in
             guard subviews.compactMap({ $0 as? Commiting }).first(where: { $0.label.text == item })!.isSelected else { return }
-            
+            Git.shared.git.add(item)
         }
     }
     

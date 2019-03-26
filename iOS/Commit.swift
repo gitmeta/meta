@@ -140,6 +140,11 @@ class Commit: Sheet, UITextViewDelegate {
         return top
     }
     
+    private func ready() {
+        let spinner = Spinner()
+        DispatchQueue.main.async { [weak self] in self?.perform(spinner) }
+    }
+    
     private func perform(_ spinner: Spinner) {
         status.untracked.forEach { item in
             guard scroll.subviews.compactMap({ $0 as? Commiting }).first(where: { $0.label.text == item })!.isSelected
@@ -151,8 +156,13 @@ class Commit: Sheet, UITextViewDelegate {
     }
     
     @objc private func commit() {
-        let spinner = Spinner()
-        DispatchQueue.main.async { [weak self] in self?.perform(spinner) }
+        if App.shared.user.credentials == nil {
+            Credentials { [weak self] in
+                self?.ready()
+            }
+        } else {
+            ready()
+        }
     }
     
     @objc private func done() { App.shared.endEditing(true) }

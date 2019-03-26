@@ -49,7 +49,7 @@ class Libgit: meta.Libgit {
         git_index_free(index)
     }
     
-    override func commit(_ message: String, credentials: Credentials, repository: OpaquePointer!) {
+    override func commit(_ message: String, credentials: meta.Credentials, repository: OpaquePointer!) {
         let index = self.index(repository)
         let signature = self.signature(credentials)
         var tree = git_oid()
@@ -107,7 +107,7 @@ class Libgit: meta.Libgit {
         } (status.index_to_workdir?.pointee ?? status.head_to_index?.pointee)
     }
     
-    private func signature(_ credentials: Credentials) -> UnsafeMutablePointer<git_signature> {
+    private func signature(_ credentials: meta.Credentials) -> UnsafeMutablePointer<git_signature> {
         return {
             var signature: UnsafeMutablePointer<git_signature>!
             git_signature_new(&signature, credentials.name, credentials.email, git_time_t($0.timeIntervalSince1970),

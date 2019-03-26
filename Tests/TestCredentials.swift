@@ -18,4 +18,8 @@ class TestCredentials: XCTestCase {
         XCTAssertThrowsError(try Credentials("test", email: "test@mailcom."))
         XCTAssertThrowsError(try Credentials("test", email: "test@.mailcom"))
     }
+    
+    func testWeird() {
+        XCTAssertThrowsError(try Credentials("test", email: "test@ mail.com"))
+    }
 }

@@ -1,3 +1,4 @@
+import meta
 import UIKit
 
 class Credentials: Sheet, UITextFieldDelegate {
@@ -33,27 +34,28 @@ class Credentials: Sheet, UITextFieldDelegate {
         
         let titleName = UILabel()
         titleName.translatesAutoresizingMaskIntoConstraints = false
-        titleName.font = .systemFont(ofSize: 14, weight: .bold)
-        titleName.textColor = UIColor(white: 1, alpha: 0.4)
+        titleName.font = .systemFont(ofSize: 16, weight: .bold)
+        titleName.textColor = UIColor(white: 1, alpha: 0.35)
         titleName.text = .local("Credentials.name")
         base.addSubview(titleName)
         
         let titleEmail = UILabel()
         titleEmail.translatesAutoresizingMaskIntoConstraints = false
-        titleEmail.font = .systemFont(ofSize: 14, weight: .bold)
-        titleEmail.textColor = UIColor(white: 1, alpha: 0.4)
+        titleEmail.font = .systemFont(ofSize: 16, weight: .bold)
+        titleEmail.textColor = UIColor(white: 1, alpha: 0.35)
         titleEmail.text = .local("Credentials.email")
         base.addSubview(titleEmail)
         
         let name = UITextField()
         name.translatesAutoresizingMaskIntoConstraints = false
+        name.text = App.shared.user.credentials?.name
         name.clearButtonMode = .never
         name.keyboardType = .alphabet
         name.keyboardAppearance = .dark
         name.spellCheckingType = .no
         name.autocorrectionType = .no
         name.autocapitalizationType = .none
-        name.font = .systemFont(ofSize: 14, weight: .medium)
+        name.font = .systemFont(ofSize: 16, weight: .medium)
         name.textColor = .white
         name.tintColor = .white
         name.delegate = self
@@ -62,13 +64,14 @@ class Credentials: Sheet, UITextFieldDelegate {
         
         let email = UITextField()
         email.translatesAutoresizingMaskIntoConstraints = false
+        email.text = App.shared.user.credentials?.email
         email.clearButtonMode = .never
         email.keyboardType = .emailAddress
         email.keyboardAppearance = .dark
         email.spellCheckingType = .no
         email.autocorrectionType = .no
         email.autocapitalizationType = .none
-        email.font = .systemFont(ofSize: 14, weight: .medium)
+        email.font = .systemFont(ofSize: 16, weight: .medium)
         email.textColor = .white
         email.tintColor = .white
         email.delegate = self
@@ -135,6 +138,12 @@ class Credentials: Sheet, UITextFieldDelegate {
     
     @objc private func done() {
         App.shared.endEditing(true)
-        
+        do {
+            App.shared.user.credentials = try meta.Credentials(name.text!, email: email.text!)
+            Alert.shared.add(.local("Credentials.saved"))
+            close()
+        } catch {
+            Alert.shared.add(error)
+        }
     }
 }

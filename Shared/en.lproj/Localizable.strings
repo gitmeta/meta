@@ -37,6 +37,7 @@ Credentials.done="Save";
 Credentials.cancel="Cancel";
 Credentials.name="Name";
 Credentials.email="Email";
+Credentials.saved="Credentials updated";
 Activate.title="Activate Git";
 Activate.info="Selecting your HOME directory";
 Activate.select="Select";

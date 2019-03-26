@@ -8,10 +8,11 @@ class Alert {
     private var alert = [String]()
     
     private init() { }
+    func add(_ error: Error) { add((error as? Exception)?.local ?? error.localizedDescription) }
     
-    func add(_ error: Error) {
-        alert.append((error as? Exception)?.local ?? error.localizedDescription)
-        DispatchQueue.main.async { if self.view == nil { self.pop() } }
+    func add(_ message: String) {
+        alert.append(message)
+        DispatchQueue.main.async { if self.view === nil { self.pop() } }
     }
     
     private func pop() {
@@ -51,7 +52,7 @@ class Alert {
             view.alpha = 1
             App.shared.rootViewController!.view.layoutIfNeeded()
         }) { _ in
-            DispatchQueue.main.asyncAfter(deadline: .now() + 8) { [weak view] in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [weak view] in
                 if view != nil && view === self.view {
                     self.remove()
                 }
@@ -61,7 +62,7 @@ class Alert {
     
     @objc private func remove() {
         bottom?.constant = 0
-        UIView.animate(withDuration: 0.3, animations: {
+        UIView.animate(withDuration: 0.4, animations: {
             self.view?.alpha = 0
             App.shared.rootViewController!.view.layoutIfNeeded()
         }) { _ in

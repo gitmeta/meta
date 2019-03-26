@@ -88,6 +88,8 @@
 		2072453B223E840200D0DE1F /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2072453A223E840200D0DE1F /* libiconv.tbd */; };
 		2086C14122445D54006E994C /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086C14022445D54006E994C /* Image.swift */; };
 		2086C14322445E3D006E994C /* Pdf.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086C14222445E3D006E994C /* Pdf.swift */; };
+		208B7965224A13A300D0DD5C /* Commit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 208B7964224A13A300D0DD5C /* Commit.swift */; };
+		208B7966224A13A300D0DD5C /* Commit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 208B7964224A13A300D0DD5C /* Commit.swift */; };
 		20921CE8222BD6A0007FDB7A /* Sheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20921CE7222BD6A0007FDB7A /* Sheet.swift */; };
 		20A2AF822247892E003E68A7 /* Commit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A2AF812247892E003E68A7 /* Commit.swift */; };
 		20A70CB9222D383B001AE4E8 /* List.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A70CB8222D383B001AE4E8 /* List.swift */; };
@@ -342,6 +344,7 @@
 		2072453A223E840200D0DE1F /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.1.sdk/usr/lib/libiconv.tbd; sourceTree = DEVELOPER_DIR; };
 		2086C14022445D54006E994C /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		2086C14222445E3D006E994C /* Pdf.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pdf.swift; sourceTree = "<group>"; };
+		208B7964224A13A300D0DD5C /* Commit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Commit.swift; sourceTree = "<group>"; };
 		20921CE7222BD6A0007FDB7A /* Sheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sheet.swift; sourceTree = "<group>"; };
 		20A2AF812247892E003E68A7 /* Commit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Commit.swift; sourceTree = "<group>"; };
 		20A70CB8222D383B001AE4E8 /* List.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = List.swift; sourceTree = "<group>"; };
@@ -646,6 +649,7 @@
 			isa = PBXGroup;
 			children = (
 				20079146223788D90086976A /* Access.swift */,
+				208B7964224A13A300D0DD5C /* Commit.swift */,
 				205AEC4A224915CA00E39DFD /* Credentials.swift */,
 				20366C6B22293BDD009A2FB3 /* Directory.swift */,
 				20366C7122293BDD009A2FB3 /* Document.swift */,
@@ -959,6 +963,7 @@
 			files = (
 				20079147223788D90086976A /* Access.swift in Sources */,
 				20366C8322293BDD009A2FB3 /* Document.swift in Sources */,
+				208B7965224A13A300D0DD5C /* Commit.swift in Sources */,
 				20366C8122293BDD009A2FB3 /* Editable.swift in Sources */,
 				20366C7522293BDD009A2FB3 /* Storage.swift in Sources */,
 				20E8114A223D35BD0065FD65 /* Libgit.swift in Sources */,
@@ -982,6 +987,7 @@
 			files = (
 				20366C8422293BDD009A2FB3 /* Document.swift in Sources */,
 				20366C8222293BDD009A2FB3 /* Editable.swift in Sources */,
+				208B7966224A13A300D0DD5C /* Commit.swift in Sources */,
 				20366C7622293BDD009A2FB3 /* Storage.swift in Sources */,
 				20366C8622293BDD009A2FB3 /* Pdf.swift in Sources */,
 				20E8114B223D35BD0065FD65 /* Libgit.swift in Sources */,

@@ -49,6 +49,31 @@ class Libgit: meta.Libgit {
         git_index_free(index)
     }
     
+    override func commit(_ message: String, credentials: Credentials, repository: OpaquePointer!) {
+        let index = self.index(repository)
+        let signature = self.signature(credentials)
+        var tree = git_oid()
+        git_index_write_tree(&tree, index)
+        var parent = git_oid()
+        git_reference_name_to_id(&parent, repository, "HEAD")
+        var look: OpaquePointer?
+        git_tree_lookup(&look, repository, &tree)
+        var pretty = git_buf()
+        git_message_prettify(&pretty, message, 0, 35)
+        var history: OpaquePointer!
+        git_commit_lookup(&history, repository, &parent)
+        var id = git_oid()
+        ContiguousArray(arrayLiteral: history).withUnsafeBufferPointer(<#T##body: (UnsafeBufferPointer<OpaquePointer?>) throws -> R##(UnsafeBufferPointer<OpaquePointer?>) throws -> R#>)
+        git_commit_create(&id, repository, "HEAD", signature, signature, "UTF-8", pretty.ptr, look, 1,
+                          UnsafeMutablePointer(mutating: ContiguousArray(arrayLiteral: history).withUnsafeBufferPointer.baseAddress))
+        
+        git_commit_free(history)
+        git_buf_free(&pretty)
+        git_tree_free(look)
+        git_signature_free(signature)
+        git_index_free(index)
+    }
+    
     private func index(_ repository: OpaquePointer) -> OpaquePointer {
         var index: OpaquePointer?
         git_repository_index(&index, repository)
@@ -80,5 +105,14 @@ class Libgit: meta.Libgit {
         return {
             $0?.new_file.path.map(String.init(cString:)) ?? String()
         } (status.index_to_workdir?.pointee ?? status.head_to_index?.pointee)
+    }
+    
+    private func signature(_ credentials: Credentials) -> UnsafeMutablePointer<git_signature> {
+        return {
+            var signature: UnsafeMutablePointer<git_signature>!
+            git_signature_new(&signature, credentials.name, credentials.email, git_time_t($0.timeIntervalSince1970),
+                              Int32(TimeZone.current.secondsFromGMT(for: $0) / 60))
+            return signature
+        } (Date())
     }
 }

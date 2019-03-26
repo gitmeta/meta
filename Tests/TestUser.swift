@@ -47,7 +47,7 @@ class TestUser: XCTestCase {
     func testUpdateCredentialsSaves() {
         let expect = expectation(description: String())
         storage.saved = { expect.fulfill() }
-        User().credentials = Credentials(String(), email: String())
+        User().credentials = Credentials()
         waitForExpectations(timeout: 1)
     }
     
@@ -88,7 +88,9 @@ class TestUser: XCTestCase {
         let user = User()
         user.welcome = false
         user.access = Access(URL(fileURLWithPath: "/"), data: Data())
-        user.credentials = Credentials("test", email: "test@mail.com")
+        user.credentials = Credentials()
+        user.credentials!.name = "test"
+        user.credentials!.email = "test@mail.com"
         user.created = Date(timeIntervalSince1970: 0)
         user.rate = Date(timeIntervalSince1970: 1000)
         XCTAssertEqual("""

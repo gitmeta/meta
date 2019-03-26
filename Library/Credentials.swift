@@ -1,9 +1,17 @@
 public struct Credentials: Codable {
-    public let name: String
-    public let email: String
+    public var name = String()
+    public var email = String()
     
-    init(_ name: String, email: String) {
+    public init(_ name: String, email: String) throws {
+        guard !name.isEmpty else { throw Exception.invalidName }
+        
+        let at = email.components(separatedBy: "@")
+        let dot = at.last!.components(separatedBy: ".")
+        guard at.count == 2, dot.count > 1, !dot.first!.isEmpty, !dot.last!.isEmpty else { throw Exception.invalidEmail }
+        
         self.name = name
         self.email = email
     }
+    
+    init() { }
 }

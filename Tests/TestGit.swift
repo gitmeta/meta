@@ -74,7 +74,7 @@ class TestGit: XCTestCase {
         let expect = expectation(description: String())
         libgit._commit = { expect.fulfill() }
         git.repository = Repository(pointer: nil, url: URL(fileURLWithPath: "/"))
-        git.commit(String(), credentials: Credentials(String(), email: String()))
+        git.commit(String(), credentials: Credentials())
         waitForExpectations(timeout: 1)
     }
 }

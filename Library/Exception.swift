@@ -6,5 +6,7 @@ public enum Exception: LocalizedError {
     case fileNoExists
     case noRepository
     case alreadyRepository
+    case invalidName
+    case invalidEmail
     case unknown
 }

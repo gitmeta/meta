@@ -73,6 +73,7 @@
 		20366C9A22293BE8009A2FB3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 20366C9122293BE8009A2FB3 /* Assets.xcassets */; };
 		20366C9B22293BE8009A2FB3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 20366C9122293BE8009A2FB3 /* Assets.xcassets */; };
 		2037F567222A9149009778BC /* Welcome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2037F566222A9149009778BC /* Welcome.swift */; };
+		2039B30B224A5AAC00FD6BAA /* TestCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2039B30A224A5AAC00FD6BAA /* TestCredentials.swift */; };
 		203C6EB7223E740D00C64AEA /* libgit2Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 203C6EB5223E73F300C64AEA /* libgit2Mac.a */; };
 		203C6EB8223E742500C64AEA /* libgit2iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 203C6EB6223E73F400C64AEA /* libgit2iOS.a */; };
 		2058C224223E4FBE00A23F2B /* Libgit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2058C223223E4FBE00A23F2B /* Libgit.swift */; };
@@ -328,6 +329,7 @@
 		20366C9E22293D20009A2FB3 /* libmeta.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libmeta.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		20366C9F22293D59009A2FB3 /* libmeta.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libmeta.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		2037F566222A9149009778BC /* Welcome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Welcome.swift; sourceTree = "<group>"; };
+		2039B30A224A5AAC00FD6BAA /* TestCredentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCredentials.swift; sourceTree = "<group>"; };
 		203C6EB5223E73F300C64AEA /* libgit2Mac.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libgit2Mac.a; sourceTree = "<group>"; };
 		203C6EB6223E73F400C64AEA /* libgit2iOS.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libgit2iOS.a; sourceTree = "<group>"; };
 		2058C223223E4FBE00A23F2B /* Libgit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Libgit.swift; sourceTree = "<group>"; };
@@ -630,12 +632,13 @@
 			isa = PBXGroup;
 			children = (
 				20366C6022293BCF009A2FB3 /* Tests.plist */,
+				2039B30A224A5AAC00FD6BAA /* TestCredentials.swift */,
 				20366C5F22293BCF009A2FB3 /* TestDocument.swift */,
 				20A70CC0222D6D7D001AE4E8 /* TestDocumentChange.swift */,
 				20366C5E22293BCF009A2FB3 /* TestFolder.swift */,
 				20E81144223D34CB0065FD65 /* TestGit.swift */,
-				20E99E002245AE5100EEDF45 /* TestStatus.swift */,
 				20E8114C223D35FD0065FD65 /* TestLibgit.swift */,
+				20E99E002245AE5100EEDF45 /* TestStatus.swift */,
 				20366C6222293BCF009A2FB3 /* TestStorage.swift */,
 				20366C5D22293BCF009A2FB3 /* TestUser.swift */,
 			);
@@ -1006,6 +1009,7 @@
 				20366C6522293BCF009A2FB3 /* TestDocument.swift in Sources */,
 				20366C6822293BCF009A2FB3 /* TestStorage.swift in Sources */,
 				20E8114D223D35FD0065FD65 /* TestLibgit.swift in Sources */,
+				2039B30B224A5AAC00FD6BAA /* TestCredentials.swift in Sources */,
 				20366C6322293BCF009A2FB3 /* TestUser.swift in Sources */,
 				20A70CC1222D6D7D001AE4E8 /* TestDocumentChange.swift in Sources */,
 				20E81145223D34CB0065FD65 /* TestGit.swift in Sources */,

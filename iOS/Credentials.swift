@@ -1,9 +1,11 @@
 import UIKit
 
-class Credentials: Sheet {
+class Credentials: Sheet, UITextFieldDelegate {
+    private weak var name: UITextField!
+    private weak var email: UITextField!
+    
     @discardableResult init(_ done: @escaping(() -> Void)) {
         super.init(true)
-        backgroundColor = .black
         
         let image = UIImageView(image: #imageLiteral(resourceName: "credentials.pdf"))
         image.translatesAutoresizingMaskIntoConstraints = false
@@ -13,8 +15,8 @@ class Credentials: Sheet {
         
         let base = UIView()
         base.translatesAutoresizingMaskIntoConstraints = false
-        base.backgroundColor = .shade
-        base.layer.cornerRadius = 20
+        base.backgroundColor = .black
+        base.layer.cornerRadius = 4
         addSubview(base)
         
         let done = Link(.local("Credentials.done"), target: self, selector: #selector(self.done))
@@ -29,21 +31,92 @@ class Credentials: Sheet {
         cancel.titleLabel!.font = .systemFont(ofSize: 14, weight: .light)
         addSubview(cancel)
         
-        image.topAnchor.constraint(equalTo: topAnchor, constant: 30 + App.shared.margin.top).isActive = true
+        let titleName = UILabel()
+        titleName.translatesAutoresizingMaskIntoConstraints = false
+        titleName.font = .systemFont(ofSize: 14, weight: .bold)
+        titleName.textColor = UIColor(white: 1, alpha: 0.4)
+        titleName.text = .local("Credentials.name")
+        base.addSubview(titleName)
+        
+        let titleEmail = UILabel()
+        titleEmail.translatesAutoresizingMaskIntoConstraints = false
+        titleEmail.font = .systemFont(ofSize: 14, weight: .bold)
+        titleEmail.textColor = UIColor(white: 1, alpha: 0.4)
+        titleEmail.text = .local("Credentials.email")
+        base.addSubview(titleEmail)
+        
+        let name = UITextField()
+        name.translatesAutoresizingMaskIntoConstraints = false
+        name.clearButtonMode = .never
+        name.keyboardType = .alphabet
+        name.keyboardAppearance = .dark
+        name.spellCheckingType = .no
+        name.autocorrectionType = .no
+        name.autocapitalizationType = .none
+        name.font = .systemFont(ofSize: 14, weight: .medium)
+        name.textColor = .white
+        name.tintColor = .white
+        name.delegate = self
+        base.addSubview(name)
+        self.name = name
+        
+        let email = UITextField()
+        email.translatesAutoresizingMaskIntoConstraints = false
+        email.clearButtonMode = .never
+        email.keyboardType = .emailAddress
+        email.keyboardAppearance = .dark
+        email.spellCheckingType = .no
+        email.autocorrectionType = .no
+        email.autocapitalizationType = .none
+        email.font = .systemFont(ofSize: 14, weight: .medium)
+        email.textColor = .white
+        email.tintColor = .white
+        email.delegate = self
+        base.addSubview(email)
+        self.email = email
+        
+        let border = UIView()
+        border.backgroundColor = .shade
+        border.translatesAutoresizingMaskIntoConstraints = false
+        border.isUserInteractionEnabled = false
+        base.addSubview(border)
+        
+        image.bottomAnchor.constraint(equalTo: base.topAnchor).isActive = true
         image.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         image.widthAnchor.constraint(equalToConstant: 78).isActive = true
         image.heightAnchor.constraint(equalToConstant: 36).isActive = true
         
-        base.topAnchor.constraint(equalTo: image.bottomAnchor).isActive = true
+        base.bottomAnchor.constraint(equalTo: centerYAnchor).isActive = true
         base.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         base.widthAnchor.constraint(equalToConstant: 300).isActive = true
-        base.heightAnchor.constraint(equalToConstant: 200).isActive = true
+        base.heightAnchor.constraint(equalToConstant: 100).isActive = true
         
-        done.topAnchor.constraint(equalTo: base.bottomAnchor, constant: 40).isActive = true
+        titleName.leftAnchor.constraint(equalTo: base.leftAnchor, constant: 20).isActive = true
+        titleName.centerYAnchor.constraint(equalTo: name.centerYAnchor).isActive = true
+        
+        titleEmail.leftAnchor.constraint(equalTo: base.leftAnchor, constant: 20).isActive = true
+        titleEmail.centerYAnchor.constraint(equalTo: email.centerYAnchor).isActive = true
+        
+        name.topAnchor.constraint(equalTo: base.topAnchor).isActive = true
+        name.widthAnchor.constraint(equalToConstant: 190).isActive = true
+        name.rightAnchor.constraint(equalTo: base.rightAnchor, constant: -20).isActive = true
+        name.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        
+        border.topAnchor.constraint(equalTo: name.bottomAnchor).isActive = true
+        border.rightAnchor.constraint(equalTo: base.rightAnchor).isActive = true
+        border.heightAnchor.constraint(equalToConstant: 1).isActive = true
+        border.widthAnchor.constraint(equalToConstant: 210).isActive = true
+        
+        email.topAnchor.constraint(equalTo: border.bottomAnchor).isActive = true
+        email.widthAnchor.constraint(equalToConstant: 190).isActive = true
+        email.rightAnchor.constraint(equalTo: base.rightAnchor, constant: -20).isActive = true
+        email.bottomAnchor.constraint(equalTo: base.bottomAnchor).isActive = true
+        
+        done.bottomAnchor.constraint(equalTo: cancel.topAnchor, constant: -20).isActive = true
         done.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         done.width.constant = 200
         
-        cancel.topAnchor.constraint(equalTo: done.bottomAnchor, constant: 20).isActive = true
+        cancel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -(20 + App.shared.margin.bottom)).isActive = true
         cancel.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         cancel.widthAnchor.constraint(equalTo: done.widthAnchor).isActive = true
         cancel.heightAnchor.constraint(equalToConstant: 40).isActive = true
@@ -51,7 +124,17 @@ class Credentials: Sheet {
     
     required init?(coder: NSCoder) { return nil }
     
+    func textFieldShouldReturn(_ field: UITextField) -> Bool {
+        if field === name {
+            email.becomeFirstResponder()
+        } else {
+            done()
+        }
+        return true
+    }
+    
     @objc private func done() {
+        App.shared.endEditing(true)
         
     }
 }

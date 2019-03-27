@@ -2,10 +2,12 @@ import meta
 import UIKit
 
 class Credentials: Sheet, UITextFieldDelegate {
+    private var success: (() -> Void)!
     private weak var name: UITextField!
     private weak var email: UITextField!
     
-    @discardableResult init(_ done: @escaping(() -> Void)) {
+    @discardableResult init(_ success: @escaping(() -> Void)) {
+        self.success = success
         super.init(true)
         
         let image = UIImageView(image: #imageLiteral(resourceName: "credentials.pdf"))
@@ -142,6 +144,7 @@ class Credentials: Sheet, UITextFieldDelegate {
             App.shared.user.credentials = try meta.Credentials(name.text!, email: email.text!)
             Alert.shared.add(.local("Credentials.saved"))
             close()
+            success()
         } catch {
             Alert.shared.add(error)
         }

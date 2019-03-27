@@ -56,11 +56,12 @@ class Document: UIControl {
     func update() {
         if document is meta.Directory {
             image.image = isSelected ? #imageLiteral(resourceName: "collapse.pdf") : #imageLiteral(resourceName: "expand.pdf")
+            backgroundColor = isHighlighted ? UIColor(white: 1, alpha: 0.1) : .clear
         } else {
             if List.shared.selected === self || isHighlighted || isSelected {
-                alpha = 0.3
+                backgroundColor = UIColor(white: 1, alpha: 0.1)
             } else {
-                alpha = 1
+                backgroundColor = .clear
             }
         }
     }

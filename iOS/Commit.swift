@@ -142,7 +142,9 @@ class Commit: Sheet, UITextViewDelegate {
     
     private func ready() {
         let spinner = Spinner()
-        DispatchQueue.main.async { [weak self] in self?.perform(spinner) }
+        spinner.ready = { [weak self] in
+            self?.perform(spinner)
+        }
     }
     
     private func perform(_ spinner: Spinner) {
@@ -151,6 +153,7 @@ class Commit: Sheet, UITextViewDelegate {
                 else { return }
             Git.shared.git.add(item)
         }
+        Git.shared.git.commit(text.text, credentials: App.shared.user.credentials!)
         spinner.close()
         close()
     }

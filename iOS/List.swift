@@ -134,6 +134,7 @@ class List: UIScrollView {
             
             document.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
             document.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
+            document.widthAnchor.constraint(equalTo: self.widthAnchor).isActive = true
             document.top = document.topAnchor.constraint(equalTo: $0.1, constant: $0.2)
             return (document, document.bottomAnchor, 0)
             }.0

@@ -53,25 +53,25 @@ class Libgit: meta.Libgit {
         let index = self.index(repository)
         let signature = self.signature(credentials)
         var tree = git_oid()
-        git_index_write_tree(&tree, index)
+        assert(git_index_write_tree(&tree, index) == GIT_OK.rawValue)
         var parent = git_oid()
-        git_reference_name_to_id(&parent, repository, "HEAD")
-        var look: OpaquePointer?
-        git_tree_lookup(&look, repository, &tree)
+        assert(git_reference_name_to_id(&parent, repository, "HEAD") == GIT_OK.rawValue)
+        var look: OpaquePointer!
+        assert(git_tree_lookup(&look, repository, &tree) == GIT_OK.rawValue)
         var pretty = git_buf()
-        git_message_prettify(&pretty, message, 0, 35)
+        assert(git_message_prettify(&pretty, message, 0, 0) == GIT_OK.rawValue)
         var history: OpaquePointer!
-        git_commit_lookup(&history, repository, &parent)
+        assert(git_commit_lookup(&history, repository, &parent) == GIT_OK.rawValue)
         var id = git_oid()
-        ContiguousArray(arrayLiteral: history).withUnsafeBufferPointer {
-            git_commit_create(&id, repository, "HEAD", signature, signature, "UTF-8", pretty.ptr, look, 1,
-                              UnsafeMutablePointer(mutating: $0.baseAddress))
-            git_commit_free(history)
-            git_buf_free(&pretty)
-            git_tree_free(look)
-            git_signature_free(signature)
-            git_index_free(index)
-        }
+        
+        git_commit_create(&id, repository, "HEAD", signature, signature, "UTF-8", pretty.ptr, look, 1,
+                          UnsafeMutablePointer<OpaquePointer?>(history))
+        
+        git_commit_free(history)
+        git_buf_free(&pretty)
+        git_tree_free(look)
+        git_signature_free(signature)
+        git_index_free(index)
     }
     
     private func index(_ repository: OpaquePointer) -> OpaquePointer {

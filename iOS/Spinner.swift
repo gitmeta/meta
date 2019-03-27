@@ -1,6 +1,8 @@
 import UIKit
 
 class Spinner: UIView {
+    var ready: (() -> Void)?
+    
     init() {
         App.shared.endEditing(true)
         super.init(frame: .zero)
@@ -42,7 +44,11 @@ class Spinner: UIView {
         image.widthAnchor.constraint(equalToConstant: 50).isActive = true
         image.heightAnchor.constraint(equalToConstant: 50).isActive = true
         
-        UIView.animate(withDuration: 0.2) { [weak self] in self?.alpha = 1 }
+        UIView.animate(withDuration: 0.3, animations: { [weak self] in
+            self?.alpha = 1
+        }) { [weak self] _ in
+            self?.ready?()
+        }
     }
     
     required init?(coder: NSCoder) { return nil }

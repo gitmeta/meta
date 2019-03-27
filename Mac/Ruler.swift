@@ -19,11 +19,12 @@ class Ruler: NSRulerView {
         let range = layout.glyphRange(forBoundingRect: text.visibleRect, in: text.textContainer!)
         var i = (try! NSRegularExpression(pattern: "\n")).numberOfMatches(in: text.string,
                                                                           range: NSMakeRange(0, range.location))
+
         var c = range.lowerBound
         while c < range.upperBound {
             i += 1
             let end = layout.glyphRange(forCharacterRange: NSRange(location: text.string.lineRange(for:
-                Range(NSRange(location: c, length: 0), in: text.string)!).upperBound.encodedOffset, length: 0),
+                Range(NSRange(location: c, length: 0), in: text.string)!).upperBound.utf16Offset(in: text.string), length: 0),
                                         actualCharacterRange: nil).upperBound
             numbers.append((i, layout.lineFragmentRect(forGlyphAt: c, effectiveRange: nil,
                                                        withoutAdditionalLayout: true).minY, {

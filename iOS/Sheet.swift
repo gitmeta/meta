@@ -1,6 +1,8 @@
 import UIKit
 
 class Sheet: UIView {
+    var closing: (() -> Void)?
+    
     init(_ animated: Bool) {
         App.shared.endEditing(true)
         super.init(frame: .zero)
@@ -25,6 +27,9 @@ class Sheet: UIView {
         App.shared.endEditing(true)
         UIView.animate(withDuration: 0.3, animations: { [weak self] in
             self?.alpha = 0
-        }) { [weak self] _ in self?.removeFromSuperview() }
+        }) { [weak self] _ in
+            self?.closing?()
+            self?.removeFromSuperview()
+        }
     }
 }

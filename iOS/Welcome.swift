@@ -88,7 +88,7 @@ class Welcome: Sheet {
     
     @objc private func create() {
         Git.shared.create()
-        List.shared.update()
+        closing = { List.shared.update() }
         close()
     }
     

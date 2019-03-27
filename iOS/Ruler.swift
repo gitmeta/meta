@@ -25,7 +25,7 @@ class Ruler: UIView {
         while c < range.upperBound {
             i += 1
             let end = layout.glyphRange(forCharacterRange: NSRange(location: text.text.lineRange(for:
-                Range(NSRange(location: c, length: 0), in: text.text)!).upperBound.encodedOffset, length: 0),
+                Range(NSRange(location: c, length: 0), in: text.text)!).upperBound.utf16Offset(in: text.text), length: 0),
                                         actualCharacterRange: nil).upperBound
             numbers.append((i, layout.lineFragmentRect(forGlyphAt: c, effectiveRange: nil, withoutAdditionalLayout: true).minY,
             !text.isFirstResponder ? 0 : {

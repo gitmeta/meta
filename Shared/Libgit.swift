@@ -17,6 +17,36 @@ class Libgit: meta.Libgit {
         git_repository_free(repository)
     }
     
+    override func clone(_ url: URL, path: URL) -> OpaquePointer? {
+        let pointer = UnsafeMutablePointer<git_clone_options>.allocate(capacity: 1)
+        git_clone_init_options(pointer, UInt32(GIT_CLONE_OPTIONS_VERSION))
+        var options = pointer.move()
+        pointer.deallocate()
+        options.bare = 0
+
+        options.checkout_opts = {
+            let pointer = UnsafeMutablePointer<git_checkout_options>.allocate(capacity: 1)
+            git_checkout_init_options(pointer, UInt32(GIT_CHECKOUT_OPTIONS_VERSION))
+            var options = pointer.move()
+            pointer.deallocate()
+            options.checkout_strategy = GIT_CHECKOUT_SAFE.rawValue
+            return options
+        } ()
+        
+        options.fetch_opts = {
+            let pointer = UnsafeMutablePointer<git_fetch_options>.allocate(capacity: 1)
+            git_fetch_init_options(pointer, UInt32(GIT_FETCH_OPTIONS_VERSION))
+            var fetch = pointer.move()
+            pointer.deallocate()
+            return fetch
+        } ()
+        
+        var repository: OpaquePointer?
+        let result = git_clone(&repository, url.path, path.withUnsafeFileSystemRepresentation({ $0 }), &options)
+        print("clone: \(result)")
+        return repository
+    }
+    
     override func create(_ url: URL) -> OpaquePointer! {
         var repository: OpaquePointer?
         git_repository_init(&repository, url.path, 0)

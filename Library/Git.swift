@@ -17,6 +17,15 @@ public class Git {
         }
     }
     
+    public func clone(_ url: URL, path: URL) throws {
+//        guard self.repository == nil else { throw Exception.alreadyRepository }
+        queue.async { [weak self] in
+            self?.repository = {
+                $0 == nil ? nil : Repository(pointer: $0, url: url)
+            } (Libgit.shared.clone(url, path: path))
+        }
+    }
+    
     public func create(_ url: URL) throws {
         guard self.repository == nil else { throw Exception.alreadyRepository }
         queue.async { [weak self] in
@@ -33,14 +42,14 @@ public class Git {
     
     public func add(_ file: String) throws {
         guard let repository = self.repository else { throw Exception.noRepository }
-        queue.async { [weak self] in
+        queue.async {
             Libgit.shared.add(repository.pointer, file: file)
         }
     }
     
     public func commit(_ message: String, credentials: Credentials) throws {
         guard let repository = self.repository else { throw Exception.noRepository }
-        queue.async { [weak self] in
+        queue.async {
             Libgit.shared.commit(message, credentials: credentials, repository: repository.pointer)
         }
     }
@@ -51,4 +60,6 @@ public class Git {
             result(Libgit.shared.history(repository.pointer))
         }
     }
+    
+    
 }

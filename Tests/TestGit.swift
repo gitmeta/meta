@@ -79,11 +79,22 @@ class TestGit: XCTestCase {
     }
     
     func testHistory() {
-        let expectHistory = expectation(description: String())
-        let expectResult = expectation(description: String())
-        libgit._history = { expectHistory.fulfill() }
+        let expect = expectation(description: String())
+        libgit._history = { expect.fulfill() }
         git.repository = Repository(pointer: nil, url: URL(fileURLWithPath: "/"))
-        try! git.history { _ in expectResult.fulfill() }
+        try! git.history { _ in }
+        waitForExpectations(timeout: 1)
+    }
+    
+    func testCloneThrowsIfRepository() {
+        git.repository = Repository(pointer: nil, url: URL(fileURLWithPath: "/"))
+        XCTAssertThrowsError(try git.clone(URL(fileURLWithPath: "/"), path: URL(fileURLWithPath: "/")))
+    }
+    
+    func testClone() {
+        let expect = expectation(description: String())
+        libgit._clone = { expect.fulfill() }
+        try! git.clone(URL(fileURLWithPath: "/"), path: URL(fileURLWithPath: "/"))
         waitForExpectations(timeout: 1)
     }
 }

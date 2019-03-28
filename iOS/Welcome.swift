@@ -16,7 +16,7 @@ class Welcome: Sheet {
         let done = link(.local("Welcome.continue"), selector: #selector(self.done))
         done.isHidden = true
         
-        let clone = link(.local("Welcome.clone"), selector: #selector(close))
+        let clone = link(.local("Welcome.clone"), selector: #selector(self.clone))
         
         let check = UIButton()
         check.translatesAutoresizingMaskIntoConstraints = false
@@ -90,6 +90,11 @@ class Welcome: Sheet {
         Git.shared.create()
         closing = { List.shared.update() }
         close()
+    }
+    
+    @objc private func clone() {
+        let url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("documents")
+        try! Git.shared.git.clone(URL(string: "https://github.com/velvetroom/formatter")!, path: url)
     }
     
     @objc private func check(_ button: UIButton) {

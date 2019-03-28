@@ -4,12 +4,17 @@ public struct Status: CustomStringConvertible {
     public var modified = [String]()
     public var deleted = [String]()
     public var branch = String()
+    public var commit = String()
+    public var commitable: Bool { return !untracked.isEmpty || !added.isEmpty || !modified.isEmpty || !deleted.isEmpty }
     
     public init() { }
     
     public var description: String {
-        return branch
-            .appending(list(untracked, title: "untracked"))
+        return branch.appending("\n" + commit).appending(list)
+    }
+    
+    private var list: String {
+        return list(untracked, title: "untracked")
             .appending(list(added, title: "added"))
             .appending(list(modified, title: "modified"))
             .appending(list(deleted, title: "deleted"))

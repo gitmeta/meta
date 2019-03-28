@@ -7,6 +7,7 @@ class TestStatus: XCTestCase {
     override func setUp() {
         status = Status()
         status.branch = "hello world"
+        status.commit = "abc"
         status.untracked = ["d", "t"]
         status.added = ["b", "a"]
         status.modified = ["x"]
@@ -16,6 +17,7 @@ class TestStatus: XCTestCase {
     func testPrint() {
         XCTAssertEqual("""
 hello world
+abc
 untracked:
 - d
 - t
@@ -29,24 +31,34 @@ deleted:
 """, status.description)
     }
     
-    func testPrintEmpty() {
-        status.untracked = []
-        status.modified = []
-        status.added = []
-        status.deleted = []
-        XCTAssertEqual("""
-hello world
-""", status.description)
-    }
-    
     func testPrintOnlyDeleted() {
         status.untracked = []
         status.modified = []
         status.added = []
         XCTAssertEqual("""
 hello world
+abc
 deleted:
 - h
 """, status.description)
+    }
+    
+    func testCommitableFalse() {
+        XCTAssertFalse(Status().commitable)
+    }
+    
+    func testCommitable() {
+        var status = Status()
+        status.added = [String()]
+        XCTAssertTrue(status.commitable)
+        status = Status()
+        status.deleted = [String()]
+        XCTAssertTrue(status.commitable)
+        status = Status()
+        status.modified = [String()]
+        XCTAssertTrue(status.commitable)
+        status = Status()
+        status.untracked = [String()]
+        XCTAssertTrue(status.commitable)
     }
 }

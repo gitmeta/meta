@@ -87,6 +87,9 @@
 		205D8E0E2247C40E003FDBCF /* Spinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205D8E0D2247C40E003FDBCF /* Spinner.swift */; };
 		20724539223E83FA00D0DE1F /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 20724538223E83FA00D0DE1F /* libz.tbd */; };
 		2072453B223E840200D0DE1F /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2072453A223E840200D0DE1F /* libiconv.tbd */; };
+		2079E9F1224CBB2E001CB149 /* Commit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2079E9F0224CBB2E001CB149 /* Commit.swift */; };
+		2079E9F2224CBB2E001CB149 /* Commit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2079E9F0224CBB2E001CB149 /* Commit.swift */; };
+		2079E9F4224CBD11001CB149 /* TestCommit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2079E9F3224CBD11001CB149 /* TestCommit.swift */; };
 		2086C14122445D54006E994C /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086C14022445D54006E994C /* Image.swift */; };
 		2086C14322445E3D006E994C /* Pdf.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086C14222445E3D006E994C /* Pdf.swift */; };
 		20921CE8222BD6A0007FDB7A /* Sheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20921CE7222BD6A0007FDB7A /* Sheet.swift */; };
@@ -342,6 +345,8 @@
 		205D8E0D2247C40E003FDBCF /* Spinner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spinner.swift; sourceTree = "<group>"; };
 		20724538223E83FA00D0DE1F /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.1.sdk/usr/lib/libz.tbd; sourceTree = DEVELOPER_DIR; };
 		2072453A223E840200D0DE1F /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.1.sdk/usr/lib/libiconv.tbd; sourceTree = DEVELOPER_DIR; };
+		2079E9F0224CBB2E001CB149 /* Commit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Commit.swift; sourceTree = "<group>"; };
+		2079E9F3224CBD11001CB149 /* TestCommit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCommit.swift; sourceTree = "<group>"; };
 		2086C14022445D54006E994C /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		2086C14222445E3D006E994C /* Pdf.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pdf.swift; sourceTree = "<group>"; };
 		20921CE7222BD6A0007FDB7A /* Sheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sheet.swift; sourceTree = "<group>"; };
@@ -632,6 +637,7 @@
 			isa = PBXGroup;
 			children = (
 				20366C6022293BCF009A2FB3 /* Tests.plist */,
+				2079E9F3224CBD11001CB149 /* TestCommit.swift */,
 				2039B30A224A5AAC00FD6BAA /* TestCredentials.swift */,
 				20366C5F22293BCF009A2FB3 /* TestDocument.swift */,
 				20A70CC0222D6D7D001AE4E8 /* TestDocumentChange.swift */,
@@ -649,6 +655,7 @@
 			isa = PBXGroup;
 			children = (
 				20079146223788D90086976A /* Access.swift */,
+				2079E9F0224CBB2E001CB149 /* Commit.swift */,
 				205AEC4A224915CA00E39DFD /* Credentials.swift */,
 				20366C6B22293BDD009A2FB3 /* Directory.swift */,
 				20366C7122293BDD009A2FB3 /* Document.swift */,
@@ -963,6 +970,7 @@
 			files = (
 				20079147223788D90086976A /* Access.swift in Sources */,
 				20366C8322293BDD009A2FB3 /* Document.swift in Sources */,
+				2079E9F1224CBB2E001CB149 /* Commit.swift in Sources */,
 				20366C8122293BDD009A2FB3 /* Editable.swift in Sources */,
 				20366C7522293BDD009A2FB3 /* Storage.swift in Sources */,
 				20E8114A223D35BD0065FD65 /* Libgit.swift in Sources */,
@@ -986,6 +994,7 @@
 			files = (
 				20366C8422293BDD009A2FB3 /* Document.swift in Sources */,
 				20366C8222293BDD009A2FB3 /* Editable.swift in Sources */,
+				2079E9F2224CBB2E001CB149 /* Commit.swift in Sources */,
 				20366C7622293BDD009A2FB3 /* Storage.swift in Sources */,
 				20366C8622293BDD009A2FB3 /* Pdf.swift in Sources */,
 				20E8114B223D35BD0065FD65 /* Libgit.swift in Sources */,
@@ -1011,6 +1020,7 @@
 				20366C6822293BCF009A2FB3 /* TestStorage.swift in Sources */,
 				20E8114D223D35FD0065FD65 /* TestLibgit.swift in Sources */,
 				2039B30B224A5AAC00FD6BAA /* TestCredentials.swift in Sources */,
+				2079E9F4224CBD11001CB149 /* TestCommit.swift in Sources */,
 				20366C6322293BCF009A2FB3 /* TestUser.swift in Sources */,
 				20A70CC1222D6D7D001AE4E8 /* TestDocumentChange.swift in Sources */,
 				20E81145223D34CB0065FD65 /* TestGit.swift in Sources */,

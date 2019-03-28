@@ -31,17 +31,24 @@ public class Git {
         }
     }
     
-    public func add(_ file: String) {
+    public func add(_ file: String) throws {
+        guard let repository = self.repository else { throw Exception.noRepository }
         queue.async { [weak self] in
-            guard let repository = self?.repository else { return }
             Libgit.shared.add(repository.pointer, file: file)
         }
     }
     
-    public func commit(_ message: String, credentials: Credentials) {
+    public func commit(_ message: String, credentials: Credentials) throws {
+        guard let repository = self.repository else { throw Exception.noRepository }
         queue.async { [weak self] in
-            guard let repository = self?.repository else { return }
             Libgit.shared.commit(message, credentials: credentials, repository: repository.pointer)
+        }
+    }
+    
+    public func history(_ result: @escaping(([Commit]) -> Void)) throws {
+        guard let repository = self.repository else { throw Exception.noRepository }
+        queue.async {
+            result(Libgit.shared.history(repository.pointer))
         }
     }
 }

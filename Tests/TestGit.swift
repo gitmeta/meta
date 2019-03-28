@@ -66,7 +66,7 @@ class TestGit: XCTestCase {
         let expect = expectation(description: String())
         libgit._add = { expect.fulfill() }
         git.repository = Repository(pointer: nil, url: URL(fileURLWithPath: "/"))
-        git.add(String())
+        try! git.add(String())
         waitForExpectations(timeout: 1)
     }
     
@@ -74,7 +74,16 @@ class TestGit: XCTestCase {
         let expect = expectation(description: String())
         libgit._commit = { expect.fulfill() }
         git.repository = Repository(pointer: nil, url: URL(fileURLWithPath: "/"))
-        git.commit(String(), credentials: Credentials())
+        try! git.commit(String(), credentials: Credentials())
+        waitForExpectations(timeout: 1)
+    }
+    
+    func testHistory() {
+        let expectHistory = expectation(description: String())
+        let expectResult = expectation(description: String())
+        libgit._history = { expectHistory.fulfill() }
+        git.repository = Repository(pointer: nil, url: URL(fileURLWithPath: "/"))
+        try! git.history { _ in expectResult.fulfill() }
         waitForExpectations(timeout: 1)
     }
 }

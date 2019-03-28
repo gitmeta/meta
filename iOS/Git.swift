@@ -35,8 +35,15 @@ class Git: UIView {
         
         let status = link("status", selector: #selector(self.status))
         let commit = link("commit", selector: #selector(self.commit))
+        let history = link("log", selector: #selector(self.history))
+        
+        status.leftAnchor.constraint(equalTo: leftAnchor, constant: 15).isActive = true
         
         commit.topAnchor.constraint(equalTo: status.bottomAnchor, constant: 10).isActive = true
+        commit.leftAnchor.constraint(equalTo: leftAnchor, constant: 15).isActive = true
+        
+        history.topAnchor.constraint(equalTo: status.topAnchor).isActive = true
+        history.rightAnchor.constraint(equalTo: rightAnchor, constant: -15).isActive = true
         
         text.topAnchor.constraint(equalTo: commit.bottomAnchor, constant: 4).isActive = true
         text.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
@@ -70,7 +77,7 @@ class Git: UIView {
         DispatchQueue.main.async {
             self.text.textStorage.append({
                 $0.append(NSAttributedString(string: self.format.string(from: Date()) + " ", attributes: [
-                    .font: UIFont.light(14), .foregroundColor: UIColor(white: 1, alpha: 0.6)]))
+                    .font: UIFont.light(14), .foregroundColor: UIColor.halo]))
                 $0.append(NSAttributedString(string: message + "\n", attributes: [
                     .font: UIFont.light(14), .foregroundColor: UIColor.white]))
                 return $0
@@ -96,8 +103,7 @@ class Git: UIView {
             $0.setTitleColor(.halo, for: .normal)
             $0.setTitleColor(UIColor.halo.withAlphaComponent(0.2), for: .highlighted)
             addSubview($0)
-            
-            $0.leftAnchor.constraint(equalTo: leftAnchor, constant: 15).isActive = true
+
             $0.width.constant = 120
             return $0
         } (Link(title, target: self, selector: selector))
@@ -123,5 +129,6 @@ class Git: UIView {
         } catch { Alert.shared.add(error) }
     }
     
+    @objc private func history() { History() }
     @objc private func clear() { text.text = String() }
 }

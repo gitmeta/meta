@@ -85,6 +85,7 @@ class Commit: Sheet, UITextViewDelegate {
         cancel.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         cancel.widthAnchor.constraint(equalToConstant: 70).isActive = true
         cancel.heightAnchor.constraint(equalToConstant: 70).isActive = true
+        cancel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -App.shared.margin.bottom).isActive = true
         
         text.topAnchor.constraint(equalTo: topAnchor).isActive = true
         text.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
@@ -103,12 +104,6 @@ class Commit: Sheet, UITextViewDelegate {
         border.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
         border.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
         border.heightAnchor.constraint(equalToConstant: 1).isActive = true
-        
-        if #available(iOS 11.0, *) {
-            cancel.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor).isActive = true
-        } else {
-            cancel.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-        }
     }
     
     required init?(coder: NSCoder) { return nil }
@@ -148,8 +143,8 @@ class Commit: Sheet, UITextViewDelegate {
     }
     
     private func perform(_ spinner: Spinner) {
-        scroll.subviews.compactMap({ $0 as? Commiting }).filter({ $0.isSelected }).forEach { Git.shared.git.add($0.label.text!) }
-        Git.shared.git.commit(text.text.isEmpty ? .local("Git.default") : text.text , credentials: App.shared.user.credentials!)
+        scroll.subviews.compactMap({ $0 as? Commiting }).filter({ $0.isSelected }).forEach { try! Git.shared.git.add($0.label.text!) }
+        try! Git.shared.git.commit(text.text.isEmpty ? .local("Git.default") : text.text , credentials: App.shared.user.credentials!)
         spinner.close()
         close()
     }

@@ -76,6 +76,19 @@ class Libgit: meta.Libgit {
         git_index_free(index)
     }
     
+    override func history(_ repository: OpaquePointer!) -> [meta.Commit] {
+        var id = git_oid()
+        var walker: OpaquePointer?
+        git_reference_name_to_id(&id, repository, "HEAD")
+        git_revwalk_new(&walker, repository)
+        git_revwalk_sorting(walker, GIT_SORT_TOPOLOGICAL.rawValue)
+        git_revwalk_sorting(walker, GIT_SORT_TIME.rawValue)
+        git_revwalk_push(walker, &id)
+        var result = [meta.Commit]()
+        while(git_revwalk_next(&id, walker) == GIT_OK.rawValue) { result.append(commit(id, repository: repository)) }
+        return result
+    }
+    
     private func index(_ repository: OpaquePointer) -> OpaquePointer {
         var index: OpaquePointer?
         git_repository_index(&index, repository)
@@ -104,9 +117,14 @@ class Libgit: meta.Libgit {
     }
     
     private func commit(_ repository: OpaquePointer) -> meta.Commit {
-        var result = meta.Commit()
         var id = git_oid()
         git_reference_name_to_id(&id, repository, "HEAD")
+        return commit(id, repository: repository)
+    }
+    
+    private func commit(_ id: git_oid, repository: OpaquePointer) -> meta.Commit {
+        var result = meta.Commit()
+        var id = id
         var commit: OpaquePointer!
         git_commit_lookup(&commit, repository, &id)
         result.id = self.id(id)

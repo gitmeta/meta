@@ -90,6 +90,8 @@
 		2079E9F1224CBB2E001CB149 /* Commit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2079E9F0224CBB2E001CB149 /* Commit.swift */; };
 		2079E9F2224CBB2E001CB149 /* Commit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2079E9F0224CBB2E001CB149 /* Commit.swift */; };
 		2079E9F4224CBD11001CB149 /* TestCommit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2079E9F3224CBD11001CB149 /* TestCommit.swift */; };
+		2079E9F6224CCE81001CB149 /* History.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2079E9F5224CCE81001CB149 /* History.swift */; };
+		2079E9F8224CDDF5001CB149 /* Historying.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2079E9F7224CDDF5001CB149 /* Historying.swift */; };
 		2086C14122445D54006E994C /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086C14022445D54006E994C /* Image.swift */; };
 		2086C14322445E3D006E994C /* Pdf.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086C14222445E3D006E994C /* Pdf.swift */; };
 		20921CE8222BD6A0007FDB7A /* Sheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20921CE7222BD6A0007FDB7A /* Sheet.swift */; };
@@ -347,6 +349,8 @@
 		2072453A223E840200D0DE1F /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.1.sdk/usr/lib/libiconv.tbd; sourceTree = DEVELOPER_DIR; };
 		2079E9F0224CBB2E001CB149 /* Commit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Commit.swift; sourceTree = "<group>"; };
 		2079E9F3224CBD11001CB149 /* TestCommit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCommit.swift; sourceTree = "<group>"; };
+		2079E9F5224CCE81001CB149 /* History.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = History.swift; sourceTree = "<group>"; };
+		2079E9F7224CDDF5001CB149 /* Historying.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Historying.swift; sourceTree = "<group>"; };
 		2086C14022445D54006E994C /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		2086C14222445E3D006E994C /* Pdf.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pdf.swift; sourceTree = "<group>"; };
 		20921CE7222BD6A0007FDB7A /* Sheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sheet.swift; sourceTree = "<group>"; };
@@ -577,6 +581,8 @@
 				20A8EB91223F796A001D8D86 /* Git.swift */,
 				20592A80222ED6EA00EAFD63 /* Gradient.swift */,
 				20ABA34922326E2400C1A8AA /* Help.swift */,
+				2079E9F5224CCE81001CB149 /* History.swift */,
+				2079E9F7224CDDF5001CB149 /* Historying.swift */,
 				2086C14022445D54006E994C /* Image.swift */,
 				201CE1EC222EA0DD007AE422 /* Layout.swift */,
 				20ABA34B223272E600C1A8AA /* Line.swift */,
@@ -940,6 +946,7 @@
 				20921CE8222BD6A0007FDB7A /* Sheet.swift in Sources */,
 				20A70CBB222D3B15001AE4E8 /* Document.swift in Sources */,
 				20592A81222ED6EA00EAFD63 /* Gradient.swift in Sources */,
+				2079E9F8224CDDF5001CB149 /* Historying.swift in Sources */,
 				2086C14322445E3D006E994C /* Pdf.swift in Sources */,
 				205D8DD52247B84D003FDBCF /* Commiting.swift in Sources */,
 				20A70CBF222D4D51001AE4E8 /* Link.swift in Sources */,
@@ -956,6 +963,7 @@
 				20A70CB9222D383B001AE4E8 /* List.swift in Sources */,
 				20366C3222293BA4009A2FB3 /* App.swift in Sources */,
 				201CE1E3222E7432007AE422 /* Alert.swift in Sources */,
+				2079E9F6224CCE81001CB149 /* History.swift in Sources */,
 				201CE1ED222EA0DD007AE422 /* Layout.swift in Sources */,
 				201CE1E7222E9AD4007AE422 /* Text.swift in Sources */,
 				20592A7F222EBB4600EAFD63 /* Display.swift in Sources */,

@@ -53,25 +53,33 @@ class Libgit: meta.Libgit {
         let index = self.index(repository)
         let signature = self.signature(credentials)
         var tree = git_oid()
-        assert(git_index_write_tree(&tree, index) == GIT_OK.rawValue)
+        git_index_write_tree(&tree, index)
         var parent = git_oid()
-        assert(git_reference_name_to_id(&parent, repository, "HEAD") == GIT_OK.rawValue)
+        git_reference_name_to_id(&parent, repository, "HEAD")
         var look: OpaquePointer!
-        assert(git_tree_lookup(&look, repository, &tree) == GIT_OK.rawValue)
+        git_tree_lookup(&look, repository, &tree)
         var pretty = git_buf()
-        assert(git_message_prettify(&pretty, message, 0, 0) == GIT_OK.rawValue)
+        git_message_prettify(&pretty, message, 0, 0)
         var history: OpaquePointer!
-        assert(git_commit_lookup(&history, repository, &parent) == GIT_OK.rawValue)
-        var id = git_oid()
+        git_commit_lookup(&history, repository, &parent)
+
         
-        git_commit_create(&id, repository, "HEAD", signature, signature, "UTF-8", pretty.ptr, look, 1,
-                          UnsafeMutablePointer<OpaquePointer?>(history))
-        
-        git_commit_free(history)
-        git_buf_free(&pretty)
-        git_tree_free(look)
-        git_signature_free(signature)
-        git_index_free(index)
+        let parentsContiguous = ContiguousArray([history])
+        parentsContiguous.withUnsafeBufferPointer { unsafeBuffer in
+            let parentsPtr = UnsafeMutablePointer(mutating: unsafeBuffer.baseAddress)
+            var id = git_oid()
+            print(parent)
+            var x = git_commit_create(&id, repository, "HEAD", signature, signature, "UTF-8", pretty.ptr, look, history == nil ? 0 : 1,
+                                      parentsPtr)
+            
+            print(x == GIT_OK.rawValue)
+            
+            git_commit_free(history)
+            git_buf_free(&pretty)
+            git_tree_free(look)
+            git_signature_free(signature)
+            git_index_free(index)
+        }
     }
     
     private func index(_ repository: OpaquePointer) -> OpaquePointer {

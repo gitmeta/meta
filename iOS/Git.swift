@@ -105,14 +105,20 @@ class Git: UIView {
     
     @objc private func status() {
         do {
-            try git.status { self.log($0.description) }
+            try git.status {
+                self.log($0.description.appending($0.commitable ? String() : .local("Git.notCommitable")))
+            }
         } catch { Alert.shared.add(error) }
     }
     
     @objc private func commit() {
         do {
             try git.status { status in
-                DispatchQueue.main.async { Commit(status) }
+                if status.commitable {
+                    DispatchQueue.main.async { Commit(status) }
+                } else {
+                    self.log(.local("Git.notCommitable"))
+                }
             }
         } catch { Alert.shared.add(error) }
     }

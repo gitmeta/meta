@@ -148,17 +148,8 @@ class Commit: Sheet, UITextViewDelegate {
     }
     
     private func perform(_ spinner: Spinner) {
-        status.untracked.forEach { item in
-            guard scroll.subviews.compactMap({ $0 as? Commiting }).first(where: { $0.label.text == item })!.isSelected
-                else { return }
-            Git.shared.git.add(item)
-        }
-        status.modified.forEach { item in
-            guard scroll.subviews.compactMap({ $0 as? Commiting }).first(where: { $0.label.text == item })!.isSelected
-                else { return }
-            Git.shared.git.add(item)
-        }
-        Git.shared.git.commit(text.text, credentials: App.shared.user.credentials!)
+        scroll.subviews.compactMap({ $0 as? Commiting }).filter({ $0.isSelected }).forEach { Git.shared.git.add($0.label.text!) }
+        Git.shared.git.commit(text.text.isEmpty ? .local("Git.default") : text.text , credentials: App.shared.user.credentials!)
         spinner.close()
         close()
     }

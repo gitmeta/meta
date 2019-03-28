@@ -130,6 +130,7 @@ class Libgit: meta.Libgit {
         result.id = self.id(id)
         result.author = String(validatingUTF8: git_commit_author(commit).pointee.name)!
         result.message = String(validatingUTF8: git_commit_message(commit))!
+        result.date = Date(timeIntervalSince1970: TimeInterval(git_commit_author(commit).pointee.when.time))
         git_commit_free(commit)
         return result
     }

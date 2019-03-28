@@ -6,6 +6,6 @@ public struct Commit: CustomStringConvertible {
     public init() { }
     
     public var description: String {
-        return id.appending(" - ").appending(author).appending("\n" + message)
+        return author.appending(":\n" + message)
     }
 }

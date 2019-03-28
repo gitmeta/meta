@@ -37,6 +37,7 @@ class Libgit: meta.Libgit {
         }
         git_status_list_free(list)
         status.branch = branch(repository)
+        status.commit = commit(repository).description
         return status
     }
     
@@ -50,6 +51,7 @@ class Libgit: meta.Libgit {
     }
     
     override func commit(_ message: String, credentials: meta.Credentials, repository: OpaquePointer!) {
+        var id = git_oid()
         let index = self.index(repository)
         let signature = self.signature(credentials)
         var tree = git_oid()
@@ -62,24 +64,16 @@ class Libgit: meta.Libgit {
         git_message_prettify(&pretty, message, 0, 0)
         var history: OpaquePointer!
         git_commit_lookup(&history, repository, &parent)
-
+        let list = ContiguousArray([history])
         
-        let parentsContiguous = ContiguousArray([history])
-        parentsContiguous.withUnsafeBufferPointer { unsafeBuffer in
-            let parentsPtr = UnsafeMutablePointer(mutating: unsafeBuffer.baseAddress)
-            var id = git_oid()
-            print(parent)
-            var x = git_commit_create(&id, repository, "HEAD", signature, signature, "UTF-8", pretty.ptr, look, history == nil ? 0 : 1,
-                                      parentsPtr)
-            
-            print(x == GIT_OK.rawValue)
-            
-            git_commit_free(history)
-            git_buf_free(&pretty)
-            git_tree_free(look)
-            git_signature_free(signature)
-            git_index_free(index)
-        }
+        git_commit_create(&id, repository, "HEAD", signature, signature, "UTF-8", pretty.ptr, look, history == nil ? 0 : 1,
+                          list.withUnsafeBufferPointer { UnsafeMutablePointer(mutating: $0.baseAddress) })
+        
+        git_commit_free(history)
+        git_buf_free(&pretty)
+        git_tree_free(look)
+        git_signature_free(signature)
+        git_index_free(index)
     }
     
     private func index(_ repository: OpaquePointer) -> OpaquePointer {
@@ -109,6 +103,19 @@ class Libgit: meta.Libgit {
         }
     }
     
+    private func commit(_ repository: OpaquePointer) -> meta.Commit {
+        var result = meta.Commit()
+        var id = git_oid()
+        git_reference_name_to_id(&id, repository, "HEAD")
+        var commit: OpaquePointer!
+        git_commit_lookup(&commit, repository, &id)
+        result.id = self.id(id)
+        result.author = String(validatingUTF8: git_commit_author(commit).pointee.name)!
+        result.message = String(validatingUTF8: git_commit_message(commit))!
+        git_commit_free(commit)
+        return result
+    }
+    
     private func name(_ status: git_status_entry) -> String {
         return {
             $0?.new_file.path.map(String.init(cString:)) ?? String()
@@ -122,5 +129,13 @@ class Libgit: meta.Libgit {
                               Int32(TimeZone.current.secondsFromGMT(for: $0) / 60))
             return signature
         } (Date())
+    }
+    
+    private func id(_ oid: git_oid) -> String {
+        let length = Int(GIT_OID_RAWSZ) * 2
+        let string = UnsafeMutablePointer<Int8>.allocate(capacity: length)
+        var oid = oid
+        git_oid_fmt(string, &oid)
+        return String(bytesNoCopy: string, length: length, encoding: .ascii, freeWhenDone: true)!
     }
 }

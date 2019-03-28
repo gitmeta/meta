@@ -4,11 +4,10 @@ import XCTest
 class TestCommit: XCTestCase {
     func testDescription() {
         var commit = Commit()
-        commit.id = "lorem ipsum"
         commit.author = "test"
         commit.message = "this is a test"
         XCTAssertEqual("""
-lorem ipsum - test
+test:
 this is a test
 """, commit.description)
     }

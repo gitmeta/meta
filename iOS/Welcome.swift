@@ -93,8 +93,18 @@ class Welcome: Sheet {
     }
     
     @objc private func clone() {
-        let url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("documents")
-        try! Git.shared.git.clone(URL(string: "https://github.com/velvetroom/formatter")!, path: url)
+        let spinner = Spinner()
+        spinner.ready = {
+            DispatchQueue.global(qos: .background).async { [weak self] in
+                try! Git.shared.git.clone(URL(string: "https://github.com/velvetroom/formatter")!, path: App.shared.user.access!.url) {
+                    DispatchQueue.main.async { [weak self] in
+                        spinner.close()
+                        List.shared.update()
+                        self?.close()
+                    }
+                }
+            }
+        }
     }
     
     @objc private func check(_ button: UIButton) {

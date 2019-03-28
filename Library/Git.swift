@@ -17,12 +17,13 @@ public class Git {
         }
     }
     
-    public func clone(_ url: URL, path: URL) throws {
-//        guard self.repository == nil else { throw Exception.alreadyRepository }
+    public func clone(_ url: URL, path: URL, result: @escaping(() -> Void)) throws {
+        guard self.repository == nil else { throw Exception.alreadyRepository }
         queue.async { [weak self] in
             self?.repository = {
                 $0 == nil ? nil : Repository(pointer: $0, url: url)
             } (Libgit.shared.clone(url, path: path))
+            result()
         }
     }
     

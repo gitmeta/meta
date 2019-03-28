@@ -36,14 +36,15 @@ class Libgit: meta.Libgit {
         options.fetch_opts = {
             let pointer = UnsafeMutablePointer<git_fetch_options>.allocate(capacity: 1)
             git_fetch_init_options(pointer, UInt32(GIT_FETCH_OPTIONS_VERSION))
-            var fetch = pointer.move()
+            let fetch = pointer.move()
             pointer.deallocate()
             return fetch
         } ()
         
+        print(url.absoluteString)
+        
         var repository: OpaquePointer?
-        let result = git_clone(&repository, url.path, path.withUnsafeFileSystemRepresentation({ $0 }), &options)
-        print("clone: \(result)")
+        let result = git_clone(&repository, url.absoluteString, path.withUnsafeFileSystemRepresentation({ $0 }), &options)
         return repository
     }
     

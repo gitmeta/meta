@@ -125,6 +125,8 @@ class Credentials: Sheet, UITextFieldDelegate {
         cancel.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         cancel.widthAnchor.constraint(equalTo: done.widthAnchor).isActive = true
         cancel.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        
+        ready = { [weak self] in self?.name.becomeFirstResponder() }
     }
     
     required init?(coder: NSCoder) { return nil }

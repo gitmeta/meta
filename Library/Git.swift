@@ -8,9 +8,7 @@ public class Git {
     
     public func url(_ url: URL) {
         queue.async { [weak self] in
-            if let current = self?.repository {
-                Libgit.shared.release(repository: current.pointer)
-            }
+            self?.close()
             self?.repository = {
                $0 == nil ? nil : Repository(pointer: $0, url: url)
             } (Libgit.shared.repository(url))
@@ -33,6 +31,12 @@ public class Git {
         queue.async { [weak self] in
             self?.repository = Repository(pointer: Libgit.shared.create(url), url: url)
         }
+    }
+    
+    public func close() {
+        guard let repository = self.repository else { return }
+        Libgit.shared.release(repository: repository.pointer)
+        self.repository = nil
     }
     
     public func status(_ result: @escaping((Status) -> Void)) throws {

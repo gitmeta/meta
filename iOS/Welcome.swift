@@ -81,20 +81,6 @@ class Welcome: Sheet {
         } (Link(title, target: self, selector: selector))
     }
     
-    private func cloneReady() {
-        let spinner = Spinner()
-        Git.shared.git.clone(URL(string: "https://github.com/velvetroom/formatter")!, path: App.shared.user.access!.url) { [weak self] in
-            switch $0 {
-            case .failure(let error):
-                Alert.shared.add(error)
-            case .success():
-                List.shared.update()
-                self?.close()
-            }
-            spinner.close()
-        }
-    }
-    
     @objc private func done() {
         Git.shared.log(.local("Welcome.current"))
         close()
@@ -108,10 +94,11 @@ class Welcome: Sheet {
     
     @objc private func clone() {
         if Git.shared.git.repository == nil {
-            cloneReady()
+            Clone()
         } else {
             Replace()
         }
+        close()
     }
     
     @objc private func check(_ button: UIButton) {

@@ -2,7 +2,7 @@ import UIKit
 
 class Replace: Sheet {
     @discardableResult init() {
-        super.init(false)
+        super.init(true)
         let title = UILabel()
         title.translatesAutoresizingMaskIntoConstraints = false
         title.font = .systemFont(ofSize: 16, weight: .bold)
@@ -30,7 +30,7 @@ class Replace: Sheet {
         
         let cancel = UIButton()
         cancel.translatesAutoresizingMaskIntoConstraints = false
-        cancel.addTarget(self, action: #selector(close), for: .touchUpInside)
+        cancel.addTarget(self, action: #selector(self.cancel), for: .touchUpInside)
         cancel.setTitle(.local("Replace.cancel"), for: [])
         cancel.setTitleColor(UIColor(white: 1, alpha: 0.6), for: .normal)
         cancel.setTitleColor(UIColor(white: 1, alpha: 0.2), for: .highlighted)
@@ -61,8 +61,21 @@ class Replace: Sheet {
     
     required init?(coder: NSCoder) { return nil }
     
+    @objc private func cancel() {
+        close()
+        Welcome()
+    }
+    
     @objc private func replace() {
         let spinner = Spinner()
-        
+        DispatchQueue.global(qos: .background).async {
+            List.shared.folder.clear(App.shared.user.access!.url)
+            Git.shared.git.close()
+            DispatchQueue.main.async { [weak self] in
+                spinner.close()
+                self?.close()
+                Clone()
+            }
+        }
     }
 }

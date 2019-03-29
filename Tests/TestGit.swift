@@ -107,4 +107,13 @@ class TestGit: XCTestCase {
         }
         waitForExpectations(timeout: 1)
     }
+    
+    func testClose() {
+        let expect = expectation(description: String())
+        libgit._releaseRepository = { expect.fulfill() }
+        git.repository = Repository(pointer: nil, url: URL(fileURLWithPath: "/"))
+        git.close()
+        XCTAssertNil(git.repository)
+        waitForExpectations(timeout: 1)
+    }
 }

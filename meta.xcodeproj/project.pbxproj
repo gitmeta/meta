@@ -95,6 +95,7 @@
 		2086C14122445D54006E994C /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086C14022445D54006E994C /* Image.swift */; };
 		2086C14322445E3D006E994C /* Pdf.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086C14222445E3D006E994C /* Pdf.swift */; };
 		20882845224E0E8500E67068 /* Replace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20882844224E0E8500E67068 /* Replace.swift */; };
+		20882847224E233E00E67068 /* Clone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20882846224E233E00E67068 /* Clone.swift */; };
 		20921CE8222BD6A0007FDB7A /* Sheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20921CE7222BD6A0007FDB7A /* Sheet.swift */; };
 		20A2AF822247892E003E68A7 /* Commit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A2AF812247892E003E68A7 /* Commit.swift */; };
 		20A70CB9222D383B001AE4E8 /* List.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A70CB8222D383B001AE4E8 /* List.swift */; };
@@ -355,6 +356,7 @@
 		2086C14022445D54006E994C /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		2086C14222445E3D006E994C /* Pdf.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pdf.swift; sourceTree = "<group>"; };
 		20882844224E0E8500E67068 /* Replace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Replace.swift; sourceTree = "<group>"; };
+		20882846224E233E00E67068 /* Clone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Clone.swift; sourceTree = "<group>"; };
 		20921CE7222BD6A0007FDB7A /* Sheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sheet.swift; sourceTree = "<group>"; };
 		20A2AF812247892E003E68A7 /* Commit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Commit.swift; sourceTree = "<group>"; };
 		20A70CB8222D383B001AE4E8 /* List.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = List.swift; sourceTree = "<group>"; };
@@ -573,6 +575,7 @@
 				201CE1E2222E7432007AE422 /* Alert.swift */,
 				20366C2F22293BA4009A2FB3 /* App.swift */,
 				201CE1E4222E8E04007AE422 /* Bar.swift */,
+				20882846224E233E00E67068 /* Clone.swift */,
 				20A2AF812247892E003E68A7 /* Commit.swift */,
 				205D8DD42247B84D003FDBCF /* Commiting.swift */,
 				201CE1E0222E5AD5007AE422 /* Create.swift */,
@@ -965,6 +968,7 @@
 				20A2AF822247892E003E68A7 /* Commit.swift in Sources */,
 				20A70CB9222D383B001AE4E8 /* List.swift in Sources */,
 				20366C3222293BA4009A2FB3 /* App.swift in Sources */,
+				20882847224E233E00E67068 /* Clone.swift in Sources */,
 				201CE1E3222E7432007AE422 /* Alert.swift in Sources */,
 				2079E9F6224CCE81001CB149 /* History.swift in Sources */,
 				201CE1ED222EA0DD007AE422 /* Layout.swift in Sources */,

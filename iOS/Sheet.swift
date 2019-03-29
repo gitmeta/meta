@@ -1,6 +1,7 @@
 import UIKit
 
 class Sheet: UIView {
+    var ready: (() -> Void)?
     var closing: (() -> Void)?
     
     init(_ animated: Bool) {
@@ -17,7 +18,11 @@ class Sheet: UIView {
         
         if animated {
             alpha = 0
-            UIView.animate(withDuration: 0.4) { [weak self] in self?.alpha = 1 }
+            UIView.animate(withDuration: 0.4, animations: { [weak self] in
+                self?.alpha = 1
+            }) { [weak self] _ in
+                self?.ready?()
+            }
         }
     }
     

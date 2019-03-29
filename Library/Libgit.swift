@@ -13,4 +13,5 @@ open class Libgit {
     open func add(_ repository: OpaquePointer!, file: String) { }
     open func commit(_ message: String, credentials: Credentials, repository: OpaquePointer!) { }
     open func history(_ repository: OpaquePointer!) -> [Commit] { return [] }
+    open func push(_ repository: OpaquePointer!) { }
 }

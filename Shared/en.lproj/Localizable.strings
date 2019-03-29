@@ -28,6 +28,7 @@ Git.unborn="New repository";
 Git.branch="Branch ";
 Git.notCommitable="Nothing to commit";
 Git.default="meta";
+Git.pushed="Pushed to remote";
 Commit.commit="commit";
 Commit.done="Done";
 Commit.placeholder="Message";

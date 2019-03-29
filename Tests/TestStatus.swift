@@ -6,6 +6,7 @@ class TestStatus: XCTestCase {
     
     override func setUp() {
         status = Status()
+        status.remote = "asd"
         status.branch = "hello world"
         status.commit = "abc"
         status.untracked = ["d", "t"]
@@ -16,6 +17,7 @@ class TestStatus: XCTestCase {
     
     func testPrint() {
         XCTAssertEqual("""
+asd
 hello world
 abc
 untracked:
@@ -36,6 +38,7 @@ deleted:
         status.modified = []
         status.added = []
         XCTAssertEqual("""
+asd
 hello world
 abc
 deleted:

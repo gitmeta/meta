@@ -66,6 +66,7 @@ class Libgit: meta.Libgit {
             }
         }
         git_status_list_free(list)
+        status.remote = remote(repository)
         status.branch = branch(repository)
         status.commit = commit(repository).description
         return status
@@ -117,6 +118,55 @@ class Libgit: meta.Libgit {
         var result = [meta.Commit]()
         while(git_revwalk_next(&id, walker) == GIT_OK.rawValue) { result.append(commit(id, repository: repository)) }
         return result
+    }
+    
+    func asd() {
+        
+    }
+    
+    override func push(_ repository: OpaquePointer!) {
+        var remote: OpaquePointer!
+        git_remote_lookup(&remote, repository, "origin")
+        
+        git_cred_acquire_cb
+        
+        let calls = UnsafeMutablePointer<git_remote_callbacks>.allocate(capacity: 1)
+        git_remote_init_callbacks(calls, UInt32(GIT_REMOTE_CALLBACKS_VERSION))
+        var callback = calls.move()
+        callback.credentials
+        calls.deallocate()
+        
+        print(git_remote_connect(remote, GIT_DIRECTION_PUSH, calls, nil, nil))
+        print(git_remote_add_push(remote, "origin", "refs/heads/master:refs/heads/master"))
+        
+        let pointer = UnsafeMutablePointer<git_push_options>.allocate(capacity: 1)
+        git_push_init_options(pointer, UInt32(GIT_PUSH_OPTIONS_VERSION))
+        var options = pointer.move()
+        pointer.deallocate()
+        
+        print(git_remote_upload(remote, nil, &options))
+        git_remote_free(remote)
+        /*
+        
+        // get the remote.
+        git_remote* remote = NULL;
+        git_remote_lookup( &remote, repository, "origin" );
+        
+        // connect to remote
+        git_remote_connect( remote, GIT_DIRECTION_PUSH )
+        
+        // add a push refspec
+        git_remote_add_push( remote, "refs/heads/master:refs/heads/master" );
+        
+        // configure options
+        git_push_options options;
+        git_push_init_options( &options, GIT_PUSH_OPTIONS_VERSION );
+        
+        // do the push
+        git_remote_upload( remote, NULL, &options );
+        
+        git_remote_free( remote );
+        return true;*/
     }
     
     private func index(_ repository: OpaquePointer) -> OpaquePointer {
@@ -186,5 +236,13 @@ class Libgit: meta.Libgit {
         var oid = oid
         git_oid_fmt(string, &oid)
         return String(bytesNoCopy: string, length: length, encoding: .ascii, freeWhenDone: true)!
+    }
+    
+    private func remote(_ repository: OpaquePointer) -> String {
+        var remote: OpaquePointer!
+        defer { git_remote_free(remote) }
+        return {
+            $0 == GIT_OK.rawValue ? String(validatingUTF8: git_remote_url(remote))! : String()
+        } (git_remote_lookup(&remote, repository, "origin"))
     }
 }

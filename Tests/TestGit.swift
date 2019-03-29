@@ -116,4 +116,18 @@ class TestGit: XCTestCase {
         XCTAssertNil(git.repository)
         waitForExpectations(timeout: 1)
     }
+    
+    func testPush() {
+        let expectPush = expectation(description: String())
+        let expectResult = expectation(description: String())
+        libgit._push = { expectPush.fulfill() }
+        git.repository = Repository(pointer: nil, url: URL(fileURLWithPath: "/"))
+        DispatchQueue.global(qos: .background).async {
+            try! self.git.push {
+                XCTAssertEqual(Thread.main, Thread.current)
+                expectResult.fulfill()
+            }
+        }
+        waitForExpectations(timeout: 1)
+    }
 }

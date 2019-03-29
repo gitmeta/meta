@@ -36,16 +36,28 @@ class Git: UIView {
         let status = link("status", selector: #selector(self.status))
         let commit = link("commit", selector: #selector(self.commit))
         let history = link("log", selector: #selector(self.history))
+        let reset = link("reset", selector: #selector(self.history))
+        let pull = link("pull", selector: #selector(self.history))
+        let push = link("push", selector: #selector(self.push))
         
         status.leftAnchor.constraint(equalTo: leftAnchor, constant: 15).isActive = true
         
         commit.topAnchor.constraint(equalTo: status.bottomAnchor, constant: 10).isActive = true
         commit.leftAnchor.constraint(equalTo: leftAnchor, constant: 15).isActive = true
         
+        history.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         history.topAnchor.constraint(equalTo: status.topAnchor).isActive = true
-        history.rightAnchor.constraint(equalTo: rightAnchor, constant: -15).isActive = true
         
-        text.topAnchor.constraint(equalTo: commit.bottomAnchor, constant: 4).isActive = true
+        reset.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        reset.topAnchor.constraint(equalTo: commit.topAnchor).isActive = true
+        
+        pull.topAnchor.constraint(equalTo: status.topAnchor).isActive = true
+        pull.rightAnchor.constraint(equalTo: rightAnchor, constant: -15).isActive = true
+        
+        push.topAnchor.constraint(equalTo: commit.topAnchor).isActive = true
+        push.rightAnchor.constraint(equalTo: rightAnchor, constant: -15).isActive = true
+        
+        text.topAnchor.constraint(equalTo: commit.bottomAnchor, constant: 2).isActive = true
         text.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
         text.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
         text.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
@@ -104,7 +116,7 @@ class Git: UIView {
             $0.setTitleColor(UIColor.halo.withAlphaComponent(0.2), for: .highlighted)
             addSubview($0)
 
-            $0.width.constant = 120
+            $0.width.constant = (min(UIScreen.main.bounds.width, UIScreen.main.bounds.height) / 3) - 15
             return $0
         } (Link(title, target: self, selector: selector))
     }
@@ -127,6 +139,14 @@ class Git: UIView {
                 }
             }
         } catch { Alert.shared.add(error) }
+    }
+    
+    @objc private func push() {
+        let spinner = Spinner()
+        try! git.push {
+            spinner.close()
+            self.log(.local("Git.pushed"))
+        }
     }
     
     @objc private func history() { History() }

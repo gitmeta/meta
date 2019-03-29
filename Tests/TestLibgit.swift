@@ -10,6 +10,7 @@ class TestLibgit: Libgit {
     var _commit: (() -> Void)!
     var _history: (() -> Void)!
     var _clone: (() -> Void)!
+    var _push: (() -> Void)!
     
     override func repository(_ url: URL) -> OpaquePointer? { _repository?(); return nil }
     override func release(repository: OpaquePointer!) { _releaseRepository?() }
@@ -19,4 +20,5 @@ class TestLibgit: Libgit {
     override func add(_ repository: OpaquePointer!, file: String) { _add() }
     override func commit(_ message: String, credentials: Credentials, repository: OpaquePointer!) { _commit() }
     override func history(_ repository: OpaquePointer!) -> [Commit] { _history(); return [] }
+    override func push(_ repository: OpaquePointer!) { _push() }
 }

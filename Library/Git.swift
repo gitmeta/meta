@@ -67,5 +67,13 @@ public class Git {
         }
     }
     
-    
+    public func push(_ result: @escaping(() -> Void)) throws {
+        guard let repository = self.repository else { throw Exception.noRepository }
+        queue.async {
+            Libgit.shared.push(repository.pointer)
+            DispatchQueue.main.async {
+                result()
+            }
+        }
+    }
 }

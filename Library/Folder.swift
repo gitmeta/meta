@@ -59,6 +59,12 @@ public class Folder {
         }
     }
     
+    public func clear(_ url: URL) {
+        try? FileManager.default.contentsOfDirectory(atPath: url.path).forEach {
+            try? FileManager.default.removeItem(at: url.appendingPathComponent($0))
+        }
+    }
+    
     func load(_ url: [URL]) -> [Document] {
         return url.map ({
             (try? $0.resourceValues(forKeys: [.isDirectoryKey]))?.isDirectory == true ? Directory($0) : {

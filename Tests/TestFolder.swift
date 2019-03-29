@@ -64,4 +64,13 @@ class TestFolder: XCTestCase {
         folder.saveAll()
         waitForExpectations(timeout: 1)
     }
+    
+    func testClear() {
+        let directory = URL(fileURLWithPath: NSTemporaryDirectory())
+        let url = directory.appendingPathComponent("file.json")
+        try! Data().write(to: url)
+        XCTAssertTrue(FileManager.default.fileExists(atPath: url.path))
+        folder.clear(directory)
+        XCTAssertFalse(FileManager.default.fileExists(atPath: url.path))
+    }
 }

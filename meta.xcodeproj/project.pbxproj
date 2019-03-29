@@ -94,6 +94,7 @@
 		2079E9F8224CDDF5001CB149 /* Historying.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2079E9F7224CDDF5001CB149 /* Historying.swift */; };
 		2086C14122445D54006E994C /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086C14022445D54006E994C /* Image.swift */; };
 		2086C14322445E3D006E994C /* Pdf.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086C14222445E3D006E994C /* Pdf.swift */; };
+		20882845224E0E8500E67068 /* Replace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20882844224E0E8500E67068 /* Replace.swift */; };
 		20921CE8222BD6A0007FDB7A /* Sheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20921CE7222BD6A0007FDB7A /* Sheet.swift */; };
 		20A2AF822247892E003E68A7 /* Commit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A2AF812247892E003E68A7 /* Commit.swift */; };
 		20A70CB9222D383B001AE4E8 /* List.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A70CB8222D383B001AE4E8 /* List.swift */; };
@@ -353,6 +354,7 @@
 		2079E9F7224CDDF5001CB149 /* Historying.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Historying.swift; sourceTree = "<group>"; };
 		2086C14022445D54006E994C /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		2086C14222445E3D006E994C /* Pdf.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pdf.swift; sourceTree = "<group>"; };
+		20882844224E0E8500E67068 /* Replace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Replace.swift; sourceTree = "<group>"; };
 		20921CE7222BD6A0007FDB7A /* Sheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sheet.swift; sourceTree = "<group>"; };
 		20A2AF812247892E003E68A7 /* Commit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Commit.swift; sourceTree = "<group>"; };
 		20A70CB8222D383B001AE4E8 /* List.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = List.swift; sourceTree = "<group>"; };
@@ -589,6 +591,7 @@
 				20A70CBE222D4D51001AE4E8 /* Link.swift */,
 				20A70CB8222D383B001AE4E8 /* List.swift */,
 				2086C14222445E3D006E994C /* Pdf.swift */,
+				20882844224E0E8500E67068 /* Replace.swift */,
 				20592A7C222EAE6000EAFD63 /* Ruler.swift */,
 				20921CE7222BD6A0007FDB7A /* Sheet.swift */,
 				201CE1EA222EA0B7007AE422 /* Skin.swift */,
@@ -965,6 +968,7 @@
 				201CE1E3222E7432007AE422 /* Alert.swift in Sources */,
 				2079E9F6224CCE81001CB149 /* History.swift in Sources */,
 				201CE1ED222EA0DD007AE422 /* Layout.swift in Sources */,
+				20882845224E0E8500E67068 /* Replace.swift in Sources */,
 				201CE1E7222E9AD4007AE422 /* Text.swift in Sources */,
 				20592A7F222EBB4600EAFD63 /* Display.swift in Sources */,
 				20A8EB92223F796A001D8D86 /* Git.swift in Sources */,

@@ -12,11 +12,11 @@ class TestDocumentChange: XCTestCase {
         user = User()
         folder = Folder()
         user.access = Access(URL(fileURLWithPath: NSTemporaryDirectory()), data: Data())
-        clear()
+        folder.clear(URL(fileURLWithPath: NSTemporaryDirectory()))
     }
     
     override func tearDown() {
-        clear()
+        folder.clear(URL(fileURLWithPath: NSTemporaryDirectory()))
     }
     
     func testCreateFile() {
@@ -54,11 +54,5 @@ class TestDocumentChange: XCTestCase {
     func testThrowsIfNotExisting() {
         XCTAssertThrowsError(try folder.delete(Editable(
             URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent("hello.txt"))))
-    }
-    
-    private func clear() {
-        try? FileManager.default.contentsOfDirectory(atPath: URL(fileURLWithPath: NSTemporaryDirectory()).path).forEach {
-            try? FileManager.default.removeItem(at: URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent($0))
-        }
     }
 }

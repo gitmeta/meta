@@ -15,7 +15,9 @@ extension Exception {
         case .alreadyRepository: return .local("Alert.alreadyRepository")
         case .invalidName: return .local("Alert.invalidName")
         case .invalidEmail: return .local("Alert.invalidEmail")
+        case .invalidUrl: return .local("Alert.invalidUrl")
         case .failedClone: return .local("Alert.failedClone")
+        case .noRemote: return .local("Alert.noRemote")
         case .unknown: return .local("Alert.unknown")
         }
     }

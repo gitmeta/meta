@@ -123,9 +123,9 @@ class TestGit: XCTestCase {
         libgit._push = { expectPush.fulfill() }
         git.repository = Repository(pointer: nil, url: URL(fileURLWithPath: "/"))
         DispatchQueue.global(qos: .background).async {
-            try! self.git.push {
+            self.git.push {
                 XCTAssertEqual(Thread.main, Thread.current)
-                expectResult.fulfill()
+                if case .success() = $0 { expectResult.fulfill() }
             }
         }
         waitForExpectations(timeout: 1)

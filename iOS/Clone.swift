@@ -86,21 +86,20 @@ class Clone: Sheet, UITextFieldDelegate {
     required init?(coder: NSCoder) { return nil }
     
     func textFieldShouldReturn(_: UITextField) -> Bool {
-        clone()
+        url.resignFirstResponder()
         return true
     }
     
     @objc private func cancel() {
         close()
-        Welcome()
+        Welcome(false)
     }
     
     @objc private func clone() {
-        self.url.resignFirstResponder()
-        guard let url = URL(string: self.url.text!) else { return Alert.shared.add(.local("Clone.notUrl")) }
-        Git.shared.log(.local("Clone.log") + url.absoluteString)
+        url.resignFirstResponder()
+        Git.shared.log(.local("Clone.log") + url.text!)
         let spinner = Spinner()
-        Git.shared.git.clone(url, path: App.shared.user.access!.url) { [weak self] in
+        Git.shared.git.clone(url.text!, path: App.shared.user.access!.url) { [weak self] in
             switch $0 {
             case .failure(let error):
                 Alert.shared.add(error)

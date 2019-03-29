@@ -145,7 +145,7 @@ class Commit: Sheet, UITextViewDelegate {
     private func perform(_ spinner: Spinner) {
         scroll.subviews.compactMap({ $0 as? Commiting }).filter({ $0.isSelected }).forEach { try! Git.shared.git.add($0.label.text!) }
         try! Git.shared.git.commit(text.text.isEmpty ? .local("Git.default") : text.text , credentials: App.shared.user.credentials!)
-        Git.shared.log(.local("Commit.done"))
+        Git.shared.log(.local("Commit.commited"))
         spinner.close()
         close()
     }

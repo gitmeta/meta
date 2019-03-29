@@ -37,9 +37,11 @@ internal func credentialsCallback(
     let result: Int32
     
     // Find username_from_url
-    let name = username.map(String.init(cString:))
+//    let name = username.map(String.init(cString:))
     
-    switch Credentialis.fromPointer(payload!) {
+    result = git_cred_userpass_plaintext_new(cred, "vauxhall", "")
+    print(result)
+    /*switch Credentialis.fromPointer(payload!) {
     case .default:
         result = git_cred_default_new(cred)
     case .sshAgent:
@@ -48,7 +50,7 @@ internal func credentialsCallback(
         result = git_cred_userpass_plaintext_new(cred, username, password)
     case .sshMemory(let username, let publicKey, let privateKey, let passphrase):
         result = git_cred_ssh_key_memory_new(cred, username, publicKey, privateKey, passphrase)
-    }
+    }*/
     
     return (result != GIT_OK.rawValue) ? -1 : 0
 }
@@ -118,7 +120,7 @@ class Libgit: meta.Libgit {
             }
         }
         git_status_list_free(list)
-        status.remote = remote(repository)
+        status.remote = remote(repository)?.absoluteString ?? status.remote
         status.branch = branch(repository)
         status.commit = commit(repository).description
         return status
@@ -172,32 +174,44 @@ class Libgit: meta.Libgit {
         return result
     }
     
-    func asd() {
-        
-    }
-    
-    override func push(_ repository: OpaquePointer!) {
+    override func push(_ repository: OpaquePointer!) throws {
         var remote: OpaquePointer!
         git_remote_lookup(&remote, repository, "origin")
-        
-        
-        let calls = UnsafeMutablePointer<git_remote_callbacks>.allocate(capacity: 1)
-        git_remote_init_callbacks(calls, UInt32(GIT_REMOTE_CALLBACKS_VERSION))
-        var callback = calls.move()
-        callback.payload = Credentialis.plaintext(username: "", password: "").toPointer()
-        callback.credentials = credentialsCallback
-        calls.deallocate()
-        
-        print(git_remote_connect(remote, GIT_DIRECTION_PUSH, &callback, nil, nil))
-        print(git_remote_add_push(remote, "origin", "refs/heads/master:refs/heads/master"))
-        
-        let pointer = UnsafeMutablePointer<git_push_options>.allocate(capacity: 1)
-        git_push_init_options(pointer, UInt32(GIT_PUSH_OPTIONS_VERSION))
-        var options = pointer.move()
-        pointer.deallocate()
-        
-        print(git_remote_upload(remote, nil, &options))
+        if remote == nil {
+            throw Exception.noRemote
+        } else {
+            //        let cred = Credentialis.default
+            let calls = UnsafeMutablePointer<git_remote_callbacks>.allocate(capacity: 1)
+            git_remote_init_callbacks(calls, UInt32(GIT_REMOTE_CALLBACKS_VERSION))
+            var callback = calls.move()
+            //        callback.payload = cred.toPointer()
+            callback.credentials = credentialsCallback
+            calls.deallocate()
+            
+            
+            print(git_remote_connect(remote, GIT_DIRECTION_PUSH, &callback, nil, nil))
+            print(git_remote_add_push(remote, "origin", "refs/heads/master:refs/heads/master"))
+            
+            let pointer = UnsafeMutablePointer<git_push_options>.allocate(capacity: 1)
+            git_push_init_options(pointer, UInt32(GIT_PUSH_OPTIONS_VERSION))
+            var options = pointer.move()
+            pointer.deallocate()
+            
+            print(git_remote_upload(remote, nil, &options))
+            git_remote_free(remote)
+        }
+    }
+    
+    override func remote(_ repository: OpaquePointer!) -> URL? {
+        var url: URL?
+        var remote: OpaquePointer!
+        git_remote_lookup(&remote, repository, "origin")
+        if let remote = remote,
+            let string = String(validatingUTF8: git_remote_url(remote)) {
+            url = URL(string: string)
+        }
         git_remote_free(remote)
+        return url
     }
     
     private func index(_ repository: OpaquePointer) -> OpaquePointer {
@@ -238,11 +252,13 @@ class Libgit: meta.Libgit {
         var id = id
         var commit: OpaquePointer!
         git_commit_lookup(&commit, repository, &id)
-        result.id = self.id(id)
-        result.author = String(validatingUTF8: git_commit_author(commit).pointee.name)!
-        result.message = String(validatingUTF8: git_commit_message(commit))!
-        result.date = Date(timeIntervalSince1970: TimeInterval(git_commit_author(commit).pointee.when.time))
-        git_commit_free(commit)
+        if commit != nil {
+            result.id = self.id(id)
+            result.author = String(validatingUTF8: git_commit_author(commit).pointee.name) ?? result.author
+            result.message = String(validatingUTF8: git_commit_message(commit))!
+            result.date = Date(timeIntervalSince1970: TimeInterval(git_commit_author(commit).pointee.when.time))
+            git_commit_free(commit)
+        }
         return result
     }
     
@@ -267,13 +283,5 @@ class Libgit: meta.Libgit {
         var oid = oid
         git_oid_fmt(string, &oid)
         return String(bytesNoCopy: string, length: length, encoding: .ascii, freeWhenDone: true)!
-    }
-    
-    private func remote(_ repository: OpaquePointer) -> String {
-        var remote: OpaquePointer!
-        defer { git_remote_free(remote) }
-        return {
-            $0 == GIT_OK.rawValue ? String(validatingUTF8: git_remote_url(remote))! : String()
-        } (git_remote_lookup(&remote, repository, "origin"))
     }
 }

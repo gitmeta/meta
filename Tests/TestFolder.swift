@@ -14,6 +14,10 @@ class TestFolder: XCTestCase {
         editable = Editable(URL(fileURLWithPath: "file.json"))
     }
     
+    override func tearDown() {
+        Storage.shared = TestStorage()
+    }
+    
     func testSaveUpdates() {
         let expect = expectation(description: String())
         storage.saved = {

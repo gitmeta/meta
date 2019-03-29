@@ -142,10 +142,17 @@ class Git: UIView {
     }
     
     @objc private func push() {
-        let spinner = Spinner()
-        try! git.push {
-            spinner.close()
-            self.log(.local("Git.pushed"))
+        if git.remote == nil {
+            Remote()
+        } else {
+            let spinner = Spinner()
+            git.push {
+                spinner.close()
+                switch $0 {
+                case .failure(let error): Alert.shared.add(error)
+                case .success(): self.log(.local("Git.pushed"))
+                }
+            }
         }
     }
     

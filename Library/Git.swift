@@ -15,8 +15,11 @@ public class Git {
         }
     }
     
-    public func clone(_ url: URL, path: URL, result: @escaping((Result<Void, Error>) -> Void)) {
+    public func clone(_ location: String, path: URL, result: @escaping((Result<Void, Error>) -> Void)) {
         guard self.repository == nil else { return result(.failure(Exception.alreadyRepository)) }
+        guard let location = location.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed),
+            let url = URL(string: location)
+        else { return result(.failure(Exception.invalidUrl)) }
         queue.async {
             let response = Result { [weak self] in
                 guard let self = self else { return }
@@ -67,13 +70,16 @@ public class Git {
         }
     }
     
-    public func push(_ result: @escaping(() -> Void)) throws {
-        guard let repository = self.repository else { throw Exception.noRepository }
+    public func push(_ result: @escaping((Result<Void, Error>) -> Void)) {
+        guard let repository = self.repository else { return result(.failure(Exception.noRepository)) }
         queue.async {
-            Libgit.shared.push(repository.pointer)
-            DispatchQueue.main.async {
-                result()
-            }
+            let response = Result { try Libgit.shared.push(repository.pointer) }
+            DispatchQueue.main.async { result(response) }
         }
+    }
+    
+    public var remote: URL? {
+        guard let repository = self.repository else { return nil }
+        return Libgit.shared.remote(repository.pointer)
     }
 }

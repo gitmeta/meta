@@ -63,7 +63,7 @@ class Replace: Sheet {
     
     @objc private func cancel() {
         close()
-        Welcome()
+        Welcome(false)
     }
     
     @objc private func replace() {

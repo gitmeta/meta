@@ -62,7 +62,7 @@ class Welcome: Sheet {
         label.centerYAnchor.constraint(equalTo: check.centerYAnchor).isActive = true
         label.leftAnchor.constraint(equalTo: check.rightAnchor).isActive = true
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [weak create, weak done] in
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak create, weak done] in
             {
                 create?.isHidden = !$0
                 done?.isHidden = $0

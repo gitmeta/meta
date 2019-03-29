@@ -98,6 +98,7 @@ class Clone: Sheet, UITextFieldDelegate {
     @objc private func clone() {
         self.url.resignFirstResponder()
         guard let url = URL(string: self.url.text!) else { return Alert.shared.add(.local("Clone.notUrl")) }
+        Git.shared.log(.local("Clone.log") + url.absoluteString)
         let spinner = Spinner()
         Git.shared.git.clone(url, path: App.shared.user.access!.url) { [weak self] in
             switch $0 {

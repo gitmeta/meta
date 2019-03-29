@@ -71,6 +71,7 @@ class Replace: Sheet {
         DispatchQueue.global(qos: .background).async {
             List.shared.folder.clear(App.shared.user.access!.url)
             Git.shared.git.close()
+            Git.shared.log(.local("Replace.log"))
             DispatchQueue.main.async { [weak self] in
                 spinner.close()
                 self?.close()

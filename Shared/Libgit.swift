@@ -1,6 +1,58 @@
 import meta
 import Foundation
 
+private class Wrapper<T> {
+    let value: T
+    
+    init(_ value: T) {
+        self.value = value
+    }
+}
+
+public enum Credentialis {
+    case `default`
+    case sshAgent
+    case plaintext(username: String, password: String)
+    case sshMemory(username: String, publicKey: String, privateKey: String, passphrase: String)
+    
+    internal static func fromPointer(_ pointer: UnsafeMutableRawPointer) -> Credentialis {
+        return Unmanaged<Wrapper<Credentialis>>.fromOpaque(UnsafeRawPointer(pointer)).takeRetainedValue().value
+    }
+    
+    internal func toPointer() -> UnsafeMutableRawPointer {
+        return Unmanaged.passRetained(Wrapper(self)).toOpaque()
+    }
+}
+
+/// Handle the request of credentials, passing through to a wrapped block after converting the arguments.
+/// Converts the result to the correct error code required by libgit2 (0 = success, 1 = rejected setting creds,
+/// -1 = error)
+internal func credentialsCallback(
+    cred: UnsafeMutablePointer<UnsafeMutablePointer<git_cred>?>?,
+    url: UnsafePointer<CChar>?,
+    username: UnsafePointer<CChar>?,
+    _: UInt32,
+    payload: UnsafeMutableRawPointer? ) -> Int32 {
+    
+    let result: Int32
+    
+    // Find username_from_url
+    let name = username.map(String.init(cString:))
+    
+    switch Credentialis.fromPointer(payload!) {
+    case .default:
+        result = git_cred_default_new(cred)
+    case .sshAgent:
+        result = git_cred_ssh_key_from_agent(cred, name!)
+    case .plaintext(let username, let password):
+        result = git_cred_userpass_plaintext_new(cred, username, password)
+    case .sshMemory(let username, let publicKey, let privateKey, let passphrase):
+        result = git_cred_ssh_key_memory_new(cred, username, publicKey, privateKey, passphrase)
+    }
+    
+    return (result != GIT_OK.rawValue) ? -1 : 0
+}
+
 class Libgit: meta.Libgit {
     override init() {
         super.init()
@@ -128,15 +180,15 @@ class Libgit: meta.Libgit {
         var remote: OpaquePointer!
         git_remote_lookup(&remote, repository, "origin")
         
-        git_cred_acquire_cb
         
         let calls = UnsafeMutablePointer<git_remote_callbacks>.allocate(capacity: 1)
         git_remote_init_callbacks(calls, UInt32(GIT_REMOTE_CALLBACKS_VERSION))
         var callback = calls.move()
-        callback.credentials
+        callback.payload = Credentialis.plaintext(username: "", password: "").toPointer()
+        callback.credentials = credentialsCallback
         calls.deallocate()
         
-        print(git_remote_connect(remote, GIT_DIRECTION_PUSH, calls, nil, nil))
+        print(git_remote_connect(remote, GIT_DIRECTION_PUSH, &callback, nil, nil))
         print(git_remote_add_push(remote, "origin", "refs/heads/master:refs/heads/master"))
         
         let pointer = UnsafeMutablePointer<git_push_options>.allocate(capacity: 1)
@@ -146,27 +198,6 @@ class Libgit: meta.Libgit {
         
         print(git_remote_upload(remote, nil, &options))
         git_remote_free(remote)
-        /*
-        
-        // get the remote.
-        git_remote* remote = NULL;
-        git_remote_lookup( &remote, repository, "origin" );
-        
-        // connect to remote
-        git_remote_connect( remote, GIT_DIRECTION_PUSH )
-        
-        // add a push refspec
-        git_remote_add_push( remote, "refs/heads/master:refs/heads/master" );
-        
-        // configure options
-        git_push_options options;
-        git_push_init_options( &options, GIT_PUSH_OPTIONS_VERSION );
-        
-        // do the push
-        git_remote_upload( remote, NULL, &options );
-        
-        git_remote_free( remote );
-        return true;*/
     }
     
     private func index(_ repository: OpaquePointer) -> OpaquePointer {

@@ -112,7 +112,7 @@ class Git: UIView {
     @objc private func status() {
         do {
             try git.status {
-                self.log($0.description.appending($0.commitable ? String() : .local("Git.notCommitable")))
+                self.log($0.description.appending($0.commitable ? String() : "\n" + .local("Git.notCommitable")))
             }
         } catch { Alert.shared.add(error) }
     }

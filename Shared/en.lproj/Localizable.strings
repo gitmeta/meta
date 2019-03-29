@@ -35,6 +35,7 @@ Commit.untracked="Untracked";
 Commit.added="Added";
 Commit.modified="Modified";
 Commit.deleted="Deleted";
+Commit.done="Commited";
 Credentials.done="Save";
 Credentials.cancel="Cancel";
 Credentials.name="Name";

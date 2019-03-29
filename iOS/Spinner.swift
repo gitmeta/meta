@@ -7,7 +7,7 @@ class Spinner: UIView {
         App.shared.endEditing(true)
         super.init(frame: .zero)
         translatesAutoresizingMaskIntoConstraints = false
-        backgroundColor = UIColor(white: 0, alpha: 0.8)
+        backgroundColor = UIColor(white: 0, alpha: 0.92)
         alpha = 0
         App.shared.rootViewController!.view.addSubview(self)
         
@@ -55,7 +55,7 @@ class Spinner: UIView {
     
     func close() {
         DispatchQueue.main.async {
-            UIView.animate(withDuration: 0.3, animations: { [weak self] in
+            UIView.animate(withDuration: 0.4, animations: { [weak self] in
                 self?.alpha = 0
             }) { [weak self] _ in self?.removeFromSuperview() }
         }

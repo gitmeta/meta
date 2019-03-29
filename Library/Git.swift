@@ -17,13 +17,14 @@ public class Git {
         }
     }
     
-    public func clone(_ url: URL, path: URL, result: @escaping(() -> Void)) throws {
-        guard self.repository == nil else { throw Exception.alreadyRepository }
-        queue.async { [weak self] in
-            self?.repository = {
-                $0 == nil ? nil : Repository(pointer: $0, url: url)
-            } (Libgit.shared.clone(url, path: path))
-            result()
+    public func clone(_ url: URL, path: URL, result: @escaping((Result<Void, Error>) -> Void)) {
+        guard self.repository == nil else { return result(.failure(Exception.alreadyRepository)) }
+        queue.async {
+            let response = Result { [weak self] in
+                guard let self = self else { return }
+                self.repository = Repository(pointer: try Libgit.shared.clone(url, path: path), url: url)
+            }
+            DispatchQueue.main.async { result(response) }
         }
     }
     

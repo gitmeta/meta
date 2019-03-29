@@ -86,15 +86,25 @@ class TestGit: XCTestCase {
         waitForExpectations(timeout: 1)
     }
     
-    func testCloneThrowsIfRepository() {
+    func testCloneErrorsIfRepository() {
+        let expect = expectation(description: String())
         git.repository = Repository(pointer: nil, url: URL(fileURLWithPath: "/"))
-        XCTAssertThrowsError(try git.clone(URL(fileURLWithPath: "/"), path: URL(fileURLWithPath: "/")))
+        git.clone(URL(fileURLWithPath: "/"), path: URL(fileURLWithPath: "/")) {
+            if case .failure(_) = $0 { expect.fulfill() }
+        }
+        waitForExpectations(timeout: 1)
     }
     
     func testClone() {
-        let expect = expectation(description: String())
-        libgit._clone = { expect.fulfill() }
-        try! git.clone(URL(fileURLWithPath: "/"), path: URL(fileURLWithPath: "/"))
+        let expectClone = expectation(description: String())
+        let expectReturn = expectation(description: String())
+        libgit._clone = { expectClone.fulfill() }
+        DispatchQueue.global(qos: .background).async {
+            self.git.clone(URL(fileURLWithPath: "/"), path: URL(fileURLWithPath: "/")) {
+                XCTAssertTrue(Thread.main == Thread.current)
+                if case .success() = $0 { expectReturn.fulfill() }
+            }
+        }
         waitForExpectations(timeout: 1)
     }
 }

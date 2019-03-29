@@ -94,16 +94,15 @@ class Welcome: Sheet {
     
     @objc private func clone() {
         let spinner = Spinner()
-        spinner.ready = {
-            DispatchQueue.global(qos: .background).async { [weak self] in
-                try! Git.shared.git.clone(URL(string: "https://github.com/velvetroom/formatter")!, path: App.shared.user.access!.url) {
-                    DispatchQueue.main.async { [weak self] in
-                        spinner.close()
-                        List.shared.update()
-                        self?.close()
-                    }
-                }
+        Git.shared.git.clone(URL(string: "https://github.com/velvetroom/formatter")!, path: App.shared.user.access!.url) { [weak self] in
+            switch $0 {
+            case .failure(let error):
+                Alert.shared.add(error)
+            case .success():
+                List.shared.update()
+                self?.close()
             }
+            spinner.close()
         }
     }
     

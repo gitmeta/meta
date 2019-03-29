@@ -7,7 +7,7 @@ open class Libgit {
     
     open func repository(_ url: URL) -> OpaquePointer? { return nil }
     open func release(repository: OpaquePointer!) {  }
-    open func clone(_ url: URL, path: URL) -> OpaquePointer? { return nil }
+    open func clone(_ url: URL, path: URL) throws -> OpaquePointer! { return nil }
     open func create(_ url: URL) -> OpaquePointer! { return nil }
     open func status(_ repository: OpaquePointer!) -> Status { return Status() }
     open func add(_ repository: OpaquePointer!, file: String) { }

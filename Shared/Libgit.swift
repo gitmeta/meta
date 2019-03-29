@@ -17,7 +17,7 @@ class Libgit: meta.Libgit {
         git_repository_free(repository)
     }
     
-    override func clone(_ url: URL, path: URL) -> OpaquePointer? {
+    override func clone(_ url: URL, path: URL) throws -> OpaquePointer! {
         let pointer = UnsafeMutablePointer<git_clone_options>.allocate(capacity: 1)
         git_clone_init_options(pointer, UInt32(GIT_CLONE_OPTIONS_VERSION))
         var options = pointer.move()
@@ -41,10 +41,9 @@ class Libgit: meta.Libgit {
             return fetch
         } ()
         
-        print(url.absoluteString)
-        
-        var repository: OpaquePointer?
+        var repository: OpaquePointer!
         let result = git_clone(&repository, url.absoluteString, path.withUnsafeFileSystemRepresentation({ $0 }), &options)
+        if result != GIT_OK.rawValue { throw Exception.failedClone }
         return repository
     }
     

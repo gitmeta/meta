@@ -52,4 +52,5 @@ Alert.noRepository="This is not a repository";
 Alert.alreadyRepository="This is already a repository";
 Alert.invalidName="Invalid name";
 Alert.invalidEmail="Invalid email";
+Alert.failedClone="Failed to clone repository";
 Alert.unknown="Unknown error";

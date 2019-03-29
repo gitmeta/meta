@@ -8,5 +8,6 @@ public enum Exception: LocalizedError {
     case alreadyRepository
     case invalidName
     case invalidEmail
+    case failedClone
     case unknown
 }

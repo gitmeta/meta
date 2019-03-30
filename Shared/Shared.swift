@@ -13,7 +13,7 @@ extension Exception {
         case .fileNoExists: return .local("Alert.fileNoExists")
         case .noRepository: return .local("Alert.noRepository")
         case .alreadyRepository: return .local("Alert.alreadyRepository")
-        case .invalidName: return .local("Alert.invalidName")
+        case .invalidUser: return .local("Alert.invalidUser")
         case .invalidEmail: return .local("Alert.invalidEmail")
         case .invalidUrl: return .local("Alert.invalidUrl")
         case .failedClone: return .local("Alert.failedClone")

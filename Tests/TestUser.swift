@@ -89,23 +89,23 @@ class TestUser: XCTestCase {
         user.welcome = false
         user.access = Access(URL(fileURLWithPath: "/"), data: Data())
         user.credentials = Credentials()
-        user.credentials!.name = "test"
+        user.credentials!.user = "test"
         user.credentials!.email = "test@mail.com"
         user.created = Date(timeIntervalSince1970: 0)
         user.rate = Date(timeIntervalSince1970: 1000)
         XCTAssertEqual("""
-{"credentials":{"name":"test","email":"test@mail.com"},"created":-978307200,"access":{"url":"file:\\/\\/\\/","data":""},"welcome":false,"rate":-978306200}
+{"credentials":{"email":"test@mail.com","user":"test"},"created":-978307200,"access":{"url":"file:\\/\\/\\/","data":""},"welcome":false,"rate":-978306200}
 """, String(decoding: try JSONEncoder().encode(user), as: UTF8.self))
     }
     
     func testDecode() {
         let decoded = try! JSONDecoder().decode(User.self, from: Data("""
-{"rate":-978306200,"created":-978307200,"access":{"url":"file:\\/\\/\\/","data":""},"welcome":false,"credentials":{"name":"test", "email":"test@mail.com"}}
+{"rate":-978306200,"created":-978307200,"access":{"url":"file:\\/\\/\\/","data":""},"welcome":false,"credentials":{"user":"test", "email":"test@mail.com"}}
 """.utf8))
         XCTAssertEqual(URL(fileURLWithPath: "/"), decoded.access?.url)
         XCTAssertEqual(Date(timeIntervalSince1970: 0), decoded.created)
         XCTAssertEqual(Date(timeIntervalSince1970: 1000), decoded.rate)
-        XCTAssertEqual("test", decoded.credentials?.name)
+        XCTAssertEqual("test", decoded.credentials?.user)
         XCTAssertEqual("test@mail.com", decoded.credentials?.email)
         XCTAssertEqual(false, decoded.welcome)
     }

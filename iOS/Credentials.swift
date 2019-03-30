@@ -3,8 +3,9 @@ import UIKit
 
 class Credentials: Sheet, UITextFieldDelegate {
     private var success: (() -> Void)!
-    private weak var name: UITextField!
+    private weak var user: UITextField!
     private weak var email: UITextField!
+    private weak var password: UITextField!
     
     @discardableResult init(_ success: @escaping(() -> Void)) {
         self.success = success
@@ -34,12 +35,12 @@ class Credentials: Sheet, UITextFieldDelegate {
         cancel.titleLabel!.font = .systemFont(ofSize: 14, weight: .light)
         addSubview(cancel)
         
-        let titleName = UILabel()
-        titleName.translatesAutoresizingMaskIntoConstraints = false
-        titleName.font = .systemFont(ofSize: 16, weight: .bold)
-        titleName.textColor = UIColor(white: 1, alpha: 0.35)
-        titleName.text = .local("Credentials.name")
-        base.addSubview(titleName)
+        let titleUser = UILabel()
+        titleUser.translatesAutoresizingMaskIntoConstraints = false
+        titleUser.font = .systemFont(ofSize: 16, weight: .bold)
+        titleUser.textColor = UIColor(white: 1, alpha: 0.35)
+        titleUser.text = .local("Credentials.user")
+        base.addSubview(titleUser)
         
         let titleEmail = UILabel()
         titleEmail.translatesAutoresizingMaskIntoConstraints = false
@@ -48,21 +49,28 @@ class Credentials: Sheet, UITextFieldDelegate {
         titleEmail.text = .local("Credentials.email")
         base.addSubview(titleEmail)
         
-        let name = UITextField()
-        name.translatesAutoresizingMaskIntoConstraints = false
-        name.text = App.shared.user.credentials?.name
-        name.clearButtonMode = .never
-        name.keyboardType = .alphabet
-        name.keyboardAppearance = .dark
-        name.spellCheckingType = .no
-        name.autocorrectionType = .no
-        name.autocapitalizationType = .none
-        name.font = .systemFont(ofSize: 16, weight: .medium)
-        name.textColor = .white
-        name.tintColor = .white
-        name.delegate = self
-        base.addSubview(name)
-        self.name = name
+        let titlePassword = UILabel()
+        titlePassword.translatesAutoresizingMaskIntoConstraints = false
+        titlePassword.font = .systemFont(ofSize: 16, weight: .bold)
+        titlePassword.textColor = UIColor(white: 1, alpha: 0.35)
+        titlePassword.text = .local("Credentials.password")
+        base.addSubview(titlePassword)
+        
+        let user = UITextField()
+        user.translatesAutoresizingMaskIntoConstraints = false
+        user.text = App.shared.user.credentials?.user
+        user.clearButtonMode = .never
+        user.keyboardType = .alphabet
+        user.keyboardAppearance = .dark
+        user.spellCheckingType = .no
+        user.autocorrectionType = .no
+        user.autocapitalizationType = .none
+        user.font = .systemFont(ofSize: 16, weight: .medium)
+        user.textColor = .white
+        user.tintColor = .white
+        user.delegate = self
+        base.addSubview(user)
+        self.user = user
         
         let email = UITextField()
         email.translatesAutoresizingMaskIntoConstraints = false
@@ -80,11 +88,35 @@ class Credentials: Sheet, UITextFieldDelegate {
         base.addSubview(email)
         self.email = email
         
-        let border = UIView()
-        border.backgroundColor = .shade
-        border.translatesAutoresizingMaskIntoConstraints = false
-        border.isUserInteractionEnabled = false
-        base.addSubview(border)
+        let password = UITextField()
+        password.translatesAutoresizingMaskIntoConstraints = false
+        password.clearButtonMode = .never
+        password.keyboardType = .alphabet
+        password.keyboardAppearance = .dark
+        password.spellCheckingType = .no
+        password.autocorrectionType = .no
+        password.autocapitalizationType = .none
+        password.font = .systemFont(ofSize: 16, weight: .medium)
+        password.textColor = .white
+        password.tintColor = .white
+        password.clearsOnInsertion = true
+        password.clearsOnBeginEditing = true
+        password.isSecureTextEntry = true
+        password.delegate = self
+        base.addSubview(password)
+        self.password = password
+        
+        let borderTop = UIView()
+        borderTop.backgroundColor = .shade
+        borderTop.translatesAutoresizingMaskIntoConstraints = false
+        borderTop.isUserInteractionEnabled = false
+        base.addSubview(borderTop)
+        
+        let borderBottom = UIView()
+        borderBottom.backgroundColor = .shade
+        borderBottom.translatesAutoresizingMaskIntoConstraints = false
+        borderBottom.isUserInteractionEnabled = false
+        base.addSubview(borderBottom)
         
         image.bottomAnchor.constraint(equalTo: base.topAnchor).isActive = true
         image.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
@@ -94,28 +126,41 @@ class Credentials: Sheet, UITextFieldDelegate {
         base.bottomAnchor.constraint(equalTo: centerYAnchor).isActive = true
         base.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         base.widthAnchor.constraint(equalToConstant: 300).isActive = true
-        base.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        base.heightAnchor.constraint(equalToConstant: 150).isActive = true
         
-        titleName.leftAnchor.constraint(equalTo: base.leftAnchor, constant: 20).isActive = true
-        titleName.centerYAnchor.constraint(equalTo: name.centerYAnchor).isActive = true
+        titleUser.leftAnchor.constraint(equalTo: base.leftAnchor, constant: 20).isActive = true
+        titleUser.centerYAnchor.constraint(equalTo: user.centerYAnchor).isActive = true
         
         titleEmail.leftAnchor.constraint(equalTo: base.leftAnchor, constant: 20).isActive = true
         titleEmail.centerYAnchor.constraint(equalTo: email.centerYAnchor).isActive = true
         
-        name.topAnchor.constraint(equalTo: base.topAnchor).isActive = true
-        name.widthAnchor.constraint(equalToConstant: 190).isActive = true
-        name.rightAnchor.constraint(equalTo: base.rightAnchor, constant: -20).isActive = true
-        name.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        titlePassword.leftAnchor.constraint(equalTo: base.leftAnchor, constant: 20).isActive = true
+        titlePassword.centerYAnchor.constraint(equalTo: password.centerYAnchor).isActive = true
         
-        border.topAnchor.constraint(equalTo: name.bottomAnchor).isActive = true
-        border.rightAnchor.constraint(equalTo: base.rightAnchor).isActive = true
-        border.heightAnchor.constraint(equalToConstant: 1).isActive = true
-        border.widthAnchor.constraint(equalToConstant: 210).isActive = true
+        user.topAnchor.constraint(equalTo: base.topAnchor).isActive = true
+        user.widthAnchor.constraint(equalToConstant: 180).isActive = true
+        user.rightAnchor.constraint(equalTo: base.rightAnchor, constant: -10).isActive = true
+        user.heightAnchor.constraint(equalToConstant: 50).isActive = true
         
-        email.topAnchor.constraint(equalTo: border.bottomAnchor).isActive = true
-        email.widthAnchor.constraint(equalToConstant: 190).isActive = true
-        email.rightAnchor.constraint(equalTo: base.rightAnchor, constant: -20).isActive = true
-        email.bottomAnchor.constraint(equalTo: base.bottomAnchor).isActive = true
+        borderTop.topAnchor.constraint(equalTo: user.bottomAnchor).isActive = true
+        borderTop.rightAnchor.constraint(equalTo: base.rightAnchor).isActive = true
+        borderTop.heightAnchor.constraint(equalToConstant: 1).isActive = true
+        borderTop.widthAnchor.constraint(equalToConstant: 190).isActive = true
+        
+        email.topAnchor.constraint(equalTo: borderTop.bottomAnchor).isActive = true
+        email.widthAnchor.constraint(equalToConstant: 180).isActive = true
+        email.rightAnchor.constraint(equalTo: base.rightAnchor, constant: -10).isActive = true
+        email.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        
+        borderBottom.topAnchor.constraint(equalTo: email.bottomAnchor).isActive = true
+        borderBottom.rightAnchor.constraint(equalTo: base.rightAnchor).isActive = true
+        borderBottom.heightAnchor.constraint(equalToConstant: 1).isActive = true
+        borderBottom.widthAnchor.constraint(equalToConstant: 190).isActive = true
+        
+        password.topAnchor.constraint(equalTo: borderBottom.bottomAnchor).isActive = true
+        password.widthAnchor.constraint(equalToConstant: 180).isActive = true
+        password.rightAnchor.constraint(equalTo: base.rightAnchor, constant: -10).isActive = true
+        password.bottomAnchor.constraint(equalTo: base.bottomAnchor).isActive = true
         
         done.bottomAnchor.constraint(equalTo: cancel.topAnchor, constant: -20).isActive = true
         done.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
@@ -126,16 +171,18 @@ class Credentials: Sheet, UITextFieldDelegate {
         cancel.widthAnchor.constraint(equalTo: done.widthAnchor).isActive = true
         cancel.heightAnchor.constraint(equalToConstant: 40).isActive = true
         
-        ready = { [weak self] in self?.name.becomeFirstResponder() }
+        ready = { [weak self] in self?.user.becomeFirstResponder() }
     }
     
     required init?(coder: NSCoder) { return nil }
     
     func textFieldShouldReturn(_ field: UITextField) -> Bool {
-        if field === name {
+        if field === user {
             email.becomeFirstResponder()
+        } else if field === email {
+            password.becomeFirstResponder()
         } else {
-            done()
+            field.resignFirstResponder()
         }
         return true
     }
@@ -143,7 +190,7 @@ class Credentials: Sheet, UITextFieldDelegate {
     @objc private func done() {
         App.shared.endEditing(true)
         do {
-            App.shared.user.credentials = try meta.Credentials(name.text!, email: email.text!)
+            App.shared.user.credentials = try meta.Credentials(user.text!, email: email.text!)
             Alert.shared.add(.local("Credentials.saved"))
             close()
             success()

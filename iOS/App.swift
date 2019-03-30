@@ -14,7 +14,7 @@ import StoreKit
         rootViewController = UIViewController()
         if #available(iOS 11.0, *) { margin = rootViewController!.view.safeAreaInsets }
         
-        let gradient = Gradient()
+        let gradient = Gradient.top()
         
         rootViewController!.view.addSubview(Display.shared)
         rootViewController!.view.addSubview(Git.shared)

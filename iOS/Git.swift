@@ -17,7 +17,7 @@ class Git: UIView {
         text.backgroundColor = .clear
         text.alwaysBounceVertical = true
         text.contentSize = .zero
-        text.textContainerInset = UIEdgeInsets(top: 20, left: 12, bottom: 20, right: 12)
+        text.textContainerInset = UIEdgeInsets(top: 70, left: 12, bottom: 130, right: 12)
         text.isEditable = false
         addSubview(text)
         self.text = text
@@ -25,13 +25,16 @@ class Git: UIView {
         let clear = UIButton()
         clear.translatesAutoresizingMaskIntoConstraints = false
         clear.layer.cornerRadius = 4
-        clear.backgroundColor = UIColor(white: 0.2, alpha: 0.7)
+        clear.backgroundColor = UIColor(white: 0.1, alpha: 0.8)
         clear.setTitleColor(UIColor(white: 1, alpha: 0.5), for: .normal)
         clear.setTitleColor(UIColor(white: 1, alpha: 0.2), for: .highlighted)
         clear.setTitle(.local("Console.clear"), for: [])
         clear.titleLabel!.font = .systemFont(ofSize: 11, weight: .light)
         clear.addTarget(self, action: #selector(self.clear), for: .touchUpInside)
         addSubview(clear)
+        
+        let gradient = Gradient.bottom()
+        addSubview(gradient)
         
         let status = link("status", selector: #selector(self.status))
         let commit = link("commit", selector: #selector(self.commit))
@@ -41,8 +44,8 @@ class Git: UIView {
         let push = link("push", selector: #selector(self.push))
         
         status.leftAnchor.constraint(equalTo: leftAnchor, constant: 15).isActive = true
+        status.bottomAnchor.constraint(equalTo: commit.topAnchor, constant: -10).isActive = true
         
-        commit.topAnchor.constraint(equalTo: status.bottomAnchor, constant: 10).isActive = true
         commit.leftAnchor.constraint(equalTo: leftAnchor, constant: 15).isActive = true
         
         history.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
@@ -57,7 +60,7 @@ class Git: UIView {
         push.topAnchor.constraint(equalTo: commit.topAnchor).isActive = true
         push.rightAnchor.constraint(equalTo: rightAnchor, constant: -15).isActive = true
         
-        text.topAnchor.constraint(equalTo: commit.bottomAnchor, constant: 2).isActive = true
+        text.topAnchor.constraint(equalTo: topAnchor).isActive = true
         text.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
         text.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
         text.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
@@ -65,13 +68,17 @@ class Git: UIView {
         clear.rightAnchor.constraint(equalTo: rightAnchor, constant: -20).isActive = true
         clear.widthAnchor.constraint(equalToConstant: 60).isActive = true
         clear.heightAnchor.constraint(equalToConstant: 32).isActive = true
+        clear.bottomAnchor.constraint(equalTo: text.bottomAnchor, constant: -120).isActive = true
+        
+        gradient.topAnchor.constraint(equalTo: status.topAnchor, constant: -30).isActive = true
+        gradient.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
+        gradient.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
+        gradient.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
         
         if #available(iOS 11.0, *) {
-            status.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 50).isActive = true
-            clear.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -20).isActive = true
+            commit.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -10).isActive = true
         } else {
-            status.topAnchor.constraint(equalTo: topAnchor, constant: 50).isActive = true
-            clear.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20).isActive = true
+            commit.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10).isActive = true
         }
         
         format.dateStyle = .none
@@ -109,16 +116,22 @@ class Git: UIView {
         } catch { Alert.shared.add(error) }
     }
     
-    private func link(_ title: String, selector: Selector) -> Link {
+    private func link(_ title: String, selector: Selector) -> UIView {
         return {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.addTarget(self, action: selector, for: .touchUpInside)
+            $0.setTitle(title, for: [])
+            $0.titleLabel!.font = .bold(12)
             $0.backgroundColor = .shade
+            $0.layer.cornerRadius = 4
             $0.setTitleColor(.halo, for: .normal)
             $0.setTitleColor(UIColor.halo.withAlphaComponent(0.2), for: .highlighted)
             addSubview($0)
 
-            $0.width.constant = (min(UIScreen.main.bounds.width, UIScreen.main.bounds.height) / 3) - 15
+            $0.heightAnchor.constraint(equalToConstant: 40).isActive = true
+            $0.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.33, constant: -15).isActive = true
             return $0
-        } (Link(title, target: self, selector: selector))
+        } (UIButton())
     }
     
     @objc private func status() {

@@ -20,7 +20,6 @@ class Clone: Sheet, UITextFieldDelegate {
         
         let url = UITextField()
         url.translatesAutoresizingMaskIntoConstraints = false
-        url.text = App.shared.user.credentials?.name
         url.clearButtonMode = .never
         url.keyboardType = .URL
         url.keyboardAppearance = .dark

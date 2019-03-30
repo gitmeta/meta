@@ -271,7 +271,7 @@ class Libgit: meta.Libgit {
     private func signature(_ credentials: meta.Credentials) -> UnsafeMutablePointer<git_signature> {
         return {
             var signature: UnsafeMutablePointer<git_signature>!
-            git_signature_new(&signature, credentials.name, credentials.email, git_time_t($0.timeIntervalSince1970),
+            git_signature_new(&signature, credentials.user, credentials.email, git_time_t($0.timeIntervalSince1970),
                               Int32(TimeZone.current.secondsFromGMT(for: $0) / 60))
             return signature
         } (Date())

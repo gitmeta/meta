@@ -16,6 +16,29 @@ class TestDocument: XCTestCase {
         XCTAssertEqual("hello world", Editable(URL(fileURLWithPath: String())).content)
     }
     
+    func testReturnCache() {
+        let editable = Editable(URL(fileURLWithPath: String()))
+        editable.cache = "hello world"
+        XCTAssertEqual("hello world", editable.content)
+    }
+    
+    func testNoDobleLoad() {
+        storage._document = "hello world"
+        let editable = Editable(URL(fileURLWithPath: String()))
+        XCTAssertEqual("hello world", editable.content)
+        storage._document = "modified"
+        XCTAssertEqual("hello world", editable.content)
+    }
+    
+    func testRefreshFile() {
+        storage._document = "hello world"
+        let editable = Editable(URL(fileURLWithPath: String()))
+        XCTAssertEqual("hello world", editable.content)
+        editable.refresh()
+        storage._document = "modified"
+        XCTAssertEqual("modified", editable.content)
+    }
+    
     func testMakeDirectory() {
         XCTAssertTrue(folder.load([URL(fileURLWithPath: NSHomeDirectory())]).first is Directory)
         XCTAssertFalse(folder.load([URL(fileURLWithPath: "hello.world")]).first is Directory)

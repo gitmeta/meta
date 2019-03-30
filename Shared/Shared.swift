@@ -19,8 +19,11 @@ extension Exception {
         case .invalidUrl: return .local("Alert.invalidUrl")
         case .failedClone: return .local("Alert.failedClone")
         case .failedPush: return .local("Alert.failedPush")
+        case .failedPull: return .local("Alert.failedPull")
+        case .failedReset: return .local("Alert.failedReset")
         case .noRemote: return .local("Alert.noRemote")
         case .noBranch: return .local("Alert.noBranch")
+        case .unsynched: return .local("Alert.unsynched")
         case .unknown: return .local("Alert.unknown")
         }
     }

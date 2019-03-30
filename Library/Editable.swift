@@ -12,5 +12,9 @@ public class Editable: Document {
         }
     }
     
-    private var cache: String?
+    var cache: String?
+    
+    public func refresh() {
+        cache = nil
+    }
 }

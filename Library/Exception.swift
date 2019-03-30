@@ -14,5 +14,8 @@ public enum Exception: LocalizedError {
     case invalidUrl
     case failedClone
     case failedPush
+    case failedPull
+    case failedReset
+    case unsynched
     case unknown
 }

@@ -28,14 +28,13 @@ class Libgit: meta.Libgit {
             git_fetch_init_options(pointer, UInt32(GIT_FETCH_OPTIONS_VERSION))
             var fetch = pointer.move()
             pointer.deallocate()
-            fetch.callbacks = auth()
+            fetch.callbacks = auth
             return fetch
         } ()
         
         var repository: OpaquePointer!
         let result = git_clone(&repository, url.absoluteString, path.withUnsafeFileSystemRepresentation({ $0 }), &options)
         if result != GIT_OK.rawValue { throw Exception.failedClone }
-        git_remote_add_push(repository, "origin", "refs/heads/master:refs/heads/master")
         return repository
     }
     
@@ -113,16 +112,60 @@ class Libgit: meta.Libgit {
     }
     
     override func push(_ repository: OpaquePointer!) throws {
+        pushRefspecs(repository)
+        
         var remote: OpaquePointer!
         git_remote_lookup(&remote, repository, "origin")
         if remote == nil { throw Exception.noRemote }
         
-        var auth = self.auth()
+        var auth = self.auth
         git_remote_connect(remote, GIT_DIRECTION_PUSH, &auth, nil, nil)
         
         let result = git_remote_upload(remote, nil, nil)
         git_remote_free(remote)
+        if result == GIT_ENONFASTFORWARD.rawValue { throw Exception.unsynched }
         if result != GIT_OK.rawValue { throw Exception.failedPush }
+    }
+    
+    override func pull(_ repository: OpaquePointer!) throws {
+        fetchRefspecs(repository)
+        
+        var remote: OpaquePointer!
+        git_remote_lookup(&remote, repository, "origin")
+        if remote == nil { throw Exception.noRemote }
+        
+        
+        //var options = checkoutOptions(strategy: strategy, progress: progress)
+        
+        let pointer = UnsafeMutablePointer<git_checkout_options>.allocate(capacity: 1)
+        print(git_checkout_init_options(pointer, UInt32(GIT_CHECKOUT_OPTIONS_VERSION)))
+        var options = pointer.move()
+        pointer.deallocate()
+        options.checkout_strategy = GIT_CHECKOUT_FORCE.rawValue
+        
+        let result = git_checkout_head(repository, &options)
+        print(result)
+        /*
+        guard result == GIT_OK.rawValue else {
+            return Result.failure(NSError(gitError: result, pointOfFailure: "git_checkout_head"))
+        }
+        
+        return Result.success(())
+        
+        
+ 
+        
+        
+        let pointer = UnsafeMutablePointer<git_fetch_options>.allocate(capacity: 1)
+        git_fetch_init_options(pointer, UInt32(GIT_FETCH_OPTIONS_VERSION))
+        var options = pointer.move()
+        pointer.deallocate()
+        options.callbacks = auth
+        
+        let result = git_remote_fetch(remote, nil, &options, nil)*/
+        git_remote_free(remote)
+//        if result == GIT_ENONFASTFORWARD.rawValue { throw Exception.unsynched }
+        if result != GIT_OK.rawValue { throw Exception.failedPull }
     }
     
     override func remote(_ repository: OpaquePointer!) -> URL? {
@@ -135,6 +178,26 @@ class Libgit: meta.Libgit {
         }
         git_remote_free(remote)
         return url
+    }
+    
+    override func reset(_ repository: OpaquePointer!) throws {
+        let pointer = UnsafeMutablePointer<git_checkout_options>.allocate(capacity: 1)
+        git_checkout_init_options(pointer, UInt32(GIT_CHECKOUT_OPTIONS_VERSION))
+        var options = pointer.move()
+        pointer.deallocate()
+        options.checkout_strategy = GIT_CHECKOUT_FORCE.rawValue
+        if git_checkout_head(repository, &options) != GIT_OK.rawValue { throw Exception.failedReset }
+    }
+    
+    private var auth: git_remote_callbacks {
+        let pointer = UnsafeMutablePointer<git_remote_callbacks>.allocate(capacity: 1)
+        git_remote_init_callbacks(pointer, UInt32(GIT_REMOTE_CALLBACKS_VERSION))
+        var callback = pointer.move()
+        pointer.deallocate()
+        callback.credentials = { input, _, _, _, _ in
+            return git_cred_userpass_plaintext_new(input, App.shared.user.credentials!.user, App.shared.user.credentials!.password)
+        }
+        return callback
     }
     
     private func index(_ repository: OpaquePointer) -> OpaquePointer {
@@ -199,15 +262,40 @@ class Libgit: meta.Libgit {
         } (Date())
     }
     
-    private func auth() -> git_remote_callbacks {
-        let pointer = UnsafeMutablePointer<git_remote_callbacks>.allocate(capacity: 1)
-        git_remote_init_callbacks(pointer, UInt32(GIT_REMOTE_CALLBACKS_VERSION))
-        var callback = pointer.move()
-        pointer.deallocate()
-        callback.credentials = { input, _, _, _, _ in
-            return git_cred_userpass_plaintext_new(input, App.shared.user.credentials!.user, App.shared.user.credentials!.password)
+    private func pushRefspecs(_ repository: OpaquePointer) {
+        var remote: OpaquePointer!
+        git_remote_lookup(&remote, repository, "origin")
+        
+        let pointer = UnsafeMutablePointer<git_strarray>.allocate(capacity: 1)
+        git_remote_get_push_refspecs(pointer, remote)
+        let branch = self.branch(repository)!
+        var found = false
+        for i in 0 ..< pointer.pointee.count {
+            if String(validatingUTF8: pointer.pointee.strings[i]!)?.contains(branch) == true {
+                found = true
+                break
+            }
         }
-        return callback
+        
+        if !found { git_remote_add_push(repository, "origin", "refs/heads/\(branch):refs/heads/\(branch)") }
+        
+        git_strarray_free(pointer)
+        pointer.deallocate()
+        git_remote_free(remote)
+    }
+    
+    private func fetchRefspecs(_ repository: OpaquePointer) {
+        var remote: OpaquePointer!
+        git_remote_lookup(&remote, repository, "origin")
+        
+        let pointer = UnsafeMutablePointer<git_strarray>.allocate(capacity: 1)
+        git_remote_get_fetch_refspecs(pointer, remote)
+        if pointer.pointee.count < 1 {
+            git_remote_add_fetch(repository, "origin", "+refs/heads/*:refs/remotes/origin/*")
+        }
+        git_strarray_free(pointer)
+        pointer.deallocate()
+        git_remote_free(remote)
     }
     
     private func id(_ oid: git_oid) -> String {

@@ -20,6 +20,7 @@
 		201CE1E9222E9FEB007AE422 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201CE1E8222E9FEB007AE422 /* Storage.swift */; };
 		201CE1EB222EA0B7007AE422 /* Skin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201CE1EA222EA0B7007AE422 /* Skin.swift */; };
 		201CE1ED222EA0DD007AE422 /* Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201CE1EC222EA0DD007AE422 /* Layout.swift */; };
+		2023268F224FDB4C00A14F4B /* Reset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2023268E224FDB4C00A14F4B /* Reset.swift */; };
 		202B57F0223E7ECE00E98EFC /* Libgit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2058C223223E4FBE00A23F2B /* Libgit.swift */; };
 		20366C3022293BA4009A2FB3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 20366C2D22293BA4009A2FB3 /* LaunchScreen.storyboard */; };
 		20366C3222293BA4009A2FB3 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20366C2F22293BA4009A2FB3 /* App.swift */; };
@@ -202,6 +203,7 @@
 		201CE1E8222E9FEB007AE422 /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		201CE1EA222EA0B7007AE422 /* Skin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Skin.swift; sourceTree = "<group>"; };
 		201CE1EC222EA0DD007AE422 /* Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Layout.swift; sourceTree = "<group>"; };
+		2023268E224FDB4C00A14F4B /* Reset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reset.swift; sourceTree = "<group>"; };
 		2031AECD223D16790009218F /* git2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = git2.h; sourceTree = "<group>"; };
 		2031AECF223D16790009218F /* signature.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = signature.h; sourceTree = "<group>"; };
 		2031AED0223D16790009218F /* oid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = oid.h; sourceTree = "<group>"; };
@@ -577,7 +579,6 @@
 				201CE1E2222E7432007AE422 /* Alert.swift */,
 				20366C2F22293BA4009A2FB3 /* App.swift */,
 				201CE1E4222E8E04007AE422 /* Bar.swift */,
-				20CED387224ED9DA00F963BE /* Remote.swift */,
 				20882846224E233E00E67068 /* Clone.swift */,
 				20A2AF812247892E003E68A7 /* Commit.swift */,
 				205D8DD42247B84D003FDBCF /* Commiting.swift */,
@@ -597,7 +598,9 @@
 				20A70CBE222D4D51001AE4E8 /* Link.swift */,
 				20A70CB8222D383B001AE4E8 /* List.swift */,
 				2086C14222445E3D006E994C /* Pdf.swift */,
+				20CED387224ED9DA00F963BE /* Remote.swift */,
 				20882844224E0E8500E67068 /* Replace.swift */,
+				2023268E224FDB4C00A14F4B /* Reset.swift */,
 				20592A7C222EAE6000EAFD63 /* Ruler.swift */,
 				20921CE7222BD6A0007FDB7A /* Sheet.swift */,
 				201CE1EA222EA0B7007AE422 /* Skin.swift */,
@@ -955,6 +958,7 @@
 				20921CE8222BD6A0007FDB7A /* Sheet.swift in Sources */,
 				20A70CBB222D3B15001AE4E8 /* Document.swift in Sources */,
 				20592A81222ED6EA00EAFD63 /* Gradient.swift in Sources */,
+				2023268F224FDB4C00A14F4B /* Reset.swift in Sources */,
 				2079E9F8224CDDF5001CB149 /* Historying.swift in Sources */,
 				2086C14322445E3D006E994C /* Pdf.swift in Sources */,
 				205D8DD52247B84D003FDBCF /* Commiting.swift in Sources */,

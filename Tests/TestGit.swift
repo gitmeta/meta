@@ -130,4 +130,32 @@ class TestGit: XCTestCase {
         }
         waitForExpectations(timeout: 1)
     }
+    
+    func testPull() {
+        let expectPull = expectation(description: String())
+        let expectResult = expectation(description: String())
+        libgit._pull = { expectPull.fulfill() }
+        git.repository = Repository(pointer: nil, url: URL(fileURLWithPath: "/"))
+        DispatchQueue.global(qos: .background).async {
+            self.git.pull {
+                XCTAssertEqual(Thread.main, Thread.current)
+                if case .success() = $0 { expectResult.fulfill() }
+            }
+        }
+        waitForExpectations(timeout: 1)
+    }
+    
+    func testReset() {
+        let expectReset = expectation(description: String())
+        let expectResult = expectation(description: String())
+        libgit._reset = { expectReset.fulfill() }
+        git.repository = Repository(pointer: nil, url: URL(fileURLWithPath: "/"))
+        DispatchQueue.global(qos: .background).async {
+            self.git.reset {
+                XCTAssertEqual(Thread.main, Thread.current)
+                if case .success() = $0 { expectResult.fulfill() }
+            }
+        }
+        waitForExpectations(timeout: 1)
+    }
 }

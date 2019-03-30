@@ -76,6 +76,22 @@ public class Git {
         }
     }
     
+    public func pull(_ result: @escaping((Result<Void, Error>) -> Void)) {
+        guard let repository = self.repository else { return result(.failure(Exception.noRepository)) }
+        queue.async {
+            let response = Result { try Libgit.shared.pull(repository.pointer) }
+            DispatchQueue.main.async { result(response) }
+        }
+    }
+    
+    public func reset(_ result: @escaping((Result<Void, Error>) -> Void)) {
+        guard let repository = self.repository else { return result(.failure(Exception.noRepository)) }
+        queue.async {
+            let response = Result { try Libgit.shared.reset(repository.pointer) }
+            DispatchQueue.main.async { result(response) }
+        }
+    }
+    
     public var remote: URL? {
         guard let repository = self.repository else { return nil }
         return Libgit.shared.remote(repository.pointer)

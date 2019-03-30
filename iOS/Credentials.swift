@@ -190,7 +190,7 @@ class Credentials: Sheet, UITextFieldDelegate {
     @objc private func done() {
         App.shared.endEditing(true)
         do {
-            App.shared.user.credentials = try meta.Credentials(user.text!, email: email.text!)
+            App.shared.user.credentials = try meta.Credentials(user.text!, email: email.text!, password: password.text!)
             Alert.shared.add(.local("Credentials.saved"))
             close()
             success()

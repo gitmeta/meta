@@ -7,6 +7,7 @@ class TestUser: XCTestCase {
     override func setUp() {
         storage = TestStorage()
         Storage.shared = storage
+        Credentials.keychain = false
     }
     
     func testFirstTime() {
@@ -88,9 +89,7 @@ class TestUser: XCTestCase {
         let user = User()
         user.welcome = false
         user.access = Access(URL(fileURLWithPath: "/"), data: Data())
-        user.credentials = Credentials()
-        user.credentials!.user = "test"
-        user.credentials!.email = "test@mail.com"
+        user.credentials = try! Credentials("test", email: "test@mail.com", password: "a")
         user.created = Date(timeIntervalSince1970: 0)
         user.rate = Date(timeIntervalSince1970: 1000)
         XCTAssertEqual("""

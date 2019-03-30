@@ -1,14 +1,15 @@
 import Foundation
 
 public class Credentials: Codable {
-    public var user = String()
-    public var email = String()
+    public private(set) var user = String()
+    public private(set) var email = String()
+    static var keychain = true
     private let query = [kSecClass as String: kSecClassGenericPassword,
                          kSecAttrKeyType as String: kSecAttrKeyTypeRSA,
                          kSecAttrAccount as String: Data("user".utf8),
                          kSecAttrService as String: Data("meta".utf8)] as [String: Any]
     
-    public init(_ user: String, email: String) throws {
+    public init(_ user: String, email: String, password: String) throws {
         guard !user.isEmpty else { throw Exception.invalidUser }
         
         try email.forEach {
@@ -22,8 +23,11 @@ public class Credentials: Codable {
         let dot = at.last!.components(separatedBy: ".")
         guard at.count == 2, dot.count > 1, !dot.first!.isEmpty, !dot.last!.isEmpty else { throw Exception.invalidEmail }
         
+        guard !password.isEmpty else { throw Exception.invalidPassword }
+        
         self.user = user
         self.email = email
+        self.password = password
     }
     
     init() { }
@@ -40,30 +44,34 @@ public class Credentials: Codable {
         try container.encode(email, forKey: .email)
     }
     
-    public var password: String? {
+    public private(set) var password: String? {
         get {
-            var result: CFTypeRef?
-            var query = self.query
-            query[kSecReturnData as String] = true
-            query[kSecReturnAttributes as String] = true
-            query[kSecMatchLimit as String] = kSecMatchLimitOne
-            SecItemCopyMatching(query as CFDictionary, &result)
-            if let data = (result as? [String: Any])?[String(kSecValueData)] as? Data {
-                return String(decoding: data, as: UTF8.self)
+            if Credentials.keychain {
+                var result: CFTypeRef?
+                var query = self.query
+                query[kSecReturnData as String] = true
+                query[kSecReturnAttributes as String] = true
+                query[kSecMatchLimit as String] = kSecMatchLimitOne
+                SecItemCopyMatching(query as CFDictionary, &result)
+                if let data = (result as? [String: Any])?[String(kSecValueData)] as? Data {
+                    return String(decoding: data, as: UTF8.self)
+                }
             }
             return nil
         }
         set {
-            if newValue == nil {
-                if password != nil {
-                    SecItemDelete(query as CFDictionary)
+            if Credentials.keychain {
+                if newValue == nil {
+                    if password != nil {
+                        SecItemDelete(query as CFDictionary)
+                    }
+                } else if password != nil {
+                    SecItemUpdate(query as CFDictionary, [kSecValueData as String: Data(newValue!.utf8)] as CFDictionary)
+                } else {
+                    var query = self.query
+                    query[kSecValueData as String] = Data(newValue!.utf8)
+                    SecItemAdd(query as CFDictionary, nil)
                 }
-            } else if password != nil {
-                SecItemUpdate(query as CFDictionary, [kSecValueData as String: Data(newValue!.utf8)] as CFDictionary)
-            } else {
-                var query = self.query
-                query[kSecValueData as String] = Data(newValue!.utf8)
-                SecItemAdd(query as CFDictionary, nil)
             }
         }
     }

@@ -67,6 +67,7 @@ Alert.noRepository="This is not a repository";
 Alert.alreadyRepository="This is already a repository";
 Alert.invalidUser="Invalid user";
 Alert.invalidEmail="Invalid email";
+Alert.invalidPassword="Invalid password";
 Alert.invalidUrl="Invalid URL";
 Alert.failedClone="Failed to clone repository";
 Alert.noRemote="Repository has no remote";

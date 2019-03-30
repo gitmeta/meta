@@ -5,12 +5,14 @@ public enum Exception: LocalizedError {
     case fileAlreadyExists
     case fileNoExists
     case noRepository
+    case noRemote
+    case noBranch
     case alreadyRepository
     case invalidUser
     case invalidEmail
     case invalidPassword
     case invalidUrl
     case failedClone
-    case noRemote
+    case failedPush
     case unknown
 }

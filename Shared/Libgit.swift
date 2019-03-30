@@ -1,60 +1,6 @@
 import meta
 import Foundation
 
-private class Wrapper<T> {
-    let value: T
-    
-    init(_ value: T) {
-        self.value = value
-    }
-}
-
-public enum Credentialis {
-    case `default`
-    case sshAgent
-    case plaintext(username: String, password: String)
-    case sshMemory(username: String, publicKey: String, privateKey: String, passphrase: String)
-    
-    internal static func fromPointer(_ pointer: UnsafeMutableRawPointer) -> Credentialis {
-        return Unmanaged<Wrapper<Credentialis>>.fromOpaque(UnsafeRawPointer(pointer)).takeRetainedValue().value
-    }
-    
-    internal func toPointer() -> UnsafeMutableRawPointer {
-        return Unmanaged.passRetained(Wrapper(self)).toOpaque()
-    }
-}
-
-/// Handle the request of credentials, passing through to a wrapped block after converting the arguments.
-/// Converts the result to the correct error code required by libgit2 (0 = success, 1 = rejected setting creds,
-/// -1 = error)
-internal func credentialsCallback(
-    cred: UnsafeMutablePointer<UnsafeMutablePointer<git_cred>?>?,
-    url: UnsafePointer<CChar>?,
-    username: UnsafePointer<CChar>?,
-    _: UInt32,
-    payload: UnsafeMutableRawPointer? ) -> Int32 {
-    
-    let result: Int32
-    
-    // Find username_from_url
-//    let name = username.map(String.init(cString:))
-    
-    result = git_cred_userpass_plaintext_new(cred, "vauxhall", "")
-    print(result)
-    /*switch Credentialis.fromPointer(payload!) {
-    case .default:
-        result = git_cred_default_new(cred)
-    case .sshAgent:
-        result = git_cred_ssh_key_from_agent(cred, name!)
-    case .plaintext(let username, let password):
-        result = git_cred_userpass_plaintext_new(cred, username, password)
-    case .sshMemory(let username, let publicKey, let privateKey, let passphrase):
-        result = git_cred_ssh_key_memory_new(cred, username, publicKey, privateKey, passphrase)
-    }*/
-    
-    return (result != GIT_OK.rawValue) ? -1 : 0
-}
-
 class Libgit: meta.Libgit {
     override init() {
         super.init()
@@ -77,15 +23,6 @@ class Libgit: meta.Libgit {
         var options = pointer.move()
         pointer.deallocate()
         
-        options.checkout_opts = {
-            let pointer = UnsafeMutablePointer<git_checkout_options>.allocate(capacity: 1)
-            git_checkout_init_options(pointer, UInt32(GIT_CHECKOUT_OPTIONS_VERSION))
-            var options = pointer.move()
-            pointer.deallocate()
-            options.checkout_strategy = GIT_CHECKOUT_SAFE.rawValue
-            return options
-        } ()
-        
         options.fetch_opts = {
             let pointer = UnsafeMutablePointer<git_fetch_options>.allocate(capacity: 1)
             git_fetch_init_options(pointer, UInt32(GIT_FETCH_OPTIONS_VERSION))
@@ -98,6 +35,7 @@ class Libgit: meta.Libgit {
         var repository: OpaquePointer!
         let result = git_clone(&repository, url.absoluteString, path.withUnsafeFileSystemRepresentation({ $0 }), &options)
         if result != GIT_OK.rawValue { throw Exception.failedClone }
+        git_remote_add_push(repository, "origin", "refs/heads/master:refs/heads/master")
         return repository
     }
     
@@ -121,7 +59,7 @@ class Libgit: meta.Libgit {
         }
         git_status_list_free(list)
         status.remote = remote(repository)?.absoluteString ?? status.remote
-        status.branch = branch(repository)
+        status.branch = branch(repository) ?? .local("Git.unborn")
         status.commit = commit(repository).description
         return status
     }
@@ -177,23 +115,14 @@ class Libgit: meta.Libgit {
     override func push(_ repository: OpaquePointer!) throws {
         var remote: OpaquePointer!
         git_remote_lookup(&remote, repository, "origin")
-        if remote == nil {
-            throw Exception.noRemote
-        } else {
-            
-            
-            /*
-            print(git_remote_connect(remote, GIT_DIRECTION_PUSH, &callback, nil, nil))
-            print(git_remote_add_push(remote, "origin", "refs/heads/master:refs/heads/master"))
-            
-            let pointer = UnsafeMutablePointer<git_push_options>.allocate(capacity: 1)
-            git_push_init_options(pointer, UInt32(GIT_PUSH_OPTIONS_VERSION))
-            var options = pointer.move()
-            pointer.deallocate()
-            
-            print(git_remote_upload(remote, nil, &options))
-            git_remote_free(remote)*/
-        }
+        if remote == nil { throw Exception.noRemote }
+        
+        var auth = self.auth()
+        git_remote_connect(remote, GIT_DIRECTION_PUSH, &auth, nil, nil)
+        
+        let result = git_remote_upload(remote, nil, nil)
+        git_remote_free(remote)
+        if result != GIT_OK.rawValue { throw Exception.failedPush }
     }
     
     override func remote(_ repository: OpaquePointer!) -> URL? {
@@ -214,25 +143,24 @@ class Libgit: meta.Libgit {
         return index!
     }
     
-    private func branch(_ repository: OpaquePointer) -> String {
-        if git_repository_head_unborn(repository) == 1 {
-            return .local("Git.unborn")
-        } else {
+    private func branch(_ repository: OpaquePointer) -> String? {
+        if git_repository_head_unborn(repository) != 1 {
             var head: OpaquePointer?
             git_repository_head(&head, repository)
-            let name: String
+            let name: String?
             if git_reference_is_branch(head) != 0 || git_reference_is_remote(head) != 0 {
                 var pointer: UnsafePointer<Int8>?
                 git_branch_name(&pointer, head)
-                name = String(validatingUTF8: pointer!)!
+                name = String(validatingUTF8: pointer!)
             } else if git_reference_is_tag(head) != 0 {
-                name = String(validatingUTF8: git_reference_name(head))!.components(separatedBy: "/").last!
+                name = String(validatingUTF8: git_reference_name(head))!.components(separatedBy: "/heads/").last
             } else {
-                name = String(validatingUTF8: git_reference_shorthand(head))!
+                name = String(validatingUTF8: git_reference_shorthand(head))
             }
             git_reference_free(head)
-            return .local("Git.branch") + name
+            return name
         }
+        return nil
     }
     
     private func commit(_ repository: OpaquePointer) -> meta.Commit {

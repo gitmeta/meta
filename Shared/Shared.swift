@@ -18,7 +18,9 @@ extension Exception {
         case .invalidPassword: return .local("Alert.invalidPassword")
         case .invalidUrl: return .local("Alert.invalidUrl")
         case .failedClone: return .local("Alert.failedClone")
+        case .failedPush: return .local("Alert.failedPush")
         case .noRemote: return .local("Alert.noRemote")
+        case .noBranch: return .local("Alert.noBranch")
         case .unknown: return .local("Alert.unknown")
         }
     }

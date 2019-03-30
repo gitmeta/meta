@@ -47,7 +47,7 @@ class Commit: Sheet, UITextViewDelegate {
             $0.titleLabel!.font = .systemFont(ofSize: 14, weight: .medium)
             $0.addTarget(self, action: #selector(done), for: .touchUpInside)
             return $0
-        } (UIButton(frame: CGRect(x: 0, y: 0, width: 0, height: 34)))
+        } (UIButton(frame: CGRect(x: 0, y: 0, width: 0, height: 38)))
         addSubview(text)
         self.text = text
         

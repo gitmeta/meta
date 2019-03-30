@@ -76,8 +76,7 @@ class Libgit: meta.Libgit {
         git_clone_init_options(pointer, UInt32(GIT_CLONE_OPTIONS_VERSION))
         var options = pointer.move()
         pointer.deallocate()
-        options.bare = 0
-
+        
         options.checkout_opts = {
             let pointer = UnsafeMutablePointer<git_checkout_options>.allocate(capacity: 1)
             git_checkout_init_options(pointer, UInt32(GIT_CHECKOUT_OPTIONS_VERSION))
@@ -90,8 +89,9 @@ class Libgit: meta.Libgit {
         options.fetch_opts = {
             let pointer = UnsafeMutablePointer<git_fetch_options>.allocate(capacity: 1)
             git_fetch_init_options(pointer, UInt32(GIT_FETCH_OPTIONS_VERSION))
-            let fetch = pointer.move()
+            var fetch = pointer.move()
             pointer.deallocate()
+            fetch.callbacks = auth()
             return fetch
         } ()
         
@@ -180,15 +180,9 @@ class Libgit: meta.Libgit {
         if remote == nil {
             throw Exception.noRemote
         } else {
-            //        let cred = Credentialis.default
-            let calls = UnsafeMutablePointer<git_remote_callbacks>.allocate(capacity: 1)
-            git_remote_init_callbacks(calls, UInt32(GIT_REMOTE_CALLBACKS_VERSION))
-            var callback = calls.move()
-            //        callback.payload = cred.toPointer()
-            callback.credentials = credentialsCallback
-            calls.deallocate()
             
             
+            /*
             print(git_remote_connect(remote, GIT_DIRECTION_PUSH, &callback, nil, nil))
             print(git_remote_add_push(remote, "origin", "refs/heads/master:refs/heads/master"))
             
@@ -198,7 +192,7 @@ class Libgit: meta.Libgit {
             pointer.deallocate()
             
             print(git_remote_upload(remote, nil, &options))
-            git_remote_free(remote)
+            git_remote_free(remote)*/
         }
     }
     
@@ -275,6 +269,17 @@ class Libgit: meta.Libgit {
                               Int32(TimeZone.current.secondsFromGMT(for: $0) / 60))
             return signature
         } (Date())
+    }
+    
+    private func auth() -> git_remote_callbacks {
+        let pointer = UnsafeMutablePointer<git_remote_callbacks>.allocate(capacity: 1)
+        git_remote_init_callbacks(pointer, UInt32(GIT_REMOTE_CALLBACKS_VERSION))
+        var callback = pointer.move()
+        pointer.deallocate()
+        callback.credentials = { input, _, _, _, _ in
+            return git_cred_userpass_plaintext_new(input, App.shared.user.credentials!.user, App.shared.user.credentials!.password)
+        }
+        return callback
     }
     
     private func id(_ oid: git_oid) -> String {

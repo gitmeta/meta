@@ -81,6 +81,15 @@ class Welcome: Sheet {
         } (Link(title, target: self, selector: selector))
     }
     
+    private func ready() {
+        if Git.shared.git.repository == nil {
+            Clone()
+        } else {
+            Replace()
+        }
+        close()
+    }
+    
     @objc private func done() {
         Git.shared.log(.local("Welcome.current"))
         close()
@@ -93,12 +102,13 @@ class Welcome: Sheet {
     }
     
     @objc private func clone() {
-        if Git.shared.git.repository == nil {
-            Clone()
+        if App.shared.user.credentials == nil {
+            Credentials { [weak self] in
+                self?.ready()
+            }
         } else {
-            Replace()
+            ready()
         }
-        close()
     }
     
     @objc private func check(_ button: UIButton) {

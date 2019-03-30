@@ -15,11 +15,9 @@ public class Git {
         }
     }
     
-    public func clone(_ location: String, path: URL, result: @escaping((Result<Void, Error>) -> Void)) {
+    public func clone(_ url: String, path: URL, result: @escaping((Result<Void, Error>) -> Void)) {
         guard self.repository == nil else { return result(.failure(Exception.alreadyRepository)) }
-        guard let location = location.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed),
-            let url = URL(string: location)
-        else { return result(.failure(Exception.invalidUrl)) }
+        guard let url = URL(string: url) else { return result(.failure(Exception.invalidUrl)) }
         queue.async {
             let response = Result { [weak self] in
                 guard let self = self else { return }

@@ -123,7 +123,7 @@ class Credentials: Sheet, UITextFieldDelegate {
         image.widthAnchor.constraint(equalToConstant: 78).isActive = true
         image.heightAnchor.constraint(equalToConstant: 36).isActive = true
         
-        base.bottomAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        base.bottomAnchor.constraint(equalTo: centerYAnchor, constant: 20).isActive = true
         base.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         base.widthAnchor.constraint(equalToConstant: 300).isActive = true
         base.heightAnchor.constraint(equalToConstant: 150).isActive = true

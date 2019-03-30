@@ -69,6 +69,6 @@ Alert.invalidUser="Invalid user";
 Alert.invalidEmail="Invalid email";
 Alert.invalidPassword="Invalid password";
 Alert.invalidUrl="Invalid URL";
-Alert.failedClone="Failed to clone repository";
+Alert.failedClone="Failed to clone repository, check the URL is correct and your credentials are in order.";
 Alert.noRemote="Repository has no remote";
 Alert.unknown="Unknown error";

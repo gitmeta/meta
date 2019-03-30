@@ -128,44 +128,7 @@ class Libgit: meta.Libgit {
     }
     
     override func pull(_ repository: OpaquePointer!) throws {
-        fetchRefspecs(repository)
         
-        var remote: OpaquePointer!
-        git_remote_lookup(&remote, repository, "origin")
-        if remote == nil { throw Exception.noRemote }
-        
-        
-        //var options = checkoutOptions(strategy: strategy, progress: progress)
-        
-        let pointer = UnsafeMutablePointer<git_checkout_options>.allocate(capacity: 1)
-        print(git_checkout_init_options(pointer, UInt32(GIT_CHECKOUT_OPTIONS_VERSION)))
-        var options = pointer.move()
-        pointer.deallocate()
-        options.checkout_strategy = GIT_CHECKOUT_FORCE.rawValue
-        
-        let result = git_checkout_head(repository, &options)
-        print(result)
-        /*
-        guard result == GIT_OK.rawValue else {
-            return Result.failure(NSError(gitError: result, pointOfFailure: "git_checkout_head"))
-        }
-        
-        return Result.success(())
-        
-        
- 
-        
-        
-        let pointer = UnsafeMutablePointer<git_fetch_options>.allocate(capacity: 1)
-        git_fetch_init_options(pointer, UInt32(GIT_FETCH_OPTIONS_VERSION))
-        var options = pointer.move()
-        pointer.deallocate()
-        options.callbacks = auth
-        
-        let result = git_remote_fetch(remote, nil, &options, nil)*/
-        git_remote_free(remote)
-//        if result == GIT_ENONFASTFORWARD.rawValue { throw Exception.unsynched }
-        if result != GIT_OK.rawValue { throw Exception.failedPull }
     }
     
     override func remote(_ repository: OpaquePointer!) -> URL? {

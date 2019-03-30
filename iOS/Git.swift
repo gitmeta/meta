@@ -42,6 +42,7 @@ class Git: UIView {
         let reset = link("reset", selector: #selector(self.reset))
         let pull = link("pull", selector: #selector(self.pull))
         let push = link("push", selector: #selector(self.push))
+        pull.isHidden = true
         
         status.leftAnchor.constraint(equalTo: leftAnchor, constant: 15).isActive = true
         status.bottomAnchor.constraint(equalTo: commit.topAnchor, constant: -10).isActive = true

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2004246E22504560007786FF /* libgit2iOSsimulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2004246D22504560007786FF /* libgit2iOSsimulator.a */; settings = {ATTRIBUTES = (Weak, ); }; };
 		2005CD5522293F9D00B6972D /* libmeta.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 20366C9F22293D59009A2FB3 /* libmeta.a */; };
 		2005CD5822293FAE00B6972D /* libmeta.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 20366C9F22293D59009A2FB3 /* libmeta.a */; };
 		2005CD5B22293FB900B6972D /* libmeta.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 20366C9E22293D20009A2FB3 /* libmeta.a */; };
@@ -76,7 +77,7 @@
 		2037F567222A9149009778BC /* Welcome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2037F566222A9149009778BC /* Welcome.swift */; };
 		2039B30B224A5AAC00FD6BAA /* TestCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2039B30A224A5AAC00FD6BAA /* TestCredentials.swift */; };
 		203C6EB7223E740D00C64AEA /* libgit2Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 203C6EB5223E73F300C64AEA /* libgit2Mac.a */; };
-		203C6EB8223E742500C64AEA /* libgit2iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 203C6EB6223E73F400C64AEA /* libgit2iOS.a */; };
+		203C6EB8223E742500C64AEA /* libgit2iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 203C6EB6223E73F400C64AEA /* libgit2iOS.a */; settings = {ATTRIBUTES = (Weak, ); }; };
 		2058C224223E4FBE00A23F2B /* Libgit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2058C223223E4FBE00A23F2B /* Libgit.swift */; };
 		20592A7D222EAE6000EAFD63 /* Ruler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20592A7C222EAE6000EAFD63 /* Ruler.swift */; };
 		20592A7F222EBB4600EAFD63 /* Display.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20592A7E222EBB4600EAFD63 /* Display.swift */; };
@@ -194,6 +195,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2004246D22504560007786FF /* libgit2iOSsimulator.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libgit2iOSsimulator.a; sourceTree = "<group>"; };
 		20079146223788D90086976A /* Access.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Access.swift; sourceTree = "<group>"; };
 		200A3390222D13450055F364 /* iOS.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = iOS.xcassets; sourceTree = "<group>"; };
 		201CE1E0222E5AD5007AE422 /* Create.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Create.swift; sourceTree = "<group>"; };
@@ -410,6 +412,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2004246E22504560007786FF /* libgit2iOSsimulator.a in Frameworks */,
 				2072453B223E840200D0DE1F /* libiconv.tbd in Frameworks */,
 				20724539223E83FA00D0DE1F /* libz.tbd in Frameworks */,
 				203C6EB8223E742500C64AEA /* libgit2iOS.a in Frameworks */,
@@ -553,6 +556,7 @@
 				20366C2A22293B8B009A2FB3 /* .gitignore */,
 				20366C2B22293B8B009A2FB3 /* LICENSE */,
 				203C6EB6223E73F400C64AEA /* libgit2iOS.a */,
+				2004246D22504560007786FF /* libgit2iOSsimulator.a */,
 				203C6EB5223E73F300C64AEA /* libgit2Mac.a */,
 				20366C9E22293D20009A2FB3 /* libmeta.a */,
 				20366C9F22293D59009A2FB3 /* libmeta.a */,

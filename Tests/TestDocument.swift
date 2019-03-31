@@ -30,15 +30,6 @@ class TestDocument: XCTestCase {
         XCTAssertEqual("hello world", editable.content)
     }
     
-    func testRefreshFile() {
-        storage._document = "hello world"
-        let editable = Editable(URL(fileURLWithPath: String()))
-        XCTAssertEqual("hello world", editable.content)
-        editable.refresh()
-        storage._document = "modified"
-        XCTAssertEqual("modified", editable.content)
-    }
-    
     func testMakeDirectory() {
         XCTAssertTrue(folder.load([URL(fileURLWithPath: NSHomeDirectory())]).first is Directory)
         XCTAssertFalse(folder.load([URL(fileURLWithPath: "hello.world")]).first is Directory)

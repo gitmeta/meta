@@ -14,9 +14,7 @@ class Text: UITextView, UITextViewDelegate {
             $0.lineBreakMode = .byCharWrapping
             return $0
         } (NSTextContainer(), Layout()) )
-        
-        document.refresh()
-        
+
         let line = Line()
         insertSubview(line, at: 0)
         self.line = line

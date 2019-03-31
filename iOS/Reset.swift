@@ -73,6 +73,7 @@ class Reset: Sheet {
                 case .failure(let error): Alert.shared.add(error)
                 case .success(): Git.shared.log(.local("Git.reseted"))
                 }
+                List.shared.update()
                 self?.close()
             }
         }

@@ -42,7 +42,6 @@ class Git: UIView {
         let reset = link("reset", selector: #selector(self.reset))
         let pull = link("pull", selector: #selector(self.pull))
         let push = link("push", selector: #selector(self.push))
-        pull.isHidden = true
         
         status.leftAnchor.constraint(equalTo: leftAnchor, constant: 15).isActive = true
         status.bottomAnchor.constraint(equalTo: commit.topAnchor, constant: -10).isActive = true
@@ -179,16 +178,15 @@ class Git: UIView {
                 spinner.close()
                 switch $0 {
                 case .failure(let error): Alert.shared.add(error)
-                case .success(): self.log(.local("Git.pulled"))
+                case .success():
+                    self.log(.local("Git.pulled"))
+                    List.shared.update()
                 }
             }
         }
     }
     
-    @objc private func reset() {
-        Reset()
-    }
-    
+    @objc private func reset() { Reset() }
     @objc private func history() { History() }
     @objc private func clear() { text.text = String() }
 }

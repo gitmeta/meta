@@ -71,9 +71,10 @@ class Reset: Sheet {
                 spinner.close()
                 switch $0 {
                 case .failure(let error): Alert.shared.add(error)
-                case .success(): Git.shared.log(.local("Git.reseted"))
+                case .success():
+                    Git.shared.log(.local("Git.reseted"))
+                    List.shared.update()
                 }
-                List.shared.update()
                 self?.close()
             }
         }

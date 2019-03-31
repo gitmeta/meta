@@ -54,10 +54,10 @@ public class Git {
         }
     }
     
-    public func commit(_ message: String, credentials: Credentials) throws {
+    public func commit(_ message: String) throws {
         guard let repository = self.repository else { throw Exception.noRepository }
         queue.async {
-            Libgit.shared.commit(message, credentials: credentials, repository: repository.pointer)
+            Libgit.shared.commit(message, repository: repository.pointer)
         }
     }
     

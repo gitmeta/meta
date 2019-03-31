@@ -2,6 +2,8 @@ import meta
 import Foundation
 
 class Libgit: meta.Libgit {
+    private static var merging = git_oid()
+    
     override init() {
         super.init()
         git_libgit2_init()
@@ -22,16 +24,8 @@ class Libgit: meta.Libgit {
         git_clone_init_options(pointer, UInt32(GIT_CLONE_OPTIONS_VERSION))
         var options = pointer.move()
         pointer.deallocate()
-        
-        options.fetch_opts = {
-            let pointer = UnsafeMutablePointer<git_fetch_options>.allocate(capacity: 1)
-            git_fetch_init_options(pointer, UInt32(GIT_FETCH_OPTIONS_VERSION))
-            var fetch = pointer.move()
-            pointer.deallocate()
-            fetch.callbacks = auth
-            return fetch
-        } ()
-        
+        options.checkout_opts = checkout
+        options.fetch_opts = fetch
         var repository: OpaquePointer!
         let result = git_clone(&repository, url.absoluteString, path.withUnsafeFileSystemRepresentation({ $0 }), &options)
         if result != GIT_OK.rawValue { throw Exception.failedClone }
@@ -72,30 +66,8 @@ class Libgit: meta.Libgit {
         git_index_free(index)
     }
     
-    override func commit(_ message: String, credentials: meta.Credentials, repository: OpaquePointer!) {
-        var id = git_oid()
-        let index = self.index(repository)
-        let signature = self.signature(credentials)
-        var tree = git_oid()
-        git_index_write_tree(&tree, index)
-        var parent = git_oid()
-        git_reference_name_to_id(&parent, repository, "HEAD")
-        var look: OpaquePointer!
-        git_tree_lookup(&look, repository, &tree)
-        var pretty = git_buf()
-        git_message_prettify(&pretty, message, 0, 0)
-        var history: OpaquePointer!
-        git_commit_lookup(&history, repository, &parent)
-        let list = ContiguousArray([history])
-        
-        git_commit_create(&id, repository, "HEAD", signature, signature, "UTF-8", pretty.ptr, look, history == nil ? 0 : 1,
-                          list.withUnsafeBufferPointer { UnsafeMutablePointer(mutating: $0.baseAddress) })
-        
-        git_commit_free(history)
-        git_buf_free(&pretty)
-        git_tree_free(look)
-        git_signature_free(signature)
-        git_index_free(index)
+    override func commit(_ message: String, repository: OpaquePointer!) {
+        commit(message, repository: repository, parents: [])
     }
     
     override func history(_ repository: OpaquePointer!) -> [meta.Commit] {
@@ -122,13 +94,39 @@ class Libgit: meta.Libgit {
         git_remote_connect(remote, GIT_DIRECTION_PUSH, &auth, nil, nil)
         
         let result = git_remote_upload(remote, nil, nil)
+        git_remote_disconnect(remote)
         git_remote_free(remote)
         if result == GIT_ENONFASTFORWARD.rawValue { throw Exception.unsynched }
         if result != GIT_OK.rawValue { throw Exception.failedPush }
     }
     
     override func pull(_ repository: OpaquePointer!) throws {
+        fetchRefspecs(repository)
         
+        var remote: OpaquePointer!
+        git_remote_lookup(&remote, repository, "origin")
+        if remote == nil { throw Exception.noRemote }
+        
+        var fetch = self.fetch
+        git_remote_fetch(remote, nil, &fetch, nil)
+        git_repository_fetchhead_foreach(repository, { name, _, id, ismerge, _ -> Int32 in
+            if ismerge == 1 { Libgit.merging = id!.pointee }
+            return 0
+        }, nil)
+        
+        var annotated: OpaquePointer!
+        git_annotated_commit_lookup(&annotated, repository, &Libgit.merging)
+        
+        var merge = self.merge
+        var checkout = self.checkout
+        let result = git_merge(repository, &annotated, 1, &merge, &checkout)
+        
+        commit(.local("Git.mergeRemote"), repository: repository, parents: [annotated])
+        
+        git_annotated_commit_free(annotated)
+        git_remote_free(remote)
+        git_repository_state_cleanup(repository)
+        if result != GIT_OK.rawValue { throw Exception.failedPull }
     }
     
     override func remote(_ repository: OpaquePointer!) -> URL? {
@@ -144,12 +142,8 @@ class Libgit: meta.Libgit {
     }
     
     override func reset(_ repository: OpaquePointer!) throws {
-        let pointer = UnsafeMutablePointer<git_checkout_options>.allocate(capacity: 1)
-        git_checkout_init_options(pointer, UInt32(GIT_CHECKOUT_OPTIONS_VERSION))
-        var options = pointer.move()
-        pointer.deallocate()
-        options.checkout_strategy = GIT_CHECKOUT_FORCE.rawValue
-        if git_checkout_head(repository, &options) != GIT_OK.rawValue { throw Exception.failedReset }
+        var checkout = self.checkout
+        if git_checkout_head(repository, &checkout) != GIT_OK.rawValue { throw Exception.failedReset }
     }
     
     private var auth: git_remote_callbacks {
@@ -161,6 +155,44 @@ class Libgit: meta.Libgit {
             return git_cred_userpass_plaintext_new(input, App.shared.user.credentials!.user, App.shared.user.credentials!.password)
         }
         return callback
+    }
+    
+    private var signature: UnsafeMutablePointer<git_signature> {
+        return {
+            var signature: UnsafeMutablePointer<git_signature>!
+            git_signature_new(&signature, App.shared.user.credentials!.user, App.shared.user.credentials!.email,
+                              git_time_t($0.timeIntervalSince1970),
+                              Int32(TimeZone.current.secondsFromGMT(for: $0) / 60))
+            return signature
+        } (Date())
+    }
+    
+    private var checkout: git_checkout_options {
+        let pointer = UnsafeMutablePointer<git_checkout_options>.allocate(capacity: 1)
+        git_checkout_init_options(pointer, UInt32(GIT_CHECKOUT_OPTIONS_VERSION))
+        var options = pointer.move()
+        pointer.deallocate()
+        options.checkout_strategy = GIT_CHECKOUT_FORCE.rawValue
+        return options
+    }
+    
+    private var fetch: git_fetch_options {
+        let pointer = UnsafeMutablePointer<git_fetch_options>.allocate(capacity: 1)
+        git_fetch_init_options(pointer, UInt32(GIT_FETCH_OPTIONS_VERSION))
+        var fetch = pointer.move()
+        pointer.deallocate()
+        fetch.callbacks = auth
+        return fetch
+    }
+    
+    private var merge: git_merge_options {
+        let pointer = UnsafeMutablePointer<git_merge_options>.allocate(capacity: 1)
+        git_merge_init_options(pointer, UInt32(GIT_MERGE_OPTIONS_VERSION))
+        var merge = pointer.move()
+        pointer.deallocate()
+        merge.file_favor = GIT_MERGE_FILE_FAVOR_UNION
+        merge.file_flags = GIT_MERGE_FILE_DIFF_MINIMAL
+        return merge
     }
     
     private func index(_ repository: OpaquePointer) -> OpaquePointer {
@@ -189,6 +221,35 @@ class Libgit: meta.Libgit {
         return nil
     }
     
+    private func commit(_ message: String, repository: OpaquePointer!, parents: [OpaquePointer?]) {
+        var id = git_oid()
+        let index = self.index(repository)
+        let signature = self.signature
+        var tree = git_oid()
+        git_index_write_tree(&tree, index)
+        var look: OpaquePointer!
+        
+        git_tree_lookup(&look, repository, &tree)
+        var pretty = git_buf()
+        git_message_prettify(&pretty, message, 0, 0)
+        var parent = git_oid()
+        git_reference_name_to_id(&parent, repository, "HEAD")
+        var history: OpaquePointer!
+        git_commit_lookup(&history, repository, &parent)
+        var parents = parents
+        parents.insert(history, at: 0)
+        let list = ContiguousArray(parents)
+    
+        print(git_commit_create(&id, repository, "HEAD", signature, signature, "UTF-8", pretty.ptr, look, history == nil ?
+            0 : parents.count, list.withUnsafeBufferPointer { UnsafeMutablePointer(mutating: $0.baseAddress) }))
+        
+        git_commit_free(history)
+        git_buf_free(&pretty)
+        git_tree_free(look)
+        git_signature_free(signature)
+        git_index_free(index)
+    }
+    
     private func commit(_ repository: OpaquePointer) -> meta.Commit {
         var id = git_oid()
         git_reference_name_to_id(&id, repository, "HEAD")
@@ -214,15 +275,6 @@ class Libgit: meta.Libgit {
         return {
             $0?.new_file.path.map(String.init(cString:)) ?? String()
         } (status.index_to_workdir?.pointee ?? status.head_to_index?.pointee)
-    }
-    
-    private func signature(_ credentials: meta.Credentials) -> UnsafeMutablePointer<git_signature> {
-        return {
-            var signature: UnsafeMutablePointer<git_signature>!
-            git_signature_new(&signature, credentials.user, credentials.email, git_time_t($0.timeIntervalSince1970),
-                              Int32(TimeZone.current.secondsFromGMT(for: $0) / 60))
-            return signature
-        } (Date())
     }
     
     private func pushRefspecs(_ repository: OpaquePointer) {
